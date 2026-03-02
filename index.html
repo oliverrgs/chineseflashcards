@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chinese Flash Cards</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: #f5f6f8;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    body.nightModeActive {
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+    .pageContainer {
+      width: min(720px, 92vw);
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+    }
+    .flashCard {
+      width: 100%;
+      height: 70vh;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      user-select: none;
+    }
+    body.nightModeActive .flashCard {
+      background: #111827;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .flashCard:active {
+      transform: scale(0.99);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+    .cardContent {
+      display: grid;
+      gap: 12px;
+      text-align: center;
+    }
+    .characterRow {
+      display: grid;
+      gap: 8px;
+      font-size: clamp(64px, 12vw, 120px);
+      font-weight: 600;
+      letter-spacing: 4px;
+    }
+    .characterValue {
+      font-size: clamp(120px, 12vw, 400px);
+      font-weight: 600;
+      letter-spacing: 4px;
+    }
+    .characterLabel {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #6b7280;
+      opacity: 0.2;
+    }
+    body.nightModeActive .characterLabel {
+      color: #9ca3af;
+    }
+    .detailRow {
+      display: grid;
+      gap: 8px;
+      font-size: 18px;
+    }
+    .detailLabel {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #6b7280;
+    }
+    body.nightModeActive .detailLabel {
+      color: #9ca3af;
+    }
+    .navigationRow {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .navButton {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      background: #111827;
+      color: #ffffff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    body.nightModeActive .navButton {
+      background: #e5e7eb;
+      color: #111827;
+    }
+    .navButton:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    body.nightModeActive .navButton:disabled {
+      background: #475569;
+      color: #e2e8f0;
+    }
+    .positionText {
+      font-size: 14px;
+      color: #6b7280;
+    }
+    body.nightModeActive .positionText {
+      color: #9ca3af;
+    }
+    .seenCountText {
+      font-size: 13px;
+      color: #6b7280;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      opacity: 0.2;
+    }
+    body.nightModeActive .seenCountText {
+      color: #9ca3af;
+    }
+    .levelSelector {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      background: #ffffff;
+      color: #111827;
+    }
+    body.nightModeActive .levelSelector {
+      border-color: #334155;
+      background: #111827;
+      color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="pageContainer">
+    <div class="flashCard" id="flashCardElement">
+      <div class="cardContent" id="cardContentElement"></div>
+    </div>
+    <div class="navigationRow">
+      <button class="navButton" id="previousButtonElement">Previous</button>
+      <button class="navButton" id="nightModeToggleButtonElement">Night Mode</button>
+      <select class="levelSelector" id="hskLevelSelectElement">
+        <option value="1">HSK 1</option>
+        <option value="2">HSK 2</option>
+        <option value="3">HSK 3</option>
+        <option value="4">HSK 4</option>
+        <option value="5">HSK 5</option>
+        <option value="6">HSK 6</option>
+        <option value="all">All</option>
+      </select>
+      <div class="positionText" id="positionTextElement"></div>
+      <button class="navButton" id="nextButtonElement">Next</button>
+    </div>
+  </div>
+
+  <script src="flashcardDataList.js"></script>
+  <script>
+    const localStorageKeyNameMap = {
+      nightModeEnabled: "chineseFlashCardsNightModeEnabled",
+      seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
+      hskLevelSelection: "chineseFlashCardsHskLevelSelection"
+    };
+
+    const loadSeenCountByCharacterMapFromLocalStorage = () => {
+      const seenCountByCharacterStorageValue = localStorage.getItem(localStorageKeyNameMap.seenCountByCharacter);
+      if (!seenCountByCharacterStorageValue) {
+        return {};
+      }
+      try {
+        const parsedSeenCountByCharacterMapValue = JSON.parse(seenCountByCharacterStorageValue);
+        return parsedSeenCountByCharacterMapValue && typeof parsedSeenCountByCharacterMapValue === "object"
+          ? parsedSeenCountByCharacterMapValue
+          : {};
+      } catch (errorValue) {
+        return {};
+      }
+    };
+
+    const saveSeenCountByCharacterMapToLocalStorage = (seenCountByCharacterMapValue) => {
+      localStorage.setItem(localStorageKeyNameMap.seenCountByCharacter, JSON.stringify(seenCountByCharacterMapValue));
+    };
+
+    const getSeenCountKeyFromCardData = (cardDataValue) => cardDataValue.simplified;
+
+    const loadNightModeEnabledValueFromLocalStorage = () => {
+      return localStorage.getItem(localStorageKeyNameMap.nightModeEnabled) === "true";
+    };
+
+    const saveNightModeEnabledValueToLocalStorage = (nightModeEnabledValue) => {
+      localStorage.setItem(localStorageKeyNameMap.nightModeEnabled, nightModeEnabledValue ? "true" : "false");
+    };
+
+    const loadHskLevelSelectionValueFromLocalStorage = () => {
+      const hskLevelSelectionStorageValue = localStorage.getItem(localStorageKeyNameMap.hskLevelSelection);
+      return hskLevelSelectionStorageValue ? hskLevelSelectionStorageValue : "all";
+    };
+
+    const saveHskLevelSelectionValueToLocalStorage = (hskLevelSelectionValue) => {
+      localStorage.setItem(localStorageKeyNameMap.hskLevelSelection, hskLevelSelectionValue);
+    };
+
+    const flashCardElement = document.getElementById("flashCardElement");
+    const cardContentElement = document.getElementById("cardContentElement");
+    const previousButtonElement = document.getElementById("previousButtonElement");
+    const nextButtonElement = document.getElementById("nextButtonElement");
+    const nightModeToggleButtonElement = document.getElementById("nightModeToggleButtonElement");
+    const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
+    const positionTextElement = document.getElementById("positionTextElement");
+
+    const shuffleFlashCardDataList = (flashCardDataListValue) => {
+      for (let shuffleIndexValue = flashCardDataListValue.length - 1; shuffleIndexValue > 0; shuffleIndexValue -= 1) {
+        const randomSwapIndexValue = Math.floor(Math.random() * (shuffleIndexValue + 1));
+        const swapValue = flashCardDataListValue[shuffleIndexValue];
+        flashCardDataListValue[shuffleIndexValue] = flashCardDataListValue[randomSwapIndexValue];
+        flashCardDataListValue[randomSwapIndexValue] = swapValue;
+      }
+      return flashCardDataListValue;
+    };
+
+    const getFilteredFlashCardDataListForHskLevelSelection = (hskLevelSelectionValue) => {
+      if (hskLevelSelectionValue === "all") {
+        return [...flashCardDataList];
+      }
+      const maxHskLevelValue = Number.parseInt(hskLevelSelectionValue, 10);
+      if (Number.isNaN(maxHskLevelValue)) {
+        return [...flashCardDataList];
+      }
+      return flashCardDataList.filter((flashCardDataValue) => {
+        return flashCardDataValue.hskLevel !== null && flashCardDataValue.hskLevel <= maxHskLevelValue;
+      });
+    };
+
+    let randomizedFlashCardDataList = [];
+    let currentCardIndexValue = 0;
+    let isDetailViewVisibleValue = false;
+    let currentCardSeenCountValue = 0;
+    let seenCountByCharacterMapValue = loadSeenCountByCharacterMapFromLocalStorage();
+
+    const updateSeenCountForCurrentCard = () => {
+      if (randomizedFlashCardDataList.length === 0) {
+        currentCardSeenCountValue = 0;
+        return;
+      }
+      const currentCardDataValue = randomizedFlashCardDataList[currentCardIndexValue];
+      const seenCountKeyValue = getSeenCountKeyFromCardData(currentCardDataValue);
+      const currentSeenCountValue = Number(seenCountByCharacterMapValue[seenCountKeyValue] || 0) + 1;
+      seenCountByCharacterMapValue[seenCountKeyValue] = currentSeenCountValue;
+      currentCardSeenCountValue = currentSeenCountValue;
+      saveSeenCountByCharacterMapToLocalStorage(seenCountByCharacterMapValue);
+    };
+
+    const setNightModeEnabledValue = (nightModeEnabledValue) => {
+      document.body.classList.toggle("nightModeActive", nightModeEnabledValue);
+      nightModeToggleButtonElement.textContent = nightModeEnabledValue ? "Day Mode" : "Night Mode";
+      saveNightModeEnabledValueToLocalStorage(nightModeEnabledValue);
+    };
+
+    const updateRandomizedFlashCardDataListForSelection = () => {
+      const hskLevelSelectionValue = loadHskLevelSelectionValueFromLocalStorage();
+      const filteredFlashCardDataList = getFilteredFlashCardDataListForHskLevelSelection(hskLevelSelectionValue);
+      randomizedFlashCardDataList = shuffleFlashCardDataList(filteredFlashCardDataList);
+      currentCardIndexValue = 0;
+      isDetailViewVisibleValue = false;
+      updateSeenCountForCurrentCard();
+      renderCardContent();
+    };
+
+    const renderCardContent = () => {
+      if (randomizedFlashCardDataList.length === 0) {
+        positionTextElement.textContent = "0 / 0";
+        previousButtonElement.disabled = true;
+        nextButtonElement.disabled = true;
+        cardContentElement.innerHTML = `
+          <div class="cardContent">
+            <div class="detailRow">
+              <div>
+                <div class="detailLabel">No cards</div>
+                <div>Adjust HSK level</div>
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      if (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length) {
+        currentCardIndexValue = 0;
+      }
+      const currentCardData = randomizedFlashCardDataList[currentCardIndexValue];
+      positionTextElement.textContent = `${currentCardIndexValue + 1} / ${randomizedFlashCardDataList.length}`;
+      previousButtonElement.disabled = currentCardIndexValue === 0;
+      nextButtonElement.disabled = currentCardIndexValue === randomizedFlashCardDataList.length - 1;
+
+      if (!isDetailViewVisibleValue) {
+        cardContentElement.innerHTML = `
+          <div class="cardContent">
+            <div class="characterRow">
+              <div>
+                <div class="characterLabel">Traditional</div>
+                <div class="characterValue">${currentCardData.traditional}</div>
+              </div>
+              <div>
+                <div class="characterLabel">Simplified</div>
+                <div class="characterValue">${currentCardData.simplified}</div>
+              </div>
+            </div>
+            <div class="seenCountText">Seen ${currentCardSeenCountValue} times</div>
+          </div>
+        `;
+        return;
+      }
+
+      cardContentElement.innerHTML = `
+        <div class="cardContent">
+          <div class="characterRow">
+            <div>${currentCardData.traditional} / ${currentCardData.simplified}</div>
+          </div>
+          <div class="detailRow">
+            <div>
+              <div class="detailLabel">Definition</div>
+              <div>${currentCardData.definition}</div>
+            </div>
+            <div>
+              <div class="detailLabel">Pinyin</div>
+              <div>${currentCardData.pinyin}</div>
+            </div>
+            <div>
+              <div class="detailLabel">Radical</div>
+              <div>${currentCardData.radicals}</div>
+            </div>
+            <div>
+              <div class="detailLabel">Stroke Count</div>
+              <div>${currentCardData.strokeCount}</div>
+            </div>
+            <div>
+              <div class="detailLabel">HSK Level</div>
+              <div>${currentCardData.hskLevel}</div>
+            </div>
+            <div>
+              <div class="detailLabel">General Standard #</div>
+              <div>${currentCardData.generalStandardNumber}</div>
+            </div>
+            <div>
+              <div class="detailLabel">Frequency Rank</div>
+              <div>${currentCardData.frequencyRank}</div>
+            </div>
+            <div>
+              <div class="detailLabel">Seen Count</div>
+              <div>${currentCardSeenCountValue}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    };
+
+    flashCardElement.addEventListener("click", () => {
+      isDetailViewVisibleValue = !isDetailViewVisibleValue;
+      renderCardContent();
+    });
+
+    previousButtonElement.addEventListener("click", () => {
+      if (currentCardIndexValue === 0) {
+        return;
+      }
+      currentCardIndexValue -= 1;
+      isDetailViewVisibleValue = false;
+      updateSeenCountForCurrentCard();
+      renderCardContent();
+    });
+
+    nextButtonElement.addEventListener("click", () => {
+      if (currentCardIndexValue === randomizedFlashCardDataList.length - 1) {
+        return;
+      }
+      currentCardIndexValue += 1;
+      isDetailViewVisibleValue = false;
+      updateSeenCountForCurrentCard();
+      renderCardContent();
+    });
+
+    nightModeToggleButtonElement.addEventListener("click", () => {
+      const nextNightModeEnabledValue = !document.body.classList.contains("nightModeActive");
+      setNightModeEnabledValue(nextNightModeEnabledValue);
+    });
+
+    hskLevelSelectElement.addEventListener("change", (eventValue) => {
+      const nextHskLevelSelectionValue = eventValue.target.value;
+      saveHskLevelSelectionValueToLocalStorage(nextHskLevelSelectionValue);
+      updateRandomizedFlashCardDataListForSelection();
+    });
+
+    setNightModeEnabledValue(loadNightModeEnabledValueFromLocalStorage());
+    hskLevelSelectElement.value = loadHskLevelSelectionValueFromLocalStorage();
+    if (!hskLevelSelectElement.value) {
+      hskLevelSelectElement.value = "all";
+      saveHskLevelSelectionValueToLocalStorage("all");
+    }
+    updateRandomizedFlashCardDataListForSelection();
+  </script>
+</body>
+</html>
