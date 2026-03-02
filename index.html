@@ -133,6 +133,9 @@
       text-transform: uppercase;
       opacity: 0.2;
     }
+    .unimportantInfo {
+        opacity: 0.2;
+    }
     body.nightModeActive .seenCountText {
       color: #9ca3af;
     }
@@ -168,6 +171,12 @@
         <option value="6">HSK 6</option>
         <option value="all">All</option>
       </select>
+      <select class="levelSelector" id="frequencySelectElement">
+        <option value="200">Top 200</option>
+        <option value="500">Top 500</option>
+        <option value="1000">Top 1000</option>
+        <option value="all">All</option>
+      </select>
       <div class="positionText" id="positionTextElement"></div>
       <button class="navButton" id="nextButtonElement">Next</button>
     </div>
@@ -178,7 +187,8 @@
     const localStorageKeyNameMap = {
       nightModeEnabled: "chineseFlashCardsNightModeEnabled",
       seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
-      hskLevelSelection: "chineseFlashCardsHskLevelSelection"
+      hskLevelSelection: "chineseFlashCardsHskLevelSelection",
+      frequencySelection: "chineseFlashCardsFrequencySelection"
     };
 
     const loadSeenCountByCharacterMapFromLocalStorage = () => {
@@ -219,12 +229,22 @@
       localStorage.setItem(localStorageKeyNameMap.hskLevelSelection, hskLevelSelectionValue);
     };
 
+    const loadFrequencySelectionValueFromLocalStorage = () => {
+      const frequencySelectionStorageValue = localStorage.getItem(localStorageKeyNameMap.frequencySelection);
+      return frequencySelectionStorageValue ? frequencySelectionStorageValue : "all";
+    };
+
+    const saveFrequencySelectionValueToLocalStorage = (frequencySelectionValue) => {
+      localStorage.setItem(localStorageKeyNameMap.frequencySelection, frequencySelectionValue);
+    };
+
     const flashCardElement = document.getElementById("flashCardElement");
     const cardContentElement = document.getElementById("cardContentElement");
     const previousButtonElement = document.getElementById("previousButtonElement");
     const nextButtonElement = document.getElementById("nextButtonElement");
     const nightModeToggleButtonElement = document.getElementById("nightModeToggleButtonElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
+    const frequencySelectElement = document.getElementById("frequencySelectElement");
     const positionTextElement = document.getElementById("positionTextElement");
 
     const shuffleFlashCardDataList = (flashCardDataListValue) => {
@@ -237,16 +257,21 @@
       return flashCardDataListValue;
     };
 
-    const getFilteredFlashCardDataListForHskLevelSelection = (hskLevelSelectionValue) => {
-      if (hskLevelSelectionValue === "all") {
-        return [...flashCardDataList];
-      }
-      const maxHskLevelValue = Number.parseInt(hskLevelSelectionValue, 10);
-      if (Number.isNaN(maxHskLevelValue)) {
-        return [...flashCardDataList];
-      }
+    const getFilteredFlashCardDataListForSelections = (hskLevelSelectionValue, frequencySelectionValue) => {
+      const maxHskLevelValue = hskLevelSelectionValue === "all"
+        ? null
+        : Number.parseInt(hskLevelSelectionValue, 10);
+      const maxFrequencyRankValue = frequencySelectionValue === "all"
+        ? null
+        : Number.parseInt(frequencySelectionValue, 10);
       return flashCardDataList.filter((flashCardDataValue) => {
-        return flashCardDataValue.hskLevel !== null && flashCardDataValue.hskLevel <= maxHskLevelValue;
+        const matchesHskSelectionValue = maxHskLevelValue === null
+          ? true
+          : flashCardDataValue.hskLevel !== null && flashCardDataValue.hskLevel <= maxHskLevelValue;
+        const matchesFrequencySelectionValue = maxFrequencyRankValue === null
+          ? true
+          : flashCardDataValue.frequencyRank !== null && flashCardDataValue.frequencyRank <= maxFrequencyRankValue;
+        return matchesHskSelectionValue && matchesFrequencySelectionValue;
       });
     };
 
@@ -277,7 +302,11 @@
 
     const updateRandomizedFlashCardDataListForSelection = () => {
       const hskLevelSelectionValue = loadHskLevelSelectionValueFromLocalStorage();
-      const filteredFlashCardDataList = getFilteredFlashCardDataListForHskLevelSelection(hskLevelSelectionValue);
+      const frequencySelectionValue = loadFrequencySelectionValueFromLocalStorage();
+      const filteredFlashCardDataList = getFilteredFlashCardDataListForSelections(
+        hskLevelSelectionValue,
+        frequencySelectionValue
+      );
       randomizedFlashCardDataList = shuffleFlashCardDataList(filteredFlashCardDataList);
       currentCardIndexValue = 0;
       isDetailViewVisibleValue = false;
@@ -345,26 +374,27 @@
             </div>
             <div>
               <div class="detailLabel">Radical</div>
-              <div>${currentCardData.radicals}</div>
+              <div>
+                ${currentCardData.radicals}
+                ${radicalList.find((radical) => radical.radical === currentCardData.radicals)?.variants?.length > 0 ? 
+                    `(${radicalList.find((radical) => radical.radical === currentCardData.radicals)?.variants?.join(", ")})` 
+                    : ""}
+                : ${radicalList.find((radical) => radical.radical === currentCardData.radicals)?.meaning}</div>
             </div>
             <div>
-              <div class="detailLabel">Stroke Count</div>
+              <div class="detailLabel unimportantInfo">Stroke Count</div>
               <div>${currentCardData.strokeCount}</div>
             </div>
-            <div>
-              <div class="detailLabel">HSK Level</div>
+            <div >
+              <div class="detailLabel unimportantInfo">HSK Level</div>
               <div>${currentCardData.hskLevel}</div>
             </div>
             <div>
-              <div class="detailLabel">General Standard #</div>
-              <div>${currentCardData.generalStandardNumber}</div>
-            </div>
-            <div>
-              <div class="detailLabel">Frequency Rank</div>
+              <div class="detailLabel unimportantInfo">Frequency Rank</div>
               <div>${currentCardData.frequencyRank}</div>
             </div>
             <div>
-              <div class="detailLabel">Seen Count</div>
+              <div class="detailLabel unimportantInfo">Seen Count</div>
               <div>${currentCardSeenCountValue}</div>
             </div>
           </div>
@@ -408,11 +438,22 @@
       updateRandomizedFlashCardDataListForSelection();
     });
 
+    frequencySelectElement.addEventListener("change", (eventValue) => {
+      const nextFrequencySelectionValue = eventValue.target.value;
+      saveFrequencySelectionValueToLocalStorage(nextFrequencySelectionValue);
+      updateRandomizedFlashCardDataListForSelection();
+    });
+
     setNightModeEnabledValue(loadNightModeEnabledValueFromLocalStorage());
     hskLevelSelectElement.value = loadHskLevelSelectionValueFromLocalStorage();
     if (!hskLevelSelectElement.value) {
       hskLevelSelectElement.value = "all";
       saveHskLevelSelectionValueToLocalStorage("all");
+    }
+    frequencySelectElement.value = loadFrequencySelectionValueFromLocalStorage();
+    if (!frequencySelectElement.value) {
+      frequencySelectElement.value = "all";
+      saveFrequencySelectionValueToLocalStorage("all");
     }
     updateRandomizedFlashCardDataListForSelection();
   </script>
