@@ -381,21 +381,23 @@
                     : ""}
                 : ${radicalList.find((radical) => radical.radical === currentCardData.radicals)?.meaning}</div>
             </div>
-            <div>
-              <div class="detailLabel unimportantInfo">Stroke Count</div>
+            <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+              <div class="unimportantInfo">
+                <div class="detailLabel">Stroke Count</div>
               <div>${currentCardData.strokeCount}</div>
             </div>
-            <div >
-              <div class="detailLabel unimportantInfo">HSK Level</div>
+              <div class="unimportantInfo">
+                <div class="detailLabel">HSK Level</div>
               <div>${currentCardData.hskLevel}</div>
             </div>
-            <div>
-              <div class="detailLabel unimportantInfo">Frequency Rank</div>
+              <div class="unimportantInfo">
+                <div class="detailLabel">Frequency Rank</div>
               <div>${currentCardData.frequencyRank}</div>
             </div>
-            <div>
-              <div class="detailLabel unimportantInfo">Seen Count</div>
+              <div class="unimportantInfo">
+                <div class="detailLabel">Seen Count</div>
               <div>${currentCardSeenCountValue}</div>
+              </div>
             </div>
           </div>
         </div>
