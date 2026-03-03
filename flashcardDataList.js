@@ -260,7 +260,7 @@ const flashCardDataList = [
       { traditional: "下", simplified: "下", pinyin: "xià", definition: "under, underneath, below; down; inferior; bring down", radicals: "一", strokeCount: 3, hskLevel: 1, generalStandardNumber: "0030", frequencyRank: 42 },
       { traditional: "自", simplified: "自", pinyin: "zì", definition: "self, private, personal; from", radicals: "自", strokeCount: 6, hskLevel: 3, generalStandardNumber: "0477", frequencyRank: 43 },
       { traditional: "之", simplified: "之", pinyin: "zhī", definition: "marks preceding phrase as modifier of following phrase; it, him her, them; go to", radicals: "丿", strokeCount: 3, hskLevel: 4, generalStandardNumber: "0058", frequencyRank: 44 },
-      { traditional: "年", simplified: "年", pinyin: "nián", definition: "", radicals: "干", strokeCount: 6, hskLevel: 1, generalStandardNumber: "0444", frequencyRank: 45 },
+      { traditional: "年", simplified: "年", pinyin: "nián", definition: "year", radicals: "干", strokeCount: 6, hskLevel: 1, generalStandardNumber: "0444", frequencyRank: 45 },
       { traditional: "过", simplified: "过", pinyin: "guò", definition: "pass, pass through, go across", radicals: "辵", strokeCount: 6, hskLevel: 2, generalStandardNumber: "0379", frequencyRank: 46 },
       { traditional: "发", simplified: "发", pinyin: "fā", definition: "issue, dispatch, send out; hair", radicals: "又", strokeCount: 5, hskLevel: 3, generalStandardNumber: "0339", frequencyRank: 47 },
       { traditional: "后", simplified: "后", pinyin: "hòu", definition: "queen, empress, sovereign; (simp. for 後) behind, rear, after", radicals: "口", strokeCount: 6, hskLevel: 1, generalStandardNumber: "0482", frequencyRank: 48 },
@@ -356,7 +356,7 @@ const flashCardDataList = [
       ,{ traditional: "很", simplified: "很", pinyin: "hěn", definition: "very, quite, much", radicals: "彳", strokeCount: 9, hskLevel: 1, generalStandardNumber: "1584", frequencyRank: 138 }
       ,{ traditional: "最", simplified: "最", pinyin: "zuì", definition: "most, extremely, exceedingly", radicals: "曰", strokeCount: 12, hskLevel: 2, generalStandardNumber: "2614", frequencyRank: 139 }
       ,{ traditional: "重", simplified: "重", pinyin: "zhòng", definition: "heavy, weighty; double", radicals: "里", strokeCount: 9, hskLevel: 3, generalStandardNumber: "1552", frequencyRank: 140 }
-      ,{ traditional: "并", simplified: "并", pinyin: "bìng", definition: "", radicals: "干", strokeCount: 6, hskLevel: 4, generalStandardNumber: "0531", frequencyRank: 141 }
+      ,{ traditional: "并", simplified: "并", pinyin: "bìng", definition: "and, also, furthermore, definitely", radicals: "干", strokeCount: 6, hskLevel: 4, generalStandardNumber: "0531", frequencyRank: 141 }
       ,{ traditional: "物", simplified: "物", pinyin: "wù", definition: "thing, substance, creature", radicals: "牛", strokeCount: 8, hskLevel: 3, generalStandardNumber: "1127", frequencyRank: 142 }
       ,{ traditional: "手", simplified: "手", pinyin: "shǒu", definition: "hand", radicals: "手", strokeCount: 4, hskLevel: 2, generalStandardNumber: "0121", frequencyRank: 143 }
       ,{ traditional: "应", simplified: "应", pinyin: "yīng", definition: "should, ought to, must", radicals: "广", strokeCount: 7, hskLevel: 3, generalStandardNumber: "0836", frequencyRank: 144 }
@@ -369,11 +369,11 @@ const flashCardDataList = [
       ,{ traditional: "美", simplified: "美", pinyin: "měi", definition: "beautiful, pretty; pleasing", radicals: "羊", strokeCount: 9, hskLevel: 4, generalStandardNumber: "1642", frequencyRank: 151 }
       ,{ traditional: "相", simplified: "相", pinyin: "xiāng", definition: "mutual, reciprocal, each other", radicals: "目", strokeCount: 9, hskLevel: 3, generalStandardNumber: "1430", frequencyRank: 152 }
       ,{ traditional: "见", simplified: "见", pinyin: "jiàn", definition: "see, observe, behold; perceive", radicals: "見", strokeCount: 4, hskLevel: 1, generalStandardNumber: "0118", frequencyRank: 153 }
-      ,{ traditional: "被", simplified: "被", pinyin: "bèi", definition: "", radicals: "衣", strokeCount: 10, hskLevel: 3, generalStandardNumber: "2118", frequencyRank: 154 }
+      ,{ traditional: "被", simplified: "被", pinyin: "bèi", definition: "by (passive voice)", radicals: "衣", strokeCount: 10, hskLevel: 3, generalStandardNumber: "2118", frequencyRank: 154 }
       ,{ traditional: "利", simplified: "利", pinyin: "lì", definition: "gains, advantage, profit, merit", radicals: "刀", strokeCount: 7, hskLevel: 4, generalStandardNumber: "0763", frequencyRank: 155 }
       ,{ traditional: "什", simplified: "什", pinyin: "shén", definition: "file of ten soldiers; mixed, miscellaneous", radicals: "人", strokeCount: 4, hskLevel: 1, generalStandardNumber: "0129", frequencyRank: 156 }
       ,{ traditional: "二", simplified: "二", pinyin: "èr", definition: "two; twice", radicals: "二", strokeCount: 2, hskLevel: 1, generalStandardNumber: "0003", frequencyRank: 157 }
-      ,{ traditional: "等", simplified: "等", pinyin: "děng", definition: "", radicals: "竹", strokeCount: 12, hskLevel: 2, generalStandardNumber: "2681", frequencyRank: 158 }
+      ,{ traditional: "等", simplified: "等", pinyin: "děng", definition: "equal, equivalent, same; wait for, await", radicals: "竹", strokeCount: 12, hskLevel: 2, generalStandardNumber: "2681", frequencyRank: 158 }
       ,{ traditional: "产", simplified: "产", pinyin: "chǎn", definition: "give birth, bring forth, produce", radicals: "立", strokeCount: 6, hskLevel: 5, generalStandardNumber: "0522", frequencyRank: 159 }
       ,{ traditional: "或", simplified: "或", pinyin: "huò", definition: "or, either, else; perhaps, maybe", radicals: "戈", strokeCount: 8, hskLevel: 3, generalStandardNumber: "1035", frequencyRank: 160 }
       ,{ traditional: "新", simplified: "新", pinyin: "xīn", definition: "new, recent, fresh, modern", radicals: "斤", strokeCount: 13, hskLevel: 2, generalStandardNumber: "2994", frequencyRank: 161 }
@@ -593,7 +593,7 @@ const flashCardDataList = [
       ,{ traditional: "失", simplified: "失", pinyin: "shī", definition: "lose; make mistake, neglect", radicals: "大", strokeCount: 5, hskLevel: 4, generalStandardNumber: "0265", frequencyRank: 375 }
       ,{ traditional: "转", simplified: "转", pinyin: "zhuǎn", definition: "shift, move, turn", radicals: "車", strokeCount: 8, hskLevel: 4, generalStandardNumber: "1059", frequencyRank: 376 }
       ,{ traditional: "夫", simplified: "夫", pinyin: "fū", definition: "man, male adult, husband; those", radicals: "大", strokeCount: 4, hskLevel: 2, generalStandardNumber: "0079", frequencyRank: 377 }
-      ,{ traditional: "令", simplified: "令", pinyin: "lìng", definition: "", radicals: "人", strokeCount: 5, hskLevel: 5, generalStandardNumber: "0282", frequencyRank: 378 }
+      ,{ traditional: "令", simplified: "令", pinyin: "lìng", definition: "order, command, instruction; make a request", radicals: "人", strokeCount: 5, hskLevel: 5, generalStandardNumber: "0282", frequencyRank: 378 }
       ,{ traditional: "准", simplified: "准", pinyin: "zhǔn", definition: "approve, allow, permit; in accord", radicals: "冫", strokeCount: 10, hskLevel: 2, generalStandardNumber: "2024", frequencyRank: 379 }
       ,{ traditional: "布", simplified: "布", pinyin: "bù", definition: "cotton cloth, textiles, linen", radicals: "巾", strokeCount: 5, hskLevel: 5, generalStandardNumber: "0218", frequencyRank: 380 }
       ,{ traditional: "始", simplified: "始", pinyin: "shǐ", definition: "begin, start; then, only then", radicals: "女", strokeCount: 8, hskLevel: 2, generalStandardNumber: "1329", frequencyRank: 381 }
@@ -686,7 +686,7 @@ const flashCardDataList = [
       ,{ traditional: "广", simplified: "广", pinyin: "guǎng", definition: "wide, extensive, broad; rad. 53", radicals: "广", strokeCount: 3, hskLevel: 4, generalStandardNumber: "0053", frequencyRank: 468 }
       ,{ traditional: "显", simplified: "显", pinyin: "xiǎn", definition: "manifest, display; evident, clear", radicals: "日", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1485", frequencyRank: 469 }
       ,{ traditional: "吧", simplified: "吧", pinyin: "ba", definition: "emphatic final particle", radicals: "口", strokeCount: 7, hskLevel: 2, generalStandardNumber: "0747", frequencyRank: 470 }
-      ,{ traditional: "阿", simplified: "阿", pinyin: "ā", definition: "", radicals: "阜", strokeCount: 7, hskLevel: 3, generalStandardNumber: "0913", frequencyRank: 471 }
+      ,{ traditional: "阿", simplified: "阿", pinyin: "ā", definition: "family, close, affectionate", radicals: "阜", strokeCount: 7, hskLevel: 3, generalStandardNumber: "0913", frequencyRank: 471 }
       ,{ traditional: "李", simplified: "李", pinyin: "lǐ", definition: "plum; judge; surname", radicals: "木", strokeCount: 7, hskLevel: 3, generalStandardNumber: "0688", frequencyRank: 472 }
       ,{ traditional: "标", simplified: "标", pinyin: "biāo", definition: "mark, symbol, label, sign; stand the bole of a tree", radicals: "木", strokeCount: 9, hskLevel: 4, generalStandardNumber: "1424", frequencyRank: 473 }
       ,{ traditional: "谈", simplified: "谈", pinyin: "tán", definition: "talk; conversation; surname", radicals: "言", strokeCount: 10, hskLevel: 4, generalStandardNumber: "2127", frequencyRank: 474 }
@@ -750,7 +750,7 @@ const flashCardDataList = [
       ,{ traditional: "派", simplified: "派", pinyin: "pài", definition: "school of thought, sect, branch", radicals: "水", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1673", frequencyRank: 532 }
       ,{ traditional: "孩", simplified: "孩", pinyin: "hái", definition: "baby, child; children", radicals: "子", strokeCount: 9, hskLevel: 2, generalStandardNumber: "1730", frequencyRank: 533 }
       ,{ traditional: "验", simplified: "验", pinyin: "yàn", definition: "test, examine, inspect; verify", radicals: "馬", strokeCount: 10, hskLevel: 4, generalStandardNumber: "2152", frequencyRank: 534 }
-      ,{ traditional: "责", simplified: "责", pinyin: "zé", definition: "", radicals: "貝", strokeCount: 8, hskLevel: 4, generalStandardNumber: "0948", frequencyRank: 535 }
+      ,{ traditional: "责", simplified: "责", pinyin: "zé", definition: "responsible, liable, accountable", radicals: "貝", strokeCount: 8, hskLevel: 4, generalStandardNumber: "0948", frequencyRank: 535 }
       ,{ traditional: "营", simplified: "营", pinyin: "yíng", definition: "encampment, barracks; manage", radicals: "艸", strokeCount: 11, hskLevel: 5, generalStandardNumber: "2214", frequencyRank: 536 }
       ,{ traditional: "星", simplified: "星", pinyin: "xīng", definition: "a star, planet; any point of light", radicals: "日", strokeCount: 9, hskLevel: 1, generalStandardNumber: "1488", frequencyRank: 537 }
       ,{ traditional: "够", simplified: "够", pinyin: "gòu", definition: "enough, adequate", radicals: "夕", strokeCount: 11, hskLevel: 4, generalStandardNumber: "2362", frequencyRank: 538 }
@@ -805,7 +805,7 @@ const flashCardDataList = [
       ,{ traditional: "杀", simplified: "杀", pinyin: "shā", definition: "kill, slaughter, murder; hurt", radicals: "木", strokeCount: 6, hskLevel: 5, generalStandardNumber: "0487", frequencyRank: 587 }
       ,{ traditional: "攻", simplified: "攻", pinyin: "gōng", definition: "attack, assault; criticize", radicals: "攴", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0630", frequencyRank: 588 }
       ,{ traditional: "父", simplified: "父", pinyin: "fù", definition: "father; KangXi radical 88", radicals: "父", strokeCount: 4, hskLevel: 4, generalStandardNumber: "0141", frequencyRank: 589 }
-      ,{ traditional: "苏", simplified: "苏", pinyin: "sū", definition: "", radicals: "艸", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0677", frequencyRank: 590 }
+      ,{ traditional: "苏", simplified: "苏", pinyin: "sū", definition: "(phonetic, used in names) ", radicals: "艸", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0677", frequencyRank: 590 }
       ,{ traditional: "密", simplified: "密", pinyin: "mì", definition: "dense, thick, close; intimate", radicals: "宀", strokeCount: 11, hskLevel: 4, generalStandardNumber: "2458", frequencyRank: 591 }
       ,{ traditional: "低", simplified: "低", pinyin: "dī", definition: "low; to lower, hang, bend, bow", radicals: "人", strokeCount: 7, hskLevel: 4, generalStandardNumber: "0781", frequencyRank: 592 }
       ,{ traditional: "朝", simplified: "朝", pinyin: "cháo", definition: "dynasty; morning", radicals: "月", strokeCount: 12, hskLevel: 5, generalStandardNumber: "2559", frequencyRank: 593 }
@@ -865,7 +865,7 @@ const flashCardDataList = [
       ,{ traditional: "预", simplified: "预", pinyin: "yù", definition: "prepare, arrange; in advance", radicals: "頁", strokeCount: 10, hskLevel: 4, generalStandardNumber: "2148", frequencyRank: 647 }
       ,{ traditional: "谁", simplified: "谁", pinyin: "shuí", definition: "who? whom? whose? anyone?", radicals: "言", strokeCount: 10, hskLevel: 1, generalStandardNumber: "2122", frequencyRank: 648 }
       ,{ traditional: "益", simplified: "益", pinyin: "yì", definition: "profit, benefit; advantage", radicals: "皿", strokeCount: 10, hskLevel: 5, generalStandardNumber: "2055", frequencyRank: 649 }
-      ,{ traditional: "阳", simplified: "阳", pinyin: "yáng", definition: "", radicals: "阜", strokeCount: 6, hskLevel: 3, generalStandardNumber: "0572", frequencyRank: 650 }
+      ,{ traditional: "阳", simplified: "阳", pinyin: "yáng", definition: "yang of yin-yang; positive,sunny, bright, masculine, warm", radicals: "阜", strokeCount: 6, hskLevel: 3, generalStandardNumber: "0572", frequencyRank: 650 }
       ,{ traditional: "若", simplified: "若", pinyin: "ruò", definition: "if, supposing, assuming; similar", radicals: "艸", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1002", frequencyRank: 651 }
       ,{ traditional: "哪", simplified: "哪", pinyin: "nǎ", definition: "which? where? how?", radicals: "口", strokeCount: 9, hskLevel: 1, generalStandardNumber: "1515", frequencyRank: 652 }
       ,{ traditional: "微", simplified: "微", pinyin: "wēi", definition: "small, prefix micro-, trifling", radicals: "彳", strokeCount: 13, hskLevel: 4, generalStandardNumber: "2965", frequencyRank: 653 }
@@ -941,7 +941,7 @@ const flashCardDataList = [
       ,{ traditional: "退", simplified: "退", pinyin: "tuì", definition: "step back, retreat, withdraw", radicals: "辵", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1720", frequencyRank: 723 }
       ,{ traditional: "既", simplified: "既", pinyin: "jì", definition: "already; de facto; since; then", radicals: "无", strokeCount: 9, hskLevel: 4, generalStandardNumber: "1721", frequencyRank: 724 }
       ,{ traditional: "衣", simplified: "衣", pinyin: "yī", definition: "clothes, clothing; cover, skin", radicals: "衣", strokeCount: 6, hskLevel: 1, generalStandardNumber: "0520", frequencyRank: 725 }
-      ,{ traditional: "您", simplified: "您", pinyin: "nín", definition: "", radicals: "心", strokeCount: 11, hskLevel: 2, generalStandardNumber: "2331", frequencyRank: 726 }
+      ,{ traditional: "您", simplified: "您", pinyin: "nín", definition: "you (polite)", radicals: "心", strokeCount: 11, hskLevel: 2, generalStandardNumber: "2331", frequencyRank: 726 }
       ,{ traditional: "宗", simplified: "宗", pinyin: "zōng", definition: "lineage, ancestry; ancestor, clan", radicals: "宀", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1275", frequencyRank: 727 }
       ,{ traditional: "积", simplified: "积", pinyin: "jī", definition: "accumulate, store up, amass", radicals: "禾", strokeCount: 10, hskLevel: 4, generalStandardNumber: "1945", frequencyRank: 728 }
       ,{ traditional: "余", simplified: "余", pinyin: "yú", definition: "I, my, me; surname; surplus", radicals: "人", strokeCount: 7, hskLevel: 5, generalStandardNumber: "0795", frequencyRank: 729 }
@@ -1036,7 +1036,7 @@ const flashCardDataList = [
       ,{ traditional: "货", simplified: "货", pinyin: "huò", definition: "goods, commodities, products", radicals: "貝", strokeCount: 8, hskLevel: 4, generalStandardNumber: "1151", frequencyRank: 818 }
       ,{ traditional: "互", simplified: "互", pinyin: "hù", definition: "mutually, reciprocally", radicals: "二", strokeCount: 4, hskLevel: 4, generalStandardNumber: "0106", frequencyRank: 819 }
       ,{ traditional: "付", simplified: "付", pinyin: "fù", definition: "give, deliver, pay, hand over; entrust", radicals: "人", strokeCount: 5, hskLevel: 4, generalStandardNumber: "0269", frequencyRank: 820 }
-      ,{ traditional: "伯", simplified: "伯", pinyin: "bó", definition: "", radicals: "人", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0778", frequencyRank: 821 }
+      ,{ traditional: "伯", simplified: "伯", pinyin: "bó", definition: "father's elder brother (uncle), sir", radicals: "人", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0778", frequencyRank: 821 }
       ,{ traditional: "慢", simplified: "慢", pinyin: "màn", definition: "slow(ly), leisurely, sluggish", radicals: "心", strokeCount: 14, hskLevel: 2, generalStandardNumber: "3169", frequencyRank: 822 }
       ,{ traditional: "欧", simplified: "欧", pinyin: "ōu", definition: "translit.: Europe; ohm; surname", radicals: "欠", strokeCount: 8, hskLevel: 5, generalStandardNumber: "1053", frequencyRank: 823 }
       ,{ traditional: "换", simplified: "换", pinyin: "huàn", definition: "change", radicals: "手", strokeCount: 10, hskLevel: 3, generalStandardNumber: "1806", frequencyRank: 824 }
@@ -1202,14 +1202,14 @@ const flashCardDataList = [
       ,{ traditional: "借", simplified: "借", pinyin: "jiè", definition: "borrow; lend; make pretext of", radicals: "人", strokeCount: 10, hskLevel: 3, generalStandardNumber: "1955", frequencyRank: 984 }
       ,{ traditional: "君", simplified: "君", pinyin: "jūn", definition: "sovereign, monarch, ruler, chief, prince", radicals: "口", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0899", frequencyRank: 985 }
       ,{ traditional: "禁", simplified: "禁", pinyin: "jìn", definition: "restrict, prohibit, forbid", radicals: "示", strokeCount: 13, hskLevel: 4, generalStandardNumber: "2863", frequencyRank: 986 }
-      ,{ traditional: "阴", simplified: "阴", pinyin: "yīn", definition: "", radicals: "阜", strokeCount: 6, hskLevel: 2, generalStandardNumber: "0575", frequencyRank: 987 }
+      ,{ traditional: "阴", simplified: "阴", pinyin: "yīn", definition: "negative, feminine, cool, moist; Yin (of yin-yang)", radicals: "阜", strokeCount: 6, hskLevel: 2, generalStandardNumber: "0575", frequencyRank: 987 }
       ,{ traditional: "园", simplified: "园", pinyin: "yuán", definition: "garden; park, orchard", radicals: "囗", strokeCount: 7, hskLevel: 3, generalStandardNumber: "0726", frequencyRank: 988 }
       ,{ traditional: "谋", simplified: "谋", pinyin: "móu", definition: "plan, scheme; strategem", radicals: "言", strokeCount: 11, hskLevel: 6, generalStandardNumber: "2459", frequencyRank: 989 }
       ,{ traditional: "宋", simplified: "宋", pinyin: "sòng", definition: "Song dynasty; surname", radicals: "宀", strokeCount: 7, hskLevel: null, generalStandardNumber: "0878", frequencyRank: 990 }
       ,{ traditional: "避", simplified: "避", pinyin: "bì", definition: "avoid; turn aside; escape; hide", radicals: "辵", strokeCount: 16, hskLevel: 5, generalStandardNumber: "3385", frequencyRank: 991 }
       ,{ traditional: "抓", simplified: "抓", pinyin: "zhuā", definition: "scratch; clutch, seize, grab", radicals: "手", strokeCount: 7, hskLevel: 5, generalStandardNumber: "0633", frequencyRank: 992 }
       ,{ traditional: "荣", simplified: "荣", pinyin: "róng", definition: "glory, honor; flourish, prosper", radicals: "艸", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1415", frequencyRank: 993 }
-      ,{ traditional: "姑", simplified: "姑", pinyin: "gū", definition: "", radicals: "女", strokeCount: 8, hskLevel: 5, generalStandardNumber: "1325", frequencyRank: 994 }
+      ,{ traditional: "姑", simplified: "姑", pinyin: "gū", definition: "father's sister (aunt), nun", radicals: "女", strokeCount: 8, hskLevel: 5, generalStandardNumber: "1325", frequencyRank: 994 }
       ,{ traditional: "孙", simplified: "孙", pinyin: "sūn", definition: "grandchild, descendent; surname", radicals: "子", strokeCount: 6, hskLevel: 4, generalStandardNumber: "0570", frequencyRank: 995 }
       ,{ traditional: "逃", simplified: "逃", pinyin: "táo", definition: "escape, flee; abscond, dodge", radicals: "辵", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1588", frequencyRank: 996 }
       ,{ traditional: "牙", simplified: "牙", pinyin: "yá", definition: "tooth, molars, teeth; serrated", radicals: "牙", strokeCount: 4, hskLevel: 3, generalStandardNumber: "0102", frequencyRank: 997 }
@@ -1276,11 +1276,11 @@ const flashCardDataList = [
       ,{ traditional: "刺", simplified: "刺", pinyin: "cì", definition: "stab; prick, irritate; prod", radicals: "刀", strokeCount: 8, hskLevel: 5, generalStandardNumber: "1039", frequencyRank: 1058 }
       ,{ traditional: "拥", simplified: "拥", pinyin: "yōng", definition: "embrace, hug, squeeze; crowd", radicals: "手", strokeCount: 8, hskLevel: 5, generalStandardNumber: "0974", frequencyRank: 1059 }
       ,{ traditional: "徒", simplified: "徒", pinyin: "tú", definition: "disciple, follower; go on foot", radicals: "彳", strokeCount: 10, hskLevel: 6, generalStandardNumber: "1975", frequencyRank: 1060 }
-      ,{ traditional: "姆", simplified: "姆", pinyin: "mǔ", definition: "", radicals: "女", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1330", frequencyRank: 1061 }
+      ,{ traditional: "姆", simplified: "姆", pinyin: "mǔ", definition: "nanny, (usually phonetic for loanwords)", radicals: "女", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1330", frequencyRank: 1061 }
       ,{ traditional: "杨", simplified: "杨", pinyin: "yáng", definition: "willow, poplar, aspen; surname", radicals: "木", strokeCount: 7, hskLevel: null, generalStandardNumber: "0689", frequencyRank: 1062 }
       ,{ traditional: "齐", simplified: "齐", pinyin: "qí", definition: "even, uniform, of equal length", radicals: "齊", strokeCount: 6, hskLevel: 5, generalStandardNumber: "0518", frequencyRank: 1063 }
       ,{ traditional: "赛", simplified: "赛", pinyin: "sài", definition: "compete, contend; contest, race", radicals: "宀", strokeCount: 14, hskLevel: 3, generalStandardNumber: "3172", frequencyRank: 1064 }
-      ,{ traditional: "趣", simplified: "趣", pinyin: "qù", definition: "", radicals: "走", strokeCount: 15, hskLevel: 3, generalStandardNumber: "3194", frequencyRank: 1065 }
+      ,{ traditional: "趣", simplified: "趣", pinyin: "qù", definition: "interesting, amusing, delightful", radicals: "走", strokeCount: 15, hskLevel: 3, generalStandardNumber: "3194", frequencyRank: 1065 }
       ,{ traditional: "曲", simplified: "曲", pinyin: "qū", definition: "crooked, bent; wrong, false", radicals: "曰", strokeCount: 6, hskLevel: 6, generalStandardNumber: "0424", frequencyRank: 1066 }
       ,{ traditional: "刀", simplified: "刀", pinyin: "dāo", definition: "knife; old coin; measure", radicals: "刀", strokeCount: 2, hskLevel: 4, generalStandardNumber: "0018", frequencyRank: 1067 }
       ,{ traditional: "床", simplified: "床", pinyin: "chuáng", definition: "bed, couch; framework, chassis", radicals: "广", strokeCount: 7, hskLevel: 2, generalStandardNumber: "0831", frequencyRank: 1068 }
@@ -1347,7 +1347,7 @@ const flashCardDataList = [
       ,{ traditional: "杰", simplified: "杰", pinyin: "jié", definition: "hero; heroic, outstanding", radicals: "木", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1031", frequencyRank: 1129 }
       ,{ traditional: "筑", simplified: "筑", pinyin: "zhù", definition: "ancient lute; build", radicals: "竹", strokeCount: 12, hskLevel: 5, generalStandardNumber: "2682", frequencyRank: 1130 }
       ,{ traditional: "折", simplified: "折", pinyin: "zhé", definition: "break off, snap; bend", radicals: "手", strokeCount: 7, hskLevel: 4, generalStandardNumber: "0632", frequencyRank: 1131 }
-      ,{ traditional: "郑", simplified: "郑", pinyin: "zhèng", definition: "", radicals: "邑", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1229", frequencyRank: 1132 }
+      ,{ traditional: "郑", simplified: "郑", pinyin: "zhèng", definition: "(phonetic)", radicals: "邑", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1229", frequencyRank: 1132 }
       ,{ traditional: "贝", simplified: "贝", pinyin: "bèi", definition: "sea shell; money, currency", radicals: "貝", strokeCount: 4, hskLevel: 5, generalStandardNumber: "0114", frequencyRank: 1133 }
       ,{ traditional: "尊", simplified: "尊", pinyin: "zūn", definition: "respect, revere, venerate; honor", radicals: "寸", strokeCount: 12, hskLevel: 4, generalStandardNumber: "2743", frequencyRank: 1134 }
       ,{ traditional: "吴", simplified: "吴", pinyin: "wú", definition: "name of warring state; surname", radicals: "口", strokeCount: 7, hskLevel: null, generalStandardNumber: "0718", frequencyRank: 1135 }
@@ -1364,7 +1364,7 @@ const flashCardDataList = [
       ,{ traditional: "搞", simplified: "搞", pinyin: "gǎo", definition: "to clear, clarify", radicals: "手", strokeCount: 13, hskLevel: 5, generalStandardNumber: "2842", frequencyRank: 1146 }
       ,{ traditional: "狂", simplified: "狂", pinyin: "kuáng", definition: "insane, mad; violent; wild", radicals: "犬", strokeCount: 7, hskLevel: 5, generalStandardNumber: "0811", frequencyRank: 1147 }
       ,{ traditional: "措", simplified: "措", pinyin: "cuò", definition: "place; collect, arrange; employ", radicals: "手", strokeCount: 11, hskLevel: 5, generalStandardNumber: "2162", frequencyRank: 1148 }
-      ,{ traditional: "姓", simplified: "姓", pinyin: "xìng", definition: "", radicals: "女", strokeCount: 8, hskLevel: 2, generalStandardNumber: "1327", frequencyRank: 1149 }
+      ,{ traditional: "姓", simplified: "姓", pinyin: "xìng", definition: "surname of family", radicals: "女", strokeCount: 8, hskLevel: 2, generalStandardNumber: "1327", frequencyRank: 1149 }
       ,{ traditional: "残", simplified: "残", pinyin: "cán", definition: "injure, spoil; oppress; broken", radicals: "歹", strokeCount: 9, hskLevel: 6, generalStandardNumber: "1460", frequencyRank: 1150 }
       ,{ traditional: "秋", simplified: "秋", pinyin: "qiū", definition: "autumn, fall; year", radicals: "禾", strokeCount: 9, hskLevel: 3, generalStandardNumber: "1550", frequencyRank: 1151 }
       ,{ traditional: "培", simplified: "培", pinyin: "péi", definition: "bank up with dirt; cultivate", radicals: "土", strokeCount: 11, hskLevel: 5, generalStandardNumber: "2184", frequencyRank: 1152 }
@@ -1417,7 +1417,7 @@ const flashCardDataList = [
       ,{ traditional: "夺", simplified: "夺", pinyin: "duó", definition: "take by force, rob, snatch", radicals: "大", strokeCount: 6, hskLevel: 6, generalStandardNumber: "0396", frequencyRank: 1199 }
       ,{ traditional: "汽", simplified: "汽", pinyin: "qì", definition: "steam, vapor, gas", radicals: "水", strokeCount: 7, hskLevel: 2, generalStandardNumber: "0861", frequencyRank: 1200 }
       ,{ traditional: "烧", simplified: "烧", pinyin: "shāo", definition: "burn; bake; heat; roast", radicals: "火", strokeCount: 10, hskLevel: 3, generalStandardNumber: "2060", frequencyRank: 1201 }
-      ,{ traditional: "距", simplified: "距", pinyin: "jù", definition: "", radicals: "足", strokeCount: 11, hskLevel: 4, generalStandardNumber: "2273", frequencyRank: 1202 }
+      ,{ traditional: "距", simplified: "距", pinyin: "jù", definition: "distance, interval, gap", radicals: "足", strokeCount: 11, hskLevel: 4, generalStandardNumber: "2273", frequencyRank: 1202 }
       ,{ traditional: "裁", simplified: "裁", pinyin: "cái", definition: "cut out; decrease", radicals: "衣", strokeCount: 12, hskLevel: 5, generalStandardNumber: "2532", frequencyRank: 1203 }
       ,{ traditional: "偏", simplified: "偏", pinyin: "piān", definition: "inclined one side; slanting", radicals: "人", strokeCount: 11, hskLevel: 6, generalStandardNumber: "2334", frequencyRank: 1204 }
       ,{ traditional: "符", simplified: "符", pinyin: "fú", definition: "i.d. tag, tally, symbol, charm", radicals: "竹", strokeCount: 11, hskLevel: 4, generalStandardNumber: "2321", frequencyRank: 1205 }
@@ -1493,7 +1493,7 @@ const flashCardDataList = [
       ,{ traditional: "播", simplified: "播", pinyin: "bō", definition: "sow, spread; broadcast; cast away, reject", radicals: "手", strokeCount: 15, hskLevel: 4, generalStandardNumber: "3199", frequencyRank: 1275 }
       ,{ traditional: "朗", simplified: "朗", pinyin: "lǎng", definition: "clear, bright; distinct", radicals: "月", strokeCount: 10, hskLevel: 5, generalStandardNumber: "2109", frequencyRank: 1276 }
       ,{ traditional: "杜", simplified: "杜", pinyin: "dù", definition: "stop, prevent; restrict; surname", radicals: "木", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0680", frequencyRank: 1277 }
-      ,{ traditional: "奶", simplified: "奶", pinyin: "nǎi", definition: "", radicals: "女", strokeCount: 5, hskLevel: 2, generalStandardNumber: "0332", frequencyRank: 1278 }
+      ,{ traditional: "奶", simplified: "奶", pinyin: "nǎi", definition: "milk, breast, to breastfeed", radicals: "女", strokeCount: 5, hskLevel: 2, generalStandardNumber: "0332", frequencyRank: 1278 }
       ,{ traditional: "季", simplified: "季", pinyin: "jì", definition: "quarter of year; season; surname", radicals: "子", strokeCount: 8, hskLevel: 3, generalStandardNumber: "1132", frequencyRank: 1279 }
       ,{ traditional: "丹", simplified: "丹", pinyin: "dān", definition: "cinnabar (native HgS); vermilion (artificial HgS used as pigment)", radicals: "丶", strokeCount: 4, hskLevel: null, generalStandardNumber: "0155", frequencyRank: 1280 }
       ,{ traditional: "狗", simplified: "狗", pinyin: "gǒu", definition: "dog, canis familiaris", radicals: "犬", strokeCount: 8, hskLevel: 1, generalStandardNumber: "1198", frequencyRank: 1281 }
@@ -1609,7 +1609,7 @@ const flashCardDataList = [
       ,{ traditional: "鸡", simplified: "鸡", pinyin: "jī", definition: "chicken", radicals: "鳥", strokeCount: 7, hskLevel: 2, generalStandardNumber: "0928", frequencyRank: 1391 }
       ,{ traditional: "倍", simplified: "倍", pinyin: "bèi", definition: "times, fold, multiple times", radicals: "人", strokeCount: 10, hskLevel: 4, generalStandardNumber: "1967", frequencyRank: 1392 }
       ,{ traditional: "糊", simplified: "糊", pinyin: "hú", definition: "paste, stick on with paste", radicals: "米", strokeCount: 15, hskLevel: 5, generalStandardNumber: "3287", frequencyRank: 1393 }
-      ,{ traditional: "秦", simplified: "秦", pinyin: "qín", definition: "", radicals: "禾", strokeCount: 10, hskLevel: null, generalStandardNumber: "1772", frequencyRank: 1394 }
+      ,{ traditional: "秦", simplified: "秦", pinyin: "qín", definition: "(phonetic) / surname", radicals: "禾", strokeCount: 10, hskLevel: null, generalStandardNumber: "1772", frequencyRank: 1394 }
       ,{ traditional: "盾", simplified: "盾", pinyin: "dùn", definition: "shield, shield-shaped object; currency sign for Dutch guilder", radicals: "目", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1579", frequencyRank: 1395 }
       ,{ traditional: "杯", simplified: "杯", pinyin: "bēi", definition: "cup, glass", radicals: "木", strokeCount: 8, hskLevel: 1, generalStandardNumber: "1020", frequencyRank: 1396 }
       ,{ traditional: "租", simplified: "租", pinyin: "zū", definition: "rent, lease; rental; tax", radicals: "禾", strokeCount: 10, hskLevel: 1, generalStandardNumber: "1944", frequencyRank: 1397 }
@@ -1637,7 +1637,7 @@ const flashCardDataList = [
       ,{ traditional: "皆", simplified: "皆", pinyin: "jiē", definition: "all, every, everybody", radicals: "白", strokeCount: 9, hskLevel: 6, generalStandardNumber: "1465", frequencyRank: 1419 }
       ,{ traditional: "碎", simplified: "碎", pinyin: "suì", definition: "break, smash; broken, busted", radicals: "石", strokeCount: 13, hskLevel: 5, generalStandardNumber: "2879", frequencyRank: 1420 }
       ,{ traditional: "宙", simplified: "宙", pinyin: "zhòu", definition: "time as concept; infinite time", radicals: "宀", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1280", frequencyRank: 1421 }
-      ,{ traditional: "叔", simplified: "叔", pinyin: "shū", definition: "", radicals: "又", strokeCount: 8, hskLevel: 3, generalStandardNumber: "1065", frequencyRank: 1422 }
+      ,{ traditional: "叔", simplified: "叔", pinyin: "shū", definition: "uncle, sir", radicals: "又", strokeCount: 8, hskLevel: 3, generalStandardNumber: "1065", frequencyRank: 1422 }
       ,{ traditional: "岩", simplified: "岩", pinyin: "yán", definition: "cliff; rocks; mountain", radicals: "山", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1106", frequencyRank: 1423 }
       ,{ traditional: "荡", simplified: "荡", pinyin: "dàng", definition: "pond, pool; wash away, cleanse", radicals: "艸", strokeCount: 9, hskLevel: 6, generalStandardNumber: "1414", frequencyRank: 1424 }
       ,{ traditional: "综", simplified: "综", pinyin: "zōng", definition: "arrange threads for weaving", radicals: "糸", strokeCount: 11, hskLevel: 5, generalStandardNumber: "2496", frequencyRank: 1425 }
@@ -1689,7 +1689,7 @@ const flashCardDataList = [
       ,{ traditional: "键", simplified: "键", pinyin: "jiàn", definition: "door bolt, lock bolt; key", radicals: "金", strokeCount: 13, hskLevel: 4, generalStandardNumber: "2943", frequencyRank: 1471 }
       ,{ traditional: "伍", simplified: "伍", pinyin: "wǔ", definition: "five, company of five; troops", radicals: "人", strokeCount: 6, hskLevel: 6, generalStandardNumber: "0459", frequencyRank: 1472 }
       ,{ traditional: "峰", simplified: "峰", pinyin: "fēng", definition: "peak, summit; hump of camel", radicals: "山", strokeCount: 10, hskLevel: 6, generalStandardNumber: "1921", frequencyRank: 1473 }
-      ,{ traditional: "尺", simplified: "尺", pinyin: "chǐ", definition: "", radicals: "尸", strokeCount: 4, hskLevel: 5, generalStandardNumber: "0175", frequencyRank: 1474 }
+      ,{ traditional: "尺", simplified: "尺", pinyin: "chǐ", definition: "ruler, measuring tape, scale", radicals: "尸", strokeCount: 4, hskLevel: 5, generalStandardNumber: "0175", frequencyRank: 1474 }
       ,{ traditional: "昨", simplified: "昨", pinyin: "zuó", definition: "yesterday; in former times, past", radicals: "日", strokeCount: 9, hskLevel: 1, generalStandardNumber: "1489", frequencyRank: 1475 }
       ,{ traditional: "黎", simplified: "黎", pinyin: "lí", definition: "surname; numerous, many; black", radicals: "黍", strokeCount: 15, hskLevel: 6, generalStandardNumber: "3262", frequencyRank: 1476 }
       ,{ traditional: "辈", simplified: "辈", pinyin: "bèi", definition: "generation, lifetime; class", radicals: "非", strokeCount: 12, hskLevel: 5, generalStandardNumber: "2602", frequencyRank: 1477 }
@@ -1875,7 +1875,7 @@ const flashCardDataList = [
       ,{ traditional: "械", simplified: "械", pinyin: "xiè", definition: "weapons; implements, instruments", radicals: "木", strokeCount: 11, hskLevel: 6, generalStandardNumber: "2219", frequencyRank: 1657 }
       ,{ traditional: "咬", simplified: "咬", pinyin: "yǎo", definition: "bite, gnaw", radicals: "口", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1512", frequencyRank: 1658 }
       ,{ traditional: "邻", simplified: "邻", pinyin: "lín", definition: "neighbor; neighborhood", radicals: "邑", strokeCount: 7, hskLevel: 3, generalStandardNumber: "0801", frequencyRank: 1659 }
-      ,{ traditional: "赤", simplified: "赤", pinyin: "chì", definition: "", radicals: "赤", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0631", frequencyRank: 1660 }
+      ,{ traditional: "赤", simplified: "赤", pinyin: "chì", definition: "scarlet color, bare/naked, honest", radicals: "赤", strokeCount: 7, hskLevel: 6, generalStandardNumber: "0631", frequencyRank: 1660 }
       ,{ traditional: "挤", simplified: "挤", pinyin: "jǐ", definition: "crowd, squeeze, push against", radicals: "手", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1392", frequencyRank: 1661 }
       ,{ traditional: "弯", simplified: "弯", pinyin: "wān", definition: "bend, curve", radicals: "弓", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1616", frequencyRank: 1662 }
       ,{ traditional: "椅", simplified: "椅", pinyin: "yǐ", definition: "chair, seat", radicals: "木", strokeCount: 12, hskLevel: 1, generalStandardNumber: "2569", frequencyRank: 1663 }
@@ -2114,7 +2114,7 @@ const flashCardDataList = [
       ,{ traditional: "滴", simplified: "滴", pinyin: "dī", definition: "drip; drop of water", radicals: "水", strokeCount: 14, hskLevel: 5, generalStandardNumber: "3165", frequencyRank: 1896 }
       ,{ traditional: "疏", simplified: "疏", pinyin: "shū", definition: "neglect; careless, lax", radicals: "疋", strokeCount: 12, hskLevel: 6, generalStandardNumber: "2804", frequencyRank: 1897 }
       ,{ traditional: "萧", simplified: "萧", pinyin: "xiāo", definition: "common artemisia; dejected", radicals: "艸", strokeCount: 11, hskLevel: null, generalStandardNumber: "2216", frequencyRank: 1898 }
-      ,{ traditional: "姿", simplified: "姿", pinyin: "zī", definition: "", radicals: "女", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1630", frequencyRank: 1899 }
+      ,{ traditional: "姿", simplified: "姿", pinyin: "zī", definition: "style, posture, manner, appearance", radicals: "女", strokeCount: 9, hskLevel: 5, generalStandardNumber: "1630", frequencyRank: 1899 }
       ,{ traditional: "颤", simplified: "颤", pinyin: "chàn", definition: "shiver, tremble; trembling", radicals: "頁", strokeCount: 19, hskLevel: 6, generalStandardNumber: "3465", frequencyRank: 1900 }
       ,{ traditional: "丑", simplified: "丑", pinyin: "chǒu", definition: "clown, comedian; 2nd terrestrial branch", radicals: "一", strokeCount: 4, hskLevel: 5, generalStandardNumber: "0177", frequencyRank: 1901 }
       ,{ traditional: "劣", simplified: "劣", pinyin: "liè", definition: "bad, inferior; slightly", radicals: "力", strokeCount: 6, hskLevel: 5, generalStandardNumber: "0416", frequencyRank: 1902 }
@@ -2213,7 +2213,7 @@ const flashCardDataList = [
       ,{ traditional: "悦", simplified: "悦", pinyin: "yuè", definition: "pleased, contented, gratified", radicals: "心", strokeCount: 10, hskLevel: 6, generalStandardNumber: "2096", frequencyRank: 1995 }
       ,{ traditional: "拦", simplified: "拦", pinyin: "lán", definition: "obstruct, impede, bar, hinder", radicals: "手", strokeCount: 8, hskLevel: 5, generalStandardNumber: "0982", frequencyRank: 1996 }
       ,{ traditional: "诞", simplified: "诞", pinyin: "dàn", definition: "bear children, give birth; birth", radicals: "言", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1297", frequencyRank: 1997 }
-      ,{ traditional: "饱", simplified: "饱", pinyin: "bǎo", definition: "", radicals: "食", strokeCount: 8, hskLevel: 3, generalStandardNumber: "1202", frequencyRank: 1998 }
+      ,{ traditional: "饱", simplified: "饱", pinyin: "bǎo", definition: "full, satisfied, well fed", radicals: "食", strokeCount: 8, hskLevel: 3, generalStandardNumber: "1202", frequencyRank: 1998 }
       ,{ traditional: "乾", simplified: "乾", pinyin: "gān", definition: "dry; first hexagram; warming principle of the sun, penetrating and fertilizing, heavenly generative principle (male)", radicals: "乙", strokeCount: 11, hskLevel: null, generalStandardNumber: "2215", frequencyRank: 1999 }
       ,{ traditional: "泡", simplified: "泡", pinyin: "pào", definition: "bubbles, suds; blister; soak", radicals: "水", strokeCount: 8, hskLevel: 6, generalStandardNumber: "1251", frequencyRank: 2000 }
       ,{ traditional: "贼", simplified: "贼", pinyin: "zéi", definition: "thief, traitor; kill", radicals: "貝", strokeCount: 10, hskLevel: 6, generalStandardNumber: "1924", frequencyRank: 2001 }
