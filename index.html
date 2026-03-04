@@ -149,6 +149,31 @@
     body.nightModeActive .seenCountText {
       color: #9ca3af;
     }
+    .ttsButton {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      background: #ffffff;
+      color: #111827;
+      cursor: pointer;
+      justify-self: center;
+    }
+    .ttsButton {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      background: #ffffff;
+      color: #111827;
+      cursor: pointer;
+      justify-self: center;
+    }
+    body.nightModeActive .ttsButton {
+      border-color: #334155;
+      background: #111827;
+      color: #e5e7eb;
+    }
     .levelSelector {
       border: 1px solid #d1d5db;
       border-radius: 999px;
@@ -169,6 +194,9 @@
     <div class="auxControlsRow">
       <button class="navButton secondaryButton" id="nightModeToggleButtonElement">Night Mode</button>
       <button class="navButton secondaryButton" id="randomModeToggleButtonElement">Random Mode</button>
+      <button class="ttsButton" id="ttsButtonElement"  style="border:0px;">
+        <img src="soundicon.png" alt="Speak"/>
+    </button>
     </div>
     <div class="flashCard" id="flashCardElement">
       <div class="cardContent" id="cardContentElement"></div>
@@ -197,6 +225,8 @@
 
   <script src="flashcardDataList.js"></script>
   <script>
+    const pageLoadTime = Date.now();
+    let ttsTimeoutIdValue = null;
     const localStorageKeyNameMap = {
       nightModeEnabled: "chineseFlashCardsNightModeEnabled",
       seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
@@ -257,6 +287,7 @@
     const nextButtonElement = document.getElementById("nextButtonElement");
     const nightModeToggleButtonElement = document.getElementById("nightModeToggleButtonElement");
     const randomModeToggleButtonElement = document.getElementById("randomModeToggleButtonElement");
+    const ttsButtonElement = document.getElementById("ttsButtonElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
     const frequencySelectElement = document.getElementById("frequencySelectElement");
     const positionTextElement = document.getElementById("positionTextElement");
@@ -296,10 +327,16 @@
     let seenCountByCharacterMapValue = loadSeenCountByCharacterMapFromLocalStorage();
     let isRandomModeEnabledValue = false;
     let randomModeHistoryIndexList = [];
+    let randomModeHistoryPositionIndexValue = -1;
+    let hasSeenCountIncrementedValue = false;
+    let isSpeechVoiceLoadPendingValue = false;
 
     const updateSeenCountForCurrentCard = () => {
       if (randomizedFlashCardDataList.length === 0) {
         currentCardSeenCountValue = 0;
+        return;
+      }
+      if (hasSeenCountIncrementedValue) {
         return;
       }
       const currentCardDataValue = randomizedFlashCardDataList[currentCardIndexValue];
@@ -308,6 +345,7 @@
       seenCountByCharacterMapValue[seenCountKeyValue] = currentSeenCountValue;
       currentCardSeenCountValue = currentSeenCountValue;
       saveSeenCountByCharacterMapToLocalStorage(seenCountByCharacterMapValue);
+      hasSeenCountIncrementedValue = true;
     };
 
     const setNightModeEnabledValue = (nightModeEnabledValue) => {
@@ -327,6 +365,7 @@
       currentCardIndexValue = 0;
       isDetailViewVisibleValue = false;
       randomModeHistoryIndexList = [];
+      randomModeHistoryPositionIndexValue = -1;
       updateSeenCountForCurrentCard();
       renderCardContent();
     };
@@ -334,8 +373,89 @@
     const setRandomModeEnabledValue = (randomModeEnabledValue) => {
       isRandomModeEnabledValue = randomModeEnabledValue;
       randomModeHistoryIndexList = [];
+      randomModeHistoryPositionIndexValue = -1;
+      if (randomModeEnabledValue && randomizedFlashCardDataList.length > 0) {
+        randomModeHistoryIndexList = [currentCardIndexValue];
+        randomModeHistoryPositionIndexValue = 0;
+      }
       randomModeToggleButtonElement.textContent = randomModeEnabledValue ? "Ordered Mode" : "Random Mode";
       renderCardContent();
+    };
+
+    const getSpeechTextFromCardData = (cardDataValue) => {
+      if (cardDataValue.simplified) {
+        return cardDataValue.simplified;
+      }
+      return cardDataValue.traditional || "";
+    };
+
+    const isSpeechSynthesisAvailableValue = () => {
+      return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+    };
+
+    const getPreferredSpeechSynthesisVoiceValue = () => {
+      const availableSpeechVoiceList = window.speechSynthesis.getVoices();
+      if (!availableSpeechVoiceList || availableSpeechVoiceList.length === 0) {
+        return null;
+      }
+      const preferredVoiceValue = availableSpeechVoiceList.find((voiceValue) =>
+        voiceValue.lang && voiceValue.lang.toLowerCase().startsWith("zh")
+      );
+      return preferredVoiceValue || null;
+    };
+
+    const speakCurrentCardText = () => {
+      if (!isSpeechSynthesisAvailableValue()) {
+        alert("Speech synthesis is not available in your browser. Please try a different browser.");
+        return;
+      }
+      const selectedVoiceValue = getPreferredSpeechSynthesisVoiceValue();
+      if (!selectedVoiceValue) {
+        if (!isSpeechVoiceLoadPendingValue) {
+          isSpeechVoiceLoadPendingValue = true;
+          window.speechSynthesis.onvoiceschanged = () => {
+            isSpeechVoiceLoadPendingValue = false;
+            speakCurrentCardText();
+          };
+        }
+        alert("No Chinese voice found. Install a Chinese TTS voice in your OS/browser."
+        + "\nMacOS: Go to Accessibility > Speech"
+        + "\nWindows: Go to Time and Language > Language & Region");
+        return;
+      }
+      if (randomizedFlashCardDataList.length === 0) {
+        alert("No cards to speak.");
+        return;
+      }
+      const currentCardDataValue = randomizedFlashCardDataList[currentCardIndexValue];
+      const speechTextValue = getSpeechTextFromCardData(currentCardDataValue);
+      if (!speechTextValue) {
+        alert("No text to speak.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const speechUtteranceValue = new SpeechSynthesisUtterance(speechTextValue);
+      speechUtteranceValue.lang = "zh-CN";
+      speechUtteranceValue.voice = selectedVoiceValue;
+      speechUtteranceValue.volume = 1;
+      speechUtteranceValue.rate = 1;
+      if(pageLoadTime + 3000 > Date.now()) {
+        clearTimeout(ttsTimeoutIdValue);
+        ttsTimeoutIdValue = setTimeout(() => {
+          window.speechSynthesis.speak(speechUtteranceValue);
+        }, 3000);
+      }
+      window.speechSynthesis.speak(speechUtteranceValue);
+    };
+
+    const updateTtsButtonForCurrentCard = () => {
+      if (!ttsButtonElement) {
+        return;
+      }
+      const isAvailableValue = isSpeechSynthesisAvailableValue();
+      ttsButtonElement.onclick = () => {
+        speakCurrentCardText();
+      };
     };
 
     const renderCardContent = () => {
@@ -358,13 +478,16 @@
       if (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length) {
         currentCardIndexValue = 0;
       }
+      if (isRandomModeEnabledValue && randomModeHistoryIndexList.length > 0) {
+        currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
+      }
       const currentCardData = randomizedFlashCardDataList[currentCardIndexValue];
       positionTextElement.textContent = `${currentCardIndexValue + 1} / ${randomizedFlashCardDataList.length}`;
       if (isRandomModeEnabledValue) {
-        previousButtonElement.disabled = randomModeHistoryIndexList.length === 0;
+        previousButtonElement.disabled = randomModeHistoryPositionIndexValue <= 0;
         nextButtonElement.disabled = randomizedFlashCardDataList.length <= 1;
       } else {
-        previousButtonElement.disabled = currentCardIndexValue === 0;
+      previousButtonElement.disabled = currentCardIndexValue === 0;
         nextButtonElement.disabled = currentCardIndexValue === randomizedFlashCardDataList.length - 1;
       }
 
@@ -384,6 +507,7 @@
             <div class="seenCountText">Seen ${currentCardSeenCountValue} time${currentCardSeenCountValue === 1 ? "" : "s"}</div>
           </div>
         `;
+        updateTtsButtonForCurrentCard();
         return;
       }
 
@@ -412,16 +536,16 @@
             </div>
             <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
               <div class="unimportantInfo">
-                <div class="detailLabel">Stroke Count</div>
-                <div>${currentCardData.strokeCount}</div>
-              </div>
+              <div class="detailLabel">Stroke Count</div>
+              <div>${currentCardData.strokeCount}</div>
+            </div>
               <div class="unimportantInfo">
-                <div class="detailLabel">HSK Level</div>
-                <div>${currentCardData.hskLevel}</div>
-              </div>
+              <div class="detailLabel">HSK Level</div>
+              <div>${currentCardData.hskLevel}</div>
+            </div>
               <div class="unimportantInfo">
-                <div class="detailLabel">Frequency Rank</div>
-                <div>${currentCardData.frequencyRank}</div>
+              <div class="detailLabel">Frequency Rank</div>
+              <div>${currentCardData.frequencyRank}</div>
               </div>
               <div class="unimportantInfo">
                 <div class="detailLabel">Seen Count</div>
@@ -431,6 +555,7 @@
           </div>
         </div>
       `;
+      updateTtsButtonForCurrentCard();
     };
 
     flashCardElement.addEventListener("click", () => {
@@ -440,10 +565,11 @@
 
     previousButtonElement.addEventListener("click", () => {
       if (isRandomModeEnabledValue) {
-        if (randomModeHistoryIndexList.length === 0) {
+        if (randomModeHistoryPositionIndexValue <= 0) {
           return;
         }
-        currentCardIndexValue = randomModeHistoryIndexList.pop();
+        randomModeHistoryPositionIndexValue -= 1;
+        currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
         isDetailViewVisibleValue = false;
         updateSeenCountForCurrentCard();
         renderCardContent();
@@ -463,11 +589,20 @@
         if (randomizedFlashCardDataList.length <= 1) {
           return;
         }
-        randomModeHistoryIndexList.push(currentCardIndexValue);
+        if (randomModeHistoryPositionIndexValue < randomModeHistoryIndexList.length - 1) {
+          randomModeHistoryPositionIndexValue += 1;
+          currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
+          isDetailViewVisibleValue = false;
+          updateSeenCountForCurrentCard();
+          renderCardContent();
+          return;
+        }
         let nextRandomCardIndexValue = currentCardIndexValue;
         while (nextRandomCardIndexValue === currentCardIndexValue && randomizedFlashCardDataList.length > 1) {
           nextRandomCardIndexValue = Math.floor(Math.random() * randomizedFlashCardDataList.length);
         }
+        randomModeHistoryIndexList.push(nextRandomCardIndexValue);
+        randomModeHistoryPositionIndexValue += 1;
         currentCardIndexValue = nextRandomCardIndexValue;
         isDetailViewVisibleValue = false;
         updateSeenCountForCurrentCard();
