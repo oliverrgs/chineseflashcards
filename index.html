@@ -28,6 +28,12 @@
       gap: 16px;
       justify-items: center;
     }
+    .auxControlsRow {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
     .flashCard {
       width: 100%;
       height: 70vh;
@@ -107,6 +113,10 @@
       font-size: 14px;
       cursor: pointer;
     }
+    .navButton.secondaryButton {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
     body.nightModeActive .navButton {
       background: #e5e7eb;
       color: #111827;
@@ -156,12 +166,15 @@
 </head>
 <body>
   <div class="pageContainer">
+    <div class="auxControlsRow">
+      <button class="navButton secondaryButton" id="nightModeToggleButtonElement">Night Mode</button>
+      <button class="navButton secondaryButton" id="randomModeToggleButtonElement">Random Mode</button>
+    </div>
     <div class="flashCard" id="flashCardElement">
       <div class="cardContent" id="cardContentElement"></div>
     </div>
     <div class="navigationRow">
       <button class="navButton" id="previousButtonElement">Previous</button>
-      <button class="navButton" id="nightModeToggleButtonElement">Night Mode</button>
       <select class="levelSelector" id="hskLevelSelectElement">
         <option value="1">HSK 1</option>
         <option value="2">HSK 2</option>
@@ -243,6 +256,7 @@
     const previousButtonElement = document.getElementById("previousButtonElement");
     const nextButtonElement = document.getElementById("nextButtonElement");
     const nightModeToggleButtonElement = document.getElementById("nightModeToggleButtonElement");
+    const randomModeToggleButtonElement = document.getElementById("randomModeToggleButtonElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
     const frequencySelectElement = document.getElementById("frequencySelectElement");
     const positionTextElement = document.getElementById("positionTextElement");
@@ -280,6 +294,8 @@
     let isDetailViewVisibleValue = false;
     let currentCardSeenCountValue = 0;
     let seenCountByCharacterMapValue = loadSeenCountByCharacterMapFromLocalStorage();
+    let isRandomModeEnabledValue = false;
+    let randomModeHistoryIndexList = [];
 
     const updateSeenCountForCurrentCard = () => {
       if (randomizedFlashCardDataList.length === 0) {
@@ -310,7 +326,15 @@
       randomizedFlashCardDataList = shuffleFlashCardDataList(filteredFlashCardDataList);
       currentCardIndexValue = 0;
       isDetailViewVisibleValue = false;
+      randomModeHistoryIndexList = [];
       updateSeenCountForCurrentCard();
+      renderCardContent();
+    };
+
+    const setRandomModeEnabledValue = (randomModeEnabledValue) => {
+      isRandomModeEnabledValue = randomModeEnabledValue;
+      randomModeHistoryIndexList = [];
+      randomModeToggleButtonElement.textContent = randomModeEnabledValue ? "Ordered Mode" : "Random Mode";
       renderCardContent();
     };
 
@@ -336,8 +360,13 @@
       }
       const currentCardData = randomizedFlashCardDataList[currentCardIndexValue];
       positionTextElement.textContent = `${currentCardIndexValue + 1} / ${randomizedFlashCardDataList.length}`;
-      previousButtonElement.disabled = currentCardIndexValue === 0;
-      nextButtonElement.disabled = currentCardIndexValue === randomizedFlashCardDataList.length - 1;
+      if (isRandomModeEnabledValue) {
+        previousButtonElement.disabled = randomModeHistoryIndexList.length === 0;
+        nextButtonElement.disabled = randomizedFlashCardDataList.length <= 1;
+      } else {
+        previousButtonElement.disabled = currentCardIndexValue === 0;
+        nextButtonElement.disabled = currentCardIndexValue === randomizedFlashCardDataList.length - 1;
+      }
 
       if (!isDetailViewVisibleValue) {
         cardContentElement.innerHTML = `
@@ -352,7 +381,7 @@
                 <div class="characterValue">${currentCardData.simplified}</div>
               </div>
             </div>
-            <div class="seenCountText">Seen ${currentCardSeenCountValue} times</div>
+            <div class="seenCountText">Seen ${currentCardSeenCountValue} time${currentCardSeenCountValue === 1 ? "" : "s"}</div>
           </div>
         `;
         return;
@@ -384,19 +413,19 @@
             <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
               <div class="unimportantInfo">
                 <div class="detailLabel">Stroke Count</div>
-              <div>${currentCardData.strokeCount}</div>
-            </div>
+                <div>${currentCardData.strokeCount}</div>
+              </div>
               <div class="unimportantInfo">
                 <div class="detailLabel">HSK Level</div>
-              <div>${currentCardData.hskLevel}</div>
-            </div>
+                <div>${currentCardData.hskLevel}</div>
+              </div>
               <div class="unimportantInfo">
                 <div class="detailLabel">Frequency Rank</div>
-              <div>${currentCardData.frequencyRank}</div>
-            </div>
+                <div>${currentCardData.frequencyRank}</div>
+              </div>
               <div class="unimportantInfo">
                 <div class="detailLabel">Seen Count</div>
-              <div>${currentCardSeenCountValue}</div>
+                <div>${currentCardSeenCountValue}</div>
               </div>
             </div>
           </div>
@@ -410,6 +439,16 @@
     });
 
     previousButtonElement.addEventListener("click", () => {
+      if (isRandomModeEnabledValue) {
+        if (randomModeHistoryIndexList.length === 0) {
+          return;
+        }
+        currentCardIndexValue = randomModeHistoryIndexList.pop();
+        isDetailViewVisibleValue = false;
+        updateSeenCountForCurrentCard();
+        renderCardContent();
+        return;
+      }
       if (currentCardIndexValue === 0) {
         return;
       }
@@ -420,6 +459,21 @@
     });
 
     nextButtonElement.addEventListener("click", () => {
+      if (isRandomModeEnabledValue) {
+        if (randomizedFlashCardDataList.length <= 1) {
+          return;
+        }
+        randomModeHistoryIndexList.push(currentCardIndexValue);
+        let nextRandomCardIndexValue = currentCardIndexValue;
+        while (nextRandomCardIndexValue === currentCardIndexValue && randomizedFlashCardDataList.length > 1) {
+          nextRandomCardIndexValue = Math.floor(Math.random() * randomizedFlashCardDataList.length);
+        }
+        currentCardIndexValue = nextRandomCardIndexValue;
+        isDetailViewVisibleValue = false;
+        updateSeenCountForCurrentCard();
+        renderCardContent();
+        return;
+      }
       if (currentCardIndexValue === randomizedFlashCardDataList.length - 1) {
         return;
       }
@@ -432,6 +486,10 @@
     nightModeToggleButtonElement.addEventListener("click", () => {
       const nextNightModeEnabledValue = !document.body.classList.contains("nightModeActive");
       setNightModeEnabledValue(nextNightModeEnabledValue);
+    });
+
+    randomModeToggleButtonElement.addEventListener("click", () => {
+      setRandomModeEnabledValue(!isRandomModeEnabledValue);
     });
 
     hskLevelSelectElement.addEventListener("change", (eventValue) => {
@@ -447,6 +505,7 @@
     });
 
     setNightModeEnabledValue(loadNightModeEnabledValueFromLocalStorage());
+    setRandomModeEnabledValue(false);
     hskLevelSelectElement.value = loadHskLevelSelectionValueFromLocalStorage();
     if (!hskLevelSelectElement.value) {
       hskLevelSelectElement.value = "all";
