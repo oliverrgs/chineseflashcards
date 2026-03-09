@@ -231,7 +231,8 @@
       nightModeEnabled: "chineseFlashCardsNightModeEnabled",
       seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
       hskLevelSelection: "chineseFlashCardsHskLevelSelection",
-      frequencySelection: "chineseFlashCardsFrequencySelection"
+      frequencySelection: "chineseFlashCardsFrequencySelection",
+      randomModeEnabled: "chineseFlashCardsRandomModeEnabled"
     };
 
     const loadSeenCountByCharacterMapFromLocalStorage = () => {
@@ -279,6 +280,14 @@
 
     const saveFrequencySelectionValueToLocalStorage = (frequencySelectionValue) => {
       localStorage.setItem(localStorageKeyNameMap.frequencySelection, frequencySelectionValue);
+    };
+
+    const loadRandomModeEnabledValueFromLocalStorage = () => {
+      return localStorage.getItem(localStorageKeyNameMap.randomModeEnabled) === "true";
+    };
+
+    const saveRandomModeEnabledValueToLocalStorage = (randomModeEnabledValue) => {
+      localStorage.setItem(localStorageKeyNameMap.randomModeEnabled, randomModeEnabledValue ? "true" : "false");
     };
 
     const flashCardElement = document.getElementById("flashCardElement");
@@ -366,6 +375,7 @@
       isDetailViewVisibleValue = false;
       randomModeHistoryIndexList = [];
       randomModeHistoryPositionIndexValue = -1;
+      hasSeenCountIncrementedValue = false;
       updateSeenCountForCurrentCard();
       renderCardContent();
     };
@@ -379,6 +389,7 @@
         randomModeHistoryPositionIndexValue = 0;
       }
       randomModeToggleButtonElement.textContent = randomModeEnabledValue ? "Ordered Mode" : "Random Mode";
+      saveRandomModeEnabledValueToLocalStorage(randomModeEnabledValue);
       renderCardContent();
     };
 
@@ -418,9 +429,6 @@
             speakCurrentCardText();
           };
         }
-        alert("No Chinese voice found. Install a Chinese TTS voice in your OS/browser."
-        + "\nMacOS: Go to Accessibility > Speech"
-        + "\nWindows: Go to Time and Language > Language & Region");
         return;
       }
       if (randomizedFlashCardDataList.length === 0) {
@@ -571,6 +579,7 @@
         randomModeHistoryPositionIndexValue -= 1;
         currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
         isDetailViewVisibleValue = false;
+        hasSeenCountIncrementedValue = false;
         updateSeenCountForCurrentCard();
         renderCardContent();
         return;
@@ -580,6 +589,7 @@
       }
       currentCardIndexValue -= 1;
       isDetailViewVisibleValue = false;
+      hasSeenCountIncrementedValue = false;
       updateSeenCountForCurrentCard();
       renderCardContent();
     });
@@ -593,6 +603,7 @@
           randomModeHistoryPositionIndexValue += 1;
           currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
           isDetailViewVisibleValue = false;
+          hasSeenCountIncrementedValue = false;
           updateSeenCountForCurrentCard();
           renderCardContent();
           return;
@@ -605,6 +616,7 @@
         randomModeHistoryPositionIndexValue += 1;
         currentCardIndexValue = nextRandomCardIndexValue;
         isDetailViewVisibleValue = false;
+        hasSeenCountIncrementedValue = false;
         updateSeenCountForCurrentCard();
         renderCardContent();
         return;
@@ -614,6 +626,7 @@
       }
       currentCardIndexValue += 1;
       isDetailViewVisibleValue = false;
+      hasSeenCountIncrementedValue = false;
       updateSeenCountForCurrentCard();
       renderCardContent();
     });
@@ -640,7 +653,8 @@
     });
 
     setNightModeEnabledValue(loadNightModeEnabledValueFromLocalStorage());
-    setRandomModeEnabledValue(false);
+    updateRandomizedFlashCardDataListForSelection();
+    setRandomModeEnabledValue(loadRandomModeEnabledValueFromLocalStorage());
     hskLevelSelectElement.value = loadHskLevelSelectionValueFromLocalStorage();
     if (!hskLevelSelectElement.value) {
       hskLevelSelectElement.value = "all";
@@ -651,7 +665,6 @@
       frequencySelectElement.value = "all";
       saveFrequencySelectionValueToLocalStorage("all");
     }
-    updateRandomizedFlashCardDataListForSelection();
   </script>
 </body>
 </html>
