@@ -117,6 +117,14 @@
       padding: 6px 12px;
       font-size: 12px;
     }
+    .learnModeLabel {
+      font-size: 24px;
+      color: #6b7280;
+      padding: 10px 18px;
+    }
+    body.nightModeActive .learnModeLabel {
+      color: #9ca3af;
+    }
     body.nightModeActive .navButton {
       background: #e5e7eb;
       color: #111827;
@@ -193,7 +201,8 @@
   <div class="pageContainer">
     <div class="auxControlsRow">
       <button class="navButton secondaryButton" id="nightModeToggleButtonElement">Night Mode</button>
-      <button class="navButton secondaryButton" id="randomModeToggleButtonElement">Random Mode</button>
+      <span id="learnModeLabelElement" class="learnModeLabel">Ordered Mode</span>
+      <button class="navButton secondaryButton" id="learnModeSwitchButtonElement">Change Mode</button>
       <button class="ttsButton" id="ttsButtonElement"  style="border:0px;">
         <img src="soundicon.png" alt="Speak"/>
     </button>
@@ -233,7 +242,7 @@
       seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
       hskLevelSelection: "chineseFlashCardsHskLevelSelection",
       frequencySelection: "chineseFlashCardsFrequencySelection",
-      randomModeEnabled: "chineseFlashCardsRandomModeEnabled"
+      learnModeEnabled: "chineseFlashCardsLearnModeEnabled"
     };
 
     const loadSeenCountByCharacterMapFromLocalStorage = () => {
@@ -283,12 +292,12 @@
       localStorage.setItem(localStorageKeyNameMap.frequencySelection, frequencySelectionValue);
     };
 
-    const loadRandomModeEnabledValueFromLocalStorage = () => {
-      return localStorage.getItem(localStorageKeyNameMap.randomModeEnabled) === "true";
+    const loadLearnModeEnabledValueFromLocalStorage = () => {
+      return localStorage.getItem(localStorageKeyNameMap.learnModeEnabled) === "true";
     };
 
-    const saveRandomModeEnabledValueToLocalStorage = (randomModeEnabledValue) => {
-      localStorage.setItem(localStorageKeyNameMap.randomModeEnabled, randomModeEnabledValue ? "true" : "false");
+    const saveLearnModeEnabledValueToLocalStorage = (learnModeEnabledValue) => {
+      localStorage.setItem(localStorageKeyNameMap.learnModeEnabled, learnModeEnabledValue ? "true" : "false");
     };
 
     const flashCardElement = document.getElementById("flashCardElement");
@@ -296,7 +305,8 @@
     const previousButtonElement = document.getElementById("previousButtonElement");
     const nextButtonElement = document.getElementById("nextButtonElement");
     const nightModeToggleButtonElement = document.getElementById("nightModeToggleButtonElement");
-    const randomModeToggleButtonElement = document.getElementById("randomModeToggleButtonElement");
+    const learnModeLabelElement = document.getElementById("learnModeLabelElement");
+    const learnModeSwitchButtonElement = document.getElementById("learnModeSwitchButtonElement");
     const ttsButtonElement = document.getElementById("ttsButtonElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
     const frequencySelectElement = document.getElementById("frequencySelectElement");
@@ -330,26 +340,44 @@
       });
     };
 
+    const learnModePoolInitialSizeValue = 5;
+    const learnModeWrongWeightMultiplierValue = 1.05;
+    const learnModeMaxProbabilityValue = 0.2;
+    const learnModeRightWeightMultiplierValue = 0.5;
+    const learnModeLowWeightThresholdValue = 0.25;
+
     let randomizedFlashCardDataList = [];
     let currentCardIndexValue = 0;
     let isDetailViewVisibleValue = false;
     let currentCardSeenCountValue = 0;
     let seenCountByCharacterMapValue = loadSeenCountByCharacterMapFromLocalStorage();
-    let isRandomModeEnabledValue = false;
-    let randomModeHistoryIndexList = [];
-    let randomModeHistoryPositionIndexValue = -1;
+    let isLearnModeEnabledValue = false;
+    let learnModePoolList = [];
+    let currentLearnModePoolIndexValue = 0;
+    let learnModeDeckIndexValue = 0;
     let hasSeenCountIncrementedValue = false;
     let isSpeechVoiceLoadPendingValue = false;
 
+    (() => {
+      if (typeof radicalMapping === "undefined") return;
+      const allRadicalCharactersFromMappingValue = [...new Set(Object.values(radicalMapping).flat())];
+      const charactersWithDefinitionInFlashCardListValue = new Set(flashCardDataList.flatMap((flashCardDataValue) => [flashCardDataValue.traditional, flashCardDataValue.simplified]));
+      const radicalMappingValuesWithoutDefinitionInFlashCardListValue = allRadicalCharactersFromMappingValue.filter((radicalCharacterValue) => !charactersWithDefinitionInFlashCardListValue.has(radicalCharacterValue));
+      console.log("radicalMapping values without definition in flashCardDataList", radicalMappingValuesWithoutDefinitionInFlashCardListValue.sort());
+    })();
+
     const updateSeenCountForCurrentCard = () => {
-      if (randomizedFlashCardDataList.length === 0) {
+      const effectiveCardDataValue = isLearnModeEnabledValue && learnModePoolList.length > 0
+        ? learnModePoolList[currentLearnModePoolIndexValue].cardData
+        : randomizedFlashCardDataList[currentCardIndexValue];
+      if (!effectiveCardDataValue) {
         currentCardSeenCountValue = 0;
         return;
       }
       if (hasSeenCountIncrementedValue) {
         return;
       }
-      const currentCardDataValue = randomizedFlashCardDataList[currentCardIndexValue];
+      const currentCardDataValue = effectiveCardDataValue;
       const seenCountKeyValue = getSeenCountKeyFromCardData(currentCardDataValue);
       const currentSeenCountValue = Number(seenCountByCharacterMapValue[seenCountKeyValue] || 0) + 1;
       seenCountByCharacterMapValue[seenCountKeyValue] = currentSeenCountValue;
@@ -364,6 +392,37 @@
       saveNightModeEnabledValueToLocalStorage(nightModeEnabledValue);
     };
 
+    const getLearnModePoolKeysSet = () => new Set(learnModePoolList.map((entryValue) => getSeenCountKeyFromCardData(entryValue.cardData)));
+
+    const tryAddNewCharacterToLearnModePool = () => {
+      const totalWeightValue = learnModePoolList.reduce((sumValue, entryValue) => sumValue + entryValue.weight, 0);
+      const allWeightsSufficientlyLowValue = learnModePoolList.every((entryValue) => entryValue.weight <= learnModeLowWeightThresholdValue);
+      if (!allWeightsSufficientlyLowValue || learnModeDeckIndexValue >= randomizedFlashCardDataList.length) return;
+      const poolKeysSetValue = getLearnModePoolKeysSet();
+      while (learnModeDeckIndexValue < randomizedFlashCardDataList.length) {
+        const candidateCardDataValue = randomizedFlashCardDataList[learnModeDeckIndexValue];
+        learnModeDeckIndexValue += 1;
+        if (poolKeysSetValue.has(getSeenCountKeyFromCardData(candidateCardDataValue))) continue;
+        learnModePoolList.push({ cardData: candidateCardDataValue, weight: 1 });
+        return;
+      }
+    };
+
+    const pickNextLearnModeCardIndexByWeight = (indexToExcludeValue) => {
+      const indicesToConsiderValue = indexToExcludeValue >= 0 && indexToExcludeValue < learnModePoolList.length
+        ? learnModePoolList.map((_, indexValue) => indexValue).filter((indexValue) => indexValue !== indexToExcludeValue)
+        : learnModePoolList.map((_, indexValue) => indexValue);
+      const totalWeightValue = indicesToConsiderValue.reduce((sumValue, indexValue) => sumValue + learnModePoolList[indexValue].weight, 0);
+      if (totalWeightValue <= 0 || indicesToConsiderValue.length === 0) return 0;
+      let randomValue = Math.random() * totalWeightValue;
+      for (let indexValue = 0; indexValue < indicesToConsiderValue.length; indexValue += 1) {
+        const poolIndexValue = indicesToConsiderValue[indexValue];
+        randomValue -= learnModePoolList[poolIndexValue].weight;
+        if (randomValue <= 0) return poolIndexValue;
+      }
+      return indicesToConsiderValue[indicesToConsiderValue.length - 1];
+    };
+
     const updateRandomizedFlashCardDataListForSelection = () => {
       const hskLevelSelectionValue = loadHskLevelSelectionValueFromLocalStorage();
       const frequencySelectionValue = loadFrequencySelectionValueFromLocalStorage();
@@ -374,23 +433,42 @@
       randomizedFlashCardDataList = shuffleFlashCardDataList(filteredFlashCardDataList);
       currentCardIndexValue = 0;
       isDetailViewVisibleValue = false;
-      randomModeHistoryIndexList = [];
-      randomModeHistoryPositionIndexValue = -1;
       hasSeenCountIncrementedValue = false;
+      learnModePoolList = [];
+      learnModeDeckIndexValue = 0;
+      currentLearnModePoolIndexValue = 0;
+      if (isLearnModeEnabledValue && randomizedFlashCardDataList.length > 0) {
+        const poolKeysSetValue = new Set();
+        for (let indexValue = 0; indexValue < randomizedFlashCardDataList.length && learnModePoolList.length < learnModePoolInitialSizeValue; indexValue += 1) {
+          const cardDataValue = randomizedFlashCardDataList[indexValue];
+          const keyValue = getSeenCountKeyFromCardData(cardDataValue);
+          if (poolKeysSetValue.has(keyValue)) continue;
+          poolKeysSetValue.add(keyValue);
+          learnModePoolList.push({ cardData: cardDataValue, weight: 1 });
+          learnModeDeckIndexValue = indexValue + 1;
+        }
+        currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
+      }
       updateSeenCountForCurrentCard();
       renderCardContent();
     };
 
-    const setRandomModeEnabledValue = (randomModeEnabledValue) => {
-      isRandomModeEnabledValue = randomModeEnabledValue;
-      randomModeHistoryIndexList = [];
-      randomModeHistoryPositionIndexValue = -1;
-      if (randomModeEnabledValue && randomizedFlashCardDataList.length > 0) {
-        randomModeHistoryIndexList = [currentCardIndexValue];
-        randomModeHistoryPositionIndexValue = 0;
+    const setLearnModeEnabledValue = (learnModeEnabledValue) => {
+      isLearnModeEnabledValue = learnModeEnabledValue;
+      if (learnModeEnabledValue && randomizedFlashCardDataList.length > 0 && learnModePoolList.length === 0) {
+        const poolKeysSetValue = new Set();
+        for (let indexValue = 0; indexValue < randomizedFlashCardDataList.length && learnModePoolList.length < learnModePoolInitialSizeValue; indexValue += 1) {
+          const cardDataValue = randomizedFlashCardDataList[indexValue];
+          const keyValue = getSeenCountKeyFromCardData(cardDataValue);
+          if (poolKeysSetValue.has(keyValue)) continue;
+          poolKeysSetValue.add(keyValue);
+          learnModePoolList.push({ cardData: cardDataValue, weight: 1 });
+          learnModeDeckIndexValue = indexValue + 1;
+        }
+        currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
       }
-      randomModeToggleButtonElement.textContent = randomModeEnabledValue ? "Ordered Mode" : "Random Mode";
-      saveRandomModeEnabledValueToLocalStorage(randomModeEnabledValue);
+      learnModeLabelElement.textContent = learnModeEnabledValue ? "Learn Mode" : "Ordered Mode";
+      saveLearnModeEnabledValueToLocalStorage(learnModeEnabledValue);
       renderCardContent();
     };
 
@@ -432,11 +510,14 @@
         }
         return;
       }
-      if (randomizedFlashCardDataList.length === 0) {
+      const currentCardDataForSpeechValue = isLearnModeEnabledValue && learnModePoolList.length > 0
+        ? learnModePoolList[currentLearnModePoolIndexValue].cardData
+        : randomizedFlashCardDataList[currentCardIndexValue];
+      if (!currentCardDataForSpeechValue) {
         alert("No cards to speak.");
         return;
       }
-      const currentCardDataValue = randomizedFlashCardDataList[currentCardIndexValue];
+      const currentCardDataValue = currentCardDataForSpeechValue;
       const speechTextValue = getSpeechTextFromCardData(currentCardDataValue);
       if (!speechTextValue) {
         alert("No text to speak.");
@@ -468,8 +549,10 @@
     };
 
     const renderCardContent = () => {
-      if (randomizedFlashCardDataList.length === 0) {
+      if (randomizedFlashCardDataList.length === 0 && !(isLearnModeEnabledValue && learnModePoolList.length > 0)) {
         positionTextElement.textContent = "0 / 0";
+        previousButtonElement.textContent = isLearnModeEnabledValue ? "Wrong" : "Previous";
+        nextButtonElement.textContent = isLearnModeEnabledValue ? "Right" : "Next";
         previousButtonElement.disabled = true;
         nextButtonElement.disabled = true;
         cardContentElement.innerHTML = `
@@ -484,19 +567,32 @@
         `;
         return;
       }
-      if (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length) {
+      const currentCardData = isLearnModeEnabledValue && learnModePoolList.length > 0
+        ? learnModePoolList[currentLearnModePoolIndexValue].cardData
+        : (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length ? (currentCardIndexValue = 0, randomizedFlashCardDataList[currentCardIndexValue]) : randomizedFlashCardDataList[currentCardIndexValue]);
+      if (!isLearnModeEnabledValue && (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length)) {
         currentCardIndexValue = 0;
       }
-      if (isRandomModeEnabledValue && randomModeHistoryIndexList.length > 0) {
-        currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
-      }
-      const currentCardData = randomizedFlashCardDataList[currentCardIndexValue];
-      positionTextElement.textContent = `${currentCardIndexValue + 1} / ${randomizedFlashCardDataList.length}`;
-      if (isRandomModeEnabledValue) {
-        previousButtonElement.disabled = randomModeHistoryPositionIndexValue <= 0;
-        nextButtonElement.disabled = randomizedFlashCardDataList.length <= 1;
+      positionTextElement.textContent = isLearnModeEnabledValue && learnModePoolList.length > 0
+        ? `Pool: ${learnModePoolList.length}`
+        : `${currentCardIndexValue + 1} / ${randomizedFlashCardDataList.length}`;
+      if (isLearnModeEnabledValue) {
+        previousButtonElement.textContent = "Wrong";
+        nextButtonElement.textContent = "Right";
+        previousButtonElement.disabled = learnModePoolList.length === 0;
+        nextButtonElement.disabled = learnModePoolList.length === 0;
+        const totalPoolWeightValue = learnModePoolList.reduce((sumValue, entryValue) => sumValue + entryValue.weight, 0);
+        const poolAndFrequenciesLogValue = learnModePoolList.map((entryValue, indexValue) => ({
+          character: entryValue.cardData.simplified,
+          weight: entryValue.weight,
+          probability: totalPoolWeightValue > 0 ? (entryValue.weight / totalPoolWeightValue).toFixed(2) : 0,
+          isCurrent: indexValue === currentLearnModePoolIndexValue
+        }));
+        console.log("learn mode pool and character frequencies", { poolSize: learnModePoolList.length, totalWeight: totalPoolWeightValue, entries: poolAndFrequenciesLogValue });
       } else {
-      previousButtonElement.disabled = currentCardIndexValue === 0;
+        previousButtonElement.textContent = "Previous";
+        nextButtonElement.textContent = "Next";
+        previousButtonElement.disabled = currentCardIndexValue === 0;
         nextButtonElement.disabled = currentCardIndexValue === randomizedFlashCardDataList.length - 1;
       }
 
@@ -605,21 +701,27 @@
     });
 
     previousButtonElement.addEventListener("click", () => {
-      if (isRandomModeEnabledValue) {
-        if (randomModeHistoryPositionIndexValue <= 0) {
+      if (isLearnModeEnabledValue && learnModePoolList.length > 0) {
+        if (!isDetailViewVisibleValue) {
+          isDetailViewVisibleValue = true;
+          renderCardContent();
           return;
         }
-        randomModeHistoryPositionIndexValue -= 1;
-        currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
+        const entryValue = learnModePoolList[currentLearnModePoolIndexValue];
+        entryValue.weight *= learnModeWrongWeightMultiplierValue;
+        const totalWeightValue = learnModePoolList.reduce((sumValue, e) => sumValue + e.weight, 0);
+        if (totalWeightValue > 0 && entryValue.weight / totalWeightValue > learnModeMaxProbabilityValue) {
+          entryValue.weight = learnModeMaxProbabilityValue * totalWeightValue;
+        }
+        tryAddNewCharacterToLearnModePool();
+        currentLearnModePoolIndexValue = pickNextLearnModeCardIndexByWeight(currentLearnModePoolIndexValue);
         isDetailViewVisibleValue = false;
         hasSeenCountIncrementedValue = false;
         updateSeenCountForCurrentCard();
         renderCardContent();
         return;
       }
-      if (currentCardIndexValue === 0) {
-        return;
-      }
+      if (currentCardIndexValue === 0) return;
       currentCardIndexValue -= 1;
       isDetailViewVisibleValue = false;
       hasSeenCountIncrementedValue = false;
@@ -628,35 +730,22 @@
     });
 
     nextButtonElement.addEventListener("click", () => {
-      if (isRandomModeEnabledValue) {
-        if (randomizedFlashCardDataList.length <= 1) {
-          return;
-        }
-        if (randomModeHistoryPositionIndexValue < randomModeHistoryIndexList.length - 1) {
-          randomModeHistoryPositionIndexValue += 1;
-          currentCardIndexValue = randomModeHistoryIndexList[randomModeHistoryPositionIndexValue];
-          isDetailViewVisibleValue = false;
-          hasSeenCountIncrementedValue = false;
-          updateSeenCountForCurrentCard();
+      if (isLearnModeEnabledValue && learnModePoolList.length > 0) {
+        if (!isDetailViewVisibleValue) {
+          isDetailViewVisibleValue = true;
           renderCardContent();
           return;
         }
-        let nextRandomCardIndexValue = currentCardIndexValue;
-        while (nextRandomCardIndexValue === currentCardIndexValue && randomizedFlashCardDataList.length > 1) {
-          nextRandomCardIndexValue = Math.floor(Math.random() * randomizedFlashCardDataList.length);
-        }
-        randomModeHistoryIndexList.push(nextRandomCardIndexValue);
-        randomModeHistoryPositionIndexValue += 1;
-        currentCardIndexValue = nextRandomCardIndexValue;
+        learnModePoolList[currentLearnModePoolIndexValue].weight *= learnModeRightWeightMultiplierValue;
+        tryAddNewCharacterToLearnModePool();
+        currentLearnModePoolIndexValue = pickNextLearnModeCardIndexByWeight(currentLearnModePoolIndexValue);
         isDetailViewVisibleValue = false;
         hasSeenCountIncrementedValue = false;
         updateSeenCountForCurrentCard();
         renderCardContent();
         return;
       }
-      if (currentCardIndexValue === randomizedFlashCardDataList.length - 1) {
-        return;
-      }
+      if (currentCardIndexValue === randomizedFlashCardDataList.length - 1) return;
       currentCardIndexValue += 1;
       isDetailViewVisibleValue = false;
       hasSeenCountIncrementedValue = false;
@@ -669,8 +758,8 @@
       setNightModeEnabledValue(nextNightModeEnabledValue);
     });
 
-    randomModeToggleButtonElement.addEventListener("click", () => {
-      setRandomModeEnabledValue(!isRandomModeEnabledValue);
+    learnModeSwitchButtonElement.addEventListener("click", () => {
+      setLearnModeEnabledValue(!isLearnModeEnabledValue);
     });
 
     hskLevelSelectElement.addEventListener("change", (eventValue) => {
@@ -687,7 +776,7 @@
 
     setNightModeEnabledValue(loadNightModeEnabledValueFromLocalStorage());
     updateRandomizedFlashCardDataListForSelection();
-    setRandomModeEnabledValue(loadRandomModeEnabledValueFromLocalStorage());
+    setLearnModeEnabledValue(loadLearnModeEnabledValueFromLocalStorage());
     hskLevelSelectElement.value = loadHskLevelSelectionValueFromLocalStorage();
     if (!hskLevelSelectElement.value) {
       hskLevelSelectElement.value = "all";
