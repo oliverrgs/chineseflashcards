@@ -504,6 +504,8 @@
         cardContentElement.innerHTML = `
           <div class="cardContent">
             <div class="characterRow">
+              ${currentCardData.traditional != currentCardData.simplified ? (
+              `
               <div>
                 <div class="characterLabel">Traditional</div>
                 <div class="characterValue">${currentCardData.traditional}</div>
@@ -512,6 +514,14 @@
                 <div class="characterLabel">Simplified</div>
                 <div class="characterValue">${currentCardData.simplified}</div>
               </div>
+              `
+              ) : (
+                `
+                <div>
+                  <div class="characterValue">${currentCardData.simplified}</div>
+                </div>
+                `
+              )}
             </div>
             <div class="seenCountText">Seen ${currentCardSeenCountValue} time${currentCardSeenCountValue === 1 ? "" : "s"}</div>
           </div>
@@ -534,7 +544,15 @@
       cardContentElement.innerHTML = `
         <div class="cardContent">
           <div class="characterRow">
-            <div>${currentCardData.traditional} / ${currentCardData.simplified}</div>
+            ${currentCardData.traditional != currentCardData.simplified ? (
+              `
+              <div>${currentCardData.traditional} / ${currentCardData.simplified}</div>
+              `
+            ) : (
+              `
+              <div>${currentCardData.simplified}</div>
+              `
+            )}
           </div>
           <div class="detailRow">
             <div>
