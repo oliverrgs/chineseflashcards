@@ -566,7 +566,13 @@
             <div>
               <div class="detailLabel">Radical</div>
               <div>
-                ${radicalsFromMapping.map((oneradical)=>{ const metadataForRadical = radicalMetadataForCard(oneradical); if (metadataForRadical) return radicalToHtml(metadataForRadical); const flashCardEntryForRadical = flashCardDataList.find((flashCardDataValue) => flashCardDataValue.traditional === oneradical || flashCardDataValue.simplified === oneradical); return flashCardEntryForRadical ? `${flashCardEntryForRadical.traditional}: ${flashCardEntryForRadical.definition}` : oneradical; }).join(", ")}
+                ${radicalsFromMapping.map((oneradical)=>{ 
+                    const metadataForRadical = radicalMetadataForCard(oneradical); 
+                    if (metadataForRadical) return radicalToHtml(metadataForRadical); 
+                    const flashCardEntryForRadical = flashCardDataList.find((flashCardDataValue) => 
+                    flashCardDataValue.traditional === oneradical || flashCardDataValue.simplified === oneradical);
+                    return flashCardEntryForRadical ? `${flashCardEntryForRadical.traditional}: ${flashCardEntryForRadical.definition}` : oneradical; }
+                  ).join("<br/>")}
                 </div>
             </div>
             <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
