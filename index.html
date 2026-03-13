@@ -223,6 +223,7 @@
     </div>
   </div>
 
+  <script src="radicalmapping.js"></script>
   <script src="flashcardDataList.js"></script>
   <script>
     const pageLoadTime = Date.now();
@@ -519,6 +520,17 @@
         return;
       }
 
+      const characterForRadicalLookup = currentCardData.traditional;
+      const radicalsFromMapping = (typeof radicalMapping !== "undefined" && radicalMapping[characterForRadicalLookup]) ? radicalMapping[characterForRadicalLookup] : [];
+      const mainRadicalForCard = radicalsFromMapping[0] || "";
+      const radicalMetadataForCard = (mainRadicalForCard)=>{
+        return radicalList.find((radical) => radical.radical === mainRadicalForCard || radical.variants.includes(mainRadicalForCard));
+      }
+      const radicalToHtml = (radical) => {
+        return `${radical.radical} ${radical.variants.length > 0 ? `(${radical.variants})` : ""}:
+        ${radical.meaning}`;
+      }
+
       cardContentElement.innerHTML = `
         <div class="cardContent">
           <div class="characterRow">
@@ -536,11 +548,8 @@
             <div>
               <div class="detailLabel">Radical</div>
               <div>
-                ${currentCardData.radicals}
-                ${radicalList.find((radical) => radical.radical === currentCardData.radicals)?.variants?.length > 0 ? 
-                    `(${radicalList.find((radical) => radical.radical === currentCardData.radicals)?.variants?.join(", ")})` 
-                    : ""}
-                : ${radicalList.find((radical) => radical.radical === currentCardData.radicals)?.meaning}</div>
+                ${radicalsFromMapping.map((oneradical)=>{ const metadataForRadical = radicalMetadataForCard(oneradical); if (metadataForRadical) return radicalToHtml(metadataForRadical); const flashCardEntryForRadical = flashCardDataList.find((flashCardDataValue) => flashCardDataValue.traditional === oneradical || flashCardDataValue.simplified === oneradical); return flashCardEntryForRadical ? `${flashCardEntryForRadical.traditional}: ${flashCardEntryForRadical.definition}` : oneradical; }).join(", ")}
+                </div>
             </div>
             <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
               <div class="unimportantInfo">
