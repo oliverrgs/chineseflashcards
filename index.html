@@ -285,7 +285,7 @@
 
     const loadFrequencySelectionValueFromLocalStorage = () => {
       const frequencySelectionStorageValue = localStorage.getItem(localStorageKeyNameMap.frequencySelection);
-      return frequencySelectionStorageValue ? frequencySelectionStorageValue : "all";
+      return frequencySelectionStorageValue ? frequencySelectionStorageValue : "200";
     };
 
     const saveFrequencySelectionValueToLocalStorage = (frequencySelectionValue) => {
@@ -293,7 +293,7 @@
     };
 
     const loadLearnModeEnabledValueFromLocalStorage = () => {
-      return localStorage.getItem(localStorageKeyNameMap.learnModeEnabled) === "true";
+      return localStorage.getItem(localStorageKeyNameMap.learnModeEnabled) !== "false";
     };
 
     const saveLearnModeEnabledValueToLocalStorage = (learnModeEnabledValue) => {
