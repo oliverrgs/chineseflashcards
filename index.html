@@ -22,17 +22,49 @@
       background: #0f172a;
       color: #e5e7eb;
     }
+    .appMainLayoutRow {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: min(1040px, 96vw);
+      box-sizing: border-box;
+      padding: 0 12px;
+    }
     .pageContainer {
-      width: min(720px, 92vw);
+      flex: 1 1 320px;
+      max-width: min(720px, 100%);
       display: grid;
       gap: 16px;
       justify-items: center;
+    }
+    .learnModeStateAsideColumn {
+      flex: 0 0 auto;
+      display: flex;
+      position:fixed;
+      right:0px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      padding-top: 4px;
+    }
+    .learnModeStateAsideColumn[hidden] {
+      display: none !important;
+    }
+    .learnModeStateAsideColumn .navButton.secondaryButton {
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
     }
     .auxControlsRow {
       width: 100%;
       display: flex;
       justify-content: flex-end;
       gap: 8px;
+      flex-wrap: wrap;
     }
     .flashCard {
       width: 100%;
@@ -198,38 +230,46 @@
   </style>
 </head>
 <body>
-  <div class="pageContainer">
-    <div class="auxControlsRow">
-      <button class="navButton secondaryButton" id="nightModeToggleButtonElement">Night Mode</button>
-      <span id="learnModeLabelElement" class="learnModeLabel">Ordered Mode</span>
-      <button class="navButton secondaryButton" id="learnModeSwitchButtonElement">Change Mode</button>
-      <button class="ttsButton" id="ttsButtonElement"  style="border:0px;">
-        <img src="soundicon.png" alt="Speak"/>
-    </button>
+  <div class="appMainLayoutRow">
+    <div class="pageContainer">
+      <div class="auxControlsRow">
+        <button class="navButton secondaryButton" id="nightModeToggleButtonElement">Night Mode</button>
+        <span id="learnModeLabelElement" class="learnModeLabel">Ordered Mode</span>
+        <button class="navButton secondaryButton" id="learnModeSwitchButtonElement">Change Mode</button>
+        <button class="ttsButton" id="ttsButtonElement"  style="border:0px;">
+          <img src="soundicon.png" alt="Speak"/>
+        </button>
+      </div>
+      <div class="flashCard" id="flashCardElement">
+        <div class="cardContent" id="cardContentElement"></div>
+      </div>
+      <div class="navigationRow">
+        <button class="navButton" id="previousButtonElement">Previous</button>
+        <select class="levelSelector" id="hskLevelSelectElement">
+          <option value="1">HSK 1</option>
+          <option value="2">HSK 2</option>
+          <option value="3">HSK 3</option>
+          <option value="4">HSK 4</option>
+          <option value="5">HSK 5</option>
+          <option value="6">HSK 6</option>
+          <option value="all">All</option>
+        </select>
+        <select class="levelSelector" id="frequencySelectElement">
+          <option value="200">Top 200</option>
+          <option value="500">Top 500</option>
+          <option value="1000">Top 1000</option>
+          <option value="all">All</option>
+        </select>
+        <div class="positionText" id="positionTextElement"></div>
+        <button class="navButton" id="nextButtonElement">Next</button>
+      </div>
     </div>
-    <div class="flashCard" id="flashCardElement">
-      <div class="cardContent" id="cardContentElement"></div>
-    </div>
-    <div class="navigationRow">
-      <button class="navButton" id="previousButtonElement">Previous</button>
-      <select class="levelSelector" id="hskLevelSelectElement">
-        <option value="1">HSK 1</option>
-        <option value="2">HSK 2</option>
-        <option value="3">HSK 3</option>
-        <option value="4">HSK 4</option>
-        <option value="5">HSK 5</option>
-        <option value="6">HSK 6</option>
-        <option value="all">All</option>
-      </select>
-      <select class="levelSelector" id="frequencySelectElement">
-        <option value="200">Top 200</option>
-        <option value="500">Top 500</option>
-        <option value="1000">Top 1000</option>
-        <option value="all">All</option>
-      </select>
-      <div class="positionText" id="positionTextElement"></div>
-      <button class="navButton" id="nextButtonElement">Next</button>
-    </div>
+    <aside class="learnModeStateAsideColumn" id="learnModeStateAsideColumnElement" hidden>
+      <button class="navButton secondaryButton" id="learnModeStateDownloadButtonElement">Save</button>
+      <button class="navButton secondaryButton" id="learnModeStateUploadButtonElement">Load</button>
+      <button class="navButton secondaryButton" id="learnModeStateResetButtonElement">Reset</button>
+      <input type="file" id="learnModeStateFileInputElement" accept="application/json,.json" hidden />
+    </aside>
   </div>
 
   <script src="radicalmapping.js"></script>
@@ -242,8 +282,11 @@
       seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
       hskLevelSelection: "chineseFlashCardsHskLevelSelection",
       frequencySelection: "chineseFlashCardsFrequencySelection",
-      learnModeEnabled: "chineseFlashCardsLearnModeEnabled"
+      learnModeEnabled: "chineseFlashCardsLearnModeEnabled",
+      learnModeState: "chineseFlashCardsLearnModeState"
     };
+
+    const learnModeStateStorageSchemaVersionValue = 1;
 
     const loadSeenCountByCharacterMapFromLocalStorage = () => {
       const seenCountByCharacterStorageValue = localStorage.getItem(localStorageKeyNameMap.seenCountByCharacter);
@@ -300,6 +343,118 @@
       localStorage.setItem(localStorageKeyNameMap.learnModeEnabled, learnModeEnabledValue ? "true" : "false");
     };
 
+    const findCardDataBySimplifiedKeyInRandomizedDeck = (simplifiedCharacterKeyValue) => {
+      return randomizedFlashCardDataList.find(
+        (flashCardDataValue) => getSeenCountKeyFromCardData(flashCardDataValue) === simplifiedCharacterKeyValue
+      );
+    };
+
+    const buildLearnModeStatePlainObjectForStorage = () => {
+      return {
+        schemaVersion: learnModeStateStorageSchemaVersionValue,
+        learnModeEnabled: isLearnModeEnabledValue,
+        poolEntryList: learnModePoolList.map((poolEntryValue) => ({
+          simplifiedCharacterKey: getSeenCountKeyFromCardData(poolEntryValue.cardData),
+          weight: poolEntryValue.weight
+        })),
+        currentLearnModePoolIndexValue,
+        learnModeDeckIndexValue
+      };
+    };
+
+    const persistLearnModeStateBundleToLocalStorage = () => {
+      const learnModeStatePlainObjectValue = buildLearnModeStatePlainObjectForStorage();
+      localStorage.setItem(localStorageKeyNameMap.learnModeState, JSON.stringify(learnModeStatePlainObjectValue));
+      saveLearnModeEnabledValueToLocalStorage(learnModeStatePlainObjectValue.learnModeEnabled);
+    };
+
+    const loadLearnModeStatePlainObjectFromLocalStorage = () => {
+      const learnModeStateRawStorageValue = localStorage.getItem(localStorageKeyNameMap.learnModeState);
+      if (!learnModeStateRawStorageValue) {
+        return null;
+      }
+      try {
+        const parsedLearnModeStateValue = JSON.parse(learnModeStateRawStorageValue);
+        return parsedLearnModeStateValue && typeof parsedLearnModeStateValue === "object" ? parsedLearnModeStateValue : null;
+      } catch (errorValue) {
+        return null;
+      }
+    };
+
+    const isValidLearnModeStatePlainObjectForApply = (learnModeStatePlainObjectValue) => {
+      if (!learnModeStatePlainObjectValue || learnModeStatePlainObjectValue.schemaVersion !== learnModeStateStorageSchemaVersionValue) {
+        return false;
+      }
+      if (!Array.isArray(learnModeStatePlainObjectValue.poolEntryList)) {
+        return false;
+      }
+      for (let poolEntryIndexValue = 0; poolEntryIndexValue < learnModeStatePlainObjectValue.poolEntryList.length; poolEntryIndexValue += 1) {
+        const poolEntryFromStorageValue = learnModeStatePlainObjectValue.poolEntryList[poolEntryIndexValue];
+        if (
+          !poolEntryFromStorageValue
+          || typeof poolEntryFromStorageValue.simplifiedCharacterKey !== "string"
+          || typeof poolEntryFromStorageValue.weight !== "number"
+        ) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    const applyLearnModeStateFromPlainObject = (learnModeStatePlainObjectValue) => {
+      if (!isValidLearnModeStatePlainObjectForApply(learnModeStatePlainObjectValue)) {
+        return false;
+      }
+      const restoredLearnModePoolList = [];
+      for (
+        let poolEntryIndexValue = 0;
+        poolEntryIndexValue < learnModeStatePlainObjectValue.poolEntryList.length;
+        poolEntryIndexValue += 1
+      ) {
+        const poolEntryFromStorageValue = learnModeStatePlainObjectValue.poolEntryList[poolEntryIndexValue];
+        const matchedCardDataValue = findCardDataBySimplifiedKeyInRandomizedDeck(poolEntryFromStorageValue.simplifiedCharacterKey);
+        if (matchedCardDataValue) {
+          restoredLearnModePoolList.push({
+            cardData: matchedCardDataValue,
+            weight: poolEntryFromStorageValue.weight
+          });
+        }
+      }
+      isLearnModeEnabledValue = Boolean(learnModeStatePlainObjectValue.learnModeEnabled);
+      learnModePoolList = restoredLearnModePoolList;
+      const clampedPoolIndexValue = Math.min(
+        Math.max(0, Number(learnModeStatePlainObjectValue.currentLearnModePoolIndexValue) || 0),
+        Math.max(0, learnModePoolList.length - 1)
+      );
+      currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? clampedPoolIndexValue : 0;
+      const maxDeckIndexValue = randomizedFlashCardDataList.length;
+      learnModeDeckIndexValue = Math.min(
+        Math.max(0, Number(learnModeStatePlainObjectValue.learnModeDeckIndexValue) || 0),
+        maxDeckIndexValue
+      );
+      learnModeLabelElement.textContent = isLearnModeEnabledValue ? "Learn Mode" : "Ordered Mode";
+      persistLearnModeStateBundleToLocalStorage();
+      syncLearnModeStateAsideColumnVisibilityFromLearnModeEnabled();
+      hasSeenCountIncrementedValue = false;
+      updateSeenCountForCurrentCard();
+      renderCardContent();
+      return true;
+    };
+
+    const resetLearnModeStateCompletelyAndPersist = () => {
+      isLearnModeEnabledValue = false;
+      learnModePoolList = [];
+      currentLearnModePoolIndexValue = 0;
+      learnModeDeckIndexValue = 0;
+      learnModeLabelElement.textContent = "Ordered Mode";
+      localStorage.removeItem(localStorageKeyNameMap.learnModeState);
+      saveLearnModeEnabledValueToLocalStorage(false);
+      syncLearnModeStateAsideColumnVisibilityFromLearnModeEnabled();
+      hasSeenCountIncrementedValue = false;
+      updateSeenCountForCurrentCard();
+      renderCardContent();
+    };
+
     const flashCardElement = document.getElementById("flashCardElement");
     const cardContentElement = document.getElementById("cardContentElement");
     const previousButtonElement = document.getElementById("previousButtonElement");
@@ -307,10 +462,19 @@
     const nightModeToggleButtonElement = document.getElementById("nightModeToggleButtonElement");
     const learnModeLabelElement = document.getElementById("learnModeLabelElement");
     const learnModeSwitchButtonElement = document.getElementById("learnModeSwitchButtonElement");
+    const learnModeStateDownloadButtonElement = document.getElementById("learnModeStateDownloadButtonElement");
+    const learnModeStateUploadButtonElement = document.getElementById("learnModeStateUploadButtonElement");
+    const learnModeStateResetButtonElement = document.getElementById("learnModeStateResetButtonElement");
+    const learnModeStateFileInputElement = document.getElementById("learnModeStateFileInputElement");
+    const learnModeStateAsideColumnElement = document.getElementById("learnModeStateAsideColumnElement");
     const ttsButtonElement = document.getElementById("ttsButtonElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
     const frequencySelectElement = document.getElementById("frequencySelectElement");
     const positionTextElement = document.getElementById("positionTextElement");
+
+    const syncLearnModeStateAsideColumnVisibilityFromLearnModeEnabled = () => {
+      learnModeStateAsideColumnElement.hidden = !isLearnModeEnabledValue;
+    };
 
     const shuffleFlashCardDataList = (flashCardDataListValue) => {
       for (let shuffleIndexValue = flashCardDataListValue.length - 1; shuffleIndexValue > 0; shuffleIndexValue -= 1) {
@@ -468,7 +632,8 @@
         currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
       }
       learnModeLabelElement.textContent = learnModeEnabledValue ? "Learn Mode" : "Ordered Mode";
-      saveLearnModeEnabledValueToLocalStorage(learnModeEnabledValue);
+      persistLearnModeStateBundleToLocalStorage();
+      syncLearnModeStateAsideColumnVisibilityFromLearnModeEnabled();
       renderCardContent();
     };
 
@@ -718,6 +883,7 @@
         isDetailViewVisibleValue = false;
         hasSeenCountIncrementedValue = false;
         updateSeenCountForCurrentCard();
+        persistLearnModeStateBundleToLocalStorage();
         renderCardContent();
         return;
       }
@@ -742,6 +908,7 @@
         isDetailViewVisibleValue = false;
         hasSeenCountIncrementedValue = false;
         updateSeenCountForCurrentCard();
+        persistLearnModeStateBundleToLocalStorage();
         renderCardContent();
         return;
       }
@@ -762,21 +929,65 @@
       setLearnModeEnabledValue(!isLearnModeEnabledValue);
     });
 
+    learnModeStateDownloadButtonElement.addEventListener("click", () => {
+      const learnModeStateJsonStringValue = JSON.stringify(buildLearnModeStatePlainObjectForStorage(), null, 2);
+      const learnModeStateBlobValue = new Blob([learnModeStateJsonStringValue], { type: "application/json" });
+      const learnModeStateObjectUrlValue = URL.createObjectURL(learnModeStateBlobValue);
+      const learnModeStateAnchorElement = document.createElement("a");
+      learnModeStateAnchorElement.href = learnModeStateObjectUrlValue;
+      learnModeStateAnchorElement.download = "chinese-flash-cards-learn-mode-state.json";
+      learnModeStateAnchorElement.click();
+      URL.revokeObjectURL(learnModeStateObjectUrlValue);
+    });
+
+    learnModeStateUploadButtonElement.addEventListener("click", () => {
+      learnModeStateFileInputElement.value = "";
+      learnModeStateFileInputElement.click();
+    });
+
+    learnModeStateFileInputElement.addEventListener("change", () => {
+      const selectedLearnModeStateFileValue = learnModeStateFileInputElement.files && learnModeStateFileInputElement.files[0];
+      if (!selectedLearnModeStateFileValue) {
+        return;
+      }
+      const learnModeStateFileReaderValue = new FileReader();
+      learnModeStateFileReaderValue.onload = () => {
+        try {
+          const importedLearnModeStatePlainObjectValue = JSON.parse(String(learnModeStateFileReaderValue.result || ""));
+          if (!applyLearnModeStateFromPlainObject(importedLearnModeStatePlainObjectValue)) {
+            alert("Could not load learn mode state from file.");
+          }
+        } catch (errorValue) {
+          alert("Could not load learn mode state from file.");
+        }
+      };
+      learnModeStateFileReaderValue.readAsText(selectedLearnModeStateFileValue);
+    });
+
+    learnModeStateResetButtonElement.addEventListener("click", () => {
+      resetLearnModeStateCompletelyAndPersist();
+    });
+
     hskLevelSelectElement.addEventListener("change", (eventValue) => {
       const nextHskLevelSelectionValue = eventValue.target.value;
       saveHskLevelSelectionValueToLocalStorage(nextHskLevelSelectionValue);
       updateRandomizedFlashCardDataListForSelection();
+      persistLearnModeStateBundleToLocalStorage();
     });
 
     frequencySelectElement.addEventListener("change", (eventValue) => {
       const nextFrequencySelectionValue = eventValue.target.value;
       saveFrequencySelectionValueToLocalStorage(nextFrequencySelectionValue);
       updateRandomizedFlashCardDataListForSelection();
+      persistLearnModeStateBundleToLocalStorage();
     });
 
     setNightModeEnabledValue(loadNightModeEnabledValueFromLocalStorage());
     updateRandomizedFlashCardDataListForSelection();
-    setLearnModeEnabledValue(loadLearnModeEnabledValueFromLocalStorage());
+    const loadedLearnModeStatePlainObjectValue = loadLearnModeStatePlainObjectFromLocalStorage();
+    if (!loadedLearnModeStatePlainObjectValue || !applyLearnModeStateFromPlainObject(loadedLearnModeStatePlainObjectValue)) {
+      setLearnModeEnabledValue(loadLearnModeEnabledValueFromLocalStorage());
+    }
     hskLevelSelectElement.value = loadHskLevelSelectionValueFromLocalStorage();
     if (!hskLevelSelectElement.value) {
       hskLevelSelectElement.value = "all";
