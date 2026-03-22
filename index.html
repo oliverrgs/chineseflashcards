@@ -79,6 +79,65 @@
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       user-select: none;
+      position: relative;
+    }
+    .desktopArrowKeysHintPanelElement {
+      display: none;
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+    @media (min-width: 768px) {
+      .desktopArrowKeysHintPanelElement {
+        display: block;
+      }
+    }
+    .arrowKeysMiniDiagramGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 24px);
+      grid-template-rows: repeat(2, 22px);
+      gap: 4px;
+      align-items: center;
+      justify-items: center;
+    }
+    .arrowKeysMiniKey {
+      width: 24px;
+      height: 22px;
+      box-sizing: border-box;
+      border: 1px solid #9ca3af;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.85);
+      color: #374151;
+      font-size: 11px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    body.nightModeActive .arrowKeysMiniKey {
+      border-color: #64748b;
+      background: rgba(30, 41, 59, 0.75);
+      color: #cbd5e1;
+    }
+    .arrowKeysMiniKeyUp {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .arrowKeysMiniKeyLeft {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .arrowKeysMiniKeyDown {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .arrowKeysMiniKeyRight {
+      grid-column: 3;
+      grid-row: 2;
     }
     body.nightModeActive .flashCard {
       background: #111827;
@@ -279,6 +338,14 @@
         </button>
       </div>
       <div class="flashCard" id="flashCardElement">
+        <div class="desktopArrowKeysHintPanelElement" aria-hidden="true">
+          <div class="arrowKeysMiniDiagramGrid">
+            <span class="arrowKeysMiniKey arrowKeysMiniKeyUp">↑</span>
+            <span class="arrowKeysMiniKey arrowKeysMiniKeyLeft">←</span>
+            <span class="arrowKeysMiniKey arrowKeysMiniKeyDown">↓</span>
+            <span class="arrowKeysMiniKey arrowKeysMiniKeyRight">→</span>
+          </div>
+        </div>
         <div class="cardContent" id="cardContentElement"></div>
       </div>
       <div class="navigationRow">
