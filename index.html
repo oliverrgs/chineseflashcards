@@ -145,6 +145,44 @@
       font-size: 14px;
       cursor: pointer;
     }
+    .navButton.navButtonWithHoldProgress {
+      position: relative;
+      overflow: hidden;
+    }
+    .navButtonHoldProgressFillElement {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      transform: scaleX(0);
+      transform-origin: left center;
+      pointer-events: none;
+      transition: transform 0s linear;
+      z-index: 0;
+    }
+    .navButtonHoldProgressFillElementWrong {
+      background: linear-gradient(
+        90deg,
+        rgba(185, 28, 28, 0.92),
+        rgba(248, 113, 113, 0.75)
+      );
+    }
+    .navButtonHoldProgressFillElementRight {
+      background: linear-gradient(
+        90deg,
+        rgba(21, 128, 61, 0.92),
+        rgba(74, 222, 128, 0.78)
+      );
+    }
+    .navButtonHoldProgressFillElement.navButtonHoldProgressFillAnimating {
+      transition: transform var(--navButtonHoldToActivateDuration) linear;
+      transform: scaleX(1);
+    }
+    .navButtonLabelSpanElement {
+      position: relative;
+      z-index: 1;
+    }
     .navButton.secondaryButton {
       padding: 6px 12px;
       font-size: 12px;
@@ -244,7 +282,10 @@
         <div class="cardContent" id="cardContentElement"></div>
       </div>
       <div class="navigationRow">
-        <button class="navButton" id="previousButtonElement">Previous</button>
+        <button type="button" class="navButton navButtonWithHoldProgress" id="previousButtonElement">
+          <span class="navButtonHoldProgressFillElement navButtonHoldProgressFillElementWrong" id="previousButtonHoldProgressFillElement" aria-hidden="true"></span>
+          <span class="navButtonLabelSpanElement" id="previousButtonLabelSpanElement">Previous</span>
+        </button>
         <select class="levelSelector" id="hskLevelSelectElement">
           <option value="1">HSK 1</option>
           <option value="2">HSK 2</option>
@@ -261,7 +302,10 @@
           <option value="all">All</option>
         </select>
         <div class="positionText" id="positionTextElement"></div>
-        <button class="navButton" id="nextButtonElement">Next</button>
+        <button type="button" class="navButton navButtonWithHoldProgress" id="nextButtonElement">
+          <span class="navButtonHoldProgressFillElement navButtonHoldProgressFillElementRight" id="nextButtonHoldProgressFillElement" aria-hidden="true"></span>
+          <span class="navButtonLabelSpanElement" id="nextButtonLabelSpanElement">Next</span>
+        </button>
       </div>
     </div>
     <aside class="learnModeStateAsideColumn" id="learnModeStateAsideColumnElement" hidden>
@@ -277,6 +321,98 @@
   <script>
     const pageLoadTime = Date.now();
     let ttsTimeoutIdValue = null;
+    const uiClickDebounceDelayMillisecondsValue = 100;
+    const navButtonHoldToActivateDurationMillisecondsValue = 300;
+    document.documentElement.style.setProperty(
+      "--navButtonHoldToActivateDuration",
+      `${navButtonHoldToActivateDurationMillisecondsValue}ms`
+    );
+
+    const registerDebouncedClickHandler = (targetElementValue, clickHandlerCallbackValue) => {
+      let debounceTimeoutIdValue = null;
+      targetElementValue.addEventListener("click", () => {
+        if (debounceTimeoutIdValue !== null) {
+          clearTimeout(debounceTimeoutIdValue);
+        }
+        debounceTimeoutIdValue = setTimeout(() => {
+          debounceTimeoutIdValue = null;
+          clickHandlerCallbackValue();
+        }, uiClickDebounceDelayMillisecondsValue);
+      });
+    };
+
+    const createNavButtonHoldInteractionController = (
+      buttonElementValue,
+      fillElementValue,
+      runActionCallbackValue,
+      getShouldRequireHoldDurationBeforeNavButtonActionValue
+    ) => {
+      let navButtonHoldTimeoutIdValue = null;
+
+      const resetNavButtonHoldProgressVisual = () => {
+        fillElementValue.classList.remove("navButtonHoldProgressFillAnimating");
+        fillElementValue.style.transition = "none";
+        fillElementValue.style.removeProperty("transform");
+        void fillElementValue.offsetWidth;
+        fillElementValue.style.removeProperty("transition");
+      };
+
+      const cancelNavButtonHoldInteraction = () => {
+        if (navButtonHoldTimeoutIdValue !== null) {
+          clearTimeout(navButtonHoldTimeoutIdValue);
+          navButtonHoldTimeoutIdValue = null;
+        }
+        resetNavButtonHoldProgressVisual();
+      };
+
+      const startNavButtonHoldInteraction = (interactionStartedFromKeyboardValue) => {
+        if (buttonElementValue.disabled) {
+          return;
+        }
+        if (navButtonHoldTimeoutIdValue !== null) {
+          return;
+        }
+        resetNavButtonHoldProgressVisual();
+        if (!getShouldRequireHoldDurationBeforeNavButtonActionValue()) {
+          runActionCallbackValue();
+          return;
+        }
+        if (!interactionStartedFromKeyboardValue) {
+          runActionCallbackValue();
+          return;
+        }
+        void fillElementValue.offsetWidth;
+        fillElementValue.classList.add("navButtonHoldProgressFillAnimating");
+        navButtonHoldTimeoutIdValue = setTimeout(() => {
+          navButtonHoldTimeoutIdValue = null;
+          resetNavButtonHoldProgressVisual();
+          runActionCallbackValue();
+        }, navButtonHoldToActivateDurationMillisecondsValue);
+      };
+
+      buttonElementValue.addEventListener("mousedown", (pointerEventValue) => {
+        if (pointerEventValue.button !== 0) {
+          return;
+        }
+        pointerEventValue.preventDefault();
+        startNavButtonHoldInteraction(false);
+      });
+      buttonElementValue.addEventListener("mouseup", cancelNavButtonHoldInteraction);
+      buttonElementValue.addEventListener("mouseleave", cancelNavButtonHoldInteraction);
+      buttonElementValue.addEventListener("touchstart", (touchEventValue) => {
+        touchEventValue.preventDefault();
+        startNavButtonHoldInteraction(false);
+      }, { passive: false });
+      buttonElementValue.addEventListener("touchend", cancelNavButtonHoldInteraction);
+      buttonElementValue.addEventListener("touchcancel", cancelNavButtonHoldInteraction);
+      buttonElementValue.addEventListener("click", (clickEventValue) => {
+        clickEventValue.preventDefault();
+        clickEventValue.stopPropagation();
+      });
+
+      return { startNavButtonHoldInteraction, cancelNavButtonHoldInteraction };
+    };
+
     const localStorageKeyNameMap = {
       nightModeEnabled: "chineseFlashCardsNightModeEnabled",
       seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
@@ -459,6 +595,10 @@
     const cardContentElement = document.getElementById("cardContentElement");
     const previousButtonElement = document.getElementById("previousButtonElement");
     const nextButtonElement = document.getElementById("nextButtonElement");
+    const previousButtonHoldProgressFillElement = document.getElementById("previousButtonHoldProgressFillElement");
+    const nextButtonHoldProgressFillElement = document.getElementById("nextButtonHoldProgressFillElement");
+    const previousButtonLabelSpanElement = document.getElementById("previousButtonLabelSpanElement");
+    const nextButtonLabelSpanElement = document.getElementById("nextButtonLabelSpanElement");
     const nightModeToggleButtonElement = document.getElementById("nightModeToggleButtonElement");
     const learnModeLabelElement = document.getElementById("learnModeLabelElement");
     const learnModeSwitchButtonElement = document.getElementById("learnModeSwitchButtonElement");
@@ -703,21 +843,11 @@
       window.speechSynthesis.speak(speechUtteranceValue);
     };
 
-    const updateTtsButtonForCurrentCard = () => {
-      if (!ttsButtonElement) {
-        return;
-      }
-      const isAvailableValue = isSpeechSynthesisAvailableValue();
-      ttsButtonElement.onclick = () => {
-        speakCurrentCardText();
-      };
-    };
-
     const renderCardContent = () => {
       if (randomizedFlashCardDataList.length === 0 && !(isLearnModeEnabledValue && learnModePoolList.length > 0)) {
         positionTextElement.textContent = "0 / 0";
-        previousButtonElement.textContent = isLearnModeEnabledValue ? "Wrong" : "Previous";
-        nextButtonElement.textContent = isLearnModeEnabledValue ? "Right" : "Next";
+        previousButtonLabelSpanElement.textContent = isLearnModeEnabledValue ? "Wrong" : "Previous";
+        nextButtonLabelSpanElement.textContent = isLearnModeEnabledValue ? "Right" : "Next";
         previousButtonElement.disabled = true;
         nextButtonElement.disabled = true;
         cardContentElement.innerHTML = `
@@ -742,8 +872,8 @@
         ? `Pool: ${learnModePoolList.length}`
         : `${currentCardIndexValue + 1} / ${randomizedFlashCardDataList.length}`;
       if (isLearnModeEnabledValue) {
-        previousButtonElement.textContent = "Wrong";
-        nextButtonElement.textContent = "Right";
+        previousButtonLabelSpanElement.textContent = "Wrong";
+        nextButtonLabelSpanElement.textContent = "Right";
         previousButtonElement.disabled = learnModePoolList.length === 0;
         nextButtonElement.disabled = learnModePoolList.length === 0;
         const totalPoolWeightValue = learnModePoolList.reduce((sumValue, entryValue) => sumValue + entryValue.weight, 0);
@@ -755,8 +885,8 @@
         }));
         console.log("learn mode pool and character frequencies", { poolSize: learnModePoolList.length, totalWeight: totalPoolWeightValue, entries: poolAndFrequenciesLogValue });
       } else {
-        previousButtonElement.textContent = "Previous";
-        nextButtonElement.textContent = "Next";
+        previousButtonLabelSpanElement.textContent = "Previous";
+        nextButtonLabelSpanElement.textContent = "Next";
         previousButtonElement.disabled = currentCardIndexValue === 0;
         nextButtonElement.disabled = currentCardIndexValue === randomizedFlashCardDataList.length - 1;
       }
@@ -787,7 +917,6 @@
             <div class="seenCountText">Seen ${currentCardSeenCountValue} time${currentCardSeenCountValue === 1 ? "" : "s"}</div>
           </div>
         `;
-        updateTtsButtonForCurrentCard();
         return;
       }
 
@@ -857,15 +986,14 @@
           </div>
         </div>
       `;
-      updateTtsButtonForCurrentCard();
     };
 
-    flashCardElement.addEventListener("click", () => {
+    registerDebouncedClickHandler(flashCardElement, () => {
       isDetailViewVisibleValue = !isDetailViewVisibleValue;
       renderCardContent();
     });
 
-    previousButtonElement.addEventListener("click", () => {
+    const runPreviousNavigationButtonAction = () => {
       if (isLearnModeEnabledValue && learnModePoolList.length > 0) {
         if (!isDetailViewVisibleValue) {
           isDetailViewVisibleValue = true;
@@ -893,9 +1021,9 @@
       hasSeenCountIncrementedValue = false;
       updateSeenCountForCurrentCard();
       renderCardContent();
-    });
+    };
 
-    nextButtonElement.addEventListener("click", () => {
+    const runNextNavigationButtonAction = () => {
       if (isLearnModeEnabledValue && learnModePoolList.length > 0) {
         if (!isDetailViewVisibleValue) {
           isDetailViewVisibleValue = true;
@@ -918,18 +1046,95 @@
       hasSeenCountIncrementedValue = false;
       updateSeenCountForCurrentCard();
       renderCardContent();
+    };
+
+    const getShouldRequireHoldDurationBeforeWrongOrRightNavButtonActionValue = () => isDetailViewVisibleValue;
+
+    const previousNavButtonHoldInteractionController = createNavButtonHoldInteractionController(
+      previousButtonElement,
+      previousButtonHoldProgressFillElement,
+      runPreviousNavigationButtonAction,
+      getShouldRequireHoldDurationBeforeWrongOrRightNavButtonActionValue
+    );
+    const nextNavButtonHoldInteractionController = createNavButtonHoldInteractionController(
+      nextButtonElement,
+      nextButtonHoldProgressFillElement,
+      runNextNavigationButtonAction,
+      getShouldRequireHoldDurationBeforeWrongOrRightNavButtonActionValue
+    );
+
+    const isKeyboardArrowShortcutBlockedForFocusValue = () => {
+      const activeElementValue = document.activeElement;
+      if (!activeElementValue || activeElementValue === document.body) {
+        return false;
+      }
+      const activeTagNameUppercaseValue = activeElementValue.tagName;
+      return activeTagNameUppercaseValue === "SELECT"
+        || activeTagNameUppercaseValue === "INPUT"
+        || activeTagNameUppercaseValue === "TEXTAREA";
+    };
+
+    document.addEventListener("keydown", (keyboardEventValue) => {
+      if (isKeyboardArrowShortcutBlockedForFocusValue()) {
+        return;
+      }
+      if (keyboardEventValue.code === "ArrowUp") {
+        keyboardEventValue.preventDefault();
+        if (isDetailViewVisibleValue) {
+          isDetailViewVisibleValue = false;
+          renderCardContent();
+        } else {
+          speakCurrentCardText();
+        }
+        return;
+      }
+      if (keyboardEventValue.code === "ArrowDown") {
+        keyboardEventValue.preventDefault();
+        if (!isDetailViewVisibleValue) {
+          isDetailViewVisibleValue = true;
+          renderCardContent();
+        } else {
+          speakCurrentCardText();
+        }
+        return;
+      }
+      if (keyboardEventValue.code === "ArrowLeft") {
+        if (keyboardEventValue.repeat) {
+          return;
+        }
+        keyboardEventValue.preventDefault();
+        previousNavButtonHoldInteractionController.startNavButtonHoldInteraction(true);
+        return;
+      }
+      if (keyboardEventValue.code === "ArrowRight") {
+        if (keyboardEventValue.repeat) {
+          return;
+        }
+        keyboardEventValue.preventDefault();
+        nextNavButtonHoldInteractionController.startNavButtonHoldInteraction(true);
+        return;
+      }
     });
 
-    nightModeToggleButtonElement.addEventListener("click", () => {
+    document.addEventListener("keyup", (keyboardEventValue) => {
+      if (keyboardEventValue.code === "ArrowLeft") {
+        previousNavButtonHoldInteractionController.cancelNavButtonHoldInteraction();
+      }
+      if (keyboardEventValue.code === "ArrowRight") {
+        nextNavButtonHoldInteractionController.cancelNavButtonHoldInteraction();
+      }
+    });
+
+    registerDebouncedClickHandler(nightModeToggleButtonElement, () => {
       const nextNightModeEnabledValue = !document.body.classList.contains("nightModeActive");
       setNightModeEnabledValue(nextNightModeEnabledValue);
     });
 
-    learnModeSwitchButtonElement.addEventListener("click", () => {
+    registerDebouncedClickHandler(learnModeSwitchButtonElement, () => {
       setLearnModeEnabledValue(!isLearnModeEnabledValue);
     });
 
-    learnModeStateDownloadButtonElement.addEventListener("click", () => {
+    registerDebouncedClickHandler(learnModeStateDownloadButtonElement, () => {
       const learnModeStateJsonStringValue = JSON.stringify(buildLearnModeStatePlainObjectForStorage(), null, 2);
       const learnModeStateBlobValue = new Blob([learnModeStateJsonStringValue], { type: "application/json" });
       const learnModeStateObjectUrlValue = URL.createObjectURL(learnModeStateBlobValue);
@@ -940,9 +1145,13 @@
       URL.revokeObjectURL(learnModeStateObjectUrlValue);
     });
 
-    learnModeStateUploadButtonElement.addEventListener("click", () => {
+    registerDebouncedClickHandler(learnModeStateUploadButtonElement, () => {
       learnModeStateFileInputElement.value = "";
       learnModeStateFileInputElement.click();
+    });
+
+    registerDebouncedClickHandler(ttsButtonElement, () => {
+      speakCurrentCardText();
     });
 
     learnModeStateFileInputElement.addEventListener("change", () => {
@@ -964,7 +1173,7 @@
       learnModeStateFileReaderValue.readAsText(selectedLearnModeStateFileValue);
     });
 
-    learnModeStateResetButtonElement.addEventListener("click", () => {
+    registerDebouncedClickHandler(learnModeStateResetButtonElement, () => {
       resetLearnModeStateCompletelyAndPersist();
     });
 
