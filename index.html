@@ -188,6 +188,12 @@
     body.nightModeActive .detailLabel {
       color: #9ca3af;
     }
+    .detailPinyinTextValue {
+      font-size: clamp(26px, 4.5vw, 40px);
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+    }
     .navigationRow {
       display: flex;
       gap: 12px;
@@ -645,6 +651,9 @@
     };
 
     const resetLearnModeStateCompletelyAndPersist = () => {
+      if(!confirm("Are you sure you want to reset the learn mode state?")) {
+        return;
+      }
       isLearnModeEnabledValue = false;
       learnModePoolList = [];
       currentLearnModePoolIndexValue = 0;
@@ -1013,12 +1022,10 @@
           </div>
           <div class="detailRow">
             <div>
-              <div class="detailLabel">Definition</div>
-              <div>${currentCardData.definition}</div>
+              <div class="detailPinyinTextValue">${currentCardData.pinyin}</div>
             </div>
             <div>
-              <div class="detailLabel">Pinyin</div>
-              <div>${currentCardData.pinyin}</div>
+              <div>${currentCardData.definition}</div>
             </div>
             <div>
               <div class="detailLabel">Radical</div>
