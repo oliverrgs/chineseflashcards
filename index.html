@@ -189,7 +189,7 @@
       color: #9ca3af;
     }
     .detailPinyinTextValue {
-      font-size: clamp(26px, 4.5vw, 40px);
+      font-size: clamp(36px, 5.5vw, 50px);
       font-weight: 500;
       line-height: 1.35;
       letter-spacing: 0.04em;
@@ -394,6 +394,13 @@
   <script>
     const pageLoadTime = Date.now();
     let ttsTimeoutIdValue = null;
+    const chineseFlashCardsDiagnosticLoggingEnabledValue = true;
+    const logChineseFlashCardsDiagnosticMessage = (...diagnosticLogArgs) => {
+      if (!chineseFlashCardsDiagnosticLoggingEnabledValue) {
+        return;
+      }
+      console.log("[ChineseFlashCards]", ...diagnosticLogArgs);
+    };
     const uiClickDebounceDelayMillisecondsValue = 100;
     const navButtonHoldToActivateDurationMillisecondsValue = 300;
     document.documentElement.style.setProperty(
@@ -401,16 +408,40 @@
       `${navButtonHoldToActivateDurationMillisecondsValue}ms`
     );
 
-    const registerDebouncedClickHandler = (targetElementValue, clickHandlerCallbackValue) => {
+    const registerDebouncedClickHandler = (
+      targetElementValue,
+      clickHandlerCallbackValue,
+      optionalDebouncedClickHandlerLabelValue
+    ) => {
+      const debouncedClickHandlerLabelValue = optionalDebouncedClickHandlerLabelValue ?? targetElementValue.id ?? "debouncedClick";
       let debounceTimeoutIdValue = null;
       targetElementValue.addEventListener("click", () => {
+        const debounceClickScheduleTimestampValue = Date.now();
         if (debounceTimeoutIdValue !== null) {
           clearTimeout(debounceTimeoutIdValue);
+          logChineseFlashCardsDiagnosticMessage(
+            "debounce: cleared pending timer",
+            debouncedClickHandlerLabelValue,
+            "at",
+            debounceClickScheduleTimestampValue
+          );
         }
         debounceTimeoutIdValue = setTimeout(() => {
           debounceTimeoutIdValue = null;
+          logChineseFlashCardsDiagnosticMessage(
+            "debounce: handler fired",
+            debouncedClickHandlerLabelValue,
+            "afterMs",
+            Date.now() - debounceClickScheduleTimestampValue
+          );
           clickHandlerCallbackValue();
         }, uiClickDebounceDelayMillisecondsValue);
+        logChineseFlashCardsDiagnosticMessage(
+          "debounce: timer scheduled",
+          debouncedClickHandlerLabelValue,
+          "delayMs",
+          uiClickDebounceDelayMillisecondsValue
+        );
       });
     };
 
@@ -418,8 +449,10 @@
       buttonElementValue,
       fillElementValue,
       runActionCallbackValue,
-      getShouldRequireHoldDurationBeforeNavButtonActionValue
+      getShouldRequireHoldDurationBeforeNavButtonActionValue,
+      optionalNavButtonHoldDiagnosticLabelValue
     ) => {
+      const navButtonHoldDiagnosticLabelValue = optionalNavButtonHoldDiagnosticLabelValue ?? buttonElementValue.id ?? "navButtonHold";
       let navButtonHoldTimeoutIdValue = null;
 
       const resetNavButtonHoldProgressVisual = () => {
@@ -432,6 +465,12 @@
 
       const cancelNavButtonHoldInteraction = () => {
         if (navButtonHoldTimeoutIdValue !== null) {
+          logChineseFlashCardsDiagnosticMessage(
+            "navHold: cancel cleared timer",
+            navButtonHoldDiagnosticLabelValue,
+            "at",
+            Date.now()
+          );
           clearTimeout(navButtonHoldTimeoutIdValue);
           navButtonHoldTimeoutIdValue = null;
         }
@@ -440,24 +479,56 @@
 
       const startNavButtonHoldInteraction = (interactionStartedFromKeyboardValue) => {
         if (buttonElementValue.disabled) {
+          logChineseFlashCardsDiagnosticMessage("navHold: start ignored (disabled)", navButtonHoldDiagnosticLabelValue);
           return;
         }
         if (navButtonHoldTimeoutIdValue !== null) {
+          logChineseFlashCardsDiagnosticMessage(
+            "navHold: start ignored (timer already pending)",
+            navButtonHoldDiagnosticLabelValue,
+            "fromKeyboard",
+            interactionStartedFromKeyboardValue
+          );
           return;
         }
         resetNavButtonHoldProgressVisual();
         if (!getShouldRequireHoldDurationBeforeNavButtonActionValue()) {
+          logChineseFlashCardsDiagnosticMessage(
+            "navHold: immediate action (character side)",
+            navButtonHoldDiagnosticLabelValue,
+            "fromKeyboard",
+            interactionStartedFromKeyboardValue
+          );
           runActionCallbackValue();
           return;
         }
         if (!interactionStartedFromKeyboardValue) {
+          logChineseFlashCardsDiagnosticMessage(
+            "navHold: immediate action (pointer on answer side)",
+            navButtonHoldDiagnosticLabelValue
+          );
           runActionCallbackValue();
           return;
         }
         void fillElementValue.offsetWidth;
         fillElementValue.classList.add("navButtonHoldProgressFillAnimating");
+        const navButtonHoldScheduleTimestampValue = Date.now();
+        logChineseFlashCardsDiagnosticMessage(
+          "navHold: keyboard hold timer scheduled",
+          navButtonHoldDiagnosticLabelValue,
+          "delayMs",
+          navButtonHoldToActivateDurationMillisecondsValue,
+          "at",
+          navButtonHoldScheduleTimestampValue
+        );
         navButtonHoldTimeoutIdValue = setTimeout(() => {
           navButtonHoldTimeoutIdValue = null;
+          logChineseFlashCardsDiagnosticMessage(
+            "navHold: keyboard hold timer fired",
+            navButtonHoldDiagnosticLabelValue,
+            "afterMs",
+            Date.now() - navButtonHoldScheduleTimestampValue
+          );
           resetNavButtonHoldProgressVisual();
           runActionCallbackValue();
         }, navButtonHoldToActivateDurationMillisecondsValue);
@@ -952,14 +1023,6 @@
         nextButtonLabelSpanElement.textContent = "Right";
         previousButtonElement.disabled = learnModePoolList.length === 0;
         nextButtonElement.disabled = learnModePoolList.length === 0;
-        const totalPoolWeightValue = learnModePoolList.reduce((sumValue, entryValue) => sumValue + entryValue.weight, 0);
-        const poolAndFrequenciesLogValue = learnModePoolList.map((entryValue, indexValue) => ({
-          character: entryValue.cardData.simplified,
-          weight: entryValue.weight,
-          probability: totalPoolWeightValue > 0 ? (entryValue.weight / totalPoolWeightValue).toFixed(2) : 0,
-          isCurrent: indexValue === currentLearnModePoolIndexValue
-        }));
-        console.log("learn mode pool and character frequencies", { poolSize: learnModePoolList.length, totalWeight: totalPoolWeightValue, entries: poolAndFrequenciesLogValue });
       } else {
         previousButtonLabelSpanElement.textContent = "Previous";
         nextButtonLabelSpanElement.textContent = "Next";
@@ -1136,6 +1199,22 @@
       runNextNavigationButtonAction,
       getShouldRequireHoldDurationBeforeWrongOrRightNavButtonActionValue
     );
+
+    document.addEventListener("visibilitychange", () => {
+      logChineseFlashCardsDiagnosticMessage(
+        "visibilitychange",
+        document.visibilityState,
+        "performanceNow",
+        Math.round(performance.now())
+      );
+      if (document.visibilityState === "visible") {
+        previousNavButtonHoldInteractionController.cancelNavButtonHoldInteraction();
+        nextNavButtonHoldInteractionController.cancelNavButtonHoldInteraction();
+        logChineseFlashCardsDiagnosticMessage(
+          "visibility visible: reset nav hold timers (recovery after idle / lost keyup)"
+        );
+      }
+    });
 
     const isKeyboardArrowShortcutBlockedForFocusValue = () => {
       const activeElementValue = document.activeElement;
