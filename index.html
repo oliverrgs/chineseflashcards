@@ -1303,7 +1303,7 @@
       learnModeStateFileInputElement.click();
     });
 
-    registerDebouncedClickHandler(ttsButtonElement, () => {
+    ttsButtonElement.addEventListener("click", () => {
       speakCurrentCardText();
     });
 
