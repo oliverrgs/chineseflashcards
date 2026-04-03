@@ -869,7 +869,8 @@
     };
 
     const learnModePoolInitialSizeValue = 5;
-    const learnModeWrongWeightMultiplierValue = 1.05;
+    const learnModeWrongMinimumWeightFloorValue = 0.01;
+    const learnModeWrongWeightMultiplierValue = 4;
     const learnModeMaxProbabilityValue = 0.2;
     const learnModeRightWeightMultiplierValue = 0.5;
     const learnModeLowWeightThresholdValue = 0.25;
@@ -1348,7 +1349,10 @@
           return;
         }
         const entryValue = learnModePoolList[currentLearnModePoolIndexValue];
-        entryValue.weight *= learnModeWrongWeightMultiplierValue;
+        entryValue.weight = Math.max(
+          learnModeWrongMinimumWeightFloorValue,
+          entryValue.weight * learnModeWrongWeightMultiplierValue
+        );
         const totalWeightValue = learnModePoolList.reduce((sumValue, e) => sumValue + e.weight, 0);
         if (totalWeightValue > 0 && entryValue.weight / totalWeightValue > learnModeMaxProbabilityValue) {
           entryValue.weight = learnModeMaxProbabilityValue * totalWeightValue;
