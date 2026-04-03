@@ -339,6 +339,24 @@
       background: #111827;
       color: #e5e7eb;
     }
+    .learnModeNoMoreCardsMessage {
+      width: 100%;
+      max-width: min(720px, 100%);
+      box-sizing: border-box;
+      padding: 10px 14px;
+      font-size: 13px;
+      text-align: left;
+      white-space: pre-wrap;
+      color: #92400e;
+      background: #fef3c7;
+      border-radius: 10px;
+      border: 1px solid #fcd34d;
+    }
+    body.nightModeActive .learnModeNoMoreCardsMessage {
+      color: #fde68a;
+      background: #422006;
+      border-color: #b45309;
+    }
   </style>
 </head>
 <body>
@@ -358,6 +376,7 @@
           </select>
         </div>
       </div>
+      <div class="learnModeNoMoreCardsMessage" id="learnModeNoMoreCardsMessageElement" hidden role="status"></div>
       <div class="flashCard" id="flashCardElement">
         <div class="desktopArrowKeysHintPanelElement" aria-hidden="true">
           <div class="arrowKeysMiniDiagramGrid">
@@ -713,8 +732,7 @@
           simplifiedCharacterKey: getSeenCountKeyFromCardData(poolEntryValue.cardData),
           weight: poolEntryValue.weight
         })),
-        currentLearnModePoolIndexValue,
-        learnModeDeckIndexValue
+        currentLearnModePoolIndexValue
       };
     };
 
@@ -783,11 +801,6 @@
         Math.max(0, learnModePoolList.length - 1)
       );
       currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? clampedPoolIndexValue : 0;
-      const maxDeckIndexValue = randomizedFlashCardDataList.length;
-      learnModeDeckIndexValue = Math.min(
-        Math.max(0, Number(learnModeStatePlainObjectValue.learnModeDeckIndexValue) || 0),
-        maxDeckIndexValue
-      );
       learnModeLabelElement.textContent = isLearnModeEnabledValue ? "Learn Mode" : "Ordered Mode";
       persistLearnModeStateBundleToLocalStorage();
       syncLearnModeStateAsideColumnVisibilityFromLearnModeEnabled();
@@ -804,7 +817,6 @@
       isLearnModeEnabledValue = false;
       learnModePoolList = [];
       currentLearnModePoolIndexValue = 0;
-      learnModeDeckIndexValue = 0;
       learnModeLabelElement.textContent = "Ordered Mode";
       localStorage.removeItem(localStorageKeyNameMap.learnModeState);
       saveLearnModeEnabledValueToLocalStorage(false);
@@ -830,6 +842,7 @@
     const learnModeStateResetButtonElement = document.getElementById("learnModeStateResetButtonElement");
     const learnModeStateFileInputElement = document.getElementById("learnModeStateFileInputElement");
     const learnModeStateAsideColumnElement = document.getElementById("learnModeStateAsideColumnElement");
+    const learnModeNoMoreCardsMessageElement = document.getElementById("learnModeNoMoreCardsMessageElement");
     const ttsButtonElement = document.getElementById("ttsButtonElement");
     const ttsPlaybackModeSelectElement = document.getElementById("ttsPlaybackModeSelectElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
@@ -883,7 +896,6 @@
     let isLearnModeEnabledValue = false;
     let learnModePoolList = [];
     let currentLearnModePoolIndexValue = 0;
-    let learnModeDeckIndexValue = 0;
     let hasSeenCountIncrementedValue = false;
     let isSpeechVoiceLoadPendingValue = false;
     let previousIsDetailViewVisibleForGuessSideRandomizationValue = false;
@@ -926,18 +938,91 @@
 
     const getLearnModePoolKeysSet = () => new Set(learnModePoolList.map((entryValue) => getSeenCountKeyFromCardData(entryValue.cardData)));
 
-    const tryAddNewCharacterToLearnModePool = () => {
-      const totalWeightValue = learnModePoolList.reduce((sumValue, entryValue) => sumValue + entryValue.weight, 0);
-      const allWeightsSufficientlyLowValue = learnModePoolList.every((entryValue) => entryValue.weight <= learnModeLowWeightThresholdValue);
-      if (!allWeightsSufficientlyLowValue || learnModeDeckIndexValue >= randomizedFlashCardDataList.length) return;
-      const poolKeysSetValue = getLearnModePoolKeysSet();
-      while (learnModeDeckIndexValue < randomizedFlashCardDataList.length) {
-        const candidateCardDataValue = randomizedFlashCardDataList[learnModeDeckIndexValue];
-        learnModeDeckIndexValue += 1;
-        if (poolKeysSetValue.has(getSeenCountKeyFromCardData(candidateCardDataValue))) continue;
-        learnModePoolList.push({ cardData: candidateCardDataValue, weight: 1 });
+    const formatLearnModeBannerNumericValueForDisplay = (numericValue) => {
+      const roundedToSixDecimalPlacesValue = Math.round(numericValue * 1e6) / 1e6;
+      return String(roundedToSixDecimalPlacesValue);
+    };
+
+    const updateLearnModeNoMoreCardsToAddBannerDisplayValue = () => {
+      if (!learnModeNoMoreCardsMessageElement) {
         return;
       }
+      if (!isLearnModeEnabledValue || learnModePoolList.length === 0) {
+        learnModeNoMoreCardsMessageElement.hidden = true;
+        return;
+      }
+      const lowWeightThresholdForAddAttemptValue = learnModeLowWeightThresholdValue;
+      const poolEntryWeightListValue = learnModePoolList.map((poolEntryValue) => poolEntryValue.weight);
+      const maximumPoolEntryWeightValue = Math.max(...poolEntryWeightListValue, 0);
+      const minimumPoolEntryWeightValue = Math.min(...poolEntryWeightListValue);
+      const allPoolWeightsAtOrBelowLowThresholdValue = poolEntryWeightListValue.every(
+        (poolEntryWeightValue) => poolEntryWeightValue <= lowWeightThresholdForAddAttemptValue
+      );
+      const poolCharacterKeysSetForBannerValue = getLearnModePoolKeysSet();
+      const shuffledDeckTotalLengthValue = randomizedFlashCardDataList.length;
+      let countOfShuffledDeckSlotsWithCharacterNotAlreadyInPoolValue = 0;
+      for (let deckSequentialScanIndexValue = 0; deckSequentialScanIndexValue < shuffledDeckTotalLengthValue; deckSequentialScanIndexValue += 1) {
+        const candidateCardAtDeckIndexValue = randomizedFlashCardDataList[deckSequentialScanIndexValue];
+        if (!poolCharacterKeysSetForBannerValue.has(getSeenCountKeyFromCardData(candidateCardAtDeckIndexValue))) {
+          countOfShuffledDeckSlotsWithCharacterNotAlreadyInPoolValue += 1;
+        }
+      }
+      const learnModeNoMoreCardsBannerConditionHoldsValue =
+        allPoolWeightsAtOrBelowLowThresholdValue && countOfShuffledDeckSlotsWithCharacterNotAlreadyInPoolValue === 0;
+
+      if (!learnModeNoMoreCardsBannerConditionHoldsValue) {
+        learnModeNoMoreCardsMessageElement.hidden = true;
+        return;
+      }
+
+      learnModeNoMoreCardsMessageElement.hidden = false;
+      learnModeNoMoreCardsMessageElement.textContent =
+        "No new cards can be added while all of the following are true:\n\n"
+        + `• Add-from-deck gate: every pool weight must be ≤ ${formatLearnModeBannerNumericValueForDisplay(lowWeightThresholdForAddAttemptValue)}. `
+        + `Pool weights now — min ${formatLearnModeBannerNumericValueForDisplay(minimumPoolEntryWeightValue)}, `
+        + `max ${formatLearnModeBannerNumericValueForDisplay(maximumPoolEntryWeightValue)} `
+        + `(all pass: ${allPoolWeightsAtOrBelowLowThresholdValue ? "yes" : "no"}).\n`
+        + `• Shuffled deck length ${shuffledDeckTotalLengthValue}.\n`
+        + `• Deck positions whose simplified character is not already in the pool: `
+        + `${countOfShuffledDeckSlotsWithCharacterNotAlreadyInPoolValue} (needs > 0 to add a new card).`;
+    };
+
+    const pushOneRandomShuffledDeckCardIntoLearnModePoolIfAvailable = () => {
+      const poolCharacterKeysSetValue = getLearnModePoolKeysSet();
+      const eligibleShuffledDeckIndexListValue = [];
+      for (let deckIndexValue = 0; deckIndexValue < randomizedFlashCardDataList.length; deckIndexValue += 1) {
+        const candidateCardFromDeckValue = randomizedFlashCardDataList[deckIndexValue];
+        if (!poolCharacterKeysSetValue.has(getSeenCountKeyFromCardData(candidateCardFromDeckValue))) {
+          eligibleShuffledDeckIndexListValue.push(deckIndexValue);
+        }
+      }
+      if (eligibleShuffledDeckIndexListValue.length === 0) {
+        return;
+      }
+      const randomPickIndexWithinEligibleListValue = Math.floor(Math.random() * eligibleShuffledDeckIndexListValue.length);
+      const chosenShuffledDeckIndexValue = eligibleShuffledDeckIndexListValue[randomPickIndexWithinEligibleListValue];
+      learnModePoolList.push({
+        cardData: randomizedFlashCardDataList[chosenShuffledDeckIndexValue],
+        weight: 1
+      });
+    };
+
+    const seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize = () => {
+      while (learnModePoolList.length < learnModePoolInitialSizeValue) {
+        const learnModePoolLengthBeforePushAttemptValue = learnModePoolList.length;
+        pushOneRandomShuffledDeckCardIntoLearnModePoolIfAvailable();
+        if (learnModePoolList.length === learnModePoolLengthBeforePushAttemptValue) {
+          break;
+        }
+      }
+    };
+
+    const tryAddNewCharacterToLearnModePool = () => {
+      const allWeightsSufficientlyLowValue = learnModePoolList.every((entryValue) => entryValue.weight <= learnModeLowWeightThresholdValue);
+      if (!allWeightsSufficientlyLowValue) {
+        return;
+      }
+      pushOneRandomShuffledDeckCardIntoLearnModePoolIfAvailable();
     };
 
     const pickNextLearnModeCardIndexByWeight = (indexToExcludeValue) => {
@@ -967,18 +1052,9 @@
       isDetailViewVisibleValue = false;
       hasSeenCountIncrementedValue = false;
       learnModePoolList = [];
-      learnModeDeckIndexValue = 0;
       currentLearnModePoolIndexValue = 0;
       if (isLearnModeEnabledValue && randomizedFlashCardDataList.length > 0) {
-        const poolKeysSetValue = new Set();
-        for (let indexValue = 0; indexValue < randomizedFlashCardDataList.length && learnModePoolList.length < learnModePoolInitialSizeValue; indexValue += 1) {
-          const cardDataValue = randomizedFlashCardDataList[indexValue];
-          const keyValue = getSeenCountKeyFromCardData(cardDataValue);
-          if (poolKeysSetValue.has(keyValue)) continue;
-          poolKeysSetValue.add(keyValue);
-          learnModePoolList.push({ cardData: cardDataValue, weight: 1 });
-          learnModeDeckIndexValue = indexValue + 1;
-        }
+        seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
         currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
       }
       updateSeenCountForCurrentCard();
@@ -988,15 +1064,7 @@
     const setLearnModeEnabledValue = (learnModeEnabledValue) => {
       isLearnModeEnabledValue = learnModeEnabledValue;
       if (learnModeEnabledValue && randomizedFlashCardDataList.length > 0 && learnModePoolList.length === 0) {
-        const poolKeysSetValue = new Set();
-        for (let indexValue = 0; indexValue < randomizedFlashCardDataList.length && learnModePoolList.length < learnModePoolInitialSizeValue; indexValue += 1) {
-          const cardDataValue = randomizedFlashCardDataList[indexValue];
-          const keyValue = getSeenCountKeyFromCardData(cardDataValue);
-          if (poolKeysSetValue.has(keyValue)) continue;
-          poolKeysSetValue.add(keyValue);
-          learnModePoolList.push({ cardData: cardDataValue, weight: 1 });
-          learnModeDeckIndexValue = indexValue + 1;
-        }
+        seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
         currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
       }
       learnModeLabelElement.textContent = learnModeEnabledValue ? "Learn Mode" : "Ordered Mode";
@@ -1198,6 +1266,7 @@
           </div>
         `;
         previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
+        updateLearnModeNoMoreCardsToAddBannerDisplayValue();
         return;
       }
       const flippedFromAnswerSideToGuessSideValue = previousIsDetailViewVisibleForGuessSideRandomizationValue === true && isDetailViewVisibleValue === false;
@@ -1266,6 +1335,7 @@
           </div>
         `;
         previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
+        updateLearnModeNoMoreCardsToAddBannerDisplayValue();
         return;
       }
 
@@ -1334,6 +1404,7 @@
         </div>
       `;
       previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
+      updateLearnModeNoMoreCardsToAddBannerDisplayValue();
     };
 
     registerDebouncedClickHandler(flashCardElement, () => {
