@@ -317,6 +317,15 @@
       background: #111827;
       color: #e5e7eb;
     }
+    .ttsControlGroup {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #ttsPlaybackModeSelectElement {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
     .levelSelector {
       border: 1px solid #d1d5db;
       border-radius: 999px;
@@ -339,9 +348,15 @@
         <button class="navButton secondaryButton" id="nightModeToggleButtonElement">Night Mode</button>
         <span id="learnModeLabelElement" class="learnModeLabel">Ordered Mode</span>
         <button class="navButton secondaryButton" id="learnModeSwitchButtonElement">Change Mode</button>
-        <button class="ttsButton" id="ttsButtonElement"  style="border:0px;">
-          <img src="soundicon.png" alt="Speak"/>
-        </button>
+        <div class="ttsControlGroup">
+          <button class="ttsButton" id="ttsButtonElement"  style="border:0px;">
+            <img src="soundicon.png" alt="Speak"/>
+          </button>
+          <select class="levelSelector" id="ttsPlaybackModeSelectElement" aria-label="Speech playback mode">
+            <option value="sound">Sound</option>
+            <option value="full">Full</option>
+          </select>
+        </div>
       </div>
       <div class="flashCard" id="flashCardElement">
         <div class="desktopArrowKeysHintPanelElement" aria-hidden="true">
@@ -402,6 +417,7 @@
       console.log("[ChineseFlashCards]", ...diagnosticLogArgs);
     };
     const uiClickDebounceDelayMillisecondsValue = 100;
+    const uiClickDebounceMaximumAcceptableFireDelayMillisecondsValue = 2500;
     const navButtonHoldToActivateDurationMillisecondsValue = 300;
     document.documentElement.style.setProperty(
       "--navButtonHoldToActivateDuration",
@@ -428,11 +444,21 @@
         }
         debounceTimeoutIdValue = setTimeout(() => {
           debounceTimeoutIdValue = null;
+          const debounceActualDelayMillisecondsValue = Date.now() - debounceClickScheduleTimestampValue;
+          if (debounceActualDelayMillisecondsValue > uiClickDebounceMaximumAcceptableFireDelayMillisecondsValue) {
+            logChineseFlashCardsDiagnosticMessage(
+              "debounce: skipped stale handler (tab likely background / timer throttled)",
+              debouncedClickHandlerLabelValue,
+              "actualDelayMs",
+              debounceActualDelayMillisecondsValue
+            );
+            return;
+          }
           logChineseFlashCardsDiagnosticMessage(
             "debounce: handler fired",
             debouncedClickHandlerLabelValue,
             "afterMs",
-            Date.now() - debounceClickScheduleTimestampValue
+            debounceActualDelayMillisecondsValue
           );
           clickHandlerCallbackValue();
         }, uiClickDebounceDelayMillisecondsValue);
@@ -454,6 +480,9 @@
     ) => {
       const navButtonHoldDiagnosticLabelValue = optionalNavButtonHoldDiagnosticLabelValue ?? buttonElementValue.id ?? "navButtonHold";
       let navButtonHoldTimeoutIdValue = null;
+      let navButtonHoldKeyboardTimedHoldIsActiveValue = false;
+      let navButtonHoldActionAlreadyCompletedForCurrentPressValue = false;
+      let navButtonHoldKeyboardPressStartedAtPerformanceNowValue = 0;
 
       const resetNavButtonHoldProgressVisual = () => {
         fillElementValue.classList.remove("navButtonHoldProgressFillAnimating");
@@ -474,6 +503,26 @@
           clearTimeout(navButtonHoldTimeoutIdValue);
           navButtonHoldTimeoutIdValue = null;
         }
+        const elapsedSinceKeyboardHoldStartPerformanceMsValue =
+          performance.now() - navButtonHoldKeyboardPressStartedAtPerformanceNowValue;
+        if (
+          navButtonHoldKeyboardTimedHoldIsActiveValue
+          && !navButtonHoldActionAlreadyCompletedForCurrentPressValue
+          && elapsedSinceKeyboardHoldStartPerformanceMsValue >= navButtonHoldToActivateDurationMillisecondsValue
+        ) {
+          navButtonHoldKeyboardTimedHoldIsActiveValue = false;
+          navButtonHoldActionAlreadyCompletedForCurrentPressValue = true;
+          logChineseFlashCardsDiagnosticMessage(
+            "navHold: keyup elapsed-time fallback (timer throttled or race)",
+            navButtonHoldDiagnosticLabelValue,
+            "elapsedPerformanceMs",
+            Math.round(elapsedSinceKeyboardHoldStartPerformanceMsValue)
+          );
+          resetNavButtonHoldProgressVisual();
+          runActionCallbackValue();
+          return;
+        }
+        navButtonHoldKeyboardTimedHoldIsActiveValue = false;
         resetNavButtonHoldProgressVisual();
       };
 
@@ -493,6 +542,7 @@
         }
         resetNavButtonHoldProgressVisual();
         if (!getShouldRequireHoldDurationBeforeNavButtonActionValue()) {
+          navButtonHoldKeyboardTimedHoldIsActiveValue = false;
           logChineseFlashCardsDiagnosticMessage(
             "navHold: immediate action (character side)",
             navButtonHoldDiagnosticLabelValue,
@@ -503,6 +553,7 @@
           return;
         }
         if (!interactionStartedFromKeyboardValue) {
+          navButtonHoldKeyboardTimedHoldIsActiveValue = false;
           logChineseFlashCardsDiagnosticMessage(
             "navHold: immediate action (pointer on answer side)",
             navButtonHoldDiagnosticLabelValue
@@ -510,6 +561,9 @@
           runActionCallbackValue();
           return;
         }
+        navButtonHoldKeyboardTimedHoldIsActiveValue = true;
+        navButtonHoldActionAlreadyCompletedForCurrentPressValue = false;
+        navButtonHoldKeyboardPressStartedAtPerformanceNowValue = performance.now();
         void fillElementValue.offsetWidth;
         fillElementValue.classList.add("navButtonHoldProgressFillAnimating");
         const navButtonHoldScheduleTimestampValue = Date.now();
@@ -523,6 +577,8 @@
         );
         navButtonHoldTimeoutIdValue = setTimeout(() => {
           navButtonHoldTimeoutIdValue = null;
+          navButtonHoldKeyboardTimedHoldIsActiveValue = false;
+          navButtonHoldActionAlreadyCompletedForCurrentPressValue = true;
           logChineseFlashCardsDiagnosticMessage(
             "navHold: keyboard hold timer fired",
             navButtonHoldDiagnosticLabelValue,
@@ -563,7 +619,13 @@
       hskLevelSelection: "chineseFlashCardsHskLevelSelection",
       frequencySelection: "chineseFlashCardsFrequencySelection",
       learnModeEnabled: "chineseFlashCardsLearnModeEnabled",
-      learnModeState: "chineseFlashCardsLearnModeState"
+      learnModeState: "chineseFlashCardsLearnModeState",
+      ttsPlaybackMode: "chineseFlashCardsTtsPlaybackMode"
+    };
+
+    const ttsPlaybackModeValueMap = {
+      sound: "sound",
+      full: "full"
     };
 
     const learnModeStateStorageSchemaVersionValue = 1;
@@ -613,6 +675,20 @@
 
     const saveFrequencySelectionValueToLocalStorage = (frequencySelectionValue) => {
       localStorage.setItem(localStorageKeyNameMap.frequencySelection, frequencySelectionValue);
+    };
+
+    const loadTtsPlaybackModeValueFromLocalStorage = () => {
+      const ttsPlaybackModeStorageValue = localStorage.getItem(localStorageKeyNameMap.ttsPlaybackMode);
+      return ttsPlaybackModeStorageValue === ttsPlaybackModeValueMap.full
+        ? ttsPlaybackModeValueMap.full
+        : ttsPlaybackModeValueMap.sound;
+    };
+
+    const saveTtsPlaybackModeValueToLocalStorage = (ttsPlaybackModeValue) => {
+      localStorage.setItem(
+        localStorageKeyNameMap.ttsPlaybackMode,
+        ttsPlaybackModeValue === ttsPlaybackModeValueMap.full ? ttsPlaybackModeValueMap.full : ttsPlaybackModeValueMap.sound
+      );
     };
 
     const loadLearnModeEnabledValueFromLocalStorage = () => {
@@ -755,6 +831,7 @@
     const learnModeStateFileInputElement = document.getElementById("learnModeStateFileInputElement");
     const learnModeStateAsideColumnElement = document.getElementById("learnModeStateAsideColumnElement");
     const ttsButtonElement = document.getElementById("ttsButtonElement");
+    const ttsPlaybackModeSelectElement = document.getElementById("ttsPlaybackModeSelectElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
     const frequencySelectElement = document.getElementById("frequencySelectElement");
     const positionTextElement = document.getElementById("positionTextElement");
@@ -808,6 +885,9 @@
     let learnModeDeckIndexValue = 0;
     let hasSeenCountIncrementedValue = false;
     let isSpeechVoiceLoadPendingValue = false;
+    let previousIsDetailViewVisibleForGuessSideRandomizationValue = false;
+    let guessSideRandomizationCardKeyValue = null;
+    let guessSideDisplaysTraditionalCharacterValue = false;
 
     (() => {
       if (typeof radicalMapping === "undefined") return;
@@ -931,6 +1011,88 @@
       return cardDataValue.traditional || "";
     };
 
+    const toneMarkedCharacterToBaseLetterAndToneDigitStringMap = new Map([
+      ["ā", ["a", "1"]], ["á", ["a", "2"]], ["ǎ", ["a", "3"]], ["à", ["a", "4"]],
+      ["ē", ["e", "1"]], ["é", ["e", "2"]], ["ě", ["e", "3"]], ["è", ["e", "4"]],
+      ["ī", ["i", "1"]], ["í", ["i", "2"]], ["ǐ", ["i", "3"]], ["ì", ["i", "4"]],
+      ["ō", ["o", "1"]], ["ó", ["o", "2"]], ["ǒ", ["o", "3"]], ["ò", ["o", "4"]],
+      ["ū", ["u", "1"]], ["ú", ["u", "2"]], ["ǔ", ["u", "3"]], ["ù", ["u", "4"]],
+      ["ǖ", ["v", "1"]], ["ǘ", ["v", "2"]], ["ǚ", ["v", "3"]], ["ǜ", ["v", "4"]],
+      ["ń", ["n", "2"]], ["ň", ["n", "3"]], ["ǹ", ["n", "4"]], ["ḿ", ["m", "2"]]
+    ]);
+
+    const parsePinyinSyllableToAsciiLetterCharacterListAndToneDigitString = (pinyinSyllableStringValue) => {
+      const normalizedSyllableStringValue = pinyinSyllableStringValue.trim().toLowerCase();
+      let toneDigitStringValue = "";
+      const asciiLetterCharacterListValue = [];
+      for (const syllableCharacterValue of normalizedSyllableStringValue) {
+        const baseLetterAndToneDigitTuple = toneMarkedCharacterToBaseLetterAndToneDigitStringMap.get(syllableCharacterValue);
+        if (baseLetterAndToneDigitTuple) {
+          asciiLetterCharacterListValue.push(baseLetterAndToneDigitTuple[0]);
+          toneDigitStringValue = baseLetterAndToneDigitTuple[1];
+        } else if (syllableCharacterValue === "ü") {
+          asciiLetterCharacterListValue.push("v");
+        } else if (/[a-z]/.test(syllableCharacterValue)) {
+          asciiLetterCharacterListValue.push(syllableCharacterValue);
+        }
+      }
+      return { asciiLetterCharacterListValue, toneDigitStringValue };
+    };
+
+    const buildFullModeTtsChinesePhraseAndEnglishPhraseTextFromCardData = (cardDataValue) => {
+      const chinesePhraseTextValue = getSpeechTextFromCardData(cardDataValue);
+      const pinyinFieldStringValue = (cardDataValue.pinyin || "").trim().toLowerCase();
+      const pinyinSyllableStringListValue = pinyinFieldStringValue.split(/\s+/).filter((syllablePartValue) => syllablePartValue.length > 0);
+      const englishPinyinFragmentTextListValue = [];
+      for (const pinyinSyllableStringValue of pinyinSyllableStringListValue) {
+        const { asciiLetterCharacterListValue, toneDigitStringValue } = parsePinyinSyllableToAsciiLetterCharacterListAndToneDigitString(
+          pinyinSyllableStringValue
+        );
+        for (const asciiLetterCharacterValue of asciiLetterCharacterListValue) {
+          englishPinyinFragmentTextListValue.push(asciiLetterCharacterValue);
+        }
+        if (toneDigitStringValue) {
+          englishPinyinFragmentTextListValue.push(toneDigitStringValue);
+        }
+      }
+      const englishPhraseTextValue = englishPinyinFragmentTextListValue.join(" ");
+      return { chinesePhraseTextValue, englishPhraseTextValue };
+    };
+
+    const startFullModeChinesePhraseThenEnglishPhraseSpeech = (chinesePhraseTextValue, englishPhraseTextValue, selectedChineseSpeechVoiceValue) => {
+      const runFullModeSpeechChainFromChinesePhrase = () => {
+        let hasEnglishPhrasePlaybackStartedValue = false;
+        const maybeStartEnglishPhraseUtteranceValue = () => {
+          if (hasEnglishPhrasePlaybackStartedValue) {
+            return;
+          }
+          hasEnglishPhrasePlaybackStartedValue = true;
+          if (!englishPhraseTextValue.trim()) {
+            return;
+          }
+          const englishPhraseUtteranceValue = new SpeechSynthesisUtterance(englishPhraseTextValue);
+          englishPhraseUtteranceValue.lang = "en-US";
+          englishPhraseUtteranceValue.volume = 1;
+          englishPhraseUtteranceValue.rate = 1;
+          window.speechSynthesis.speak(englishPhraseUtteranceValue);
+        };
+        const chinesePhraseUtteranceValue = new SpeechSynthesisUtterance(chinesePhraseTextValue);
+        chinesePhraseUtteranceValue.lang = "zh-CN";
+        chinesePhraseUtteranceValue.voice = selectedChineseSpeechVoiceValue;
+        chinesePhraseUtteranceValue.volume = 1;
+        chinesePhraseUtteranceValue.rate = 1;
+        chinesePhraseUtteranceValue.onend = maybeStartEnglishPhraseUtteranceValue;
+        chinesePhraseUtteranceValue.onerror = maybeStartEnglishPhraseUtteranceValue;
+        window.speechSynthesis.speak(chinesePhraseUtteranceValue);
+      };
+      if (pageLoadTime + 3000 > Date.now()) {
+        clearTimeout(ttsTimeoutIdValue);
+        ttsTimeoutIdValue = setTimeout(runFullModeSpeechChainFromChinesePhrase, 3000);
+      } else {
+        runFullModeSpeechChainFromChinesePhrase();
+      }
+    };
+
     const isSpeechSynthesisAvailableValue = () => {
       return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
     };
@@ -976,6 +1138,33 @@
         return;
       }
       window.speechSynthesis.cancel();
+      const ttsPlaybackModeSelectValue = ttsPlaybackModeSelectElement.value;
+      if (ttsPlaybackModeSelectValue === ttsPlaybackModeValueMap.full) {
+        const { chinesePhraseTextValue, englishPhraseTextValue } = buildFullModeTtsChinesePhraseAndEnglishPhraseTextFromCardData(
+          currentCardDataValue
+        );
+        if (!chinesePhraseTextValue.trim() && !englishPhraseTextValue.trim()) {
+          alert("No text to speak.");
+          return;
+        }
+        if (!chinesePhraseTextValue.trim()) {
+          const englishOnlyUtteranceValue = new SpeechSynthesisUtterance(englishPhraseTextValue);
+          englishOnlyUtteranceValue.lang = "en-US";
+          englishOnlyUtteranceValue.volume = 1;
+          englishOnlyUtteranceValue.rate = 1;
+          if (pageLoadTime + 3000 > Date.now()) {
+            clearTimeout(ttsTimeoutIdValue);
+            ttsTimeoutIdValue = setTimeout(() => {
+              window.speechSynthesis.speak(englishOnlyUtteranceValue);
+            }, 3000);
+          } else {
+            window.speechSynthesis.speak(englishOnlyUtteranceValue);
+          }
+          return;
+        }
+        startFullModeChinesePhraseThenEnglishPhraseSpeech(chinesePhraseTextValue, englishPhraseTextValue, selectedVoiceValue);
+        return;
+      }
       const speechUtteranceValue = new SpeechSynthesisUtterance(speechTextValue);
       speechUtteranceValue.lang = "zh-CN";
       speechUtteranceValue.voice = selectedVoiceValue;
@@ -1007,13 +1196,28 @@
             </div>
           </div>
         `;
+        previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
         return;
       }
+      const flippedFromAnswerSideToGuessSideValue = previousIsDetailViewVisibleForGuessSideRandomizationValue === true && isDetailViewVisibleValue === false;
       const currentCardData = isLearnModeEnabledValue && learnModePoolList.length > 0
         ? learnModePoolList[currentLearnModePoolIndexValue].cardData
         : (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length ? (currentCardIndexValue = 0, randomizedFlashCardDataList[currentCardIndexValue]) : randomizedFlashCardDataList[currentCardIndexValue]);
       if (!isLearnModeEnabledValue && (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length)) {
         currentCardIndexValue = 0;
+      }
+      const currentGuessSideRandomizationKeyValue = getSeenCountKeyFromCardData(currentCardData);
+      const traditionalAndSimplifiedFormsDifferValue = currentCardData.traditional !== currentCardData.simplified;
+      if (traditionalAndSimplifiedFormsDifferValue) {
+        if (
+          guessSideRandomizationCardKeyValue !== currentGuessSideRandomizationKeyValue
+          || flippedFromAnswerSideToGuessSideValue
+        ) {
+          guessSideRandomizationCardKeyValue = currentGuessSideRandomizationKeyValue;
+          guessSideDisplaysTraditionalCharacterValue = Math.random() < 0.5;
+        }
+      } else {
+        guessSideRandomizationCardKeyValue = currentGuessSideRandomizationKeyValue;
       }
       positionTextElement.textContent = isLearnModeEnabledValue && learnModePoolList.length > 0
         ? `Pool: ${learnModePoolList.length}`
@@ -1034,17 +1238,22 @@
         cardContentElement.innerHTML = `
           <div class="cardContent">
             <div class="characterRow">
-              ${currentCardData.traditional != currentCardData.simplified ? (
+              ${traditionalAndSimplifiedFormsDifferValue ? (
+              guessSideDisplaysTraditionalCharacterValue ? (
               `
               <div>
                 <div class="characterLabel">Traditional</div>
                 <div class="characterValue">${currentCardData.traditional}</div>
               </div>
+              `
+              ) : (
+              `
               <div>
                 <div class="characterLabel">Simplified</div>
                 <div class="characterValue">${currentCardData.simplified}</div>
               </div>
               `
+              )
               ) : (
                 `
                 <div>
@@ -1053,9 +1262,9 @@
                 `
               )}
             </div>
-            <div class="seenCountText">Seen ${currentCardSeenCountValue} time${currentCardSeenCountValue === 1 ? "" : "s"}</div>
           </div>
         `;
+        previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
         return;
       }
 
@@ -1123,6 +1332,7 @@
           </div>
         </div>
       `;
+      previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
     };
 
     registerDebouncedClickHandler(flashCardElement, () => {
@@ -1305,6 +1515,11 @@
 
     ttsButtonElement.addEventListener("click", () => {
       speakCurrentCardText();
+    });
+
+    ttsPlaybackModeSelectElement.value = loadTtsPlaybackModeValueFromLocalStorage();
+    ttsPlaybackModeSelectElement.addEventListener("change", (eventValue) => {
+      saveTtsPlaybackModeValueToLocalStorage(eventValue.target.value);
     });
 
     learnModeStateFileInputElement.addEventListener("change", () => {
