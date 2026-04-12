@@ -1352,6 +1352,9 @@
 
       cardContentElement.innerHTML = `
         <div class="cardContent">
+            <div>
+              <div>${currentCardData.definition}</div>
+            </div>
           <div class="characterRow">
             ${currentCardData.traditional != currentCardData.simplified ? (
               `
@@ -1366,9 +1369,6 @@
           <div class="detailRow">
             <div>
               <div class="detailPinyinTextValue">${currentCardData.pinyin}</div>
-            </div>
-            <div>
-              <div>${currentCardData.definition}</div>
             </div>
             <div>
               <div class="detailLabel">Radical</div>
