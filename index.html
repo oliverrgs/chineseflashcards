@@ -118,6 +118,20 @@
       justify-content: center;
       font-weight: 600;
     }
+    .levelSelector {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      background: #ffffff;
+      color: #111827;
+      display: inline-block;
+    }
+    body.nightModeActive .levelSelector {
+      border-color: #334155;
+      background: #111827;
+      color: #e5e7eb;
+    }
     body.nightModeActive .arrowKeysMiniKey {
       border-color: #64748b;
       background: rgba(30, 41, 59, 0.75);
@@ -339,6 +353,85 @@
       background: #111827;
       color: #e5e7eb;
     }
+    .frequencyCapControlGroup {
+    }
+    .frequencyCapPopover {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      min-width: min(280px, 92vw);
+      box-sizing: border-box;
+    }
+    body.nightModeActive .frequencyCapPopover {
+      background: #111827;
+      border-color: #334155;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+    .frequencyCapStepButton {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: #111827;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    body.nightModeActive .frequencyCapStepButton {
+      border-color: #334155;
+      background: #1e293b;
+      color: #e5e7eb;
+    }
+    .frequencyCapStepButton:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .frequencyCapNumberInput {
+      width: 72px;
+      padding: 8px 10px;
+      font-size: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #111827;
+      box-sizing: border-box;
+    }
+    body.nightModeActive .frequencyCapNumberInput {
+      border-color: #334155;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+    .frequencyCapNumberInput:disabled {
+      opacity: 0.7;
+    }
+    .frequencyCapAllButton {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      background: #ffffff;
+      color: #111827;
+      cursor: pointer;
+    }
+    body.nightModeActive .frequencyCapAllButton {
+      border-color: #334155;
+      background: #1e293b;
+      color: #e5e7eb;
+    }
+    .learnModeNoMoreCardsMessage[hidden] {
+      display: none !important;
+    }
     .learnModeNoMoreCardsMessage {
       width: 100%;
       max-width: min(720px, 100%);
@@ -346,16 +439,63 @@
       padding: 10px 14px;
       font-size: 13px;
       text-align: left;
-      white-space: pre-wrap;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       color: #92400e;
       background: #fef3c7;
       border-radius: 10px;
       border: 1px solid #fcd34d;
     }
+    .learnModeNoMoreCardsMessageBodyText {
+      white-space: pre-wrap;
+    }
+    .learnModeNoMoreCardsMessageFrequencyIncreaseButton {
+      align-self: flex-start;
+      border: 2px solid #23b6ea;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 15px;
+      background: linear-gradient(90deg, #e0fff9 0%, #a8edea 100%);
+      color: #056674; /* deep teal for clarity */
+      cursor: pointer;
+      box-shadow: 0 1px 8px 0px #a8edea55;
+      transition: background 0.2s, color 0.2s, border 0.2s;
+      font-weight: 700;
+    }
+    .learnModeNoMoreCardsMessageFrequencyIncreaseButton:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: #d7f9fb;
+      color: #91b4bb;
+      border-color: #bdeff3;
+    }
+    body.nightModeActive .learnModeNoMoreCardsMessageFrequencyIncreaseButton {
+      border-color: #63e2f0;
+      background: linear-gradient(90deg, #002e4e 0%, #23b6ea 100%);
+      color: #a8edea;
+      box-shadow: 0 1px 8px 0px #12455966;
+    }
+    .learnModeNoMoreCardsMessage {
+      color: #285943; /* rich green */
+      background: linear-gradient(115deg, #ffeea8 55%, #8ecae6 100%);
+      border-radius: 16px;
+      border: 2.5px solid #8ecae6;
+      box-shadow: 0px 4px 20px #8ecae633;
+      font-weight: 800;
+      font-size: 16px;
+      animation: flashCongratsAlt 0.8s;
+    }
     body.nightModeActive .learnModeNoMoreCardsMessage {
-      color: #fde68a;
-      background: #422006;
-      border-color: #b45309;
+      color: #f2e9e4;
+      background: linear-gradient(115deg, #22223b 20%, #3a86ff 100%);
+      border-color: #3a86ff;
+      box-shadow: 0px 4px 20px #457b9d55;
+    }
+    @keyframes flashCongratsAlt {
+      from { box-shadow: 0 0 0 #8ecae6aa; }
+      50% { box-shadow: 0 0 28px 8px #ffbe0b; }
+      to { box-shadow: 0px 4px 20px #8ecae633; }
     }
   </style>
 </head>
@@ -400,14 +540,23 @@
           <option value="4">HSK 4</option>
           <option value="5">HSK 5</option>
           <option value="6">HSK 6</option>
-          <option value="all">All</option>
+          <option value="all">HSK All</option>
         </select>
-        <select class="levelSelector" id="frequencySelectElement">
-          <option value="200">Top 200</option>
-          <option value="500">Top 500</option>
-          <option value="1000">Top 1000</option>
-          <option value="all">All</option>
-        </select>
+        <div class="levelSelector" id="frequencySelectElement">
+        <button type="button" class="frequencyCapStepButton" id="frequencyCapDecrementButtonElement" aria-label="Decrease by 100">−</button>
+            Top <input
+              type="number"
+              class="frequencyCapNumberInput"
+              id="frequencyCapNumberInputElement"
+              min="0"
+              max="10000"
+              step="1"
+              inputmode="numeric"
+              aria-label="Maximum frequency rank"
+              style="border:0px;"
+            />
+            <button type="button" class="frequencyCapStepButton" id="frequencyCapIncrementButtonElement" aria-label="Increase by 100">+</button>
+            </div>
         <div class="positionText" id="positionTextElement"></div>
         <button type="button" class="navButton navButtonWithHoldProgress" id="nextButtonElement">
           <span class="navButtonHoldProgressFillElement navButtonHoldProgressFillElementRight" id="nextButtonHoldProgressFillElement" aria-hidden="true"></span>
@@ -846,8 +995,56 @@
     const ttsButtonElement = document.getElementById("ttsButtonElement");
     const ttsPlaybackModeSelectElement = document.getElementById("ttsPlaybackModeSelectElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
-    const frequencySelectElement = document.getElementById("frequencySelectElement");
+    const frequencyCapControlGroupElement = document.getElementById("frequencyCapControlGroupElement");
+    const frequencyCapPopoverElement = document.getElementById("frequencyCapPopoverElement");
+    const frequencyCapDecrementButtonElement = document.getElementById("frequencyCapDecrementButtonElement");
+    const frequencyCapIncrementButtonElement = document.getElementById("frequencyCapIncrementButtonElement");
+    const frequencyCapNumberInputElement = document.getElementById("frequencyCapNumberInputElement");
+    // const frequencyCapAllButtonElement = document.getElementById("frequencyCapAllButtonElement");
+    // const frequencyCapUseRankLimitButtonElement = document.getElementById("frequencyCapUseRankLimitButtonElement");
     const positionTextElement = document.getElementById("positionTextElement");
+
+    const clampFrequencyRankLimitNumericValue = (rawNumericValue) => {
+      const parsedNumericValue = Number.parseInt(String(rawNumericValue), 10);
+      if (!Number.isFinite(parsedNumericValue)) {
+        return frequencyRankLimitMinimumNumericValue;
+      }
+      return Math.min(
+        frequencyRankLimitMaximumNumericValue,
+        Math.max(frequencyRankLimitMinimumNumericValue, parsedNumericValue)
+      );
+    };
+
+    const syncFrequencyCapControlUiFromStoredFrequencySelectionValue = () => {
+      const storedFrequencySelectionRawValue = loadFrequencySelectionValueFromLocalStorage();
+      if (storedFrequencySelectionRawValue === "all") {
+        frequencyCapNumberInputElement.value = "";
+        frequencyCapNumberInputElement.placeholder = "All";
+        frequencyCapNumberInputElement.disabled = true;
+      } else {
+        const clampedFrequencyRankLimitNumericValue = clampFrequencyRankLimitNumericValue(storedFrequencySelectionRawValue);
+        frequencyCapNumberInputElement.placeholder = "";
+        frequencyCapNumberInputElement.disabled = false;
+        frequencyCapNumberInputElement.value = String(clampedFrequencyRankLimitNumericValue);
+      }
+    };
+
+    const persistFrequencySelectionStringValueAndRefreshDeck = (frequencySelectionStringValue) => {
+      saveFrequencySelectionValueToLocalStorage(frequencySelectionStringValue);
+      updateRandomizedFlashCardDataListForSelection();
+      persistLearnModeStateBundleToLocalStorage();
+      syncFrequencyCapControlUiFromStoredFrequencySelectionValue();
+    };
+
+    const applyFrequencyRankLimitNumericValueAndPersist = (nextNumericValue) => {
+      const clampedFrequencyRankLimitNumericValue = clampFrequencyRankLimitNumericValue(nextNumericValue);
+      persistFrequencySelectionStringValueAndRefreshDeck(String(clampedFrequencyRankLimitNumericValue));
+    };
+
+    const setFrequencyCapPopoverVisibleValue = (shouldShowPopoverValue) => {
+      isFrequencyCapPopoverVisibleValue = shouldShowPopoverValue;
+      frequencyCapPopoverElement.hidden = !shouldShowPopoverValue;
+    };
 
     const syncLearnModeStateAsideColumnVisibilityFromLearnModeEnabled = () => {
       learnModeStateAsideColumnElement.hidden = !isLearnModeEnabledValue;
@@ -888,6 +1085,11 @@
     const learnModeRightWeightMultiplierValue = 0.5;
     const learnModeLowWeightThresholdValue = 0.25;
 
+    const frequencyRankLimitMinimumNumericValue = 0;
+    const frequencyRankLimitMaximumNumericValue = 10000;
+    const frequencyRankLimitStepButtonDeltaNumericValue = 100;
+    const frequencyRankLimitDefaultRestoreNumericValue = 200;
+
     let randomizedFlashCardDataList = [];
     let currentCardIndexValue = 0;
     let isDetailViewVisibleValue = false;
@@ -901,6 +1103,7 @@
     let previousIsDetailViewVisibleForGuessSideRandomizationValue = false;
     let guessSideRandomizationCardKeyValue = null;
     let guessSideDisplaysTraditionalCharacterValue = false;
+    let isFrequencyCapPopoverVisibleValue = true;
 
     (() => {
       if (typeof radicalMapping === "undefined") return;
@@ -949,6 +1152,7 @@
       }
       if (!isLearnModeEnabledValue || learnModePoolList.length === 0) {
         learnModeNoMoreCardsMessageElement.hidden = true;
+        learnModeNoMoreCardsMessageElement.replaceChildren();
         return;
       }
       const lowWeightThresholdForAddAttemptValue = learnModeLowWeightThresholdValue;
@@ -972,19 +1176,43 @@
 
       if (!learnModeNoMoreCardsBannerConditionHoldsValue) {
         learnModeNoMoreCardsMessageElement.hidden = true;
+        learnModeNoMoreCardsMessageElement.replaceChildren();
         return;
       }
 
       learnModeNoMoreCardsMessageElement.hidden = false;
-      learnModeNoMoreCardsMessageElement.textContent =
-        "No new cards can be added while all of the following are true:\n\n"
-        + `• Add-from-deck gate: every pool weight must be ≤ ${formatLearnModeBannerNumericValueForDisplay(lowWeightThresholdForAddAttemptValue)}. `
-        + `Pool weights now — min ${formatLearnModeBannerNumericValueForDisplay(minimumPoolEntryWeightValue)}, `
-        + `max ${formatLearnModeBannerNumericValueForDisplay(maximumPoolEntryWeightValue)} `
-        + `(all pass: ${allPoolWeightsAtOrBelowLowThresholdValue ? "yes" : "no"}).\n`
-        + `• Shuffled deck length ${shuffledDeckTotalLengthValue}.\n`
-        + `• Deck positions whose simplified character is not already in the pool: `
-        + `${countOfShuffledDeckSlotsWithCharacterNotAlreadyInPoolValue} (needs > 0 to add a new card).`;
+      learnModeNoMoreCardsMessageElement.replaceChildren();
+      const learnModeNoMoreCardsMessageBodyTextElement = document.createElement("div");
+      learnModeNoMoreCardsMessageBodyTextElement.className = "learnModeNoMoreCardsMessageBodyText";
+      learnModeNoMoreCardsMessageBodyTextElement.textContent =
+        `CONGRATULATIONS YOU'VE LEARNED ALL ${shuffledDeckTotalLengthValue} CHINESE CHARACTERS!\n\n`;
+      learnModeNoMoreCardsMessageElement.appendChild(learnModeNoMoreCardsMessageBodyTextElement);
+
+      const storedFrequencySelectionForBannerButtonValue = loadFrequencySelectionValueFromLocalStorage();
+      if (storedFrequencySelectionForBannerButtonValue !== "all") {
+        const currentFrequencyRankLimitForBannerButtonValue = clampFrequencyRankLimitNumericValue(
+          storedFrequencySelectionForBannerButtonValue
+        );
+        const frequencyIncreaseButtonElement = document.createElement("button");
+        frequencyIncreaseButtonElement.type = "button";
+        frequencyIncreaseButtonElement.className = "learnModeNoMoreCardsMessageFrequencyIncreaseButton";
+        frequencyIncreaseButtonElement.textContent = `Increase limit by ${frequencyRankLimitStepButtonDeltaNumericValue}`;
+        if (currentFrequencyRankLimitForBannerButtonValue >= frequencyRankLimitMaximumNumericValue) {
+          frequencyIncreaseButtonElement.disabled = true;
+          frequencyIncreaseButtonElement.title = "Rank limit is already at the maximum";
+        }
+        frequencyIncreaseButtonElement.addEventListener("click", () => {
+          const storedFrequencySelectionAtClickValue = loadFrequencySelectionValueFromLocalStorage();
+          if (storedFrequencySelectionAtClickValue === "all") {
+            return;
+          }
+          const currentFrequencyRankLimitAtClickValue = clampFrequencyRankLimitNumericValue(storedFrequencySelectionAtClickValue);
+          applyFrequencyRankLimitNumericValueAndPersist(
+            currentFrequencyRankLimitAtClickValue + frequencyRankLimitStepButtonDeltaNumericValue
+          );
+        });
+        learnModeNoMoreCardsMessageElement.appendChild(frequencyIncreaseButtonElement);
+      }
     };
 
     const pushOneRandomShuffledDeckCardIntoLearnModePoolIfAvailable = () => {
@@ -1249,6 +1477,7 @@
     };
 
     const renderCardContent = () => {
+      try {
       if (randomizedFlashCardDataList.length === 0 && !(isLearnModeEnabledValue && learnModePoolList.length > 0)) {
         positionTextElement.textContent = "0 / 0";
         previousButtonLabelSpanElement.textContent = isLearnModeEnabledValue ? "Wrong" : "Previous";
@@ -1266,7 +1495,6 @@
           </div>
         `;
         previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
-        updateLearnModeNoMoreCardsToAddBannerDisplayValue();
         return;
       }
       const flippedFromAnswerSideToGuessSideValue = previousIsDetailViewVisibleForGuessSideRandomizationValue === true && isDetailViewVisibleValue === false;
@@ -1335,7 +1563,6 @@
           </div>
         `;
         previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
-        updateLearnModeNoMoreCardsToAddBannerDisplayValue();
         return;
       }
 
@@ -1405,7 +1632,9 @@
         </div>
       `;
       previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
-      updateLearnModeNoMoreCardsToAddBannerDisplayValue();
+      } finally {
+        updateLearnModeNoMoreCardsToAddBannerDisplayValue();
+      }
     };
 
     registerDebouncedClickHandler(flashCardElement, () => {
@@ -1628,11 +1857,56 @@
       persistLearnModeStateBundleToLocalStorage();
     });
 
-    frequencySelectElement.addEventListener("change", (eventValue) => {
-      const nextFrequencySelectionValue = eventValue.target.value;
-      saveFrequencySelectionValueToLocalStorage(nextFrequencySelectionValue);
-      updateRandomizedFlashCardDataListForSelection();
-      persistLearnModeStateBundleToLocalStorage();
+
+
+    frequencyCapDecrementButtonElement.addEventListener("click", (pointerEventValue) => {
+      pointerEventValue.stopPropagation();
+      if (loadFrequencySelectionValueFromLocalStorage() === "all") {
+        return;
+      }
+      const currentFrequencyRankLimitNumericValue = clampFrequencyRankLimitNumericValue(
+        frequencyCapNumberInputElement.value === ""
+          ? frequencyRankLimitMinimumNumericValue
+          : frequencyCapNumberInputElement.value
+      );
+      applyFrequencyRankLimitNumericValueAndPersist(
+        currentFrequencyRankLimitNumericValue - frequencyRankLimitStepButtonDeltaNumericValue
+      );
+    });
+
+    frequencyCapIncrementButtonElement.addEventListener("click", (pointerEventValue) => {
+      pointerEventValue.stopPropagation();
+      if (loadFrequencySelectionValueFromLocalStorage() === "all") {
+        return;
+      }
+      const currentFrequencyRankLimitNumericValue = clampFrequencyRankLimitNumericValue(
+        frequencyCapNumberInputElement.value === ""
+          ? frequencyRankLimitMinimumNumericValue
+          : frequencyCapNumberInputElement.value
+      );
+      applyFrequencyRankLimitNumericValueAndPersist(
+        currentFrequencyRankLimitNumericValue + frequencyRankLimitStepButtonDeltaNumericValue
+      );
+    });
+
+    frequencyCapNumberInputElement.addEventListener("change", (pointerEventValue) => {
+      pointerEventValue.stopPropagation();
+      if (loadFrequencySelectionValueFromLocalStorage() === "all") {
+        return;
+      }
+      applyFrequencyRankLimitNumericValueAndPersist(frequencyCapNumberInputElement.value);
+    });
+
+
+
+    document.addEventListener("click", (pointerEventValue) => {
+      if (!isFrequencyCapPopoverVisibleValue) {
+        return;
+      }
+      if (frequencyCapControlGroupElement.contains(pointerEventValue.target)) {
+        return;
+      }
+      setFrequencyCapPopoverVisibleValue(false);
     });
 
     setNightModeEnabledValue(loadNightModeEnabledValueFromLocalStorage());
@@ -1646,11 +1920,7 @@
       hskLevelSelectElement.value = "all";
       saveHskLevelSelectionValueToLocalStorage("all");
     }
-    frequencySelectElement.value = loadFrequencySelectionValueFromLocalStorage();
-    if (!frequencySelectElement.value) {
-      frequencySelectElement.value = "all";
-      saveFrequencySelectionValueToLocalStorage("all");
-    }
+    syncFrequencyCapControlUiFromStoredFrequencySelectionValue();
   </script>
 </body>
 </html>
