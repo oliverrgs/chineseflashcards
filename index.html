@@ -7,6 +7,7 @@
   <style>
     :root {
       color-scheme: light;
+      --studySessionAsideButtonsOpacityWhenChromeHiddenValue: 0.15;
     }
     body {
       margin: 0;
@@ -65,6 +66,12 @@
       justify-content: flex-end;
       gap: 8px;
       flex-wrap: wrap;
+    }
+    body.studySessionChromeControlsHidden .studySessionChromeControlElement {
+      display: none !important;
+    }
+    body.studySessionChromeControlsHidden .learnModeStateAsideColumn .navButton.secondaryButton {
+      opacity: var(--studySessionAsideButtonsOpacityWhenChromeHiddenValue);
     }
     .flashCard {
       width: 100%;
@@ -503,10 +510,10 @@
   <div class="appMainLayoutRow">
     <div class="pageContainer">
       <div class="auxControlsRow">
-        <button class="navButton secondaryButton" id="nightModeToggleButtonElement">Night Mode</button>
-        <span id="learnModeLabelElement" class="learnModeLabel">Ordered Mode</span>
-        <button class="navButton secondaryButton" id="learnModeSwitchButtonElement">Change Mode</button>
-        <div class="ttsControlGroup">
+        <button class="navButton secondaryButton studySessionChromeControlElement" id="nightModeToggleButtonElement" type="button">Night Mode</button>
+        <span id="learnModeLabelElement" class="learnModeLabel studySessionChromeControlElement">Ordered Mode</span>
+        <button class="navButton secondaryButton studySessionChromeControlElement" id="learnModeSwitchButtonElement" type="button">Change Mode</button>
+        <div class="ttsControlGroup studySessionChromeControlElement">
           <button class="ttsButton" id="ttsButtonElement"  style="border:0px;">
             <img src="soundicon.png" alt="Speak"/>
           </button>
@@ -533,7 +540,7 @@
           <span class="navButtonHoldProgressFillElement navButtonHoldProgressFillElementWrong" id="previousButtonHoldProgressFillElement" aria-hidden="true"></span>
           <span class="navButtonLabelSpanElement" id="previousButtonLabelSpanElement">Previous</span>
         </button>
-        <select class="levelSelector" id="hskLevelSelectElement">
+        <select class="levelSelector studySessionChromeControlElement" id="hskLevelSelectElement">
           <option value="1">HSK 1</option>
           <option value="2">HSK 2</option>
           <option value="3">HSK 3</option>
@@ -542,7 +549,7 @@
           <option value="6">HSK 6</option>
           <option value="all">HSK All</option>
         </select>
-        <div class="levelSelector" id="frequencySelectElement">
+        <div class="levelSelector studySessionChromeControlElement" id="frequencySelectElement">
         <button type="button" class="frequencyCapStepButton" id="frequencyCapDecrementButtonElement" aria-label="Decrease by 100">−</button>
             Top <input
               type="number"
@@ -557,7 +564,7 @@
             />
             <button type="button" class="frequencyCapStepButton" id="frequencyCapIncrementButtonElement" aria-label="Increase by 100">+</button>
             </div>
-        <div class="positionText" id="positionTextElement"></div>
+        <div class="positionText studySessionChromeControlElement" id="positionTextElement"></div>
         <button type="button" class="navButton navButtonWithHoldProgress" id="nextButtonElement">
           <span class="navButtonHoldProgressFillElement navButtonHoldProgressFillElementRight" id="nextButtonHoldProgressFillElement" aria-hidden="true"></span>
           <span class="navButtonLabelSpanElement" id="nextButtonLabelSpanElement">Next</span>
@@ -568,6 +575,7 @@
       <button class="navButton secondaryButton" id="learnModeStateDownloadButtonElement">Save</button>
       <button class="navButton secondaryButton" id="learnModeStateUploadButtonElement">Load</button>
       <button class="navButton secondaryButton" id="learnModeStateResetButtonElement">Reset</button>
+      <button class="navButton secondaryButton" id="studySessionChromeToggleButtonElement" type="button" aria-pressed="false" aria-label="Hide study controls">Hide controls</button>
       <input type="file" id="learnModeStateFileInputElement" accept="application/json,.json" hidden />
     </aside>
   </div>
@@ -788,7 +796,8 @@
       frequencySelection: "chineseFlashCardsFrequencySelection",
       learnModeEnabled: "chineseFlashCardsLearnModeEnabled",
       learnModeState: "chineseFlashCardsLearnModeState",
-      ttsPlaybackMode: "chineseFlashCardsTtsPlaybackMode"
+      ttsPlaybackMode: "chineseFlashCardsTtsPlaybackMode",
+      studySessionChromeControlsHidden: "chineseFlashCardsStudySessionChromeControlsHidden"
     };
 
     const ttsPlaybackModeValueMap = {
@@ -856,6 +865,17 @@
       localStorage.setItem(
         localStorageKeyNameMap.ttsPlaybackMode,
         ttsPlaybackModeValue === ttsPlaybackModeValueMap.full ? ttsPlaybackModeValueMap.full : ttsPlaybackModeValueMap.sound
+      );
+    };
+
+    const loadStudySessionChromeControlsHiddenValueFromLocalStorage = () => {
+      return localStorage.getItem(localStorageKeyNameMap.studySessionChromeControlsHidden) === "true";
+    };
+
+    const saveStudySessionChromeControlsHiddenValueToLocalStorage = (shouldHideStudySessionChromeControlsValue) => {
+      localStorage.setItem(
+        localStorageKeyNameMap.studySessionChromeControlsHidden,
+        shouldHideStudySessionChromeControlsValue ? "true" : "false"
       );
     };
 
@@ -991,6 +1011,7 @@
     const learnModeStateResetButtonElement = document.getElementById("learnModeStateResetButtonElement");
     const learnModeStateFileInputElement = document.getElementById("learnModeStateFileInputElement");
     const learnModeStateAsideColumnElement = document.getElementById("learnModeStateAsideColumnElement");
+    const studySessionChromeToggleButtonElement = document.getElementById("studySessionChromeToggleButtonElement");
     const learnModeNoMoreCardsMessageElement = document.getElementById("learnModeNoMoreCardsMessageElement");
     const ttsButtonElement = document.getElementById("ttsButtonElement");
     const ttsPlaybackModeSelectElement = document.getElementById("ttsPlaybackModeSelectElement");
@@ -1031,7 +1052,7 @@
 
     const persistFrequencySelectionStringValueAndRefreshDeck = (frequencySelectionStringValue) => {
       saveFrequencySelectionValueToLocalStorage(frequencySelectionStringValue);
-      updateRandomizedFlashCardDataListForSelection();
+      updateRandomizedFlashCardDataListForSelection(true);
       persistLearnModeStateBundleToLocalStorage();
       syncFrequencyCapControlUiFromStoredFrequencySelectionValue();
     };
@@ -1104,6 +1125,22 @@
     let guessSideRandomizationCardKeyValue = null;
     let guessSideDisplaysTraditionalCharacterValue = false;
     let isFrequencyCapPopoverVisibleValue = true;
+
+    const applyStudySessionChromeVisibilityFromHiddenFlagValue = (shouldHideStudySessionChromeControlsValue) => {
+      document.body.classList.toggle("studySessionChromeControlsHidden", shouldHideStudySessionChromeControlsValue);
+      if (shouldHideStudySessionChromeControlsValue) {
+        isFrequencyCapPopoverVisibleValue = false;
+        if (frequencyCapPopoverElement) {
+          frequencyCapPopoverElement.hidden = true;
+        }
+      }
+      studySessionChromeToggleButtonElement.textContent = shouldHideStudySessionChromeControlsValue ? "Show controls" : "Hide controls";
+      studySessionChromeToggleButtonElement.setAttribute("aria-pressed", String(shouldHideStudySessionChromeControlsValue));
+      studySessionChromeToggleButtonElement.setAttribute(
+        "aria-label",
+        shouldHideStudySessionChromeControlsValue ? "Show study controls" : "Hide study controls"
+      );
+    };
 
     (() => {
       if (typeof radicalMapping === "undefined") return;
@@ -1268,7 +1305,55 @@
       return indicesToConsiderValue[indicesToConsiderValue.length - 1];
     };
 
-    const updateRandomizedFlashCardDataListForSelection = () => {
+    const reconcileLearnModePoolWithNewShuffledDeckPreservingCurrentSelection = () => {
+      const previousSimplifiedKeyForCurrentCardValue =
+        learnModePoolList.length > 0 &&
+        currentLearnModePoolIndexValue >= 0 &&
+        currentLearnModePoolIndexValue < learnModePoolList.length
+          ? getSeenCountKeyFromCardData(learnModePoolList[currentLearnModePoolIndexValue].cardData)
+          : null;
+      const restoredLearnModePoolList = [];
+      for (let poolEntryIndexValue = 0; poolEntryIndexValue < learnModePoolList.length; poolEntryIndexValue += 1) {
+        const poolEntryValue = learnModePoolList[poolEntryIndexValue];
+        const simplifiedKeyValue = getSeenCountKeyFromCardData(poolEntryValue.cardData);
+        const matchedCardDataValue = findCardDataBySimplifiedKeyInRandomizedDeck(simplifiedKeyValue);
+        if (matchedCardDataValue) {
+          restoredLearnModePoolList.push({
+            cardData: matchedCardDataValue,
+            weight: poolEntryValue.weight
+          });
+        }
+      }
+      learnModePoolList = restoredLearnModePoolList;
+      if (learnModePoolList.length === 0) {
+        currentLearnModePoolIndexValue = 0;
+        if (isLearnModeEnabledValue && randomizedFlashCardDataList.length > 0) {
+          seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
+          currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
+        }
+        return;
+      }
+      if (previousSimplifiedKeyForCurrentCardValue) {
+        const newIndexForPreviousKeyValue = learnModePoolList.findIndex(
+          (entryValue) => getSeenCountKeyFromCardData(entryValue.cardData) === previousSimplifiedKeyForCurrentCardValue
+        );
+        if (newIndexForPreviousKeyValue >= 0) {
+          currentLearnModePoolIndexValue = newIndexForPreviousKeyValue;
+        } else {
+          currentLearnModePoolIndexValue = Math.min(
+            Math.max(0, currentLearnModePoolIndexValue),
+            learnModePoolList.length - 1
+          );
+        }
+      } else {
+        currentLearnModePoolIndexValue = Math.min(
+          Math.max(0, currentLearnModePoolIndexValue),
+          learnModePoolList.length - 1
+        );
+      }
+    };
+
+    const updateRandomizedFlashCardDataListForSelection = (shouldPreserveLearnModePoolAcrossDeckRebuildValue = false) => {
       const hskLevelSelectionValue = loadHskLevelSelectionValueFromLocalStorage();
       const frequencySelectionValue = loadFrequencySelectionValueFromLocalStorage();
       const filteredFlashCardDataList = getFilteredFlashCardDataListForSelections(
@@ -1279,11 +1364,15 @@
       currentCardIndexValue = 0;
       isDetailViewVisibleValue = false;
       hasSeenCountIncrementedValue = false;
-      learnModePoolList = [];
-      currentLearnModePoolIndexValue = 0;
-      if (isLearnModeEnabledValue && randomizedFlashCardDataList.length > 0) {
-        seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
-        currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
+      if (shouldPreserveLearnModePoolAcrossDeckRebuildValue && isLearnModeEnabledValue) {
+        reconcileLearnModePoolWithNewShuffledDeckPreservingCurrentSelection();
+      } else {
+        learnModePoolList = [];
+        currentLearnModePoolIndexValue = 0;
+        if (isLearnModeEnabledValue && randomizedFlashCardDataList.length > 0) {
+          seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
+          currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
+        }
       }
       updateSeenCountForCurrentCard();
       renderCardContent();
@@ -1850,6 +1939,12 @@
       resetLearnModeStateCompletelyAndPersist();
     });
 
+    registerDebouncedClickHandler(studySessionChromeToggleButtonElement, () => {
+      const nextShouldHideStudySessionChromeControlsValue = !document.body.classList.contains("studySessionChromeControlsHidden");
+      saveStudySessionChromeControlsHiddenValueToLocalStorage(nextShouldHideStudySessionChromeControlsValue);
+      applyStudySessionChromeVisibilityFromHiddenFlagValue(nextShouldHideStudySessionChromeControlsValue);
+    });
+
     hskLevelSelectElement.addEventListener("change", (eventValue) => {
       const nextHskLevelSelectionValue = eventValue.target.value;
       saveHskLevelSelectionValueToLocalStorage(nextHskLevelSelectionValue);
@@ -1921,6 +2016,7 @@
       saveHskLevelSelectionValueToLocalStorage("all");
     }
     syncFrequencyCapControlUiFromStoredFrequencySelectionValue();
+    applyStudySessionChromeVisibilityFromHiddenFlagValue(loadStudySessionChromeControlsHiddenValueFromLocalStorage());
   </script>
 </body>
 </html>
