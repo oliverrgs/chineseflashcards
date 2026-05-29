@@ -550,7 +550,7 @@
           <option value="all">HSK All</option>
         </select>
         <div class="levelSelector studySessionChromeControlElement" id="frequencySelectElement">
-        <button type="button" class="frequencyCapStepButton" id="frequencyCapDecrementButtonElement" aria-label="Decrease by 100">−</button>
+        <button type="button" class="frequencyCapStepButton" id="frequencyCapDecrementButtonElement" aria-label="Decrease by 100">-</button>
             Top <input
               type="number"
               class="frequencyCapNumberInput"
@@ -592,7 +592,7 @@
       }
       console.log("[ChineseFlashCards]", ...diagnosticLogArgs);
     };
-    const uiClickDebounceDelayMillisecondsValue = 100;
+    const uiClickDebounceDelayMillisecondsValue = 150;
     const uiClickDebounceMaximumAcceptableFireDelayMillisecondsValue = 2500;
     const navButtonHoldToActivateDurationMillisecondsValue = 300;
     document.documentElement.style.setProperty(
@@ -600,20 +600,19 @@
       `${navButtonHoldToActivateDurationMillisecondsValue}ms`
     );
 
-    const registerDebouncedClickHandler = (
-      targetElementValue,
-      clickHandlerCallbackValue,
-      optionalDebouncedClickHandlerLabelValue
+    const createDebouncedCallback = (
+      callbackValue,
+      optionalDebouncedCallbackLabelValue
     ) => {
-      const debouncedClickHandlerLabelValue = optionalDebouncedClickHandlerLabelValue ?? targetElementValue.id ?? "debouncedClick";
+      const debouncedCallbackLabelValue = optionalDebouncedCallbackLabelValue ?? "debouncedCallback";
       let debounceTimeoutIdValue = null;
-      targetElementValue.addEventListener("click", () => {
+      return (...callbackArgsValue) => {
         const debounceClickScheduleTimestampValue = Date.now();
         if (debounceTimeoutIdValue !== null) {
           clearTimeout(debounceTimeoutIdValue);
           logChineseFlashCardsDiagnosticMessage(
             "debounce: cleared pending timer",
-            debouncedClickHandlerLabelValue,
+            debouncedCallbackLabelValue,
             "at",
             debounceClickScheduleTimestampValue
           );
@@ -624,7 +623,7 @@
           if (debounceActualDelayMillisecondsValue > uiClickDebounceMaximumAcceptableFireDelayMillisecondsValue) {
             logChineseFlashCardsDiagnosticMessage(
               "debounce: skipped stale handler (tab likely background / timer throttled)",
-              debouncedClickHandlerLabelValue,
+              debouncedCallbackLabelValue,
               "actualDelayMs",
               debounceActualDelayMillisecondsValue
             );
@@ -632,18 +631,30 @@
           }
           logChineseFlashCardsDiagnosticMessage(
             "debounce: handler fired",
-            debouncedClickHandlerLabelValue,
+            debouncedCallbackLabelValue,
             "afterMs",
             debounceActualDelayMillisecondsValue
           );
-          clickHandlerCallbackValue();
+          callbackValue(...callbackArgsValue);
         }, uiClickDebounceDelayMillisecondsValue);
         logChineseFlashCardsDiagnosticMessage(
           "debounce: timer scheduled",
-          debouncedClickHandlerLabelValue,
+          debouncedCallbackLabelValue,
           "delayMs",
           uiClickDebounceDelayMillisecondsValue
         );
+      };
+    };
+
+    const registerDebouncedClickHandler = (
+      targetElementValue,
+      clickHandlerCallbackValue,
+      optionalDebouncedClickHandlerLabelValue
+    ) => {
+      const debouncedClickHandlerLabelValue = optionalDebouncedClickHandlerLabelValue ?? targetElementValue.id ?? "debouncedClick";
+      const debouncedClickHandlerCallbackValue = createDebouncedCallback(clickHandlerCallbackValue, debouncedClickHandlerLabelValue);
+      targetElementValue.addEventListener("click", (clickEventValue) => {
+        debouncedClickHandlerCallbackValue(clickEventValue);
       });
     };
 
@@ -1238,7 +1249,7 @@
           frequencyIncreaseButtonElement.disabled = true;
           frequencyIncreaseButtonElement.title = "Rank limit is already at the maximum";
         }
-        frequencyIncreaseButtonElement.addEventListener("click", () => {
+        registerDebouncedClickHandler(frequencyIncreaseButtonElement, () => {
           const storedFrequencySelectionAtClickValue = loadFrequencySelectionValueFromLocalStorage();
           if (storedFrequencySelectionAtClickValue === "all") {
             return;
@@ -1247,7 +1258,7 @@
           applyFrequencyRankLimitNumericValueAndPersist(
             currentFrequencyRankLimitAtClickValue + frequencyRankLimitStepButtonDeltaNumericValue
           );
-        });
+        }, "frequencyIncreaseBanner");
         learnModeNoMoreCardsMessageElement.appendChild(frequencyIncreaseButtonElement);
       }
     };
@@ -1791,16 +1802,25 @@
 
     const getShouldRequireHoldDurationBeforeWrongOrRightNavButtonActionValue = () => isDetailViewVisibleValue;
 
+    const runPreviousNavigationButtonActionDebouncedValue = createDebouncedCallback(
+      runPreviousNavigationButtonAction,
+      "previousButtonElement"
+    );
+    const runNextNavigationButtonActionDebouncedValue = createDebouncedCallback(
+      runNextNavigationButtonAction,
+      "nextButtonElement"
+    );
+
     const previousNavButtonHoldInteractionController = createNavButtonHoldInteractionController(
       previousButtonElement,
       previousButtonHoldProgressFillElement,
-      runPreviousNavigationButtonAction,
+      runPreviousNavigationButtonActionDebouncedValue,
       getShouldRequireHoldDurationBeforeWrongOrRightNavButtonActionValue
     );
     const nextNavButtonHoldInteractionController = createNavButtonHoldInteractionController(
       nextButtonElement,
       nextButtonHoldProgressFillElement,
-      runNextNavigationButtonAction,
+      runNextNavigationButtonActionDebouncedValue,
       getShouldRequireHoldDurationBeforeWrongOrRightNavButtonActionValue
     );
 
@@ -1907,7 +1927,7 @@
       learnModeStateFileInputElement.click();
     });
 
-    ttsButtonElement.addEventListener("click", () => {
+    registerDebouncedClickHandler(ttsButtonElement, () => {
       speakCurrentCardText();
     });
 
@@ -1956,6 +1976,12 @@
 
     frequencyCapDecrementButtonElement.addEventListener("click", (pointerEventValue) => {
       pointerEventValue.stopPropagation();
+    });
+    frequencyCapIncrementButtonElement.addEventListener("click", (pointerEventValue) => {
+      pointerEventValue.stopPropagation();
+    });
+
+    registerDebouncedClickHandler(frequencyCapDecrementButtonElement, () => {
       if (loadFrequencySelectionValueFromLocalStorage() === "all") {
         return;
       }
@@ -1969,8 +1995,7 @@
       );
     });
 
-    frequencyCapIncrementButtonElement.addEventListener("click", (pointerEventValue) => {
-      pointerEventValue.stopPropagation();
+    registerDebouncedClickHandler(frequencyCapIncrementButtonElement, () => {
       if (loadFrequencySelectionValueFromLocalStorage() === "all") {
         return;
       }
