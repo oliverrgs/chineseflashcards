@@ -522,6 +522,7 @@
             <option value="full">Full</option>
           </select>
         </div>
+        <button class="navButton secondaryButton studySessionChromeControlElement" id="perplexityAiSentenceButtonElement" type="button">AI Sentence</button>
       </div>
       <div class="learnModeNoMoreCardsMessage" id="learnModeNoMoreCardsMessageElement" hidden role="status"></div>
       <div class="flashCard" id="flashCardElement">
@@ -803,6 +804,7 @@
     const localStorageKeyNameMap = {
       nightModeEnabled: "chineseFlashCardsNightModeEnabled",
       seenCountByCharacter: "chineseFlashCardsSeenCountByCharacter",
+      responseHistoryByCharacter: "chineseFlashCardsResponseHistoryByCharacter",
       hskLevelSelection: "chineseFlashCardsHskLevelSelection",
       frequencySelection: "chineseFlashCardsFrequencySelection",
       learnModeEnabled: "chineseFlashCardsLearnModeEnabled",
@@ -816,7 +818,12 @@
       full: "full"
     };
 
-    const learnModeStateStorageSchemaVersionValue = 1;
+    const learnModeStateStorageSchemaVersionValue = 2;
+
+    const characterResponseHistoryMaxEntryCountValue = 25;
+    const characterResponseHistoryLongGapThresholdMillisecondsValue = 10 * 60 * 1000;
+    const characterResponseHistoryMaxGapForExtraReductionMillisecondsValue = 60 * 60 * 1000;
+    const learnModeLongGapCorrectAnswerExtraWeightMultiplierValue = 0.25;
 
     const loadSeenCountByCharacterMapFromLocalStorage = () => {
       const seenCountByCharacterStorageValue = localStorage.getItem(localStorageKeyNameMap.seenCountByCharacter);
@@ -838,6 +845,118 @@
     };
 
     const getSeenCountKeyFromCardData = (cardDataValue) => cardDataValue.simplified;
+
+    const loadResponseHistoryByCharacterMapFromLocalStorage = () => {
+      const responseHistoryByCharacterStorageValue = localStorage.getItem(localStorageKeyNameMap.responseHistoryByCharacter);
+      if (!responseHistoryByCharacterStorageValue) {
+        return {};
+      }
+      try {
+        const parsedResponseHistoryByCharacterMapValue = JSON.parse(responseHistoryByCharacterStorageValue);
+        return parsedResponseHistoryByCharacterMapValue && typeof parsedResponseHistoryByCharacterMapValue === "object"
+          ? parsedResponseHistoryByCharacterMapValue
+          : {};
+      } catch (errorValue) {
+        return {};
+      }
+    };
+
+    const saveResponseHistoryByCharacterMapToLocalStorage = (responseHistoryByCharacterMapValue) => {
+      localStorage.setItem(localStorageKeyNameMap.responseHistoryByCharacter, JSON.stringify(responseHistoryByCharacterMapValue));
+    };
+
+    const isValidCharacterResponseHistoryEntryValue = (responseHistoryEntryValue) => {
+      return Boolean(
+        responseHistoryEntryValue
+        && typeof responseHistoryEntryValue.wasCorrect === "boolean"
+        && typeof responseHistoryEntryValue.responseTimestampMilliseconds === "number"
+        && (
+          responseHistoryEntryValue.intervalSincePreviousResponseMilliseconds === null
+          || typeof responseHistoryEntryValue.intervalSincePreviousResponseMilliseconds === "number"
+        )
+      );
+    };
+
+    const sanitizeCharacterResponseHistoryEntryListValue = (responseHistoryEntryListValue) => {
+      if (!Array.isArray(responseHistoryEntryListValue)) {
+        return [];
+      }
+      const validResponseHistoryEntryListValue = responseHistoryEntryListValue.filter(isValidCharacterResponseHistoryEntryValue);
+      if (validResponseHistoryEntryListValue.length <= characterResponseHistoryMaxEntryCountValue) {
+        return validResponseHistoryEntryListValue;
+      }
+      return validResponseHistoryEntryListValue.slice(
+        validResponseHistoryEntryListValue.length - characterResponseHistoryMaxEntryCountValue
+      );
+    };
+
+    const sanitizeResponseHistoryByCharacterMapValue = (responseHistoryByCharacterMapValue) => {
+      if (!responseHistoryByCharacterMapValue || typeof responseHistoryByCharacterMapValue !== "object") {
+        return {};
+      }
+      const sanitizedResponseHistoryByCharacterMapValue = {};
+      for (const simplifiedCharacterKeyValue of Object.keys(responseHistoryByCharacterMapValue)) {
+        sanitizedResponseHistoryByCharacterMapValue[simplifiedCharacterKeyValue] = sanitizeCharacterResponseHistoryEntryListValue(
+          responseHistoryByCharacterMapValue[simplifiedCharacterKeyValue]
+        );
+      }
+      return sanitizedResponseHistoryByCharacterMapValue;
+    };
+
+    const getMillisecondsSinceLastResponseForCharacter = (simplifiedCharacterKeyValue) => {
+      const responseHistoryEntryListValue = responseHistoryByCharacterMapValue[simplifiedCharacterKeyValue] || [];
+      const lastResponseHistoryEntryValue = responseHistoryEntryListValue.length > 0
+        ? responseHistoryEntryListValue[responseHistoryEntryListValue.length - 1]
+        : null;
+      if (!lastResponseHistoryEntryValue) {
+        return null;
+      }
+      return Date.now() - lastResponseHistoryEntryValue.responseTimestampMilliseconds;
+    };
+
+    const getLearnModeCorrectAnswerWeightMultiplierForCharacter = (simplifiedCharacterKeyValue) => {
+      const millisecondsSinceLastResponseValue = getMillisecondsSinceLastResponseForCharacter(simplifiedCharacterKeyValue);
+      if (millisecondsSinceLastResponseValue === null) {
+        return learnModeRightWeightMultiplierValue;
+      }
+      if (millisecondsSinceLastResponseValue <= characterResponseHistoryLongGapThresholdMillisecondsValue) {
+        return learnModeRightWeightMultiplierValue;
+      }
+      const gapRangeMillisecondsValue = characterResponseHistoryMaxGapForExtraReductionMillisecondsValue
+        - characterResponseHistoryLongGapThresholdMillisecondsValue;
+      const longGapFactorValue = gapRangeMillisecondsValue <= 0
+        ? 1
+        : Math.min(
+          1,
+          (millisecondsSinceLastResponseValue - characterResponseHistoryLongGapThresholdMillisecondsValue) / gapRangeMillisecondsValue
+        );
+      return learnModeRightWeightMultiplierValue * (
+        1 - longGapFactorValue * (1 - learnModeLongGapCorrectAnswerExtraWeightMultiplierValue)
+      );
+    };
+
+    const appendCharacterResponseHistoryEntry = (simplifiedCharacterKeyValue, wasCorrectValue) => {
+      const responseTimestampMillisecondsValue = Date.now();
+      const existingResponseHistoryEntryListValue = responseHistoryByCharacterMapValue[simplifiedCharacterKeyValue] || [];
+      const lastResponseHistoryEntryValue = existingResponseHistoryEntryListValue.length > 0
+        ? existingResponseHistoryEntryListValue[existingResponseHistoryEntryListValue.length - 1]
+        : null;
+      const intervalSincePreviousResponseMillisecondsValue = lastResponseHistoryEntryValue
+        ? responseTimestampMillisecondsValue - lastResponseHistoryEntryValue.responseTimestampMilliseconds
+        : null;
+      const nextResponseHistoryEntryListValue = [
+        ...existingResponseHistoryEntryListValue,
+        {
+          wasCorrect: wasCorrectValue,
+          responseTimestampMilliseconds: responseTimestampMillisecondsValue,
+          intervalSincePreviousResponseMilliseconds: intervalSincePreviousResponseMillisecondsValue
+        }
+      ];
+      responseHistoryByCharacterMapValue[simplifiedCharacterKeyValue] = nextResponseHistoryEntryListValue.length > characterResponseHistoryMaxEntryCountValue
+        ? nextResponseHistoryEntryListValue.slice(nextResponseHistoryEntryListValue.length - characterResponseHistoryMaxEntryCountValue)
+        : nextResponseHistoryEntryListValue;
+      saveResponseHistoryByCharacterMapToLocalStorage(responseHistoryByCharacterMapValue);
+    };
 
     const loadNightModeEnabledValueFromLocalStorage = () => {
       return localStorage.getItem(localStorageKeyNameMap.nightModeEnabled) === "true";
@@ -912,7 +1031,8 @@
           simplifiedCharacterKey: getSeenCountKeyFromCardData(poolEntryValue.cardData),
           weight: poolEntryValue.weight
         })),
-        currentLearnModePoolIndexValue
+        currentLearnModePoolIndexValue,
+        responseHistoryByCharacter: responseHistoryByCharacterMapValue
       };
     };
 
@@ -936,7 +1056,13 @@
     };
 
     const isValidLearnModeStatePlainObjectForApply = (learnModeStatePlainObjectValue) => {
-      if (!learnModeStatePlainObjectValue || learnModeStatePlainObjectValue.schemaVersion !== learnModeStateStorageSchemaVersionValue) {
+      if (
+        !learnModeStatePlainObjectValue
+        || (
+          learnModeStatePlainObjectValue.schemaVersion !== 1
+          && learnModeStatePlainObjectValue.schemaVersion !== learnModeStateStorageSchemaVersionValue
+        )
+      ) {
         return false;
       }
       if (!Array.isArray(learnModeStatePlainObjectValue.poolEntryList)) {
@@ -976,6 +1102,12 @@
       }
       isLearnModeEnabledValue = Boolean(learnModeStatePlainObjectValue.learnModeEnabled);
       learnModePoolList = restoredLearnModePoolList;
+      if (learnModeStatePlainObjectValue.responseHistoryByCharacter) {
+        responseHistoryByCharacterMapValue = sanitizeResponseHistoryByCharacterMapValue(
+          learnModeStatePlainObjectValue.responseHistoryByCharacter
+        );
+        saveResponseHistoryByCharacterMapToLocalStorage(responseHistoryByCharacterMapValue);
+      }
       const clampedPoolIndexValue = Math.min(
         Math.max(0, Number(learnModeStatePlainObjectValue.currentLearnModePoolIndexValue) || 0),
         Math.max(0, learnModePoolList.length - 1)
@@ -1026,6 +1158,7 @@
     const learnModeNoMoreCardsMessageElement = document.getElementById("learnModeNoMoreCardsMessageElement");
     const ttsButtonElement = document.getElementById("ttsButtonElement");
     const ttsPlaybackModeSelectElement = document.getElementById("ttsPlaybackModeSelectElement");
+    const perplexityAiSentenceButtonElement = document.getElementById("perplexityAiSentenceButtonElement");
     const hskLevelSelectElement = document.getElementById("hskLevelSelectElement");
     const frequencyCapControlGroupElement = document.getElementById("frequencyCapControlGroupElement");
     const frequencyCapPopoverElement = document.getElementById("frequencyCapPopoverElement");
@@ -1116,6 +1249,9 @@
     const learnModeMaxProbabilityValue = 0.2;
     const learnModeRightWeightMultiplierValue = 0.5;
     const learnModeLowWeightThresholdValue = 0.25;
+    const characterHasBeenLearnedThresholdValue = 0.02;
+
+    const perplexityAiSearchBaseUrlValue = "https://www.perplexity.ai/?q=";
 
     const frequencyRankLimitMinimumNumericValue = 0;
     const frequencyRankLimitMaximumNumericValue = 10000;
@@ -1127,6 +1263,8 @@
     let isDetailViewVisibleValue = false;
     let currentCardSeenCountValue = 0;
     let seenCountByCharacterMapValue = loadSeenCountByCharacterMapFromLocalStorage();
+    let responseHistoryByCharacterMapValue = loadResponseHistoryByCharacterMapFromLocalStorage();
+    responseHistoryByCharacterMapValue = sanitizeResponseHistoryByCharacterMapValue(responseHistoryByCharacterMapValue);
     let isLearnModeEnabledValue = false;
     let learnModePoolList = [];
     let currentLearnModePoolIndexValue = 0;
@@ -1185,6 +1323,37 @@
       document.body.classList.toggle("nightModeActive", nightModeEnabledValue);
       nightModeToggleButtonElement.textContent = nightModeEnabledValue ? "Day Mode" : "Night Mode";
       saveNightModeEnabledValueToLocalStorage(nightModeEnabledValue);
+    };
+
+    const getLowWeightLearnModeCharacterListForPerplexityAiSentencePromptValue = () => {
+      return learnModePoolList
+        .filter((poolEntryValue) => poolEntryValue.weight <= characterHasBeenLearnedThresholdValue)
+        .sort((leftPoolEntryValue, rightPoolEntryValue) => leftPoolEntryValue.weight - rightPoolEntryValue.weight)
+        .map((poolEntryValue) => getSeenCountKeyFromCardData(poolEntryValue.cardData));
+    };
+
+    const buildPerplexityAiSentencePromptTextFromCharacterListValue = (lowWeightCharacterListValue) => {
+      const characterListStringValue = lowWeightCharacterListValue.join("");
+      return `I'm learning Chinese. Here's a list of chinese characters I know ${characterListStringValue}. Make five easy and short sentences for me
+       to read. Then list the numbers 1 through 20 line by line. Then postpend the translations in English. Do not prepend or postpend
+        anything in Chinese, just the sentences I can read thanks.`;
+    };
+
+    const openPerplexityWindowWithAiSentencePromptFromMostLearnedCharactersValue = () => {
+      if (!isLearnModeEnabledValue || learnModePoolList.length === 0) {
+        alert("Turn on Learn Mode and study some characters until their weights are low.");
+        return;
+      }
+      const lowWeightCharacterListValue = getLowWeightLearnModeCharacterListForPerplexityAiSentencePromptValue();
+      if (lowWeightCharacterListValue.length === 0) {
+        alert(`No characters in the pool are at or below weight ${characterHasBeenLearnedThresholdValue} yet. Mark more cards Right to lower their weights.`);
+        return;
+      }
+      const perplexityAiSentencePromptTextValue = buildPerplexityAiSentencePromptTextFromCharacterListValue(
+        lowWeightCharacterListValue
+      );
+      const perplexityAiSearchUrlStringValue = `${perplexityAiSearchBaseUrlValue}${encodeURIComponent(perplexityAiSentencePromptTextValue)}`;
+      window.open(perplexityAiSearchUrlStringValue, "_blank", "noopener,noreferrer");
     };
 
     const getLearnModePoolKeysSet = () => new Set(learnModePoolList.map((entryValue) => getSeenCountKeyFromCardData(entryValue.cardData)));
@@ -1750,10 +1919,12 @@
           return;
         }
         const entryValue = learnModePoolList[currentLearnModePoolIndexValue];
+        const simplifiedCharacterKeyForWrongResponseValue = getSeenCountKeyFromCardData(entryValue.cardData);
         entryValue.weight = Math.max(
           learnModeWrongMinimumWeightFloorValue,
           entryValue.weight * learnModeWrongWeightMultiplierValue
         );
+        appendCharacterResponseHistoryEntry(simplifiedCharacterKeyForWrongResponseValue, false);
         const totalWeightValue = learnModePoolList.reduce((sumValue, e) => sumValue + e.weight, 0);
         if (totalWeightValue > 0 && entryValue.weight / totalWeightValue > learnModeMaxProbabilityValue) {
           entryValue.weight = learnModeMaxProbabilityValue * totalWeightValue;
@@ -1782,7 +1953,13 @@
           renderCardContent();
           return;
         }
-        learnModePoolList[currentLearnModePoolIndexValue].weight *= learnModeRightWeightMultiplierValue;
+        const correctAnswerPoolEntryValue = learnModePoolList[currentLearnModePoolIndexValue];
+        const simplifiedCharacterKeyForCorrectResponseValue = getSeenCountKeyFromCardData(correctAnswerPoolEntryValue.cardData);
+        const correctAnswerWeightMultiplierForCharacterValue = getLearnModeCorrectAnswerWeightMultiplierForCharacter(
+          simplifiedCharacterKeyForCorrectResponseValue
+        );
+        correctAnswerPoolEntryValue.weight *= correctAnswerWeightMultiplierForCharacterValue;
+        appendCharacterResponseHistoryEntry(simplifiedCharacterKeyForCorrectResponseValue, true);
         tryAddNewCharacterToLearnModePool();
         currentLearnModePoolIndexValue = pickNextLearnModeCardIndexByWeight(currentLearnModePoolIndexValue);
         isDetailViewVisibleValue = false;
@@ -1909,6 +2086,10 @@
 
     registerDebouncedClickHandler(learnModeSwitchButtonElement, () => {
       setLearnModeEnabledValue(!isLearnModeEnabledValue);
+    });
+
+    registerDebouncedClickHandler(perplexityAiSentenceButtonElement, () => {
+      openPerplexityWindowWithAiSentencePromptFromMostLearnedCharactersValue();
     });
 
     registerDebouncedClickHandler(learnModeStateDownloadButtonElement, () => {
