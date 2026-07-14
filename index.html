@@ -1023,7 +1023,7 @@
       );
     };
 
-    const buildLearnModeStatePlainObjectForStorage = () => {
+    const buildLearnModePoolStatePlainObjectForStorage = () => {
       return {
         schemaVersion: learnModeStateStorageSchemaVersionValue,
         learnModeEnabled: isLearnModeEnabledValue,
@@ -1031,15 +1031,21 @@
           simplifiedCharacterKey: getSeenCountKeyFromCardData(poolEntryValue.cardData),
           weight: poolEntryValue.weight
         })),
-        currentLearnModePoolIndexValue,
+        currentLearnModePoolIndexValue
+      };
+    };
+
+    const buildLearnModeStateExportPlainObject = () => {
+      return {
+        ...buildLearnModePoolStatePlainObjectForStorage(),
         responseHistoryByCharacter: responseHistoryByCharacterMapValue
       };
     };
 
     const persistLearnModeStateBundleToLocalStorage = () => {
-      const learnModeStatePlainObjectValue = buildLearnModeStatePlainObjectForStorage();
-      localStorage.setItem(localStorageKeyNameMap.learnModeState, JSON.stringify(learnModeStatePlainObjectValue));
-      saveLearnModeEnabledValueToLocalStorage(learnModeStatePlainObjectValue.learnModeEnabled);
+      const learnModePoolStatePlainObjectValue = buildLearnModePoolStatePlainObjectForStorage();
+      localStorage.setItem(localStorageKeyNameMap.learnModeState, JSON.stringify(learnModePoolStatePlainObjectValue));
+      saveLearnModeEnabledValueToLocalStorage(learnModePoolStatePlainObjectValue.learnModeEnabled);
     };
 
     const loadLearnModeStatePlainObjectFromLocalStorage = () => {
@@ -1120,6 +1126,34 @@
       updateSeenCountForCurrentCard();
       renderCardContent();
       return true;
+    };
+
+    const increaseFrequencyRankLimitForImportedLearnModeState = (learnModeStatePlainObjectValue) => {
+      if (!Array.isArray(learnModeStatePlainObjectValue.poolEntryList)) {
+        return;
+      }
+      const importedCharacterKeySetValue = new Set(
+        learnModeStatePlainObjectValue.poolEntryList.map(
+          (poolEntryValue) => poolEntryValue.simplifiedCharacterKey
+        )
+      );
+      const highestImportedFrequencyRankValue = flashCardDataList.reduce(
+        (highestFrequencyRankValue, flashCardDataValue) => (
+          importedCharacterKeySetValue.has(getSeenCountKeyFromCardData(flashCardDataValue))
+          && Number.isFinite(flashCardDataValue.frequencyRank)
+            ? Math.max(highestFrequencyRankValue, flashCardDataValue.frequencyRank)
+            : highestFrequencyRankValue
+        ),
+        frequencyRankLimitMinimumNumericValue
+      );
+      const storedFrequencySelectionValue = loadFrequencySelectionValueFromLocalStorage();
+      if (
+        storedFrequencySelectionValue === "all"
+        || highestImportedFrequencyRankValue <= clampFrequencyRankLimitNumericValue(storedFrequencySelectionValue)
+      ) {
+        return;
+      }
+      persistFrequencySelectionStringValueAndRefreshDeck(String(highestImportedFrequencyRankValue));
     };
 
     const resetLearnModeStateCompletelyAndPersist = () => {
@@ -2093,7 +2127,7 @@
     });
 
     registerDebouncedClickHandler(learnModeStateDownloadButtonElement, () => {
-      const learnModeStateJsonStringValue = JSON.stringify(buildLearnModeStatePlainObjectForStorage(), null, 2);
+      const learnModeStateJsonStringValue = JSON.stringify(buildLearnModeStateExportPlainObject(), null, 2);
       const learnModeStateBlobValue = new Blob([learnModeStateJsonStringValue], { type: "application/json" });
       const learnModeStateObjectUrlValue = URL.createObjectURL(learnModeStateBlobValue);
       const learnModeStateAnchorElement = document.createElement("a");
@@ -2126,6 +2160,7 @@
       learnModeStateFileReaderValue.onload = () => {
         try {
           const importedLearnModeStatePlainObjectValue = JSON.parse(String(learnModeStateFileReaderValue.result || ""));
+          increaseFrequencyRankLimitForImportedLearnModeState(importedLearnModeStatePlainObjectValue);
           if (!applyLearnModeStateFromPlainObject(importedLearnModeStatePlainObjectValue)) {
             alert("Could not load learn mode state from file.");
           }
