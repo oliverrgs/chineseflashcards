@@ -216,449 +216,3558 @@ const radicalList = [
 ];
 
 const flashCardDataList = [
-  {"traditional": "的", "simplified": "的", "pinyin": "de", "definition": "possessive, adjectival suffix", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1155", "frequencyRank": 1},
-  {"traditional": "一", "simplified": "一", "pinyin": "yī", "definition": "one; a, an; alone", "strokeCount": 1, "hskLevel": 1, "generalStandardNumber": "0001", "frequencyRank": 2},
-  {"traditional": "是", "simplified": "是", "pinyin": "shì", "definition": "indeed, yes, right; to be; demonstrative pronoun, this, that", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1479", "frequencyRank": 3},
-  {"traditional": "不", "simplified": "不", "pinyin": "bù", "definition": "no, not; un-; negative prefix", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0091", "frequencyRank": 4},
-  {"traditional": "了", "simplified": "了", "pinyin": "le", "definition": "to finish; particle of completed action", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0017", "frequencyRank": 5},
-  {"traditional": "在", "simplified": "在", "pinyin": "zài", "definition": "be at, in, on; consist in, rest", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0388", "frequencyRank": 6},
-  {"traditional": "人", "simplified": "人", "pinyin": "rén", "definition": "man; people; mankind; someone else", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0010", "frequencyRank": 7},
-  {"traditional": "有", "simplified": "有", "pinyin": "yǒu", "definition": "have, own, possess; exist", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0390", "frequencyRank": 8},
-  {"traditional": "我", "simplified": "我", "pinyin": "wǒ", "definition": "our, us, i, me, my, we", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0761", "frequencyRank": 9},
-  {"traditional": "他", "simplified": "他", "pinyin": "tā", "definition": "other, another; he, she, it", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0277", "frequencyRank": 10},
-  {"traditional": "這", "simplified": "这", "pinyin": "zhè", "definition": "this, the, here", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0837", "frequencyRank": 11},
-  {"traditional": "個", "simplified": "个", "pinyin": "gè", "definition": "numerary adjunct, piece; single", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0045", "frequencyRank": 12},
-  {"traditional": "們", "simplified": "们", "pinyin": "men", "definition": "adjunct pronoun indicate plural", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0273", "frequencyRank": 13},
-  {"traditional": "中", "simplified": "中", "pinyin": "zhōng", "definition": "central; center, middle; in the midst of; hit (target); attain", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0113", "frequencyRank": 14},
-  {"traditional": "來", "simplified": "来", "pinyin": "lái", "definition": "come, coming; return, returning", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0707", "frequencyRank": 15},
-  {"traditional": "上", "simplified": "上", "pinyin": "shàng", "definition": "top; superior, highest; go up, send up", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0036", "frequencyRank": 16},
-  {"traditional": "大", "simplified": "大", "pinyin": "dà", "definition": "big, great, vast, large, high", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0032", "frequencyRank": 17},
-  {"traditional": "為", "simplified": "为", "pinyin": "wèi", "definition": "do, handle, govern, act; be", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0165", "frequencyRank": 18},
-  {"traditional": "和", "simplified": "和", "pinyin": "hé", "definition": "harmony, peace; peaceful, calm", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1131", "frequencyRank": 19},
-  {"traditional": "國", "simplified": "国", "pinyin": "guó", "definition": "nation, country, nation-state", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1081", "frequencyRank": 20},
-  {"traditional": "地", "simplified": "地", "pinyin": "de", "definition": "earth; soil, ground; region", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0366", "frequencyRank": 21},
-  {"traditional": "到", "simplified": "到", "pinyin": "dào", "definition": "go to, arrive, been to", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1063", "frequencyRank": 22},
-  {"traditional": "以", "simplified": "以", "pinyin": "yǐ", "definition": "by means of; thereby, therefore; consider as; in order to", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0182", "frequencyRank": 23},
-  {"traditional": "說", "simplified": "说", "pinyin": "shuō", "definition": "speak, say, talk; scold, upbraid", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1717", "frequencyRank": 24},
-  {"traditional": "時", "simplified": "时", "pinyin": "shí", "definition": "time, season; era, age, period", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0717", "frequencyRank": 25},
-  {"traditional": "要", "simplified": "要", "pinyin": "yào", "definition": "necessary, essential; necessity", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1441", "frequencyRank": 26},
-  {"traditional": "就", "simplified": "就", "pinyin": "jiù", "definition": "just, simply; to come, go to; to approach, near", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2728", "frequencyRank": 27},
-  {"traditional": "出", "simplified": "出", "pinyin": "chū", "definition": "go out, send out; stand; produce", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0330", "frequencyRank": 28},
-  {"traditional": "會", "simplified": "会", "pinyin": "huì", "definition": "assemble, meet together; meeting", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0486", "frequencyRank": 29},
-  {"traditional": "可", "simplified": "可", "pinyin": "kě", "definition": "may, can, -able; possibly", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0212", "frequencyRank": 30},
-  {"traditional": "也", "simplified": "也", "pinyin": "yě", "definition": "also; classical final particle of strong affirmation or identity", "strokeCount": 3, "hskLevel": 2, "generalStandardNumber": "0066", "frequencyRank": 31},
-  {"traditional": "你", "simplified": "你", "pinyin": "nǐ", "definition": "you, second person pronoun", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0782", "frequencyRank": 32},
-  {"traditional": "對", "simplified": "对", "pinyin": "duì", "definition": "correct, right; facing, opposed", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0341", "frequencyRank": 33},
-  {"traditional": "生", "simplified": "生", "pinyin": "shēng", "definition": "life, living, lifetime; birth", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0263", "frequencyRank": 34},
-  {"traditional": "能", "simplified": "能", "pinyin": "néng", "definition": "to be able; can, permitted to; ability", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2146", "frequencyRank": 35},
-  {"traditional": "而", "simplified": "而", "pinyin": "ér", "definition": "and; and then; and yet; but", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0392", "frequencyRank": 36},
-  {"traditional": "子", "simplified": "子", "pinyin": "zi", "definition": "offspring, child; fruit, seed of; 1st terrestrial branch", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0064", "frequencyRank": 37},
-  {"traditional": "那", "simplified": "那", "pinyin": "nà", "definition": "that, that one, those", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0564", "frequencyRank": 38},
-  {"traditional": "得", "simplified": "得", "pinyin": "dé", "definition": "obtain, get, gain, acquire", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2341", "frequencyRank": 39},
-  {"traditional": "於", "simplified": "于", "pinyin": "yú", "definition": "in, on, at; go to; surname", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0024", "frequencyRank": 40},
-  {"traditional": "著", "simplified": "着", "pinyin": "zhe", "definition": "make move, take action", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2398", "frequencyRank": 41},
-  {"traditional": "下", "simplified": "下", "pinyin": "xià", "definition": "under, underneath, below; down; inferior; bring down", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0030", "frequencyRank": 42},
-  {"traditional": "自", "simplified": "自", "pinyin": "zì", "definition": "self, private, personal; from", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0477", "frequencyRank": 43},
-  {"traditional": "之", "simplified": "之", "pinyin": "zhī", "definition": "marks preceding phrase as modifier of following phrase; it, him her, them; go to", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0058", "frequencyRank": 44},
-  {"traditional": "年", "simplified": "年", "pinyin": "nián", "definition": "year", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0444", "frequencyRank": 45},
-  {"traditional": "過", "simplified": "过", "pinyin": "guò", "definition": "pass, pass through, go across", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0379", "frequencyRank": 46},
-  {"traditional": "發", "simplified": "发", "pinyin": "fā", "definition": "issue, dispatch, send out; hair", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0339", "frequencyRank": 47},
-  {"traditional": "後", "simplified": "后", "pinyin": "hòu", "definition": "queen, empress, sovereign; (simp. for 後) behind, rear, after", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0482", "frequencyRank": 48},
-  {"traditional": "作", "simplified": "作", "pinyin": "zuò", "definition": "make; work; compose, write; act, perform", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0777", "frequencyRank": 49},
-  {"traditional": "裡", "simplified": "里", "pinyin": "lǐ", "definition": "unit of distance; village; lane", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0721", "frequencyRank": 50},
-  {"traditional": "用", "simplified": "用", "pinyin": "yòng", "definition": "use, employ, apply, operate; use", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0283", "frequencyRank": 51},
-  {"traditional": "道", "simplified": "道", "pinyin": "dào", "definition": "path, road, street; method, way", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2745", "frequencyRank": 52},
-  {"traditional": "行", "simplified": "行", "pinyin": "xíng", "definition": "go; walk; move, travel; circulate", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0483", "frequencyRank": 53},
-  {"traditional": "所", "simplified": "所", "pinyin": "suǒ", "definition": "place, location; numerary adjunct", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1164", "frequencyRank": 54},
-  {"traditional": "然", "simplified": "然", "pinyin": "rán", "definition": "yes, certainly; pledge, promise", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2723", "frequencyRank": 55},
-  {"traditional": "家", "simplified": "家", "pinyin": "jiā", "definition": "house, home, residence; family", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2099", "frequencyRank": 56},
-  {"traditional": "種", "simplified": "种", "pinyin": "zhǒng", "definition": "seed; race, breed; to plant", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1549", "frequencyRank": 57},
-  {"traditional": "事", "simplified": "事", "pinyin": "shì", "definition": "affair, matter, business; to serve; accident, incident", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1038", "frequencyRank": 58},
-  {"traditional": "成", "simplified": "成", "pinyin": "chéng", "definition": "completed, finished, fixed", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0401", "frequencyRank": 59},
-  {"traditional": "方", "simplified": "方", "pinyin": "fāng", "definition": "a square, rectangle; a region; local", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0163", "frequencyRank": 60},
-  {"traditional": "多", "simplified": "多", "pinyin": "duō", "definition": "much, many; more than, over", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0507", "frequencyRank": 61},
-  {"traditional": "經", "simplified": "经", "pinyin": "jīng", "definition": "classic works; pass through", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1350", "frequencyRank": 62},
-  {"traditional": "麼", "simplified": "么", "pinyin": "me", "definition": "interrogative particle; repetition of a tune small; tender", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0048", "frequencyRank": 63},
-  {"traditional": "去", "simplified": "去", "pinyin": "qù", "definition": "go away, leave, depart", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0204", "frequencyRank": 64},
-  {"traditional": "法", "simplified": "法", "pinyin": "fǎ", "definition": "law, rule, regulation, statute; France, French", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1241", "frequencyRank": 65},
-  {"traditional": "學", "simplified": "学", "pinyin": "xué", "definition": "learning, knowledge; school", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1273", "frequencyRank": 66},
-  {"traditional": "如", "simplified": "如", "pinyin": "rú", "definition": "if, supposing; as if; like, as", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0578", "frequencyRank": 67},
-  {"traditional": "都", "simplified": "都", "pinyin": "dōu", "definition": "metropolis, capital; all, the whole; elegant, refined", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1801", "frequencyRank": 68},
-  {"traditional": "同", "simplified": "同", "pinyin": "tóng", "definition": "same, similar; together with", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0427", "frequencyRank": 69},
-  {"traditional": "現", "simplified": "现", "pinyin": "xiàn", "definition": "appear, manifest, become visible", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "0949", "frequencyRank": 70},
-  {"traditional": "當", "simplified": "当", "pinyin": "dāng", "definition": "bear, accept, undertake; just", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0418", "frequencyRank": 71},
-  {"traditional": "沒", "simplified": "没", "pinyin": "méi", "definition": "not, have not, none; drown, sink", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0867", "frequencyRank": 72},
-  {"traditional": "動", "simplified": "动", "pinyin": "dòng", "definition": "move, happen; movement, action", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0353", "frequencyRank": 73},
-  {"traditional": "面", "simplified": "面", "pinyin": "miàn", "definition": "face; surface; plane; side, dimension", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1455", "frequencyRank": 74},
-  {"traditional": "起", "simplified": "起", "pinyin": "qǐ", "definition": "rise, stand up; go up; begin", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1789", "frequencyRank": 75},
-  {"traditional": "看", "simplified": "看", "pinyin": "kàn", "definition": "look, see; examine, scrutinize", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1539", "frequencyRank": 76},
-  {"traditional": "定", "simplified": "定", "pinyin": "dìng", "definition": "decide, settle, fix", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1276", "frequencyRank": 77},
-  {"traditional": "天", "simplified": "天", "pinyin": "tiān", "definition": "sky, heaven; god, celestial", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0078", "frequencyRank": 78},
-  {"traditional": "分", "simplified": "分", "pinyin": "fēn", "definition": "divide; small unit of time etc.", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0146", "frequencyRank": 79},
-  {"traditional": "還", "simplified": "还", "pinyin": "hái", "definition": "still, yet, also, besides", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0704", "frequencyRank": 80},
-  {"traditional": "進", "simplified": "进", "pinyin": "jìn", "definition": "advance, make progress, enter", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0605", "frequencyRank": 81},
-  {"traditional": "好", "simplified": "好", "pinyin": "hǎo", "definition": "good, excellent, fine; well", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0581", "frequencyRank": 82},
-  {"traditional": "小", "simplified": "小", "pinyin": "xiǎo", "definition": "small, tiny, insignificant", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0037", "frequencyRank": 83},
-  {"traditional": "部", "simplified": "部", "pinyin": "bù", "definition": "part, division, section", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2044", "frequencyRank": 84},
-  {"traditional": "其", "simplified": "其", "pinyin": "qí", "definition": "his, her, its, their; that", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "0996", "frequencyRank": 85},
-  {"traditional": "些", "simplified": "些", "pinyin": "xiē", "definition": "little, few; rather, somewhat", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1069", "frequencyRank": 86},
-  {"traditional": "主", "simplified": "主", "pinyin": "zhǔ", "definition": "master, chief owner; host; lord", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0300", "frequencyRank": 87},
-  {"traditional": "樣", "simplified": "样", "pinyin": "yàng", "definition": "shape, form, pattern, style", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1849", "frequencyRank": 88},
-  {"traditional": "理", "simplified": "理", "pinyin": "lǐ", "definition": "reason, logic; manage", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2157", "frequencyRank": 89},
-  {"traditional": "心", "simplified": "心", "pinyin": "xīn", "definition": "heart; mind, intelligence; soul", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0174", "frequencyRank": 90},
-  {"traditional": "她", "simplified": "她", "pinyin": "tā", "definition": "she, her", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0582", "frequencyRank": 91},
-  {"traditional": "本", "simplified": "本", "pinyin": "běn", "definition": "root, origin, source; basis", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0210", "frequencyRank": 92},
-  {"traditional": "前", "simplified": "前", "pinyin": "qián", "definition": "in front, forward; preceding", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1650", "frequencyRank": 93},
-  {"traditional": "開", "simplified": "开", "pinyin": "kāi", "definition": "open; initiate, begin, start", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0076", "frequencyRank": 94},
-  {"traditional": "但", "simplified": "但", "pinyin": "dàn", "definition": "only; but, however, yet, still", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0774", "frequencyRank": 95},
-  {"traditional": "因", "simplified": "因", "pinyin": "yīn", "definition": "cause, reason; by; because (of)", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0430", "frequencyRank": 96},
-  {"traditional": "只", "simplified": "只", "pinyin": "zhǐ", "definition": "only, just, simply", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0246", "frequencyRank": 97},
-  {"traditional": "從", "simplified": "从", "pinyin": "cóng", "definition": "from, by, since, whence, through", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0142", "frequencyRank": 98},
-  {"traditional": "想", "simplified": "想", "pinyin": "xiǎng", "definition": "think, speculate, plan, consider", "strokeCount": 13, "hskLevel": 1, "generalStandardNumber": "2867", "frequencyRank": 99},
-  {"traditional": "實", "simplified": "实", "pinyin": "shí", "definition": "real, true; honest, sincere", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1285", "frequencyRank": 100},
-  {"traditional": "日", "simplified": "日", "pinyin": "rì", "definition": "sun; day; daytime", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0112", "frequencyRank": 101},
-  {"traditional": "軍", "simplified": "军", "pinyin": "jūn", "definition": "army, military; soldiers, troops", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0552", "frequencyRank": 102},
-  {"traditional": "者", "simplified": "者", "pinyin": "zhě", "definition": "that which; he who; those who", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "0969", "frequencyRank": 103},
-  {"traditional": "意", "simplified": "意", "pinyin": "yì", "definition": "thought, idea, opinion; think", "strokeCount": 13, "hskLevel": 2, "generalStandardNumber": "2996", "frequencyRank": 104},
-  {"traditional": "無", "simplified": "无", "pinyin": "wú", "definition": "negative, no, not; KangXi radical 71", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0081", "frequencyRank": 105},
-  {"traditional": "力", "simplified": "力", "pinyin": "lì", "definition": "power, capability, influence", "strokeCount": 2, "hskLevel": 3, "generalStandardNumber": "0019", "frequencyRank": 106},
-  {"traditional": "它", "simplified": "它", "pinyin": "tā", "definition": "it; other", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0314", "frequencyRank": 107},
-  {"traditional": "與", "simplified": "与", "pinyin": "yǔ", "definition": "and; with; to; for; give, grant", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0034", "frequencyRank": 108},
-  {"traditional": "長", "simplified": "长", "pinyin": "zhǎng", "definition": "long; length; excel in; leader", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0127", "frequencyRank": 109},
-  {"traditional": "把", "simplified": "把", "pinyin": "bǎ", "definition": "hold, take; guard; regard as", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0655", "frequencyRank": 110},
-  {"traditional": "機", "simplified": "机", "pinyin": "jī", "definition": "desk; machine; moment", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0377", "frequencyRank": 111},
-  {"traditional": "十", "simplified": "十", "pinyin": "shí", "definition": "ten, tenth; complete; perfect", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0004", "frequencyRank": 112},
-  {"traditional": "民", "simplified": "民", "pinyin": "mín", "definition": "people, subjects, citizens", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0327", "frequencyRank": 113},
-  {"traditional": "第", "simplified": "第", "pinyin": "dì", "definition": "sequence, number; grade, degree", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2322", "frequencyRank": 114},
-  {"traditional": "公", "simplified": "公", "pinyin": "gōng", "definition": "fair, equitable; public; duke", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0148", "frequencyRank": 115},
-  {"traditional": "此", "simplified": "此", "pinyin": "cǐ", "definition": "this, these; in this case, then", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0411", "frequencyRank": 116},
-  {"traditional": "已", "simplified": "已", "pinyin": "yǐ", "definition": "already; finished; stop", "strokeCount": 3, "hskLevel": 2, "generalStandardNumber": "0061", "frequencyRank": 117},
-  {"traditional": "工", "simplified": "工", "pinyin": "gōng", "definition": "labor, work; worker, laborer", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0026", "frequencyRank": 118},
-  {"traditional": "使", "simplified": "使", "pinyin": "shǐ", "definition": "cause, send on a mission, order; envoy, messenger, ambassador", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1139", "frequencyRank": 119},
-  {"traditional": "情", "simplified": "情", "pinyin": "qíng", "definition": "feeling, sentiment, emotion", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2438", "frequencyRank": 120},
-  {"traditional": "明", "simplified": "明", "pinyin": "míng", "definition": "bright, light, brilliant; clear", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1087", "frequencyRank": 121},
-  {"traditional": "性", "simplified": "性", "pinyin": "xìng", "definition": "nature, character, sex", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1268", "frequencyRank": 122},
-  {"traditional": "知", "simplified": "知", "pinyin": "zhī", "definition": "know, perceive, comprehend", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1122", "frequencyRank": 123},
-  {"traditional": "全", "simplified": "全", "pinyin": "quán", "definition": "maintain, keep whole or intact", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0485", "frequencyRank": 124},
-  {"traditional": "三", "simplified": "三", "pinyin": "sān", "definition": "three", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0022", "frequencyRank": 125},
-  {"traditional": "又", "simplified": "又", "pinyin": "yòu", "definition": "and, also, again, in addition", "strokeCount": 2, "hskLevel": 3, "generalStandardNumber": "0021", "frequencyRank": 126},
-  {"traditional": "關", "simplified": "关", "pinyin": "guān", "definition": "frontier pass; close; relation", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0532", "frequencyRank": 127},
-  {"traditional": "點", "simplified": "点", "pinyin": "diǎn", "definition": "dot, speck, spot; point, degree", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1469", "frequencyRank": 128},
-  {"traditional": "正", "simplified": "正", "pinyin": "zhèng", "definition": "right, proper, correct", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0198", "frequencyRank": 129},
-  {"traditional": "業", "simplified": "业", "pinyin": "yè", "definition": "profession, business; GB radical 111", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0231", "frequencyRank": 130},
-  {"traditional": "外", "simplified": "外", "pinyin": "wài", "definition": "out, outside, external; foreign", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0293", "frequencyRank": 131},
-  {"traditional": "將", "simplified": "将", "pinyin": "jiāng", "definition": "will, going to, future; general", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1617", "frequencyRank": 132},
-  {"traditional": "兩", "simplified": "两", "pinyin": "liǎng", "definition": "two, both, pair, couple; ounce", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0697", "frequencyRank": 133},
-  {"traditional": "高", "simplified": "高", "pinyin": "gāo", "definition": "high, tall; lofty, elevated", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2021", "frequencyRank": 134},
-  {"traditional": "間", "simplified": "间", "pinyin": "jiān", "definition": "midpoint, space; place, locality", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0847", "frequencyRank": 135},
-  {"traditional": "由", "simplified": "由", "pinyin": "yóu", "definition": "cause, reason; from", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0245", "frequencyRank": 136},
-  {"traditional": "問", "simplified": "问", "pinyin": "wèn", "definition": "ask about, inquire after", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0528", "frequencyRank": 137},
-  {"traditional": "很", "simplified": "很", "pinyin": "hěn", "definition": "very, quite, much", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1584", "frequencyRank": 138},
-  {"traditional": "最", "simplified": "最", "pinyin": "zuì", "definition": "most, extremely, exceedingly", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2614", "frequencyRank": 139},
-  {"traditional": "重", "simplified": "重", "pinyin": "zhòng", "definition": "heavy, weighty; double", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1552", "frequencyRank": 140},
-  {"traditional": "並", "simplified": "并", "pinyin": "bìng", "definition": "and, also, furthermore, definitely", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0531", "frequencyRank": 141},
-  {"traditional": "物", "simplified": "物", "pinyin": "wù", "definition": "thing, substance, creature", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1127", "frequencyRank": 142},
-  {"traditional": "手", "simplified": "手", "pinyin": "shǒu", "definition": "hand", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0121", "frequencyRank": 143},
-  {"traditional": "應", "simplified": "应", "pinyin": "yīng", "definition": "should, ought to, must", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0836", "frequencyRank": 144},
-  {"traditional": "戰", "simplified": "战", "pinyin": "zhàn", "definition": "war, fighting, battle", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1468", "frequencyRank": 145},
-  {"traditional": "向", "simplified": "向", "pinyin": "xiàng", "definition": "toward, direction, trend", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0480", "frequencyRank": 146},
-  {"traditional": "頭", "simplified": "头", "pinyin": "tóu", "definition": "head; top; chief, first; boss", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0310", "frequencyRank": 147},
-  {"traditional": "文", "simplified": "文", "pinyin": "wén", "definition": "literature, culture, writing", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0161", "frequencyRank": 148},
-  {"traditional": "體", "simplified": "体", "pinyin": "tǐ", "definition": "body; group, class, body, unit; inferior", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0770", "frequencyRank": 149},
-  {"traditional": "政", "simplified": "政", "pinyin": "zhèng", "definition": "government, political affairs", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1376", "frequencyRank": 150},
-  {"traditional": "美", "simplified": "美", "pinyin": "měi", "definition": "beautiful, pretty; pleasing", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1642", "frequencyRank": 151},
-  {"traditional": "相", "simplified": "相", "pinyin": "xiāng", "definition": "mutual, reciprocal, each other", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1430", "frequencyRank": 152},
-  {"traditional": "見", "simplified": "见", "pinyin": "jiàn", "definition": "see, observe, behold; perceive", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0118", "frequencyRank": 153},
-  {"traditional": "被", "simplified": "被", "pinyin": "bèi", "definition": "by (passive voice)", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2118", "frequencyRank": 154},
-  {"traditional": "利", "simplified": "利", "pinyin": "lì", "definition": "gains, advantage, profit, merit", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0763", "frequencyRank": 155},
-  {"traditional": "什", "simplified": "什", "pinyin": "shén", "definition": "file of ten soldiers; mixed, miscellaneous", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0129", "frequencyRank": 156},
-  {"traditional": "二", "simplified": "二", "pinyin": "èr", "definition": "two; twice", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0003", "frequencyRank": 157},
-  {"traditional": "等", "simplified": "等", "pinyin": "děng", "definition": "equal, equivalent, same; wait for, await", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2681", "frequencyRank": 158},
-  {"traditional": "產", "simplified": "产", "pinyin": "chǎn", "definition": "give birth, bring forth, produce", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0522", "frequencyRank": 159},
-  {"traditional": "或", "simplified": "或", "pinyin": "huò", "definition": "or, either, else; perhaps, maybe", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1035", "frequencyRank": 160},
-  {"traditional": "新", "simplified": "新", "pinyin": "xīn", "definition": "new, recent, fresh, modern", "strokeCount": 13, "hskLevel": 2, "generalStandardNumber": "2994", "frequencyRank": 161},
-  {"traditional": "己", "simplified": "己", "pinyin": "jǐ", "definition": "self, oneself; personal, private; 6th heavenly stem", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0060", "frequencyRank": 162},
-  {"traditional": "制", "simplified": "制", "pinyin": "zhì", "definition": "system; establish; overpower", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1121", "frequencyRank": 163},
-  {"traditional": "身", "simplified": "身", "pinyin": "shēn", "definition": "body; trunk, hull; rad. no. 158", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0786", "frequencyRank": 164},
-  {"traditional": "果", "simplified": "果", "pinyin": "guǒ", "definition": "fruit; result", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1079", "frequencyRank": 165},
-  {"traditional": "加", "simplified": "加", "pinyin": "jiā", "definition": "add to, increase, augment", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0335", "frequencyRank": 166},
-  {"traditional": "西", "simplified": "西", "pinyin": "xī", "definition": "west(ern); westward, occident", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0384", "frequencyRank": 167},
-  {"traditional": "斯", "simplified": "斯", "pinyin": "sī", "definition": "this, thus, such; to lop off; emphatic particle", "strokeCount": 12, "hskLevel": 6, "generalStandardNumber": "2541", "frequencyRank": 168},
-  {"traditional": "月", "simplified": "月", "pinyin": "yuè", "definition": "moon; month; KangXi radical 74", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0150", "frequencyRank": 169},
-  {"traditional": "話", "simplified": "话", "pinyin": "huà", "definition": "speech, talk, language; dialect", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1296", "frequencyRank": 170},
-  {"traditional": "合", "simplified": "合", "pinyin": "hé", "definition": "combine, unite, join; gather", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0488", "frequencyRank": 171},
-  {"traditional": "回", "simplified": "回", "pinyin": "huí", "definition": "return, turn around; a time", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0438", "frequencyRank": 172},
-  {"traditional": "特", "simplified": "特", "pinyin": "tè", "definition": "special, unique, distinguished", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "1938", "frequencyRank": 173},
-  {"traditional": "代", "simplified": "代", "pinyin": "dài", "definition": "replace, replacement (of person or generation); era, generation", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0271", "frequencyRank": 174},
-  {"traditional": "內", "simplified": "内", "pinyin": "nèi", "definition": "inside", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0116", "frequencyRank": 175},
-  {"traditional": "信", "simplified": "信", "pinyin": "xìn", "definition": "trust, believe; letter", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1570", "frequencyRank": 176},
-  {"traditional": "表", "simplified": "表", "pinyin": "biǎo", "definition": "show, express, manifest, display", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "0951", "frequencyRank": 177},
-  {"traditional": "化", "simplified": "化", "pinyin": "huà", "definition": "change, convert, reform; -ize", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0132", "frequencyRank": 178},
-  {"traditional": "老", "simplified": "老", "pinyin": "lǎo", "definition": "old, aged; experienced", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0360", "frequencyRank": 179},
-  {"traditional": "給", "simplified": "给", "pinyin": "gěi", "definition": "give; by, for", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1758", "frequencyRank": 180},
-  {"traditional": "世", "simplified": "世", "pinyin": "shì", "definition": "generation; world; era", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0206", "frequencyRank": 181},
-  {"traditional": "位", "simplified": "位", "pinyin": "wèi", "definition": "throne; position, post; rank, status; seat", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0784", "frequencyRank": 182},
-  {"traditional": "次", "simplified": "次", "pinyin": "cì", "definition": "order, sequence; next", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0521", "frequencyRank": 183},
-  {"traditional": "度", "simplified": "度", "pinyin": "dù", "definition": "degree, system; manner; to consider", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1622", "frequencyRank": 184},
-  {"traditional": "門", "simplified": "门", "pinyin": "mén", "definition": "gate, door, entrance, opening", "strokeCount": 3, "hskLevel": 2, "generalStandardNumber": "0055", "frequencyRank": 185},
-  {"traditional": "任", "simplified": "任", "pinyin": "rèn", "definition": "trust to, rely on, appoint; to bear, duty, office; allow", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0467", "frequencyRank": 186},
-  {"traditional": "常", "simplified": "常", "pinyin": "cháng", "definition": "common, normal, frequent, regular", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2257", "frequencyRank": 187},
-  {"traditional": "先", "simplified": "先", "pinyin": "xiān", "definition": "first, former, previous", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0446", "frequencyRank": 188},
-  {"traditional": "海", "simplified": "海", "pinyin": "hǎi", "definition": "sea, ocean; maritime", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2074", "frequencyRank": 189},
-  {"traditional": "通", "simplified": "通", "pinyin": "tōng", "definition": "pass through, common, communicate", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2145", "frequencyRank": 190},
-  {"traditional": "教", "simplified": "教", "pinyin": "jiào", "definition": "teach, class", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2179", "frequencyRank": 191},
-  {"traditional": "兒", "simplified": "儿", "pinyin": "ér", "definition": "son, child; KangXi radical 10", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0012", "frequencyRank": 192},
-  {"traditional": "原", "simplified": "原", "pinyin": "yuán", "definition": "source, origin, beginning", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "1868", "frequencyRank": 193},
-  {"traditional": "東", "simplified": "东", "pinyin": "dōng", "definition": "east, eastern, eastward", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0225", "frequencyRank": 194},
-  {"traditional": "聲", "simplified": "声", "pinyin": "shēng", "definition": "sound, voice, noise; tone; music", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0654", "frequencyRank": 195},
-  {"traditional": "提", "simplified": "提", "pinyin": "tí", "definition": "hold in hand; lift in hand", "strokeCount": 12, "hskLevel": 3, "generalStandardNumber": "2520", "frequencyRank": 196},
-  {"traditional": "立", "simplified": "立", "pinyin": "lì", "definition": "stand; let stand; establish, set", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0302", "frequencyRank": 197},
-  {"traditional": "及", "simplified": "及", "pinyin": "jí", "definition": "extend; reach; come up to; and", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0052", "frequencyRank": 198},
-  {"traditional": "比", "simplified": "比", "pinyin": "bǐ", "definition": "to compare, liken; comparison; than", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0105", "frequencyRank": 199},
-  {"traditional": "員", "simplified": "员", "pinyin": "yuán", "definition": "member; personnel, staff member", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0737", "frequencyRank": 200},
-  {"traditional": "解", "simplified": "解", "pinyin": "jiě", "definition": "loosen, unfasten, untie; explain", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2981", "frequencyRank": 201},
-  {"traditional": "水", "simplified": "水", "pinyin": "shuǐ", "definition": "water, liquid, lotion, juice", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0117", "frequencyRank": 202},
-  {"traditional": "名", "simplified": "名", "pinyin": "míng", "definition": "name, rank, title, position", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0505", "frequencyRank": 203},
-  {"traditional": "真", "simplified": "真", "pinyin": "zhēn", "definition": "real, actual, true, genuine", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "1832", "frequencyRank": 204},
-  {"traditional": "論", "simplified": "论", "pinyin": "lùn", "definition": "debate; discuss; discourse", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0556", "frequencyRank": 205},
-  {"traditional": "處", "simplified": "处", "pinyin": "chù", "definition": "place, locale; department", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0294", "frequencyRank": 206},
-  {"traditional": "走", "simplified": "走", "pinyin": "zǒu", "definition": "walk, go on foot; run; leave", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0625", "frequencyRank": 207},
-  {"traditional": "義", "simplified": "义", "pinyin": "yì", "definition": "right conduct, righteousness", "strokeCount": 3, "hskLevel": 5, "generalStandardNumber": "0057", "frequencyRank": 208},
-  {"traditional": "各", "simplified": "各", "pinyin": "gè", "definition": "each, individually, every, all", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0506", "frequencyRank": 209},
-  {"traditional": "入", "simplified": "入", "pinyin": "rù", "definition": "enter, come in(to), join", "strokeCount": 2, "hskLevel": 4, "generalStandardNumber": "0011", "frequencyRank": 210},
-  {"traditional": "幾", "simplified": "几", "pinyin": "jǐ", "definition": "small table", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0014", "frequencyRank": 211},
-  {"traditional": "口", "simplified": "口", "pinyin": "kǒu", "definition": "mouth; open end; entrance, gate", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0038", "frequencyRank": 212},
-  {"traditional": "認", "simplified": "认", "pinyin": "rèn", "definition": "recognize, know, understand", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0171", "frequencyRank": 213},
-  {"traditional": "條", "simplified": "条", "pinyin": "tiáo", "definition": "clause, condition; string, stripe", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0816", "frequencyRank": 214},
-  {"traditional": "平", "simplified": "平", "pinyin": "píng", "definition": "flat, level, even; peaceful", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0222", "frequencyRank": 215},
-  {"traditional": "系", "simplified": "系", "pinyin": "xì", "definition": "system; line, link, connection", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0825", "frequencyRank": 216},
-  {"traditional": "氣", "simplified": "气", "pinyin": "qì", "definition": "steam, vapor; KangXi radical 84", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0122", "frequencyRank": 217},
-  {"traditional": "題", "simplified": "题", "pinyin": "tí", "definition": "forehead; title, headline; theme", "strokeCount": 15, "hskLevel": 2, "generalStandardNumber": "3233", "frequencyRank": 218},
-  {"traditional": "活", "simplified": "活", "pinyin": "huó", "definition": "live, exist, survive; lively", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1672", "frequencyRank": 219},
-  {"traditional": "爾", "simplified": "尔", "pinyin": "ěr", "definition": "you; that, those; final particle", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0286", "frequencyRank": 220},
-  {"traditional": "更", "simplified": "更", "pinyin": "gèng", "definition": "more, still further, much more", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0693", "frequencyRank": 221},
-  {"traditional": "別", "simplified": "别", "pinyin": "bié", "definition": "separate, other; do not", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0751", "frequencyRank": 222},
-  {"traditional": "打", "simplified": "打", "pinyin": "dǎ", "definition": "strike, hit, beat; fight; attack", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0196", "frequencyRank": 223},
-  {"traditional": "女", "simplified": "女", "pinyin": "nǚ", "definition": "woman, girl; feminine; rad. 38", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0067", "frequencyRank": 224},
-  {"traditional": "變", "simplified": "变", "pinyin": "biàn", "definition": "change, transform, alter; rebel", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1204", "frequencyRank": 225},
-  {"traditional": "四", "simplified": "四", "pinyin": "sì", "definition": "four", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0262", "frequencyRank": 226},
-  {"traditional": "神", "simplified": "神", "pinyin": "shén", "definition": "spirit, god, supernatural being", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1711", "frequencyRank": 227},
-  {"traditional": "總", "simplified": "总", "pinyin": "zǒng", "definition": "collect; overall, altogether", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1654", "frequencyRank": 228},
-  {"traditional": "何", "simplified": "何", "pinyin": "hé", "definition": "what, why, where, which, how", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0771", "frequencyRank": 229},
-  {"traditional": "電", "simplified": "电", "pinyin": "diàn", "definition": "electricity; electric; lightning", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0242", "frequencyRank": 230},
-  {"traditional": "數", "simplified": "数", "pinyin": "shù", "definition": "number; several, count; fate", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2999", "frequencyRank": 231},
-  {"traditional": "安", "simplified": "安", "pinyin": "ān", "definition": "peaceful, tranquil, quiet", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0549", "frequencyRank": 232},
-  {"traditional": "少", "simplified": "少", "pinyin": "shǎo", "definition": "few, less, inadequate", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0110", "frequencyRank": 233},
-  {"traditional": "報", "simplified": "报", "pinyin": "bào", "definition": "report, tell, announce", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0656", "frequencyRank": 234},
-  {"traditional": "才", "simplified": "才", "pinyin": "cái", "definition": "talent, ability; just, only", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0029", "frequencyRank": 235},
-  {"traditional": "結", "simplified": "结", "pinyin": "jié", "definition": "knot, tie; join, connect", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1754", "frequencyRank": 236},
-  {"traditional": "反", "simplified": "反", "pinyin": "fǎn", "definition": "reverse, opposite, contrary, anti", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0139", "frequencyRank": 237},
-  {"traditional": "受", "simplified": "受", "pinyin": "shòu", "definition": "receive, accept, get; bear, stand", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1174", "frequencyRank": 238},
-  {"traditional": "目", "simplified": "目", "pinyin": "mù", "definition": "eye; look, see; division, topic", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0236", "frequencyRank": 239},
-  {"traditional": "太", "simplified": "太", "pinyin": "tài", "definition": "very, too, much; big; extreme", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0093", "frequencyRank": 240},
-  {"traditional": "量", "simplified": "量", "pinyin": "liàng", "definition": "measure, quantity, capacity", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2616", "frequencyRank": 241},
-  {"traditional": "再", "simplified": "再", "pinyin": "zài", "definition": "again, twice, re-", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0382", "frequencyRank": 242},
-  {"traditional": "感", "simplified": "感", "pinyin": "gǎn", "definition": "feel, perceive, emotion", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2875", "frequencyRank": 243},
-  {"traditional": "建", "simplified": "建", "pinyin": "jiàn", "definition": "build, establish, erect, found", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1302", "frequencyRank": 244},
-  {"traditional": "務", "simplified": "务", "pinyin": "wù", "definition": "affairs, business; must, should", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0297", "frequencyRank": 245},
-  {"traditional": "做", "simplified": "做", "pinyin": "zuò", "definition": "work, make; act", "strokeCount": 11, "hskLevel": 1, "generalStandardNumber": "2324", "frequencyRank": 246},
-  {"traditional": "接", "simplified": "接", "pinyin": "jiē", "definition": "receive; continue; catch; connect", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2185", "frequencyRank": 247},
-  {"traditional": "必", "simplified": "必", "pinyin": "bì", "definition": "surely, most certainly; must", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0321", "frequencyRank": 248},
-  {"traditional": "場", "simplified": "场", "pinyin": "chǎng", "definition": "open space, field, market", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0367", "frequencyRank": 249},
-  {"traditional": "件", "simplified": "件", "pinyin": "jiàn", "definition": "numerary adjunct for article; matter", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0466", "frequencyRank": 250},
-  {"traditional": "計", "simplified": "计", "pinyin": "jì", "definition": "plan, plot; strategem; scheme", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0168", "frequencyRank": 251},
-  {"traditional": "管", "simplified": "管", "pinyin": "guǎn", "definition": "pipe, tube, duct; woodwind music", "strokeCount": 14, "hskLevel": 4, "generalStandardNumber": "3123", "frequencyRank": 252},
-  {"traditional": "期", "simplified": "期", "pinyin": "qī", "definition": "period of time; date; time limit", "strokeCount": 12, "hskLevel": 1, "generalStandardNumber": "2542", "frequencyRank": 253},
-  {"traditional": "市", "simplified": "市", "pinyin": "shì", "definition": "market, fair; city, town; trade", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0301", "frequencyRank": 254},
-  {"traditional": "直", "simplified": "直", "pinyin": "zhí", "definition": "straight, erect, vertical", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1011", "frequencyRank": 255},
-  {"traditional": "德", "simplified": "德", "pinyin": "dé", "definition": "ethics, morality, virtue", "strokeCount": 15, "hskLevel": 5, "generalStandardNumber": "3272", "frequencyRank": 256},
-  {"traditional": "資", "simplified": "资", "pinyin": "zī", "definition": "property; wealth; capital", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2039", "frequencyRank": 257},
-  {"traditional": "命", "simplified": "命", "pinyin": "mìng", "definition": "life; destiny, fate, luck; an order, instruction", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1168", "frequencyRank": 258},
-  {"traditional": "山", "simplified": "山", "pinyin": "shān", "definition": "mountain, hill, peak", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0039", "frequencyRank": 259},
-  {"traditional": "金", "simplified": "金", "pinyin": "jīn", "definition": "gold; metals in general; money", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1166", "frequencyRank": 260},
-  {"traditional": "指", "simplified": "指", "pinyin": "zhǐ", "definition": "finger, toe; point, indicate", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1389", "frequencyRank": 261},
-  {"traditional": "克", "simplified": "克", "pinyin": "kè", "definition": "gram; overcome; transliteration", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0675", "frequencyRank": 262},
-  {"traditional": "許", "simplified": "许", "pinyin": "xǔ", "definition": "allow, permit; promise; betroth", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0554", "frequencyRank": 263},
-  {"traditional": "統", "simplified": "统", "pinyin": "tǒng", "definition": "govern, command, control; unite", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1765", "frequencyRank": 264},
-  {"traditional": "區", "simplified": "区", "pinyin": "qū", "definition": "area, district, region, ward", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0094", "frequencyRank": 265},
-  {"traditional": "保", "simplified": "保", "pinyin": "bǎo", "definition": "protect, safeguard, defend, care", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1562", "frequencyRank": 266},
-  {"traditional": "至", "simplified": "至", "pinyin": "zhì", "definition": "reach, arrive; extremely, very", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0410", "frequencyRank": 267},
-  {"traditional": "隊", "simplified": "队", "pinyin": "duì", "definition": "team, group; army unit", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0180", "frequencyRank": 268},
-  {"traditional": "形", "simplified": "形", "pinyin": "xíng", "definition": "form, shape, appearance", "strokeCount": 7, "hskLevel": 5, "generalStandardNumber": "0604", "frequencyRank": 269},
-  {"traditional": "社", "simplified": "社", "pinyin": "shè", "definition": "god of the soil and altars to him; group of families; company, society", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0890", "frequencyRank": 270},
-  {"traditional": "便", "simplified": "便", "pinyin": "biàn", "definition": "convenience, ease; expedient", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1556", "frequencyRank": 271},
-  {"traditional": "空", "simplified": "空", "pinyin": "kōng", "definition": "empty, hollow, bare, deserted", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1282", "frequencyRank": 272},
-  {"traditional": "決", "simplified": "决", "pinyin": "jué", "definition": "decide, determine, judge", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0523", "frequencyRank": 273},
-  {"traditional": "治", "simplified": "治", "pinyin": "zhì", "definition": "govern, regulate, administer", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1264", "frequencyRank": 274},
-  {"traditional": "展", "simplified": "展", "pinyin": "zhǎn", "definition": "open, unfold; stretch, extend", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2131", "frequencyRank": 275},
-  {"traditional": "馬", "simplified": "马", "pinyin": "mǎ", "definition": "horse; surname; KangXi radical 187", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0072", "frequencyRank": 276},
-  {"traditional": "科", "simplified": "科", "pinyin": "kē", "definition": "section, department, science", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1551", "frequencyRank": 277},
-  {"traditional": "司", "simplified": "司", "pinyin": "sī", "definition": "take charge of, control, manage; officer", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0325", "frequencyRank": 278},
-  {"traditional": "五", "simplified": "五", "pinyin": "wǔ", "definition": "five; surname", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0088", "frequencyRank": 279},
-  {"traditional": "基", "simplified": "基", "pinyin": "jī", "definition": "foundation, base", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2193", "frequencyRank": 280},
-  {"traditional": "眼", "simplified": "眼", "pinyin": "yǎn", "definition": "eye; eyelet, hole, opening", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2263", "frequencyRank": 281},
-  {"traditional": "書", "simplified": "书", "pinyin": "shū", "definition": "book, letter, document; writings", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0188", "frequencyRank": 282},
-  {"traditional": "非", "simplified": "非", "pinyin": "fēi", "definition": "not, negative, non-; oppose", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1064", "frequencyRank": 283},
-  {"traditional": "則", "simplified": "则", "pinyin": "zé", "definition": "rule, law, regulation; grades", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0440", "frequencyRank": 284},
-  {"traditional": "聽", "simplified": "听", "pinyin": "tīng", "definition": "hear; understand; obey, comply", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0739", "frequencyRank": 285},
-  {"traditional": "白", "simplified": "白", "pinyin": "bái", "definition": "white; pure, unblemished; bright", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0275", "frequencyRank": 286},
-  {"traditional": "卻", "simplified": "却", "pinyin": "què", "definition": "still, but; decline; retreat", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0658", "frequencyRank": 287},
-  {"traditional": "界", "simplified": "界", "pinyin": "jiè", "definition": "boundary, limit; domain; society; the world", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1496", "frequencyRank": 288},
-  {"traditional": "達", "simplified": "达", "pinyin": "dá", "definition": "arrive at, reach; intelligent; smooth, slippery", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0398", "frequencyRank": 289},
-  {"traditional": "光", "simplified": "光", "pinyin": "guāng", "definition": "light, brilliant, shine; only", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0417", "frequencyRank": 290},
-  {"traditional": "放", "simplified": "放", "pinyin": "fàng", "definition": "put, release, free, liberate", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1223", "frequencyRank": 291},
-  {"traditional": "強", "simplified": "强", "pinyin": "qiáng", "definition": "strong, powerful, energetic", "strokeCount": 12, "hskLevel": 5, "generalStandardNumber": "2802", "frequencyRank": 292},
-  {"traditional": "即", "simplified": "即", "pinyin": "jí", "definition": "promptly, quickly, immediately", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0901", "frequencyRank": 293},
-  {"traditional": "像", "simplified": "像", "pinyin": "xiàng", "definition": "a picture, image, figure; to resemble", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2961", "frequencyRank": 294},
-  {"traditional": "難", "simplified": "难", "pinyin": "nán", "definition": "difficult, arduous, hard; unable", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2147", "frequencyRank": 295},
-  {"traditional": "且", "simplified": "且", "pinyin": "qiě", "definition": "moreover, also (post-subject); about to, will soon (pre-verb)", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0237", "frequencyRank": 296},
-  {"traditional": "權", "simplified": "权", "pinyin": "quán", "definition": "power, right, authority", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0378", "frequencyRank": 297},
-  {"traditional": "思", "simplified": "思", "pinyin": "sī", "definition": "think, consider, ponder; final particle", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1500", "frequencyRank": 298},
-  {"traditional": "王", "simplified": "王", "pinyin": "wáng", "definition": "king, ruler; royal; surname", "strokeCount": 4, "hskLevel": 5, "generalStandardNumber": "0075", "frequencyRank": 299},
-  {"traditional": "象", "simplified": "象", "pinyin": "xiàng", "definition": "elephant; ivory; figure, image", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2361", "frequencyRank": 300},
-  {"traditional": "完", "simplified": "完", "pinyin": "wán", "definition": "complete, finish, settle; whole", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0877", "frequencyRank": 301},
-  {"traditional": "設", "simplified": "设", "pinyin": "shè", "definition": "build; establish; display", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0560", "frequencyRank": 302},
-  {"traditional": "式", "simplified": "式", "pinyin": "shì", "definition": "style, system, formula, rule", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0349", "frequencyRank": 303},
-  {"traditional": "色", "simplified": "色", "pinyin": "sè", "definition": "color, tint, hue, shade; form, body; beauty, desire for beauty", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0509", "frequencyRank": 304},
-  {"traditional": "路", "simplified": "路", "pinyin": "lù", "definition": "road, path, street; journey", "strokeCount": 13, "hskLevel": 2, "generalStandardNumber": "2918", "frequencyRank": 305},
-  {"traditional": "記", "simplified": "记", "pinyin": "jì", "definition": "record; keep in mind, remember", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0323", "frequencyRank": 306},
-  {"traditional": "南", "simplified": "南", "pinyin": "nán", "definition": "south; southern part; southward", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1422", "frequencyRank": 307},
-  {"traditional": "品", "simplified": "品", "pinyin": "pǐn", "definition": "article, product, commodity", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1503", "frequencyRank": 308},
-  {"traditional": "住", "simplified": "住", "pinyin": "zhù", "definition": "reside, live at, dwell, lodge; stop", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0783", "frequencyRank": 309},
-  {"traditional": "告", "simplified": "告", "pinyin": "gào", "definition": "tell, announce, inform; accuse", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0760", "frequencyRank": 310},
-  {"traditional": "類", "simplified": "类", "pinyin": "lèi", "definition": "class, group, kind, category", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1646", "frequencyRank": 311},
-  {"traditional": "求", "simplified": "求", "pinyin": "qiú", "definition": "seek; demand, request; beseech", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0690", "frequencyRank": 312},
-  {"traditional": "據", "simplified": "据", "pinyin": "jù", "definition": "to occupy, take possession of; a base, position", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2189", "frequencyRank": 313},
-  {"traditional": "程", "simplified": "程", "pinyin": "chéng", "definition": "journey, trip; schedule, agenda", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2677", "frequencyRank": 314},
-  {"traditional": "北", "simplified": "北", "pinyin": "běi", "definition": "north; northern; northward", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0227", "frequencyRank": 315},
-  {"traditional": "邊", "simplified": "边", "pinyin": "biān", "definition": "edge, margin, side, border", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0337", "frequencyRank": 316},
-  {"traditional": "死", "simplified": "死", "pinyin": "sǐ", "definition": "die; dead; death", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0400", "frequencyRank": 317},
-  {"traditional": "張", "simplified": "张", "pinyin": "zhāng", "definition": "stretch, extend, expand; sheet", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0909", "frequencyRank": 318},
-  {"traditional": "該", "simplified": "该", "pinyin": "gāi", "definition": "should, ought to, need to", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1300", "frequencyRank": 319},
-  {"traditional": "交", "simplified": "交", "pinyin": "jiāo", "definition": "mix; intersect; exchange, communicate; deliver", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0519", "frequencyRank": 320},
-  {"traditional": "規", "simplified": "规", "pinyin": "guī", "definition": "rules, regulations, customs, law", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "0952", "frequencyRank": 321},
-  {"traditional": "萬", "simplified": "万", "pinyin": "wàn", "definition": "ten thousand; innumerable", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0035", "frequencyRank": 322},
-  {"traditional": "取", "simplified": "取", "pinyin": "qǔ", "definition": "take, receive, obtain; select", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "0997", "frequencyRank": 323},
-  {"traditional": "拉", "simplified": "拉", "pinyin": "lā", "definition": "pull, drag; seize, hold; lengthen", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "0981", "frequencyRank": 324},
-  {"traditional": "格", "simplified": "格", "pinyin": "gé", "definition": "pattern, standard, form; style", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "1845", "frequencyRank": 325},
-  {"traditional": "望", "simplified": "望", "pinyin": "wàng", "definition": "to look at, look forward; to hope, expect", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2394", "frequencyRank": 326},
-  {"traditional": "覺", "simplified": "觉", "pinyin": "jué", "definition": "to wake up from sleep; conscious", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1694", "frequencyRank": 327},
-  {"traditional": "術", "simplified": "术", "pinyin": "shù", "definition": "art, skill, special feat; method, technique", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0211", "frequencyRank": 328},
-  {"traditional": "領", "simplified": "领", "pinyin": "lǐng", "definition": "neck; collar; lead, guide", "strokeCount": 11, "hskLevel": 5, "generalStandardNumber": "2354", "frequencyRank": 329},
-  {"traditional": "共", "simplified": "共", "pinyin": "gòng", "definition": "together with, all, total; to share", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0371", "frequencyRank": 330},
-  {"traditional": "確", "simplified": "确", "pinyin": "què", "definition": "sure, certain; real, true", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2591", "frequencyRank": 331},
-  {"traditional": "傳", "simplified": "传", "pinyin": "chuán", "definition": "summon; propagate, transmit", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0455", "frequencyRank": 332},
-  {"traditional": "師", "simplified": "师", "pinyin": "shī", "definition": "teacher, master, specialist", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0413", "frequencyRank": 333},
-  {"traditional": "觀", "simplified": "观", "pinyin": "guān", "definition": "see, observe, view; appearance", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0586", "frequencyRank": 334},
-  {"traditional": "清", "simplified": "清", "pinyin": "qīng", "definition": "clear, pure, clean; peaceful", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2410", "frequencyRank": 335},
-  {"traditional": "今", "simplified": "今", "pinyin": "jīn", "definition": "now, today, modern era", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0144", "frequencyRank": 336},
-  {"traditional": "切", "simplified": "切", "pinyin": "qiè", "definition": "cut, mince, slice, carve", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0107", "frequencyRank": 337},
-  {"traditional": "院", "simplified": "院", "pinyin": "yuàn", "definition": "courtyard, yard, court; school", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1734", "frequencyRank": 338},
-  {"traditional": "讓", "simplified": "让", "pinyin": "ràng", "definition": "allow, permit, yield, concede", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0317", "frequencyRank": 339},
-  {"traditional": "識", "simplified": "识", "pinyin": "shí", "definition": "recognize, understand, know", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0892", "frequencyRank": 340},
-  {"traditional": "候", "simplified": "候", "pinyin": "hòu", "definition": "wait; expect; visit; greet", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1964", "frequencyRank": 341},
-  {"traditional": "帶", "simplified": "带", "pinyin": "dài", "definition": "belt, girdle, band, strap, zone", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1407", "frequencyRank": 342},
-  {"traditional": "導", "simplified": "导", "pinyin": "dǎo", "definition": "direct, guide, lead, conduct", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0567", "frequencyRank": 343},
-  {"traditional": "爭", "simplified": "争", "pinyin": "zhēng", "definition": "dispute, fight, contend, strive", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0508", "frequencyRank": 344},
-  {"traditional": "運", "simplified": "运", "pinyin": "yùn", "definition": "run; simplified form of 運 luck, fortune; ship, transport", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0611", "frequencyRank": 345},
-  {"traditional": "笑", "simplified": "笑", "pinyin": "xiào", "definition": "smile, laugh, giggle; snicker", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "1952", "frequencyRank": 346},
-  {"traditional": "飛", "simplified": "飞", "pinyin": "fēi", "definition": "fly; go quickly; dart; high", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0069", "frequencyRank": 347},
-  {"traditional": "風", "simplified": "风", "pinyin": "fēng", "definition": "wind; air; manners, atmosphere", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0154", "frequencyRank": 348},
-  {"traditional": "步", "simplified": "步", "pinyin": "bù", "definition": "step, pace; walk, stroll", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0710", "frequencyRank": 349},
-  {"traditional": "改", "simplified": "改", "pinyin": "gǎi", "definition": "change, alter; improve, remodel", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0908", "frequencyRank": 350},
-  {"traditional": "收", "simplified": "收", "pinyin": "shōu", "definition": "gather together, collect; harvest", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0573", "frequencyRank": 351},
-  {"traditional": "根", "simplified": "根", "pinyin": "gēn", "definition": "root, base(d on); foundation", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "1850", "frequencyRank": 352},
-  {"traditional": "幹", "simplified": "干", "pinyin": "gàn", "definition": "oppose, offend; invade; dried", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0023", "frequencyRank": 353},
-  {"traditional": "造", "simplified": "造", "pinyin": "zào", "definition": "construct, build, make, begin; prepare", "strokeCount": 10, "hskLevel": 5, "generalStandardNumber": "1940", "frequencyRank": 354},
-  {"traditional": "言", "simplified": "言", "pinyin": "yán", "definition": "words, speech; speak, say", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0826", "frequencyRank": 355},
-  {"traditional": "聯", "simplified": "联", "pinyin": "lián", "definition": "connect, join; associate, ally", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2544", "frequencyRank": 356},
-  {"traditional": "持", "simplified": "持", "pinyin": "chí", "definition": "sustain, support; hold, grasp", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1367", "frequencyRank": 357},
-  {"traditional": "組", "simplified": "组", "pinyin": "zǔ", "definition": "class; section, department", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1338", "frequencyRank": 358},
-  {"traditional": "每", "simplified": "每", "pinyin": "měi", "definition": "every, each", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0767", "frequencyRank": 359},
-  {"traditional": "濟", "simplified": "济", "pinyin": "jì", "definition": "help, aid, relieve; ferry, cross", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1678", "frequencyRank": 360},
-  {"traditional": "車", "simplified": "车", "pinyin": "chē", "definition": "cart, vehicle; carry in cart", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0100", "frequencyRank": 361},
-  {"traditional": "親", "simplified": "亲", "pinyin": "qīn", "definition": "relatives, parents; intimate the hazel nut or filbert tree a thorny tree", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1631", "frequencyRank": 362},
-  {"traditional": "極", "simplified": "极", "pinyin": "jí", "definition": "extreme, utmost, furthest, final", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0687", "frequencyRank": 363},
-  {"traditional": "林", "simplified": "林", "pinyin": "lín", "definition": "forest, grove; surname", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1018", "frequencyRank": 364},
-  {"traditional": "服", "simplified": "服", "pinyin": "fú", "definition": "clothes; wear, dress", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1190", "frequencyRank": 365},
-  {"traditional": "快", "simplified": "快", "pinyin": "kuài", "definition": "rapid, quick, speedy, fast; soon", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0876", "frequencyRank": 366},
-  {"traditional": "辦", "simplified": "办", "pinyin": "bàn", "definition": "manage, do, handle; deal with", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0181", "frequencyRank": 367},
-  {"traditional": "議", "simplified": "议", "pinyin": "yì", "definition": "consult, talk over, discuss", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0320", "frequencyRank": 368},
-  {"traditional": "往", "simplified": "往", "pinyin": "wǎng", "definition": "go, depart; past, formerly", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1160", "frequencyRank": 369},
-  {"traditional": "元", "simplified": "元", "pinyin": "yuán", "definition": "first; dollar; origin; head", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0080", "frequencyRank": 370},
-  {"traditional": "英", "simplified": "英", "pinyin": "yīng", "definition": "petal, flower, leaf; brave, a hero; England, English", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1006", "frequencyRank": 371},
-  {"traditional": "士", "simplified": "士", "pinyin": "shì", "definition": "scholar, gentleman; soldier", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0028", "frequencyRank": 372},
-  {"traditional": "證", "simplified": "证", "pinyin": "zhèng", "definition": "prove, confirm, verify; proof", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0885", "frequencyRank": 373},
-  {"traditional": "近", "simplified": "近", "pinyin": "jìn", "definition": "near, close; approach; intimate", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0791", "frequencyRank": 374},
-  {"traditional": "失", "simplified": "失", "pinyin": "shī", "definition": "lose; make mistake, neglect", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0265", "frequencyRank": 375},
-  {"traditional": "轉", "simplified": "转", "pinyin": "zhuǎn", "definition": "shift, move, turn", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1059", "frequencyRank": 376},
-  {"traditional": "夫", "simplified": "夫", "pinyin": "fū", "definition": "man, male adult, husband; those", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0079", "frequencyRank": 377},
-  {"traditional": "令", "simplified": "令", "pinyin": "lìng", "definition": "order, command, instruction; make a request", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0282", "frequencyRank": 378},
-  {"traditional": "準", "simplified": "准", "pinyin": "zhǔn", "definition": "approve, allow, permit; in accord", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "2024", "frequencyRank": 379},
-  {"traditional": "布", "simplified": "布", "pinyin": "bù", "definition": "cotton cloth, textiles, linen", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0218", "frequencyRank": 380},
-  {"traditional": "始", "simplified": "始", "pinyin": "shǐ", "definition": "begin, start; then, only then", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1329", "frequencyRank": 381},
-  {"traditional": "怎", "simplified": "怎", "pinyin": "zěn", "definition": "what? why? how?", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1543", "frequencyRank": 382},
-  {"traditional": "呢", "simplified": "呢", "pinyin": "ne", "definition": "interrogative or emphatic final; (Cant.) this", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1102", "frequencyRank": 383},
-  {"traditional": "存", "simplified": "存", "pinyin": "cún", "definition": "exist, live, be; survive; remain", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0391", "frequencyRank": 384},
-  {"traditional": "未", "simplified": "未", "pinyin": "wèi", "definition": "not yet; 8th terrestrial branch", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0192", "frequencyRank": 385},
-  {"traditional": "遠", "simplified": "远", "pinyin": "yuǎn", "definition": "distant, remote, far; profound", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0608", "frequencyRank": 386},
-  {"traditional": "叫", "simplified": "叫", "pinyin": "jiào", "definition": "cry, shout; hail, greet, call", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0253", "frequencyRank": 387},
-  {"traditional": "臺", "simplified": "台", "pinyin": "tái", "definition": "platform; unit; term of address", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0342", "frequencyRank": 388},
-  {"traditional": "單", "simplified": "单", "pinyin": "dān", "definition": "single, individual, only; lone", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1232", "frequencyRank": 389},
-  {"traditional": "影", "simplified": "影", "pinyin": "yǐng", "definition": "shadow; image, reflection; photograph", "strokeCount": 15, "hskLevel": 1, "generalStandardNumber": "3240", "frequencyRank": 390},
-  {"traditional": "具", "simplified": "具", "pinyin": "jù", "definition": "tool, implement; draw up, write", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1077", "frequencyRank": 391},
-  {"traditional": "羅", "simplified": "罗", "pinyin": "luō", "definition": "net for catching birds; gauze", "strokeCount": 8, "hskLevel": null, "generalStandardNumber": "1108", "frequencyRank": 392},
-  {"traditional": "字", "simplified": "字", "pinyin": "zì", "definition": "letter, character, word", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0548", "frequencyRank": 393},
-  {"traditional": "愛", "simplified": "爱", "pinyin": "ài", "definition": "love, be fond of, like", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1987", "frequencyRank": 394},
-  {"traditional": "擊", "simplified": "击", "pinyin": "jī", "definition": "strike, hit, beat; attack, fight", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0195", "frequencyRank": 395},
-  {"traditional": "流", "simplified": "流", "pinyin": "liú", "definition": "flow, circulate, drift; class", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2080", "frequencyRank": 396},
-  {"traditional": "備", "simplified": "备", "pinyin": "bèi", "definition": "prepare, ready, perfect", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1200", "frequencyRank": 397},
-  {"traditional": "兵", "simplified": "兵", "pinyin": "bīng", "definition": "soldier, troops", "strokeCount": 7, "hskLevel": 5, "generalStandardNumber": "0768", "frequencyRank": 398},
-  {"traditional": "連", "simplified": "连", "pinyin": "lián", "definition": "join, connect; continuous; even", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0708", "frequencyRank": 399},
-  {"traditional": "調", "simplified": "调", "pinyin": "diào", "definition": "transfer, move, change; tune", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2123", "frequencyRank": 400},
-  {"traditional": "深", "simplified": "深", "pinyin": "shēn", "definition": "deep; depth; far; very, extreme", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2432", "frequencyRank": 401},
-  {"traditional": "商", "simplified": "商", "pinyin": "shāng", "definition": "commerce, business, trade", "strokeCount": 11, "hskLevel": 1, "generalStandardNumber": "2391", "frequencyRank": 402},
-  {"traditional": "算", "simplified": "算", "pinyin": "suàn", "definition": "count, calculate, figure; plan", "strokeCount": 14, "hskLevel": 3, "generalStandardNumber": "3121", "frequencyRank": 403},
-  {"traditional": "質", "simplified": "质", "pinyin": "zhì", "definition": "matter, material, substance", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1157", "frequencyRank": 404},
-  {"traditional": "團", "simplified": "团", "pinyin": "tuán", "definition": "sphere, ball, circle; mass, lump", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0425", "frequencyRank": 405},
-  {"traditional": "集", "simplified": "集", "pinyin": "jí", "definition": "assemble, collect together", "strokeCount": 12, "hskLevel": 5, "generalStandardNumber": "2694", "frequencyRank": 406},
-  {"traditional": "百", "simplified": "百", "pinyin": "bǎi", "definition": "one hundred; numerous, many", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0389", "frequencyRank": 407},
-  {"traditional": "需", "simplified": "需", "pinyin": "xū", "definition": "need, require, must", "strokeCount": 14, "hskLevel": 3, "generalStandardNumber": "3095", "frequencyRank": 408},
-  {"traditional": "價", "simplified": "价", "pinyin": "jià", "definition": "price, value", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0469", "frequencyRank": 409},
-  {"traditional": "花", "simplified": "花", "pinyin": "huā", "definition": "flower; blossoms", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0665", "frequencyRank": 410},
-  {"traditional": "黨", "simplified": "党", "pinyin": "dǎng", "definition": "political party, gang, faction", "strokeCount": 10, "hskLevel": 6, "generalStandardNumber": "1885", "frequencyRank": 411},
-  {"traditional": "華", "simplified": "华", "pinyin": "huá", "definition": "flowery; illustrious; Chinese", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0472", "frequencyRank": 412},
-  {"traditional": "城", "simplified": "城", "pinyin": "chéng", "definition": "castle; city, town; municipality", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1373", "frequencyRank": 413},
-  {"traditional": "石", "simplified": "石", "pinyin": "shí", "definition": "stone, rock, mineral; rad. 112", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0216", "frequencyRank": 414},
-  {"traditional": "級", "simplified": "级", "pinyin": "jí", "definition": "level, rank, class; grade", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0594", "frequencyRank": 415},
-  {"traditional": "整", "simplified": "整", "pinyin": "zhěng", "definition": "orderly, neat, tidy; whole", "strokeCount": 16, "hskLevel": 4, "generalStandardNumber": "3333", "frequencyRank": 416},
-  {"traditional": "府", "simplified": "府", "pinyin": "fǔ", "definition": "prefecture; prefect; government", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1211", "frequencyRank": 417},
-  {"traditional": "離", "simplified": "离", "pinyin": "lí", "definition": "rare beast; strange; elegant", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "2035", "frequencyRank": 418},
-  {"traditional": "況", "simplified": "况", "pinyin": "kuàng", "definition": "condition, situation; furthermore", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0830", "frequencyRank": 419},
-  {"traditional": "亞", "simplified": "亚", "pinyin": "yà", "definition": "Asia; second", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0373", "frequencyRank": 420},
-  {"traditional": "請", "simplified": "请", "pinyin": "qǐng", "definition": "ask, request; invite; please", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2108", "frequencyRank": 421},
-  {"traditional": "技", "simplified": "技", "pinyin": "jì", "definition": "skill, ability, talent, ingenuity", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0615", "frequencyRank": 422},
-  {"traditional": "際", "simplified": "际", "pinyin": "jì", "definition": "border, boundary, juncture", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0911", "frequencyRank": 423},
-  {"traditional": "約", "simplified": "约", "pinyin": "yuē", "definition": "treaty, agreement, covenant", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0593", "frequencyRank": 424},
-  {"traditional": "示", "simplified": "示", "pinyin": "shì", "definition": "show, manifest; demonstrate", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0194", "frequencyRank": 425},
-  {"traditional": "復", "simplified": "复", "pinyin": "fù", "definition": "return; repeat; repeatedly", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1553", "frequencyRank": 426},
-  {"traditional": "病", "simplified": "病", "pinyin": "bìng", "definition": "illness, sickness, disease", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "2027", "frequencyRank": 427},
-  {"traditional": "息", "simplified": "息", "pinyin": "xī", "definition": "rest, put stop to, end, cease", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "1973", "frequencyRank": 428},
-  {"traditional": "究", "simplified": "究", "pinyin": "jiū", "definition": "examine, investigate", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0881", "frequencyRank": 429},
-  {"traditional": "線", "simplified": "线", "pinyin": "xiàn", "definition": "line, thread, wire; clue", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1336", "frequencyRank": 430},
-  {"traditional": "似", "simplified": "似", "pinyin": "shì", "definition": "resemble, similar to; as if, seem", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0481", "frequencyRank": 431},
-  {"traditional": "官", "simplified": "官", "pinyin": "guān", "definition": "official, public servant", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1281", "frequencyRank": 432},
-  {"traditional": "火", "simplified": "火", "pinyin": "huǒ", "definition": "fire, flame; burn; anger, rage", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0164", "frequencyRank": 433},
-  {"traditional": "斷", "simplified": "断", "pinyin": "duàn", "definition": "sever, cut off; interrupt", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2405", "frequencyRank": 434},
-  {"traditional": "精", "simplified": "精", "pinyin": "jīng", "definition": "essence; semen; spirit", "strokeCount": 14, "hskLevel": 4, "generalStandardNumber": "3153", "frequencyRank": 435},
-  {"traditional": "滿", "simplified": "满", "pinyin": "mǎn", "definition": "fill; full, satisfied", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "3005", "frequencyRank": 436},
-  {"traditional": "支", "simplified": "支", "pinyin": "zhī", "definition": "disperse, pay; support; branch", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0089", "frequencyRank": 437},
-  {"traditional": "視", "simplified": "视", "pinyin": "shì", "definition": "look at, inspect, observe, see", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1294", "frequencyRank": 438},
-  {"traditional": "消", "simplified": "消", "pinyin": "xiāo", "definition": "vanish, die out; melt away", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2071", "frequencyRank": 439},
-  {"traditional": "越", "simplified": "越", "pinyin": "yuè", "definition": "exceed, go beyond; the more ...", "strokeCount": 12, "hskLevel": 3, "generalStandardNumber": "2514", "frequencyRank": 440},
-  {"traditional": "器", "simplified": "器", "pinyin": "qì", "definition": "receptacle, vessel; instrument", "strokeCount": 16, "hskLevel": 5, "generalStandardNumber": "3348", "frequencyRank": 441},
-  {"traditional": "容", "simplified": "容", "pinyin": "róng", "definition": "looks, appearance; figure, form", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2105", "frequencyRank": 442},
-  {"traditional": "照", "simplified": "照", "pinyin": "zhào", "definition": "shine, illumine, reflect", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2911", "frequencyRank": 443},
+  {
+    "traditional": "的",
+    "simplified": "的",
+    "pinyin": "de",
+    "definition": "possessive, adjectival suffix",
+    "strokeCount": 8,
+    "hskLevel": 1,
+    "generalStandardNumber": "1155",
+    "frequencyRank": 1,
+    "commonWords": [
+      "我的 (wǒ de) - my, mine",
+      "你的 (nǐ de) - your, yours",
+      "东的 (dōng de) - eastern",
+      "快乐的 (kuàilè de) - happy"
+    ]
+  },
+  {"traditional": "一", "simplified": "一", "pinyin": "yī", "definition": "one; a, an; alone", "strokeCount": 1, "hskLevel": 1, "generalStandardNumber": "0001", "frequencyRank": 2,
+    "commonWords": [
+      "一起 (yīqǐ) - together",
+      "一個 (yí ge) - one (item)",
+      "第一 (dì yī) - first",
+      "一些 (yīxiē) - some"
+    ]
+  },
+  {"traditional": "是", "simplified": "是", "pinyin": "shì", "definition": "indeed, yes, right; to be; demonstrative pronoun, this, that", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1479", "frequencyRank": 3,
+    "commonWords": [
+      "是不是 (shì bù shì) - is or isn't",
+      "也是 (yě shì) - also is",
+      "只是 (zhǐshì) - only, just",
+      "可是 (kěshì) - but"
+    ]
+  },
+  {"traditional": "不", "simplified": "不", "pinyin": "bù", "definition": "no, not; un-; negative prefix", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0091", "frequencyRank": 4,
+    "commonWords": [
+      "不好 (bù hǎo) - not good",
+      "不能 (bùnéng) - cannot",
+      "不要 (bù yào) - don't want",
+      "不是 (bù shì) - is not"
+    ]
+  },
+  {"traditional": "了", "simplified": "了", "pinyin": "le", "definition": "to finish; particle of completed action", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0017", "frequencyRank": 5,
+    "commonWords": [
+      "走了 (zǒu le) - left, gone",
+      "吃了 (chī le) - have eaten",
+      "好了 (hǎo le) - okay, finished",
+      "完了 (wán le) - finished"
+    ]
+  },
+  {"traditional": "在", "simplified": "在", "pinyin": "zài", "definition": "be at, in, on; consist in, rest", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0388", "frequencyRank": 6,
+    "commonWords": [
+      "現在 (xiànzài) - now",
+      "正在 (zhèngzài) - in the process of",
+      "在家 (zài jiā) - at home",
+      "在這裡 (zài zhèlǐ) - here"
+    ]
+  },
+  {"traditional": "人", "simplified": "人", "pinyin": "rén", "definition": "man; people; mankind; someone else", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0010", "frequencyRank": 7,
+    "commonWords": [
+      "很多人 (hěn duō rén) - many people",
+      "本人 (běnrén) - oneself",
+      "人口 (rénkǒu) - population",
+      "男人 (nánrén) - man"
+    ]
+  },
+  {"traditional": "有", "simplified": "有", "pinyin": "yǒu", "definition": "have, own, possess; exist", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0390", "frequencyRank": 8,
+    "commonWords": [
+      "有沒有 (yǒu méiyǒu) - have or not",
+      "有時 (yǒushí) - sometimes",
+      "有意思 (yǒu yìsi) - interesting",
+      "有錢 (yǒu qián) - rich"
+    ]
+  },
+  {"traditional": "我", "simplified": "我", "pinyin": "wǒ", "definition": "our, us, i, me, my, we", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0761", "frequencyRank": 9,
+    "commonWords": [
+      "我的 (wǒ de) - my",
+      "我們 (wǒmen) - we, us",
+      "給我 (gěi wǒ) - give me",
+      "我自己 (wǒ zìjǐ) - myself"
+    ]
+  },
+  {"traditional": "他", "simplified": "他", "pinyin": "tā", "definition": "other, another; he, she, it", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0277", "frequencyRank": 10,
+    "commonWords": [
+      "他們 (tāmen) - they, them",
+      "給他 (gěi tā) - give him",
+      "他說 (tā shuō) - he says",
+      "他自己 (tā zìjǐ) - himself"
+    ]
+  },
+  {"traditional": "這", "simplified": "这", "pinyin": "zhè", "definition": "this, the, here", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0837", "frequencyRank": 11,
+    "commonWords": [
+      "這裡 (zhèlǐ) - here",
+      "這個 (zhè ge) - this",
+      "這樣 (zhèyàng) - this way",
+      "這些 (zhèxiē) - these"
+    ]
+  },
+  {"traditional": "個", "simplified": "个", "pinyin": "gè", "definition": "numerary adjunct, piece; single", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0045", "frequencyRank": 12,
+    "commonWords": [
+      "一個 (yíge) - one (item)",
+      "這個 (zhè ge) - this one",
+      "那個 (nà ge) - that one",
+      "兩個 (liǎng ge) - two (items)"
+    ]
+  },
+  {"traditional": "們", "simplified": "们", "pinyin": "men", "definition": "adjunct pronoun indicate plural", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0273", "frequencyRank": 13,
+    "commonWords": [
+      "我們 (wǒmen) - we, us",
+      "你們 (nǐmen) - you (plural)",
+      "他們 (tāmen) - they, them",
+      "妳們 (nǐmen) - you (plural, feminine)"
+    ]
+  },
+  {"traditional": "中", "simplified": "中", "pinyin": "zhōng", "definition": "central; center, middle; in the midst of; hit (target); attain", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0113", "frequencyRank": 14,
+    "commonWords": [
+      "中國 (Zhōngguó) - China",
+      "中午 (zhōngwǔ) - noon",
+      "中心 (zhōngxīn) - center",
+      "中間 (zhōngjiān) - middle"
+    ]
+  },
+  {"traditional": "來", "simplified": "来", "pinyin": "lái", "definition": "come, coming; return, returning", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0707", "frequencyRank": 15,
+    "commonWords": [
+      "來自 (láizì) - to come from",
+      "出來 (chūlái) - come out",
+      "回來 (huílái) - come back",
+      "再來 (zài lái) - come again"
+    ]
+  },
+  {"traditional": "上", "simplified": "上", "pinyin": "shàng", "definition": "top; superior, highest; go up, send up", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0036", "frequencyRank": 16,
+    "commonWords": [
+      "上海 (Shànghǎi) - Shanghai",
+      "上課 (shàngkè) - attend class",
+      "上午 (shàngwǔ) - morning",
+      "上面 (shàngmiàn) - above"
+    ]
+  },
+  {"traditional": "大", "simplified": "大", "pinyin": "dà", "definition": "big, great, vast, large, high", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0032", "frequencyRank": 17,
+    "commonWords": [
+      "大學 (dàxué) - university",
+      "大家 (dàjiā) - everyone",
+      "很大 (hěn dà) - very big",
+      "大人 (dàrén) - adult"
+    ]
+  },
+  {"traditional": "為", "simplified": "为", "pinyin": "wèi", "definition": "do, handle, govern, act; be", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0165", "frequencyRank": 18,
+    "commonWords": [
+      "因為 (yīnwèi) - because",
+      "為了 (wèile) - for, in order to",
+      "認為 (rènwéi) - think, believe",
+      "行為 (xíngwéi) - behavior"
+    ]
+  },
+  {"traditional": "和", "simplified": "和", "pinyin": "hé", "definition": "harmony, peace; peaceful, calm", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1131", "frequencyRank": 19,
+    "commonWords": [
+      "和你 (hé nǐ) - with you",
+      "和平 (hépíng) - peace",
+      "合作 (hézuò) - cooperate",
+      "暖和 (nuǎnhuo) - warm"
+    ]
+  },
+  {"traditional": "國", "simplified": "国", "pinyin": "guó", "definition": "nation, country, nation-state", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1081", "frequencyRank": 20,
+    "commonWords": [
+      "中國 (Zhōngguó) - China",
+      "國家 (guójiā) - country, nation",
+      "法國 (Fǎguó) - France",
+      "美國 (Měiguó) - USA"
+    ]
+  },
+  {"traditional": "地", "simplified": "地", "pinyin": "de", "definition": "earth; soil, ground; region", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0366", "frequencyRank": 21,
+    "commonWords": [
+      "地方 (dìfāng) - place, location",
+      "土地 (tǔdì) - land, soil",
+      "大地 (dàdì) - earth (as a planet)",
+      "地球 (dìqiú) - earth (the globe)"
+    ]
+  },
+  {"traditional": "到", "simplified": "到", "pinyin": "dào", "definition": "go to, arrive, been to", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1063", "frequencyRank": 22,
+    "commonWords": [
+      "到達 (dàodá) - arrive",
+      "見到 (jiàndào) - see, meet",
+      "聽到 (tīngdào) - hear",
+      "到處 (dàochù) - everywhere"
+    ]
+  },
+  {"traditional": "以", "simplified": "以", "pinyin": "yǐ", "definition": "by means of; thereby, therefore; consider as; in order to", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0182", "frequencyRank": 23,
+    "commonWords": [
+      "可以 (kěyǐ) - can, may",
+      "所以 (suǒyǐ) - so, therefore",
+      "以下 (yǐxià) - below",
+      "以後 (yǐhòu) - after"
+    ]
+  },
+  {"traditional": "說", "simplified": "说", "pinyin": "shuō", "definition": "speak, say, talk; scold, upbraid", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1717", "frequencyRank": 24,
+    "commonWords": [
+      "說話 (shuōhuà) - speak",
+      "小說 (xiǎoshuō) - novel",
+      "聽說 (tīngshuō) - hear said",
+      "演說 (yǎnshuō) - speech"
+    ]
+  },
+  {"traditional": "時", "simplified": "时", "pinyin": "shí", "definition": "time, season; era, age, period", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0717", "frequencyRank": 25,
+    "commonWords": [
+      "時間 (shíjiān) - time",
+      "時候 (shíhou) - moment, time",
+      "小時 (xiǎoshí) - hour",
+      "及時 (jíshí) - timely"
+    ]
+  },
+  {"traditional": "要", "simplified": "要", "pinyin": "yào", "definition": "necessary, essential; necessity", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1441", "frequencyRank": 26,
+    "commonWords": [
+      "不要 (bùyào) - don't want",
+      "需要 (xūyào) - need",
+      "主要 (zhǔyào) - main, major",
+      "想要 (xiǎng yào) - want to"
+    ]
+  },
+  {"traditional": "就", "simplified": "就", "pinyin": "jiù", "definition": "just, simply; to come, go to; to approach, near", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2728", "frequencyRank": 27,
+    "commonWords": [
+      "就是 (jiù shì) - exactly is",
+      "就要 (jiù yào) - about to",
+      "如果...就 (rúguǒ...jiù) - if...then",
+      "早就 (zǎo jiù) - long ago"
+    ]
+  },
+  {"traditional": "出", "simplified": "出", "pinyin": "chū", "definition": "go out, send out; stand; produce", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0330", "frequencyRank": 28,
+    "commonWords": [
+      "出去 (chūqù) - go out",
+      "出來 (chūlái) - come out",
+      "出口 (chūkǒu) - exit, export",
+      "出生 (chūshēng) - be born"
+    ]
+  },
+  {"traditional": "會", "simplified": "会", "pinyin": "huì", "definition": "assemble, meet together; meeting", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0486", "frequencyRank": 29,
+    "commonWords": [
+      "會議 (huìyì) - meeting, conference",
+      "機會 (jīhuì) - opportunity",
+      "社會 (shèhuì) - society",
+      "不會 (bù huì) - can't"
+    ]
+  },
+  {"traditional": "可", "simplified": "可", "pinyin": "kě", "definition": "may, can, -able; possibly", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0212", "frequencyRank": 30,
+    "commonWords": [
+      "可以 (kěyǐ) - can, may",
+      "可愛 (kě'ài) - cute, lovely",
+      "可能 (kěnéng) - possible",
+      "不可 (bùkě) - not allowed"
+    ]
+  },
+  {"traditional": "也", "simplified": "也", "pinyin": "yě", "definition": "also; classical final particle of strong affirmation or identity", "strokeCount": 3, "hskLevel": 2, "generalStandardNumber": "0066", "frequencyRank": 31,
+    "commonWords": [
+      "也是 (yě shì) - also is",
+      "我也 (wǒ yě) - I also",
+      "也許 (yěxǔ) - perhaps, maybe",
+      "他也 (tā yě) - he also"
+    ]
+  },
+  {"traditional": "你", "simplified": "你", "pinyin": "nǐ", "definition": "you, second person pronoun", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0782", "frequencyRank": 32,
+    "commonWords": [
+      "你好 (nǐ hǎo) - hello",
+      "你們 (nǐmen) - you (plural)",
+      "謝謝你 (xièxie nǐ) - thank you",
+      "給你 (gěi nǐ) - give you"
+    ]
+  },
+  {"traditional": "對", "simplified": "对", "pinyin": "duì", "definition": "correct, right; facing, opposed", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0341", "frequencyRank": 33,
+    "commonWords": [
+      "對不起 (duìbuqǐ) - sorry",
+      "對你 (duì nǐ) - to you",
+      "正確對 (zhèngquè duì) - correct",
+      "反對 (fǎnduì) - oppose"
+    ]
+  },
+  {"traditional": "生", "simplified": "生", "pinyin": "shēng", "definition": "life, living, lifetime; birth", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0263", "frequencyRank": 34,
+    "commonWords": [
+      "學生 (xuéshēng) - student",
+      "生活 (shēnghuó) - life",
+      "先生 (xiānshēng) - Mr., sir",
+      "出生 (chūshēng) - to be born"
+    ]
+  },
+  {"traditional": "能", "simplified": "能", "pinyin": "néng", "definition": "to be able; can, permitted to; ability", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2146", "frequencyRank": 35,
+    "commonWords": [
+      "可能 (kěnéng) - possible",
+      "能力 (nénglì) - ability",
+      "能夠 (nénggòu) - be able",
+      "智能 (zhìnéng) - intelligence"
+    ]
+  },
+  {"traditional": "而", "simplified": "而", "pinyin": "ér", "definition": "and; and then; and yet; but", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0392", "frequencyRank": 36,
+    "commonWords": [
+      "然而 (rán'ér) - however",
+      "而且 (érqiě) - and also",
+      "因而 (yīn'ér) - thus, therefore",
+      "反而 (fǎn'ér) - instead"
+    ]
+  },
+  {"traditional": "子", "simplified": "子", "pinyin": "zi", "definition": "offspring, child; fruit, seed of; 1st terrestrial branch", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0064", "frequencyRank": 37,
+    "commonWords": [
+      "兒子 (érzi) - son",
+      "帽子 (màozi) - hat",
+      "房子 (fángzi) - house",
+      "椅子 (yǐzi) - chair"
+    ]
+  },
+  {"traditional": "那", "simplified": "那", "pinyin": "nà", "definition": "that, that one, those", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0564", "frequencyRank": 38,
+    "commonWords": [
+      "那裡 (nàlǐ) - there",
+      "那個 (nà ge) - that one",
+      "那麼 (nàme) - so, like that",
+      "那些 (nàxiē) - those"
+    ]
+  },
+  {"traditional": "得", "simplified": "得", "pinyin": "dé", "definition": "obtain, get, gain, acquire", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2341", "frequencyRank": 39,
+    "commonWords": [
+      "覺得 (juéde) - feel, think",
+      "得到 (dédào) - get, obtain",
+      "獲得 (huòdé) - obtain, win",
+      "看得見 (kàn de jiàn) - can see"
+    ]
+  },
+  {"traditional": "於", "simplified": "于", "pinyin": "yú", "definition": "in, on, at; go to; surname", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0024", "frequencyRank": 40,
+    "commonWords": [
+      "對於 (duìyú) - towards, regarding",
+      "關於 (guānyú) - about, regarding",
+      "屬於 (shǔyú) - belong to",
+      "用於 (yòngyú) - used for"
+    ]
+  },
+  {"traditional": "著", "simplified": "着", "pinyin": "zhe", "definition": "make move, take action", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2398", "frequencyRank": 41,
+    "commonWords": [
+      "看著 (kànzhe) - looking at",
+      "穿著 (chuānzhuó) - be wearing",
+      "著名 (zhùmíng) - famous",
+      "記著 (jìzhe) - to remember"
+    ]
+  },
+  {"traditional": "下", "simplified": "下", "pinyin": "xià", "definition": "under, underneath, below; down; inferior; bring down", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0030", "frequencyRank": 42,
+    "commonWords": [
+      "下午 (xiàwǔ) - afternoon",
+      "下雨 (xiàyǔ) - to rain",
+      "下班 (xiàbān) - finish work",
+      "下面 (xiàmiàn) - below"
+    ]
+  },
+  {"traditional": "自", "simplified": "自", "pinyin": "zì", "definition": "self, private, personal; from", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0477", "frequencyRank": 43,
+    "commonWords": [
+      "自己 (zìjǐ) - oneself",
+      "自從 (zìcóng) - since",
+      "自由 (zìyóu) - freedom",
+      "自信 (zìxìn) - confidence"
+    ]
+  },
+  {"traditional": "之", "simplified": "之", "pinyin": "zhī", "definition": "marks preceding phrase as modifier of following phrase; it, him her, them; go to", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0058", "frequencyRank": 44,
+    "commonWords": [
+      "之後 (zhīhòu) - after",
+      "之間 (zhījiān) - between",
+      "之一 (zhīyī) - one of",
+      "之前 (zhīqián) - before"
+    ]
+  },
+  {"traditional": "年", "simplified": "年", "pinyin": "nián", "definition": "year", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0444", "frequencyRank": 45,
+    "commonWords": [
+      "今年 (jīnnián) - this year",
+      "去年 (qùnián) - last year",
+      "每年 (měinián) - every year",
+      "新年 (xīnnián) - new year"
+    ]
+  },
+  {"traditional": "過", "simplified": "过", "pinyin": "guò", "definition": "pass, pass through, go across", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0379", "frequencyRank": 46,
+    "commonWords": [
+      "經過 (jīngguò) - pass by",
+      "過去 (guòqù) - past, go over",
+      "過馬路 (guò mǎlù) - cross road",
+      "過年 (guònián) - celebrate new year"
+    ]
+  },
+  {"traditional": "發", "simplified": "发", "pinyin": "fā", "definition": "issue, dispatch, send out; hair", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0339", "frequencyRank": 47,
+    "commonWords": [
+      "發現 (fāxiàn) - discover",
+      "發生 (fāshēng) - happen",
+      "頭髮 (tóufa) - hair",
+      "出發 (chūfā) - depart"
+    ]
+  },
+  {"traditional": "後", "simplified": "后", "pinyin": "hòu", "definition": "queen, empress, sovereign; (simp. for 後) behind, rear, after", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0482", "frequencyRank": 48,
+    "commonWords": [
+      "然後 (ránhòu) - then, afterwards",
+      "最後 (zuìhòu) - last, final",
+      "後面 (hòumiàn) - behind",
+      "以後 (yǐhòu) - after"
+    ]
+  },
+  {"traditional": "作", "simplified": "作", "pinyin": "zuò", "definition": "make; work; compose, write; act, perform", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0777", "frequencyRank": 49,
+    "commonWords": [
+      "工作 (gōngzuò) - work",
+      "作業 (zuòyè) - homework",
+      "作者 (zuòzhě) - author",
+      "合作 (hézuò) - cooperate"
+    ]
+  },
+  {"traditional": "裡", "simplified": "里", "pinyin": "lǐ", "definition": "unit of distance; village; lane", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0721", "frequencyRank": 50,
+    "commonWords": [
+      "這裡 (zhèlǐ) - here",
+      "裡面 (lǐmiàn) - inside",
+      "家裡 (jiālǐ) - at home",
+      "合理 (hélǐ) - reasonable"
+    ]
+  },
+  {"traditional": "用", "simplified": "用", "pinyin": "yòng", "definition": "use, employ, apply, operate; use", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0283", "frequencyRank": 51,
+    "commonWords": [
+      "不用 (búyòng) - need not",
+      "使用 (shǐyòng) - use",
+      "有用 (yǒuyòng) - useful",
+      "費用 (fèiyòng) - cost, expense"
+    ]
+  },
+  {"traditional": "道", "simplified": "道", "pinyin": "dào", "definition": "path, road, street; method, way", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2745", "frequencyRank": 52,
+    "commonWords": [
+      "知道 (zhīdào) - know",
+      "問道 (wèndào) - ask (the way)",
+      "道理 (dàolǐ) - reason, principle",
+      "道歉 (dàoqiàn) - apologize"
+    ]
+  },
+  {"traditional": "行", "simplified": "行", "pinyin": "xíng", "definition": "go; walk; move, travel; circulate", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0483", "frequencyRank": 53,
+    "commonWords": [
+      "銀行 (yínháng) - bank",
+      "行為 (xíngwéi) - behavior",
+      "旅行 (lǚxíng) - travel",
+      "行動 (xíngdòng) - action"
+    ]
+  },
+  {"traditional": "所", "simplified": "所", "pinyin": "suǒ", "definition": "place, location; numerary adjunct", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1164", "frequencyRank": 54,
+    "commonWords": [
+      "場所 (chǎngsuǒ) - place",
+      "所有 (suǒyǒu) - all, own",
+      "診所 (zhěnsuǒ) - clinic",
+      "廁所 (cèsuǒ) - toilet"
+    ]
+  },
+  {"traditional": "然", "simplified": "然", "pinyin": "rán", "definition": "yes, certainly; pledge, promise", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2723", "frequencyRank": 55,
+    "commonWords": [
+      "當然 (dāngrán) - of course",
+      "然後 (ránhòu) - then",
+      "自然 (zìrán) - nature, natural",
+      "雖然 (suīrán) - although"
+    ]
+  },
+  {"traditional": "家", "simplified": "家", "pinyin": "jiā", "definition": "house, home, residence; family", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2099", "frequencyRank": 56,
+    "commonWords": [
+      "回家 (huíjiā) - return home",
+      "家庭 (jiātíng) - family",
+      "家人 (jiārén) - family member",
+      "大家 (dàjiā) - everyone"
+    ]
+  },
+  {"traditional": "種", "simplified": "种", "pinyin": "zhǒng", "definition": "seed; race, breed; to plant", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1549", "frequencyRank": 57,
+    "commonWords": [
+      "各種 (gèzhǒng) - all kinds of",
+      "這種 (zhè zhǒng) - this kind of",
+      "一種 (yìzhǒng) - a kind",
+      "品種 (pǐnzhǒng) - breed, species"
+    ]
+  },
+  {"traditional": "事", "simplified": "事", "pinyin": "shì", "definition": "affair, matter, business; to serve; accident, incident", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1038", "frequencyRank": 58,
+    "commonWords": [
+      "事情 (shìqing) - affair, matter",
+      "辦事 (bànshì) - handle affairs",
+      "大事 (dàshì) - big event",
+      "小事 (xiǎoshì) - small matter"
+    ]
+  },
+  {"traditional": "成", "simplified": "成", "pinyin": "chéng", "definition": "completed, finished, fixed", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0401", "frequencyRank": 59,
+    "commonWords": [
+      "成為 (chéngwéi) - become",
+      "成績 (chéngjì) - result, grade",
+      "完成 (wánchéng) - complete",
+      "成功 (chénggōng) - success"
+    ]
+  },
+  {"traditional": "方", "simplified": "方", "pinyin": "fāng", "definition": "a square, rectangle; a region; local", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0163", "frequencyRank": 60,
+    "commonWords": [
+      "地方 (dìfāng) - place, region",
+      "方法 (fāngfǎ) - method",
+      "方向 (fāngxiàng) - direction",
+      "方位 (fāngwèi) - position"
+    ]
+  },
+  {"traditional": "多", "simplified": "多", "pinyin": "duō", "definition": "much, many; more than, over", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0507", "frequencyRank": 61,
+    "commonWords": [
+      "很多 (hěn duō) - many",
+      "多少 (duōshao) - how many",
+      "多大 (duō dà) - how big",
+      "多次 (duōcì) - many times"
+    ]
+  },
+  {"traditional": "經", "simplified": "经", "pinyin": "jīng", "definition": "classic works; pass through", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1350", "frequencyRank": 62,
+    "commonWords": [
+      "經常 (jīngcháng) - often",
+      "已經 (yǐjīng) - already",
+      "經濟 (jīngjì) - economy",
+      "經驗 (jīngyàn) - experience"
+    ]
+  },
+  {"traditional": "麼", "simplified": "么", "pinyin": "me", "definition": "interrogative particle; repetition of a tune small; tender", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0048", "frequencyRank": 63,
+    "commonWords": [
+      "什麼 (shénme) - what",
+      "怎麼 (zěnme) - how",
+      "那麼 (nàme) - so, like that",
+      "有什麼 (yǒu shénme) - have what"
+    ]
+  },
+  {"traditional": "去", "simplified": "去", "pinyin": "qù", "definition": "go away, leave, depart", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0204", "frequencyRank": 64,
+    "commonWords": [
+      "去過 (qùguò) - have been to",
+      "過去 (guòqù) - the past",
+      "出去 (chūqù) - go out",
+      "回去 (huíqù) - go back"
+    ]
+  },
+  {"traditional": "法", "simplified": "法", "pinyin": "fǎ", "definition": "law, rule, regulation, statute; France, French", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1241", "frequencyRank": 65,
+    "commonWords": [
+      "方法 (fāngfǎ) - method",
+      "法律 (fǎlǜ) - law",
+      "法國 (Fǎguó) - France",
+      "語法 (yǔfǎ) - grammar"
+    ]
+  },
+  {"traditional": "學", "simplified": "学", "pinyin": "xué", "definition": "learning, knowledge; school", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1273", "frequencyRank": 66,
+    "commonWords": [
+      "學生 (xuéshēng) - student",
+      "學校 (xuéxiào) - school",
+      "學習 (xuéxí) - study, learn",
+      "大學 (dàxué) - university"
+    ]
+  },
+  {"traditional": "如", "simplified": "如", "pinyin": "rú", "definition": "if, supposing; as if; like, as", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0578", "frequencyRank": 67,
+    "commonWords": [
+      "如果 (rúguǒ) - if",
+      "如同 (rútóng) - like",
+      "比如 (bǐrú) - for example",
+      "如意 (rúyì) - as one wishes"
+    ]
+  },
+  {"traditional": "都", "simplified": "都", "pinyin": "dōu", "definition": "metropolis, capital; all, the whole; elegant, refined", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1801", "frequencyRank": 68,
+    "commonWords": [
+      "首都 (shǒudū) - capital",
+      "都會 (dūhuì) - metropolis",
+      "都可以 (dōu kěyǐ) - all can",
+      "大家都 (dàjiā dōu) - everyone"
+    ]
+  },
+  {"traditional": "同", "simplified": "同", "pinyin": "tóng", "definition": "same, similar; together with", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0427", "frequencyRank": 69,
+    "commonWords": [
+      "同學 (tóngxué) - classmate",
+      "同時 (tóngshí) - at the same time",
+      "相同 (xiāngtóng) - identical",
+      "共同 (gòngtóng) - together"
+    ]
+  },
+  {"traditional": "現", "simplified": "现", "pinyin": "xiàn", "definition": "appear, manifest, become visible", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "0949", "frequencyRank": 70,
+    "commonWords": [
+      "現在 (xiànzài) - now",
+      "出現 (chūxiàn) - appear",
+      "現場 (xiànchǎng) - site, scene",
+      "現金 (xiànjīn) - cash"
+    ]
+  },
+  {"traditional": "當", "simplified": "当", "pinyin": "dāng", "definition": "bear, accept, undertake; just", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0418", "frequencyRank": 71,
+    "commonWords": [
+      "當然 (dāngrán) - of course",
+      "當時 (dāngshí) - at that time",
+      "擔當 (dāndāng) - be responsible for",
+      "當作 (dāngzuò) - to treat as"
+    ]
+  },
+  {"traditional": "沒", "simplified": "没", "pinyin": "méi", "definition": "not, have not, none; drown, sink", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0867", "frequencyRank": 72,
+    "commonWords": [
+      "沒有 (méiyǒu) - not have",
+      "沒關係 (méi guānxi) - it's okay",
+      "沒事 (méishì) - it's nothing",
+      "沒想到 (méi xiǎngdào) - did not expect"
+    ]
+  },
+  {"traditional": "動", "simplified": "动", "pinyin": "dòng", "definition": "move, happen; movement, action", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0353", "frequencyRank": 73,
+    "commonWords": [
+      "運動 (yùndòng) - sports, exercise",
+      "動作 (dòngzuò) - movement",
+      "自動 (zìdòng) - automatic",
+      "活動 (huódòng) - activity"
+    ]
+  },
+  {"traditional": "面", "simplified": "面", "pinyin": "miàn", "definition": "face; surface; plane; side, dimension", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1455", "frequencyRank": 74,
+    "commonWords": [
+      "方面 (fāngmiàn) - aspect",
+      "前面 (qiánmiàn) - in front",
+      "面包 (miànbāo) - bread",
+      "面條 (miàntiáo) - noodles"
+    ]
+  },
+  {"traditional": "起", "simplified": "起", "pinyin": "qǐ", "definition": "rise, stand up; go up; begin", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1789", "frequencyRank": 75,
+    "commonWords": [
+      "起來 (qǐlái) - stand up, rise",
+      "一起 (yīqǐ) - together",
+      "起點 (qǐdiǎn) - starting point",
+      "開起 (kāiqǐ) - begin"
+    ]
+  },
+  {"traditional": "看", "simplified": "看", "pinyin": "kàn", "definition": "look, see; examine, scrutinize", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1539", "frequencyRank": 76,
+    "commonWords": [
+      "看看 (kànkan) - have a look",
+      "看見 (kànjiàn) - see",
+      "看書 (kàn shū) - read",
+      "看看看 (kàn kàn kàn) - look, look, look"
+    ]
+  },
+  {"traditional": "定", "simplified": "定", "pinyin": "dìng", "definition": "decide, settle, fix", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1276", "frequencyRank": 77,
+    "commonWords": [
+      "一定 (yídìng) - definitely",
+      "安定 (āndìng) - stable",
+      "設定 (shèdìng) - set up",
+      "決定 (juédìng) - decide"
+    ]
+  },
+  {"traditional": "天", "simplified": "天", "pinyin": "tiān", "definition": "sky, heaven; god, celestial", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0078", "frequencyRank": 78,
+    "commonWords": [
+      "今天 (jīntiān) - today",
+      "明天 (míngtiān) - tomorrow",
+      "天天 (tiāntiān) - every day",
+      "天氣 (tiānqì) - weather"
+    ]
+  },
+  {"traditional": "分", "simplified": "分", "pinyin": "fēn", "definition": "divide; small unit of time etc.", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0146", "frequencyRank": 79,
+    "commonWords": [
+      "分鐘 (fēnzhōng) - minute",
+      "部分 (bùfèn) - part",
+      "百分之 (bǎifēnzhī) - percent",
+      "分開 (fēnkāi) - separate"
+    ]
+  },
+  {"traditional": "還", "simplified": "还", "pinyin": "hái", "definition": "still, yet, also, besides", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0704", "frequencyRank": 80,
+    "commonWords": [
+      "還是 (háishì) - or, still",
+      "還有 (háiyǒu) - also have",
+      "還給 (huán gěi) - return to",
+      "還沒 (hái méi) - not yet"
+    ]
+  },
+  {"traditional": "進", "simplified": "进", "pinyin": "jìn", "definition": "advance, make progress, enter", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0605", "frequencyRank": 81,
+    "commonWords": [
+      "進來 (jìnlái) - come in",
+      "進步 (jìnbù) - progress",
+      "進入 (jìnrù) - enter",
+      "前進 (qiánjìn) - move forward"
+    ]
+  },
+  {"traditional": "好", "simplified": "好", "pinyin": "hǎo", "definition": "good, excellent, fine; well", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0581", "frequencyRank": 82,
+    "commonWords": [
+      "很好 (hěn hǎo) - very good",
+      "你好 (nǐ hǎo) - Hello",
+      "最好 (zuì hǎo) - best",
+      "好吃 (hǎo chī) - delicious"
+    ]
+  },
+  {"traditional": "小", "simplified": "小", "pinyin": "xiǎo", "definition": "small, tiny, insignificant", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0037", "frequencyRank": 83,
+    "commonWords": [
+      "小學 (xiǎoxué) - primary school",
+      "小朋友 (xiǎopéngyou) - kid",
+      "小心 (xiǎoxīn) - careful",
+      "小時 (xiǎoshí) - hour"
+    ]
+  },
+  {"traditional": "部", "simplified": "部", "pinyin": "bù", "definition": "part, division, section", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2044", "frequencyRank": 84,
+    "commonWords": [
+      "全部 (quánbù) - all, whole",
+      "部分 (bùfèn) - part",
+      "部門 (bùmén) - department",
+      "部隊 (bùduì) - troop"
+    ]
+  },
+  {"traditional": "其", "simplified": "其", "pinyin": "qí", "definition": "his, her, its, their; that", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "0996", "frequencyRank": 85,
+    "commonWords": [
+      "其次 (qícì) - next, secondly",
+      "其他 (qítā) - other",
+      "其中 (qízhōng) - among",
+      "其實 (qíshí) - actually"
+    ]
+  },
+  {"traditional": "些", "simplified": "些", "pinyin": "xiē", "definition": "little, few; rather, somewhat", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1069", "frequencyRank": 86,
+    "commonWords": [
+      "一些 (yīxiē) - some",
+      "這些 (zhèxiē) - these",
+      "那些 (nàxiē) - those",
+      "哪些 (nǎxiē) - which (ones)"
+    ]
+  },
+  {"traditional": "主", "simplified": "主", "pinyin": "zhǔ", "definition": "master, chief owner; host; lord", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0300", "frequencyRank": 87,
+    "commonWords": [
+      "主要 (zhǔyào) - main",
+      "主人 (zhǔrén) - master, host",
+      "主持 (zhǔchí) - preside",
+      "主義 (zhǔyì) - doctrine"
+    ]
+  },
+  {"traditional": "樣", "simplified": "样", "pinyin": "yàng", "definition": "shape, form, pattern, style", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1849", "frequencyRank": 88,
+    "commonWords": [
+      "怎樣 (zěnyàng) - how",
+      "樣子 (yàngzi) - appearance",
+      "一樣 (yíyàng) - the same",
+      "這樣 (zhèyàng) - like this"
+    ]
+  },
+  {"traditional": "理", "simplified": "理", "pinyin": "lǐ", "definition": "reason, logic; manage", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2157", "frequencyRank": 89,
+    "commonWords": [
+      "道理 (dàolǐ) - reason, principle",
+      "理想 (lǐxiǎng) - ideal",
+      "管理 (guǎnlǐ) - manage",
+      "心理 (xīnlǐ) - psychology"
+    ]
+  },
+  {"traditional": "心", "simplified": "心", "pinyin": "xīn", "definition": "heart; mind, intelligence; soul", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0174", "frequencyRank": 90,
+    "commonWords": [
+      "心裡 (xīnlǐ) - in the heart",
+      "小心 (xiǎoxīn) - careful",
+      "中心 (zhōngxīn) - center",
+      "決心 (juéxīn) - determination"
+    ]
+  },
+  {"traditional": "她", "simplified": "她", "pinyin": "tā", "definition": "she, her", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0582", "frequencyRank": 91,
+    "commonWords": [
+      "她們 (tāmen) - they (feminine)",
+      "給她 (gěi tā) - give her",
+      "她自己 (tā zìjǐ) - herself",
+      "她說 (tā shuō) - she says"
+    ]
+  },
+  {"traditional": "本", "simplified": "本", "pinyin": "běn", "definition": "root, origin, source; basis", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0210", "frequencyRank": 92,
+    "commonWords": [
+      "本來 (běnlái) - originally",
+      "日本 (Rìběn) - Japan",
+      "本子 (běnzi) - notebook",
+      "書本 (shūběn) - book"
+    ]
+  },
+  {"traditional": "前", "simplified": "前", "pinyin": "qián", "definition": "in front, forward; preceding", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1650", "frequencyRank": 93,
+    "commonWords": [
+      "前面 (qiánmiàn) - in front",
+      "以前 (yǐqián) - before",
+      "前天 (qiántiān) - day before yesterday",
+      "前進 (qiánjìn) - advance"
+    ]
+  },
+  {"traditional": "開", "simplified": "开", "pinyin": "kāi", "definition": "open; initiate, begin, start", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0076", "frequencyRank": 94,
+    "commonWords": [
+      "開始 (kāishǐ) - begin",
+      "開門 (kāimén) - open door",
+      "開車 (kāichē) - drive car",
+      "開會 (kāihuì) - have a meeting"
+    ]
+  },
+  {"traditional": "但", "simplified": "但", "pinyin": "dàn", "definition": "only; but, however, yet, still", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0774", "frequencyRank": 95,
+    "commonWords": [
+      "但是 (dànshì) - but",
+      "不但 (búdàn) - not only",
+      "但是你 (dànshì nǐ) - but you",
+      "但願 (dànyuàn) - if only"
+    ]
+  },
+  {"traditional": "因", "simplified": "因", "pinyin": "yīn", "definition": "cause, reason; by; because (of)", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0430", "frequencyRank": 96,
+    "commonWords": [
+      "因為 (yīnwèi) - because",
+      "原因 (yuányīn) - cause, reason",
+      "因此 (yīncǐ) - so, therefore",
+      "因人而異 (yīnrén'éryì) - varies with individuals"
+    ]
+  },
+  {"traditional": "只", "simplified": "只", "pinyin": "zhǐ", "definition": "only, just, simply", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0246", "frequencyRank": 97,
+    "commonWords": [
+      "只是 (zhǐshì) - just, only",
+      "只好 (zhǐhǎo) - have to",
+      "只要 (zhǐyào) - as long as",
+      "只能 (zhǐnéng) - can only"
+    ]
+  },
+  {"traditional": "從", "simplified": "从", "pinyin": "cóng", "definition": "from, by, since, whence, through", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0142", "frequencyRank": 98,
+    "commonWords": [
+      "從來 (cónglái) - always",
+      "從前 (cóngqián) - before, previously",
+      "跟從 (gēncóng) - follow",
+      "自從 (zìcóng) - since"
+    ]
+  },
+  {"traditional": "想", "simplified": "想", "pinyin": "xiǎng", "definition": "think, speculate, plan, consider", "strokeCount": 13, "hskLevel": 1, "generalStandardNumber": "2867", "frequencyRank": 99,
+    "commonWords": [
+      "想要 (xiǎng yào) - want to",
+      "想法 (xiǎngfǎ) - idea",
+      "想念 (xiǎngniàn) - miss (someone)",
+      "思想 (sīxiǎng) - thought"
+    ]
+  },
+  {"traditional": "實", "simplified": "实", "pinyin": "shí", "definition": "real, true; honest, sincere", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1285", "frequencyRank": 100,
+    "commonWords": [
+      "其實 (qíshí) - actually",
+      "實際 (shíjì) - reality, practical",
+      "實行 (shíxíng) - put into practice",
+      "實驗 (shíyàn) - experiment"
+    ]
+  },
+  {"traditional": "日", "simplified": "日", "pinyin": "rì", "definition": "sun; day; daytime", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0112", "frequencyRank": 101,
+    "commonWords": [
+      "生日 (shēngrì) - birthday",
+      "日本 (Rìběn) - Japan",
+      "每日 (měirì) - every day",
+      "日期 (rìqī) - date"
+    ]
+  },
+  {"traditional": "軍", "simplified": "军", "pinyin": "jūn", "definition": "army, military; soldiers, troops", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0552", "frequencyRank": 102,
+    "commonWords": [
+      "軍隊 (jūnduì) - army",
+      "軍人 (jūnrén) - soldier",
+      "海軍 (hǎijūn) - navy",
+      "空軍 (kōngjūn) - air force"
+    ]
+  },
+  {"traditional": "者", "simplified": "者", "pinyin": "zhě", "definition": "that which; he who; those who", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "0969", "frequencyRank": 103,
+    "commonWords": [
+      "作者 (zuòzhě) - author",
+      "讀者 (dúzhě) - reader",
+      "記者 (jìzhě) - reporter",
+      "學者 (xuézhě) - scholar"
+    ]
+  },
+  {"traditional": "意", "simplified": "意", "pinyin": "yì", "definition": "thought, idea, opinion; think", "strokeCount": 13, "hskLevel": 2, "generalStandardNumber": "2996", "frequencyRank": 104,
+    "commonWords": [
+      "意思 (yìsi) - meaning",
+      "注意 (zhùyì) - pay attention",
+      "主意 (zhǔyi) - idea",
+      "異議 (yìyì) - objection"
+    ]
+  },
+  {"traditional": "無", "simplified": "无", "pinyin": "wú", "definition": "negative, no, not; KangXi radical 71", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0081", "frequencyRank": 105,
+    "commonWords": [
+      "無法 (wúfǎ) - unable",
+      "無聊 (wúliáo) - bored",
+      "無論 (wúlùn) - regardless",
+      "無數 (wúshù) - countless"
+    ]
+  },
+  {"traditional": "力", "simplified": "力", "pinyin": "lì", "definition": "power, capability, influence", "strokeCount": 2, "hskLevel": 3, "generalStandardNumber": "0019", "frequencyRank": 106,
+    "commonWords": [
+      "力量 (lìliàng) - strength",
+      "努力 (nǔlì) - hardworking",
+      "能力 (nénglì) - ability",
+      "用力 (yònglì) - use force"
+    ]
+  },
+  {"traditional": "它", "simplified": "它", "pinyin": "tā", "definition": "it; other", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0314", "frequencyRank": 107,
+    "commonWords": [
+      "其他 (qítā) - other",
+      "它們 (tāmen) - they (for animals/things)",
+      "看它 (kàn tā) - look at it",
+      "它的 (tā de) - its"
+    ]
+  },
+  {"traditional": "與", "simplified": "与", "pinyin": "yǔ", "definition": "and; with; to; for; give, grant", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0034", "frequencyRank": 108,
+    "commonWords": [
+      "與其 (yǔqí) - rather than",
+      "參與 (cānyǔ) - to participate",
+      "與會 (yǔhuì) - attend meeting",
+      "與眾不同 (yǔ zhòng bù tóng) - unique"
+    ]
+  },
+  {"traditional": "長", "simplified": "长", "pinyin": "zhǎng", "definition": "long; length; excel in; leader", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0127", "frequencyRank": 109,
+    "commonWords": [
+      "長大 (zhǎngdà) - grow up",
+      "校長 (xiàozhǎng) - principal",
+      "長度 (chángdù) - length",
+      "班長 (bānzhǎng) - class leader"
+    ]
+  },
+  {"traditional": "把", "simplified": "把", "pinyin": "bǎ", "definition": "hold, take; guard; regard as", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0655", "frequencyRank": 110,
+    "commonWords": [
+      "把握 (bǎwò) - grasp",
+      "把手 (bǎshǒu) - handle",
+      "把它 (bǎ tā) - take it",
+      "一把 (yì bǎ) - a handful"
+    ]
+  },
+  {"traditional": "機", "simplified": "机", "pinyin": "jī", "definition": "desk; machine; moment", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0377", "frequencyRank": 111,
+    "commonWords": [
+      "手機 (shǒujī) - cellphone",
+      "機會 (jīhuì) - opportunity",
+      "飛機 (fēijī) - airplane",
+      "機器 (jīqì) - machine"
+    ]
+  },
+  {"traditional": "十", "simplified": "十", "pinyin": "shí", "definition": "ten, tenth; complete; perfect", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0004", "frequencyRank": 112,
+    "commonWords": [
+      "十分 (shífēn) - very",
+      "十個 (shíge) - ten (of something)",
+      "十年 (shínián) - ten years",
+      "第十 (dì shí) - tenth"
+    ]
+  },
+  {"traditional": "民", "simplified": "民", "pinyin": "mín", "definition": "people, subjects, citizens", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0327", "frequencyRank": 113,
+    "commonWords": [
+      "人民 (rénmín) - people",
+      "民族 (mínzú) - nationality",
+      "居民 (jūmín) - resident",
+      "民眾 (mínzhòng) - public"
+    ]
+  },
+  {"traditional": "第", "simplified": "第", "pinyin": "dì", "definition": "sequence, number; grade, degree", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2322", "frequencyRank": 114,
+    "commonWords": [
+      "第一 (dì yī) - first",
+      "第十 (dì shí) - tenth",
+      "次第 (cìdì) - order, sequence",
+      "第二 (dì èr) - second"
+    ]
+  },
+  {"traditional": "公", "simplified": "公", "pinyin": "gōng", "definition": "fair, equitable; public; duke", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0148", "frequencyRank": 115,
+    "commonWords": [
+      "公司 (gōngsī) - company",
+      "公開 (gōngkāi) - public",
+      "公園 (gōngyuán) - park",
+      "公務 (gōngwù) - public affairs"
+    ]
+  },
+  {"traditional": "此", "simplified": "此", "pinyin": "cǐ", "definition": "this, these; in this case, then", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0411", "frequencyRank": 116,
+    "commonWords": [
+      "因此 (yīncǐ) - therefore",
+      "彼此 (bǐcǐ) - each other",
+      "除此之外 (chú cǐ zhī wài) - in addition to this",
+      "此次 (cǐcì) - this time"
+    ]
+  },
+  {"traditional": "已", "simplified": "已", "pinyin": "yǐ", "definition": "already; finished; stop", "strokeCount": 3, "hskLevel": 2, "generalStandardNumber": "0061", "frequencyRank": 117,
+    "commonWords": [
+      "已經 (yǐjīng) - already",
+      "不已 (bùyǐ) - endlessly",
+      "難以 (nányǐ) - hard to",
+      "得以 (déyǐ) - able to"
+    ]
+  },
+  {"traditional": "工", "simplified": "工", "pinyin": "gōng", "definition": "labor, work; worker, laborer", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0026", "frequencyRank": 118,
+    "commonWords": [
+      "工人 (gōngrén) - worker",
+      "工作 (gōngzuò) - job",
+      "工廠 (gōngchǎng) - factory",
+      "工程 (gōngchéng) - engineering"
+    ]
+  },
+  {"traditional": "使", "simplified": "使", "pinyin": "shǐ", "definition": "cause, send on a mission, order; envoy, messenger, ambassador", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1139", "frequencyRank": 119,
+    "commonWords": [
+      "使用 (shǐyòng) - use",
+      "使得 (shǐdé) - make, render",
+      "天使 (tiānshǐ) - angel",
+      "即使 (jíshǐ) - even if"
+    ]
+  },
+  {"traditional": "情", "simplified": "情", "pinyin": "qíng", "definition": "feeling, sentiment, emotion", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2438", "frequencyRank": 120,
+    "commonWords": [
+      "感情 (gǎnqíng) - emotion",
+      "情況 (qíngkuàng) - situation",
+      "愛情 (àiqíng) - love",
+      "熱情 (rèqíng) - enthusiasm"
+    ]
+  },
+  {"traditional": "明", "simplified": "明", "pinyin": "míng", "definition": "bright, light, brilliant; clear", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1087", "frequencyRank": 121,
+    "commonWords": [
+      "明天 (míngtiān) - tomorrow",
+      "明白 (míngbai) - understand, clear",
+      "聰明 (cōngmíng) - smart",
+      "說明 (shuōmíng) - explain"
+    ]
+  },
+  {"traditional": "性", "simplified": "性", "pinyin": "xìng", "definition": "nature, character, sex", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1268", "frequencyRank": 122,
+    "commonWords": [
+      "個性 (gèxìng) - personality",
+      "女性 (nǚxìng) - female",
+      "性格 (xìnggé) - character",
+      "可能性 (kěnéngxìng) - possibility"
+    ]
+  },
+  {"traditional": "知", "simplified": "知", "pinyin": "zhī", "definition": "know, perceive, comprehend", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1122", "frequencyRank": 123,
+    "commonWords": [
+      "知道 (zhīdào) - know",
+      "知識 (zhīshì) - knowledge",
+      "通知 (tōngzhī) - notify",
+      "未知 (wèizhī) - unknown"
+    ]
+  },
+  {"traditional": "全", "simplified": "全", "pinyin": "quán", "definition": "maintain, keep whole or intact", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0485", "frequencyRank": 124,
+    "commonWords": [
+      "全部 (quánbù) - all, whole",
+      "安全 (ānquán) - safe",
+      "完全 (wánquán) - complete(ly)",
+      "全家 (quánjiā) - whole family"
+    ]
+  },
+  {"traditional": "三", "simplified": "三", "pinyin": "sān", "definition": "three", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0022", "frequencyRank": 125,
+    "commonWords": [
+      "三個 (sān ge) - three (of something)",
+      "三十 (sānshí) - thirty",
+      "三明治 (sānmíngzhì) - sandwich",
+      "三角 (sānjiǎo) - triangle"
+    ]
+  },
+  {"traditional": "又", "simplified": "又", "pinyin": "yòu", "definition": "and, also, again, in addition", "strokeCount": 2, "hskLevel": 3, "generalStandardNumber": "0021", "frequencyRank": 126,
+    "commonWords": [
+      "又是 (yòu shì) - is again",
+      "又來了 (yòu lái le) - came again",
+      "又高又大 (yòu gāo yòu dà) - tall and big",
+      "又快又好 (yòu kuài yòu hǎo) - fast and good"
+    ]
+  },
+  {"traditional": "關", "simplified": "关", "pinyin": "guān", "definition": "frontier pass; close; relation", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0532", "frequencyRank": 127,
+    "commonWords": [
+      "關係 (guānxì) - relationship",
+      "關閉 (guānbì) - shutdown, close",
+      "相關 (xiāngguān) - related",
+      "有關 (yǒuguān) - about"
+    ]
+  },
+  {"traditional": "點", "simplified": "点", "pinyin": "diǎn", "definition": "dot, speck, spot; point, degree", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1469", "frequencyRank": 128,
+    "commonWords": [
+      "一點 (yìdiǎn) - a little",
+      "點菜 (diǎncài) - order food",
+      "地點 (dìdiǎn) - location",
+      "時間點 (shíjiāndiǎn) - time point"
+    ]
+  },
+  {"traditional": "正", "simplified": "正", "pinyin": "zhèng", "definition": "right, proper, correct", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0198", "frequencyRank": 129,
+    "commonWords": [
+      "正在 (zhèngzài) - in progress",
+      "正好 (zhènghǎo) - just right",
+      "正確 (zhèngquè) - correct",
+      "正面 (zhèngmiàn) - positive side"
+    ]
+  },
+  {"traditional": "業", "simplified": "业", "pinyin": "yè", "definition": "profession, business; GB radical 111", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0231", "frequencyRank": 130,
+    "commonWords": [
+      "作業 (zuòyè) - homework",
+      "行業 (hángyè) - trade, profession",
+      "事業 (shìyè) - career",
+      "工業 (gōngyè) - industry"
+    ]
+  },
+  {"traditional": "外", "simplified": "外", "pinyin": "wài", "definition": "out, outside, external; foreign", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0293", "frequencyRank": 131,
+    "commonWords": [
+      "外國 (wàiguó) - foreign country",
+      "外面 (wàimiàn) - outside",
+      "外交 (wàijiāo) - diplomacy",
+      "外婆 (wàipó) - grandmother (mother's side)"
+    ]
+  },
+  {"traditional": "將", "simplified": "将", "pinyin": "jiāng", "definition": "will, going to, future; general", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1617", "frequencyRank": 132,
+    "commonWords": [
+      "將來 (jiānglái) - future",
+      "即將 (jíjiāng) - about to",
+      "將軍 (jiāngjūn) - general",
+      "將要 (jiāngyào) - will"
+    ]
+  },
+  {"traditional": "兩", "simplified": "两", "pinyin": "liǎng", "definition": "two, both, pair, couple; ounce", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0697", "frequencyRank": 133,
+    "commonWords": [
+      "兩個 (liǎng ge) - two",
+      "兩邊 (liǎngbiān) - both sides",
+      "兩次 (liǎngcì) - twice",
+      "兩天 (liǎng tiān) - two days"
+    ]
+  },
+  {"traditional": "高", "simplified": "高", "pinyin": "gāo", "definition": "high, tall; lofty, elevated", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2021", "frequencyRank": 134,
+    "commonWords": [
+      "高中 (gāozhōng) - high school",
+      "高興 (gāoxìng) - happy",
+      "高度 (gāodù) - height, degree",
+      "高級 (gāojí) - advanced"
+    ]
+  },
+  {"traditional": "間", "simplified": "间", "pinyin": "jiān", "definition": "midpoint, space; place, locality", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0847", "frequencyRank": 135,
+    "commonWords": [
+      "房間 (fángjiān) - room",
+      "中間 (zhōngjiān) - between",
+      "時間 (shíjiān) - time",
+      "空間 (kōngjiān) - space"
+    ]
+  },
+  {"traditional": "由", "simplified": "由", "pinyin": "yóu", "definition": "cause, reason; from", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0245", "frequencyRank": 136,
+    "commonWords": [
+      "由於 (yóuyú) - because of",
+      "理由 (lǐyóu) - reason",
+      "自由 (zìyóu) - freedom",
+      "來由 (láiyóu) - origin"
+    ]
+  },
+  {"traditional": "問", "simplified": "问", "pinyin": "wèn", "definition": "ask about, inquire after", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0528", "frequencyRank": 137,
+    "commonWords": [
+      "問題 (wèntí) - question, problem",
+      "問好 (wèn hǎo) - send regards",
+      "詢問 (xúnwèn) - inquire",
+      "問一下 (wèn yīxià) - ask a bit"
+    ]
+  },
+  {"traditional": "很", "simplified": "很", "pinyin": "hěn", "definition": "very, quite, much", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1584", "frequencyRank": 138,
+    "commonWords": [
+      "很好 (hěn hǎo) - very good",
+      "很大 (hěn dà) - very big",
+      "很小 (hěn xiǎo) - very small",
+      "很忙 (hěn máng) - very busy"
+    ]
+  },
+  {"traditional": "最", "simplified": "最", "pinyin": "zuì", "definition": "most, extremely, exceedingly", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2614", "frequencyRank": 139,
+    "commonWords": [
+      "最好 (zuìhǎo) - best",
+      "最大 (zuìdà) - biggest",
+      "最多 (zuìduō) - most",
+      "最小 (zuìxiǎo) - smallest"
+    ]
+  },
+  {"traditional": "重", "simplified": "重", "pinyin": "zhòng", "definition": "heavy, weighty; double", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1552", "frequencyRank": 140,
+    "commonWords": [
+      "重要 (zhòngyào) - important",
+      "重量 (zhòngliàng) - weight",
+      "重點 (zhòngdiǎn) - emphasis",
+      "體重 (tǐzhòng) - body weight"
+    ]
+  },
+  {"traditional": "並", "simplified": "并", "pinyin": "bìng", "definition": "and, also, furthermore, definitely", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0531", "frequencyRank": 141,
+    "commonWords": [
+      "並且 (bìngqiě) - and, moreover",
+      "並不 (bìng bù) - not at all",
+      "合併 (hébìng) - merge",
+      "並列 (bìngliè) - alongside"
+    ]
+  },
+  {"traditional": "物", "simplified": "物", "pinyin": "wù", "definition": "thing, substance, creature", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1127", "frequencyRank": 142,
+    "commonWords": [
+      "動物 (dòngwù) - animal",
+      "植物 (zhíwù) - plant",
+      "物品 (wùpǐn) - article, goods",
+      "食物 (shíwù) - food"
+    ]
+  },
+  {"traditional": "手", "simplified": "手", "pinyin": "shǒu", "definition": "hand", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0121", "frequencyRank": 143,
+    "commonWords": [
+      "手機 (shǒujī) - cellphone",
+      "手錶 (shǒubiǎo) - watch",
+      "雙手 (shuāngshǒu) - pair of hands",
+      "助手 (zhùshǒu) - assistant"
+    ]
+  },
+  {"traditional": "應", "simplified": "应", "pinyin": "yīng", "definition": "should, ought to, must", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0836", "frequencyRank": 144,
+    "commonWords": [
+      "應該 (yīnggāi) - should",
+      "應用 (yìngyòng) - apply",
+      "反應 (fǎnyìng) - response",
+      "適應 (shìyìng) - adapt"
+    ]
+  },
+  {"traditional": "戰", "simplified": "战", "pinyin": "zhàn", "definition": "war, fighting, battle", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1468", "frequencyRank": 145,
+    "commonWords": [
+      "戰爭 (zhànzhēng) - war",
+      "戰士 (zhànshì) - soldier",
+      "戰鬥 (zhàndòu) - battle",
+      "勝戰 (shèngzhàn) - victory"
+    ]
+  },
+  {"traditional": "向", "simplified": "向", "pinyin": "xiàng", "definition": "toward, direction, trend", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0480", "frequencyRank": 146,
+    "commonWords": [
+      "方向 (fāngxiàng) - direction",
+      "向上 (xiàng shàng) - upwards",
+      "向大家 (xiàng dàjiā) - to everyone",
+      "向來 (xiànglái) - always"
+    ]
+  },
+  {"traditional": "頭", "simplified": "头", "pinyin": "tóu", "definition": "head; top; chief, first; boss", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0310", "frequencyRank": 147,
+    "commonWords": [
+      "頭髮 (tóufa) - hair",
+      "頭痛 (tóutòng) - headache",
+      "石頭 (shítou) - stone",
+      "開頭 (kāitóu) - beginning"
+    ]
+  },
+  {"traditional": "文", "simplified": "文", "pinyin": "wén", "definition": "literature, culture, writing", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0161", "frequencyRank": 148,
+    "commonWords": [
+      "文化 (wénhuà) - culture",
+      "文章 (wénzhāng) - essay, article",
+      "文字 (wénzì) - script, writing",
+      "英文 (Yīngwén) - English"
+    ]
+  },
+  {"traditional": "體", "simplified": "体", "pinyin": "tǐ", "definition": "body; group, class, body, unit; inferior", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0770", "frequencyRank": 149,
+    "commonWords": [
+      "身體 (shēntǐ) - body",
+      "體育 (tǐyù) - sports",
+      "團體 (tuántǐ) - group",
+      "物體 (wùtǐ) - object"
+    ]
+  },
+  {"traditional": "政", "simplified": "政", "pinyin": "zhèng", "definition": "government, political affairs", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1376", "frequencyRank": 150,
+    "commonWords": [
+      "政治 (zhèngzhì) - politics",
+      "政黨 (zhèngdǎng) - political party",
+      "行政 (xíngzhèng) - administration",
+      "政策 (zhèngcè) - policy"
+    ]
+  },
+  {"traditional": "美", "simplified": "美", "pinyin": "měi", "definition": "beautiful, pretty; pleasing", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1642", "frequencyRank": 151,
+    "commonWords": [
+      "美國 (Měiguó) - USA",
+      "美麗 (měilì) - beautiful",
+      "美術 (měishù) - fine arts",
+      "審美 (shěnměi) - aesthetics"
+    ]
+  },
+  {"traditional": "相", "simplified": "相", "pinyin": "xiāng", "definition": "mutual, reciprocal, each other", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1430", "frequencyRank": 152,
+    "commonWords": [
+      "相同 (xiāngtóng) - same",
+      "相愛 (xiāng'ài) - be in love",
+      "相信 (xiāngxìn) - believe",
+      "相互 (xiānghù) - each other"
+    ]
+  },
+  {"traditional": "見", "simplified": "见", "pinyin": "jiàn", "definition": "see, observe, behold; perceive", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0118", "frequencyRank": 153,
+    "commonWords": [
+      "見面 (jiànmiàn) - meet",
+      "看見 (kànjiàn) - see",
+      "再見 (zàijiàn) - goodbye",
+      "意見 (yìjiàn) - opinion"
+    ]
+  },
+  {"traditional": "被", "simplified": "被", "pinyin": "bèi", "definition": "by (passive voice)", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2118", "frequencyRank": 154,
+    "commonWords": [
+      "被子 (bèizi) - quilt",
+      "被動 (bèidòng) - passive",
+      "被人 (bèi rén) - by people",
+      "被害 (bèihài) - victimized"
+    ]
+  },
+  {"traditional": "利", "simplified": "利", "pinyin": "lì", "definition": "gains, advantage, profit, merit", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0763", "frequencyRank": 155,
+    "commonWords": [
+      "利潤 (lìrùn) - profit",
+      "利益 (lìyì) - benefit",
+      "有利 (yǒulì) - advantageous",
+      "便利 (biànlì) - convenient"
+    ]
+  },
+  {"traditional": "什", "simplified": "什", "pinyin": "shén", "definition": "file of ten soldiers; mixed, miscellaneous", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0129", "frequencyRank": 156,
+    "commonWords": [
+      "什麼 (shénme) - what",
+      "為什麼 (wèi shénme) - why",
+      "什麼時候 (shénme shíhou) - when",
+      "什麼地方 (shénme dìfāng) - what place"
+    ]
+  },
+  {"traditional": "二", "simplified": "二", "pinyin": "èr", "definition": "two; twice", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0003", "frequencyRank": 157,
+    "commonWords": [
+      "二十 (èrshí) - twenty",
+      "第二 (dì èr) - second",
+      "二樓 (èr lóu) - second floor",
+      "十二 (shí'èr) - twelve"
+    ]
+  },
+  {"traditional": "等", "simplified": "等", "pinyin": "děng", "definition": "equal, equivalent, same; wait for, await", "strokeCount": 12, "hskLevel": 2, "generalStandardNumber": "2681", "frequencyRank": 158,
+    "commonWords": [
+      "等等 (děngděng) - etc.",
+      "等一下 (děng yīxià) - wait a moment",
+      "平等 (píngděng) - equality",
+      "等級 (děngjí) - level"
+    ]
+  },
+  {"traditional": "產", "simplified": "产", "pinyin": "chǎn", "definition": "give birth, bring forth, produce", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0522", "frequencyRank": 159,
+    "commonWords": [
+      "產品 (chǎnpǐn) - product",
+      "生產 (shēngchǎn) - produce",
+      "產業 (chǎnyè) - industry",
+      "財產 (cáichǎn) - property"
+    ]
+  },
+  {"traditional": "或", "simplified": "或", "pinyin": "huò", "definition": "or, either, else; perhaps, maybe", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1035", "frequencyRank": 160,
+    "commonWords": [
+      "或者 (huòzhě) - or",
+      "或許 (huòxǔ) - perhaps",
+      "或是 (huòshì) - or",
+      "有或沒 (yǒu huò méi) - have or not"
+    ]
+  },
+  {"traditional": "新", "simplified": "新", "pinyin": "xīn", "definition": "new, recent, fresh, modern", "strokeCount": 13, "hskLevel": 2, "generalStandardNumber": "2994", "frequencyRank": 161,
+    "commonWords": [
+      "新聞 (xīnwén) - news",
+      "新年 (xīnnián) - new year",
+      "新朋友 (xīn péngyǒu) - new friend",
+      "最新 (zuìxīn) - newest"
+    ]
+  },
+  {"traditional": "己", "simplified": "己", "pinyin": "jǐ", "definition": "self, oneself; personal, private; 6th heavenly stem", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0060", "frequencyRank": 162,
+    "commonWords": [
+      "自己 (zìjǐ) - oneself",
+      "知己 (zhījǐ) - confidant",
+      "利己 (lìjǐ) - self-interest",
+      "反己 (fǎnjǐ) - self-reflect"
+    ]
+  },
+  {"traditional": "制", "simplified": "制", "pinyin": "zhì", "definition": "system; establish; overpower", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1121", "frequencyRank": 163,
+    "commonWords": [
+      "製造 (zhìzào) - manufacture",
+      "制度 (zhìdù) - system",
+      "控制 (kòngzhì) - control",
+      "制定 (zhìdìng) - formulate"
+    ]
+  },
+  {"traditional": "身", "simplified": "身", "pinyin": "shēn", "definition": "body; trunk, hull; rad. no. 158", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0786", "frequencyRank": 164,
+    "commonWords": [
+      "身體 (shēntǐ) - body",
+      "自身 (zìshēn) - oneself",
+      "身高 (shēngāo) - height",
+      "身分 (shēnfèn) - identity"
+    ]
+  },
+  {"traditional": "果", "simplified": "果", "pinyin": "guǒ", "definition": "fruit; result", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1079", "frequencyRank": 165,
+    "commonWords": [
+      "水果 (shuǐguǒ) - fruit",
+      "如果 (rúguǒ) - if",
+      "結果 (jiéguǒ) - result",
+      "果然 (guǒrán) - sure enough"
+    ]
+  },
+  {"traditional": "加", "simplified": "加", "pinyin": "jiā", "definition": "add to, increase, augment", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0335", "frequencyRank": 166,
+    "commonWords": [
+      "增加 (zēngjiā) - increase",
+      "加油 (jiāyóu) - cheer up, come on",
+      "加入 (jiārù) - join",
+      "加班 (jiābān) - overtime"
+    ]
+  },
+  {"traditional": "西", "simplified": "西", "pinyin": "xī", "definition": "west(ern); westward, occident", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0384", "frequencyRank": 167,
+    "commonWords": [
+      "西方 (xīfāng) - west",
+      "西瓜 (xīguā) - watermelon",
+      "西班牙 (Xībānyá) - Spain",
+      "西餐 (xīcān) - western food"
+    ]
+  },
+  {"traditional": "斯", "simplified": "斯", "pinyin": "sī", "definition": "this, thus, such; to lop off; emphatic particle", "strokeCount": 12, "hskLevel": 6, "generalStandardNumber": "2541", "frequencyRank": 168,
+    "commonWords": [
+      "斯文 (sīwén) - gentle, refined",
+      "俄羅斯 (Éluósī) - Russia",
+      "斯時 (sīshí) - at this time",
+      "斯人 (sīrén) - this person"
+    ]
+  },
+  {"traditional": "月", "simplified": "月", "pinyin": "yuè", "definition": "moon; month; KangXi radical 74", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0150", "frequencyRank": 169,
+    "commonWords": [
+      "月亮 (yuèliàng) - moon",
+      "一月 (yīyuè) - January",
+      "每月 (měiyuè) - every month",
+      "下個月 (xià ge yuè) - next month"
+    ]
+  },
+  {"traditional": "話", "simplified": "话", "pinyin": "huà", "definition": "speech, talk, language; dialect", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1296", "frequencyRank": 170,
+    "commonWords": [
+      "說話 (shuōhuà) - speak",
+      "電話 (diànhuà) - phone",
+      "話題 (huàtí) - topic",
+      "中文話 (Zhōngwén huà) - Chinese language"
+    ]
+  },
+  {"traditional": "合", "simplified": "合", "pinyin": "hé", "definition": "combine, unite, join; gather", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0488", "frequencyRank": 171,
+    "commonWords": [
+      "合適 (héshì) - suitable",
+      "合格 (hégé) - qualified",
+      "合併 (hébìng) - merge",
+      "配合 (pèihé) - cooperate"
+    ]
+  },
+  {"traditional": "回", "simplified": "回", "pinyin": "huí", "definition": "return, turn around; a time", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0438", "frequencyRank": 172,
+    "commonWords": [
+      "回家 (huíjiā) - return home",
+      "回答 (huídá) - reply",
+      "回來 (huílái) - come back",
+      "次回 (cìhuí) - next time"
+    ]
+  },
+  {"traditional": "特", "simplified": "特", "pinyin": "tè", "definition": "special, unique, distinguished", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "1938", "frequencyRank": 173,
+    "commonWords": [
+      "特別 (tèbié) - special",
+      "特色 (tèsè) - characteristic",
+      "特點 (tèdiǎn) - feature",
+      "特價 (tèjià) - special price"
+    ]
+  },
+  {"traditional": "代", "simplified": "代", "pinyin": "dài", "definition": "replace, replacement (of person or generation); era, generation", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0271", "frequencyRank": 174,
+    "commonWords": [
+      "代表 (dàibiǎo) - representative",
+      "時代 (shídài) - era",
+      "年代 (niándài) - decade",
+      "代替 (dàitì) - replace"
+    ]
+  },
+  {"traditional": "內", "simplified": "内", "pinyin": "nèi", "definition": "inside", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0116", "frequencyRank": 175,
+    "commonWords": [
+      "內部 (nèibù) - internal",
+      "國內 (guónèi) - domestic",
+      "室內 (shìnèi) - indoor",
+      "體內 (tǐnèi) - inside the body"
+    ]
+  },
+  {"traditional": "信", "simplified": "信", "pinyin": "xìn", "definition": "trust, believe; letter", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1570", "frequencyRank": 176,
+    "commonWords": [
+      "相信 (xiāngxìn) - believe",
+      "信心 (xìnxīn) - confidence",
+      "信息 (xìnxī) - information",
+      "信件 (xìnjiàn) - letter"
+    ]
+  },
+  {"traditional": "表", "simplified": "表", "pinyin": "biǎo", "definition": "show, express, manifest, display", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "0951", "frequencyRank": 177,
+    "commonWords": [
+      "表現 (biǎoxiàn) - performance",
+      "表達 (biǎodá) - express",
+      "手表 (shǒubiǎo) - watch",
+      "錶格 (biǎogé) - form"
+    ]
+  },
+  {"traditional": "化", "simplified": "化", "pinyin": "huà", "definition": "change, convert, reform; -ize", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0132", "frequencyRank": 178,
+    "commonWords": [
+      "文化 (wénhuà) - culture",
+      "變化 (biànhuà) - change",
+      "美化 (měihuà) - beautify",
+      "計劃 (jìhuà) - plan"
+    ]
+  },
+  {"traditional": "老", "simplified": "老", "pinyin": "lǎo", "definition": "old, aged; experienced", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0360", "frequencyRank": 179,
+    "commonWords": [
+      "老人 (lǎorén) - old person",
+      "老師 (lǎoshī) - teacher",
+      "老闆 (lǎobǎn) - boss",
+      "老家 (lǎojiā) - hometown"
+    ]
+  },
+  {"traditional": "給", "simplified": "给", "pinyin": "gěi", "definition": "give; by, for", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1758", "frequencyRank": 180,
+    "commonWords": [
+      "給我 (gěi wǒ) - give me",
+      "送給 (sònggěi) - give as present",
+      "交給 (jiāogěi) - hand over",
+      "給你 (gěi nǐ) - give you"
+    ]
+  },
+  {"traditional": "世", "simplified": "世", "pinyin": "shì", "definition": "generation; world; era", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0206", "frequencyRank": 181,
+    "commonWords": [
+      "世界 (shìjiè) - world",
+      "世紀 (shìjì) - century",
+      "一世 (yīshì) - whole life",
+      "去世 (qùshì) - pass away"
+    ]
+  },
+  {"traditional": "位", "simplified": "位", "pinyin": "wèi", "definition": "throne; position, post; rank, status; seat", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0784", "frequencyRank": 182,
+    "commonWords": [
+      "位置 (wèizhì) - position, location",
+      "一位 (yí wèi) - a (person, polite)",
+      "地位 (dìwèi) - status",
+      "各位 (gèwèi) - everybody, ladies & gent."
+    ]
+  },
+  {"traditional": "次", "simplified": "次", "pinyin": "cì", "definition": "order, sequence; next", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0521", "frequencyRank": 183,
+    "commonWords": [
+      "下一次 (xià yīcì) - next time",
+      "第一次 (dì yīcì) - first time",
+      "次序 (cìxù) - sequence",
+      "每次 (měicì) - every time"
+    ]
+  },
+  {"traditional": "度", "simplified": "度", "pinyin": "dù", "definition": "degree, system; manner; to consider", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1622", "frequencyRank": 184,
+    "commonWords": [
+      "態度 (tàidù) - attitude",
+      "溫度 (wēndù) - temperature",
+      "程度 (chéngdù) - degree (extent)",
+      "角度 (jiǎodù) - angle"
+    ]
+  },
+  {"traditional": "門", "simplified": "门", "pinyin": "mén", "definition": "gate, door, entrance, opening", "strokeCount": 3, "hskLevel": 2, "generalStandardNumber": "0055", "frequencyRank": 185,
+    "commonWords": [
+      "開門 (kāimén) - open door",
+      "門口 (ménkǒu) - entrance",
+      "大門 (dàmén) - main gate",
+      "進門 (jìnmén) - enter door"
+    ]
+  },
+  {"traditional": "任", "simplified": "任", "pinyin": "rèn", "definition": "trust to, rely on, appoint; to bear, duty, office; allow", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0467", "frequencyRank": 186,
+    "commonWords": [
+      "任何 (rènhé) - any",
+      "任務 (rènwù) - task",
+      "主任 (zhǔrèn) - director",
+      "任命 (rènmìng) - appoint"
+    ]
+  },
+  {"traditional": "常", "simplified": "常", "pinyin": "cháng", "definition": "common, normal, frequent, regular", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2257", "frequencyRank": 187,
+    "commonWords": [
+      "常常 (chángcháng) - often",
+      "正常 (zhèngcháng) - normal",
+      "經常 (jīngcháng) - often",
+      "日常 (rìcháng) - daily"
+    ]
+  },
+  {"traditional": "先", "simplified": "先", "pinyin": "xiān", "definition": "first, former, previous", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0446", "frequencyRank": 188,
+    "commonWords": [
+      "先生 (xiānsheng) - Mr.",
+      "首先 (shǒuxiān) - first of all",
+      "優先 (yōuxiān) - priority",
+      "先後 (xiānhòu) - successively"
+    ]
+  },
+  {"traditional": "海", "simplified": "海", "pinyin": "hǎi", "definition": "sea, ocean; maritime", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2074", "frequencyRank": 189,
+    "commonWords": [
+      "上海 (Shànghǎi) - Shanghai",
+      "大海 (dàhǎi) - the sea",
+      "海外 (hǎiwài) - overseas",
+      "海洋 (hǎiyáng) - ocean"
+    ]
+  },
+  {"traditional": "通", "simplified": "通", "pinyin": "tōng", "definition": "pass through, common, communicate", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2145", "frequencyRank": 190,
+    "commonWords": [
+      "交通 (jiāotōng) - traffic",
+      "通知 (tōngzhī) - notice",
+      "通過 (tōngguò) - pass",
+      "普通 (pǔtōng) - ordinary"
+    ]
+  },
+  {"traditional": "教", "simplified": "教", "pinyin": "jiào", "definition": "teach, class", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2179", "frequencyRank": 191,
+    "commonWords": [
+      "教室 (jiàoshì) - classroom",
+      "教授 (jiàoshòu) - professor",
+      "教育 (jiàoyù) - education",
+      "教書 (jiāoshū) - teach"
+    ]
+  },
+  {"traditional": "兒", "simplified": "儿", "pinyin": "ér", "definition": "son, child; KangXi radical 10", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0012", "frequencyRank": 192,
+    "commonWords": [
+      "兒童 (értóng) - children",
+      "女兒 (nǚ'ér) - daughter",
+      "兒子 (érzi) - son",
+      "兒時 (érshí) - childhood"
+    ]
+  },
+  {"traditional": "原", "simplified": "原", "pinyin": "yuán", "definition": "source, origin, beginning", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "1868", "frequencyRank": 193,
+    "commonWords": [
+      "原因 (yuányīn) - reason",
+      "原來 (yuánlái) - originally",
+      "原則 (yuánzé) - principle",
+      "原地 (yuándì) - original place"
+    ]
+  },
+  {"traditional": "東", "simplified": "东", "pinyin": "dōng", "definition": "east, eastern, eastward", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0225", "frequencyRank": 194,
+    "commonWords": [
+      "東西 (dōngxi) - thing",
+      "東方 (dōngfāng) - the east",
+      "東部 (dōngbù) - eastern part",
+      "東京 (Dōngjīng) - Tokyo"
+    ]
+  },
+  {"traditional": "聲", "simplified": "声", "pinyin": "shēng", "definition": "sound, voice, noise; tone; music", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0654", "frequencyRank": 195,
+    "commonWords": [
+      "聲音 (shēngyīn) - sound",
+      "聲調 (shēngdiào) - tone",
+      "聲明 (shēngmíng) - statement",
+      "發聲 (fāshēng) - produce sound"
+    ]
+  },
+  {"traditional": "提", "simplified": "提", "pinyin": "tí", "definition": "hold in hand; lift in hand", "strokeCount": 12, "hskLevel": 3, "generalStandardNumber": "2520", "frequencyRank": 196,
+    "commonWords": [
+      "提出 (tíchū) - put forward",
+      "提醒 (tíxǐng) - remind",
+      "提問 (tíwèn) - ask a question",
+      "提高 (tígāo) - improve"
+    ]
+  },
+  {"traditional": "立", "simplified": "立", "pinyin": "lì", "definition": "stand; let stand; establish, set", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0302", "frequencyRank": 197,
+    "commonWords": [
+      "建立 (jiànlì) - establish",
+      "立場 (lìchǎng) - standpoint",
+      "獨立 (dúlì) - independent",
+      "立刻 (lìkè) - immediately"
+    ]
+  },
+  {"traditional": "及", "simplified": "及", "pinyin": "jí", "definition": "extend; reach; come up to; and", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0052", "frequencyRank": 198,
+    "commonWords": [
+      "及時 (jíshí) - timely",
+      "以及 (yǐjí) - and, as well as",
+      "來及 (láijí) - be in time",
+      "涉及 (shèjí) - involve"
+    ]
+  },
+  {"traditional": "比", "simplified": "比", "pinyin": "bǐ", "definition": "to compare, liken; comparison; than", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0105", "frequencyRank": 199,
+    "commonWords": [
+      "比較 (bǐjiào) - compare, relatively",
+      "比如 (bǐrú) - for example",
+      "比賽 (bǐsài) - competition",
+      "更比 (gèng bǐ) - even more than"
+    ]
+  },
+  {"traditional": "員", "simplified": "员", "pinyin": "yuán", "definition": "member; personnel, staff member", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0737", "frequencyRank": 200,
+    "commonWords": [
+      "成員 (chéngyuán) - member",
+      "服務員 (fúwùyuán) - waiter/waitress",
+      "職員 (zhíyuán) - staff",
+      "會員 (huìyuán) - member"
+    ]
+  },
+  {"traditional": "解", "simplified": "解", "pinyin": "jiě", "definition": "loosen, unfasten, untie; explain", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2981", "frequencyRank": 201,
+    "commonWords": [
+      "解釋 (jiěshì) - explain",
+      "理解 (lǐjiě) - understand",
+      "分解 (fēnjiě) - break down",
+      "解決 (jiějué) - solve"
+    ]
+  },
+  {"traditional": "水", "simplified": "水", "pinyin": "shuǐ", "definition": "water, liquid, lotion, juice", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0117", "frequencyRank": 202,
+    "commonWords": [
+      "喝水 (hē shuǐ) - drink water",
+      "水果 (shuǐguǒ) - fruit",
+      "水準 (shuǐzhǔn) - standard, level",
+      "池水 (chíshuǐ) - pool water"
+    ]
+  },
+  {"traditional": "名", "simplified": "名", "pinyin": "míng", "definition": "name, rank, title, position", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0505", "frequencyRank": 203,
+    "commonWords": [
+      "名字 (míngzi) - name",
+      "出名 (chūmíng) - famous",
+      "名牌 (míngpái) - famous brand",
+      "著名 (zhùmíng) - well-known"
+    ]
+  },
+  {"traditional": "真", "simplified": "真", "pinyin": "zhēn", "definition": "real, actual, true, genuine", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "1832", "frequencyRank": 204,
+    "commonWords": [
+      "真的 (zhēnde) - really",
+      "真實 (zhēnshí) - real",
+      "真心 (zhēnxīn) - sincere",
+      "真相 (zhēnxiàng) - truth"
+    ]
+  },
+  {"traditional": "論", "simplified": "论", "pinyin": "lùn", "definition": "debate; discuss; discourse", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0556", "frequencyRank": 205,
+    "commonWords": [
+      "討論 (tǎolùn) - discuss",
+      "論文 (lùnwén) - thesis, paper",
+      "評論 (pínglùn) - comment, review",
+      "結論 (jiélùn) - conclusion"
+    ]
+  },
+  {"traditional": "處", "simplified": "处", "pinyin": "chù", "definition": "place, locale; department", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0294", "frequencyRank": 206,
+    "commonWords": [
+      "處理 (chǔlǐ) - handle, deal with",
+      "到處 (dàochù) - everywhere",
+      "好處 (hǎochù) - advantage",
+      "長處 (chángchù) - strong point"
+    ]
+  },
+  {"traditional": "走", "simplified": "走", "pinyin": "zǒu", "definition": "walk, go on foot; run; leave", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0625", "frequencyRank": 207,
+    "commonWords": [
+      "走路 (zǒulù) - walk",
+      "走開 (zǒukāi) - go away",
+      "走到 (zǒudào) - walk to",
+      "走進 (zǒujìn) - walk into"
+    ]
+  },
+  {"traditional": "義", "simplified": "义", "pinyin": "yì", "definition": "right conduct, righteousness", "strokeCount": 3, "hskLevel": 5, "generalStandardNumber": "0057", "frequencyRank": 208,
+    "commonWords": [
+      "意義 (yìyì) - meaning",
+      "正義 (zhèngyì) - justice",
+      "義工 (yìgōng) - volunteer",
+      "義務 (yìwù) - duty"
+    ]
+  },
+  {"traditional": "各", "simplified": "各", "pinyin": "gè", "definition": "each, individually, every, all", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0506", "frequencyRank": 209,
+    "commonWords": [
+      "各種 (gèzhǒng) - all kinds of",
+      "各位 (gèwèi) - everyone",
+      "各地 (gèdì) - various places",
+      "各自 (gèzì) - each, respective"
+    ]
+  },
+  {"traditional": "入", "simplified": "入", "pinyin": "rù", "definition": "enter, come in(to), join", "strokeCount": 2, "hskLevel": 4, "generalStandardNumber": "0011", "frequencyRank": 210,
+    "commonWords": [
+      "入口 (rùkǒu) - entrance",
+      "進入 (jìnrù) - enter",
+      "收入 (shōurù) - income",
+      "加入 (jiārù) - join"
+    ]
+  },
+  {"traditional": "幾", "simplified": "几", "pinyin": "jǐ", "definition": "small table", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0014", "frequencyRank": 211,
+    "commonWords": [
+      "幾個 (jǐ ge) - how many",
+      "好幾 (hǎojǐ) - several",
+      "幾點 (jǐ diǎn) - what time",
+      "多少 (duō shǎo) - how many"
+    ]
+  },
+  {"traditional": "口", "simplified": "口", "pinyin": "kǒu", "definition": "mouth; open end; entrance, gate", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0038", "frequencyRank": 212,
+    "commonWords": [
+      "嘴口 (zuǐkǒu) - mouth",
+      "人口 (rénkǒu) - population",
+      "門口 (ménkǒu) - doorway",
+      "口味 (kǒuwèi) - taste"
+    ]
+  },
+  {"traditional": "認", "simplified": "认", "pinyin": "rèn", "definition": "recognize, know, understand", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0171", "frequencyRank": 213,
+    "commonWords": [
+      "認識 (rènshi) - know, recognize",
+      "認真 (rènzhēn) - serious",
+      "承認 (chéngrèn) - admit, recognize",
+      "認定 (rèndìng) - confirm"
+    ]
+  },
+  {"traditional": "條", "simplified": "条", "pinyin": "tiáo", "definition": "clause, condition; string, stripe", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0816", "frequencyRank": 214,
+    "commonWords": [
+      "一條 (yītiáo) - one (strip/item)",
+      "條件 (tiáojiàn) - condition",
+      "麵條 (miàntiáo) - noodles",
+      "線條 (xiàntiáo) - lines"
+    ]
+  },
+  {"traditional": "平", "simplified": "平", "pinyin": "píng", "definition": "flat, level, even; peaceful", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0222", "frequencyRank": 215,
+    "commonWords": [
+      "平常 (píngcháng) - usually",
+      "和平 (hépíng) - peace",
+      "公平 (gōngpíng) - fair",
+      "水平 (shuǐpíng) - level, standard"
+    ]
+  },
+  {"traditional": "系", "simplified": "系", "pinyin": "xì", "definition": "system; line, link, connection", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0825", "frequencyRank": 216,
+    "commonWords": [
+      "關係 (guānxì) - relationship",
+      "系統 (xìtǒng) - system",
+      "系列 (xìliè) - series",
+      "聯繫 (liánxì) - contact"
+    ]
+  },
+  {"traditional": "氣", "simplified": "气", "pinyin": "qì", "definition": "steam, vapor; KangXi radical 84", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0122", "frequencyRank": 217,
+    "commonWords": [
+      "天氣 (tiānqì) - weather",
+      "生氣 (shēngqì) - angry",
+      "空氣 (kōngqì) - air",
+      "氣氛 (qìfēn) - atmosphere"
+    ]
+  },
+  {"traditional": "題", "simplified": "题", "pinyin": "tí", "definition": "forehead; title, headline; theme", "strokeCount": 15, "hskLevel": 2, "generalStandardNumber": "3233", "frequencyRank": 218,
+    "commonWords": [
+      "問題 (wèntí) - question, problem",
+      "題目 (tímù) - topic, subject",
+      "主題 (zhǔtí) - theme",
+      "話題 (huàtí) - topic"
+    ]
+  },
+  {"traditional": "活", "simplified": "活", "pinyin": "huó", "definition": "live, exist, survive; lively", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1672", "frequencyRank": 219,
+    "commonWords": [
+      "生活 (shēnghuó) - life",
+      "活動 (huódòng) - activity",
+      "活力 (huólì) - vitality",
+      "活著 (huózhe) - alive"
+    ]
+  },
+  {"traditional": "爾", "simplified": "尔", "pinyin": "ěr", "definition": "you; that, those; final particle", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0286", "frequencyRank": 220,
+    "commonWords": [
+      "爾後 (ěrhòu) - afterwards",
+      "賽爾 (sàier) - (name, translit.)",
+      "爾等 (ěrděng) - you (plural, archaic)",
+      "爾時 (ěrshí) - at that time"
+    ]
+  },
+  {"traditional": "更", "simplified": "更", "pinyin": "gèng", "definition": "more, still further, much more", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0693", "frequencyRank": 221,
+    "commonWords": [
+      "更加 (gèngjiā) - more",
+      "更好 (gèng hǎo) - better",
+      "更加 (gèngjiā) - even more",
+      "更換 (gēnghuàn) - change, replace"
+    ]
+  },
+  {"traditional": "別", "simplified": "别", "pinyin": "bié", "definition": "separate, other; do not", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0751", "frequencyRank": 222,
+    "commonWords": [
+      "別的 (biéde) - other",
+      "別人 (biérén) - other people",
+      "特別 (tèbié) - special",
+      "分別 (fēnbié) - distinguish"
+    ]
+  },
+  {"traditional": "打", "simplified": "打", "pinyin": "dǎ", "definition": "strike, hit, beat; fight; attack", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0196", "frequencyRank": 223,
+    "commonWords": [
+      "打電話 (dǎ diànhuà) - make a phone call",
+      "打開 (dǎkāi) - open",
+      "打車 (dǎchē) - take taxi",
+      "打算 (dǎsuàn) - plan"
+    ]
+  },
+  {"traditional": "女", "simplified": "女", "pinyin": "nǚ", "definition": "woman, girl; feminine; rad. 38", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0067", "frequencyRank": 224,
+    "commonWords": [
+      "女人 (nǚrén) - woman",
+      "女兒 (nǚ'ér) - daughter",
+      "女士 (nǚshì) - lady",
+      "女朋友 (nǚpéngyou) - girlfriend"
+    ]
+  },
+  {"traditional": "變", "simplified": "变", "pinyin": "biàn", "definition": "change, transform, alter; rebel", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1204", "frequencyRank": 225,
+    "commonWords": [
+      "變化 (biànhuà) - change",
+      "變成 (biànchéng) - become",
+      "改變 (gǎibiàn) - alter",
+      "變動 (biàndòng) - fluctuation"
+    ]
+  },
+  {"traditional": "四", "simplified": "四", "pinyin": "sì", "definition": "four", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0262", "frequencyRank": 226,
+    "commonWords": [
+      "四個 (sì ge) - four (of something)",
+      "四季 (sìjì) - four seasons",
+      "四十 (sìshí) - forty",
+      "第四 (dì sì) - fourth"
+    ]
+  },
+  {"traditional": "神", "simplified": "神", "pinyin": "shén", "definition": "spirit, god, supernatural being", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1711", "frequencyRank": 227,
+    "commonWords": [
+      "精神 (jīngshén) - spirit",
+      "神奇 (shénqí) - magical",
+      "神話 (shénhuà) - myth",
+      "神經 (shénjīng) - nerve"
+    ]
+  },
+  {"traditional": "總", "simplified": "总", "pinyin": "zǒng", "definition": "collect; overall, altogether", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1654", "frequencyRank": 228,
+    "commonWords": [
+      "總是 (zǒngshì) - always",
+      "總統 (zǒngtǒng) - president",
+      "總結 (zǒngjié) - summarize",
+      "總共 (zǒnggòng) - altogether"
+    ]
+  },
+  {"traditional": "何", "simplified": "何", "pinyin": "hé", "definition": "what, why, where, which, how", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0771", "frequencyRank": 229,
+    "commonWords": [
+      "何時 (héshí) - when",
+      "如何 (rúhé) - how",
+      "任何 (rènhé) - any",
+      "為何 (wèihé) - why"
+    ]
+  },
+  {"traditional": "電", "simplified": "电", "pinyin": "diàn", "definition": "electricity; electric; lightning", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0242", "frequencyRank": 230,
+    "commonWords": [
+      "電話 (diànhuà) - telephone",
+      "電影 (diànyǐng) - movie",
+      "電視 (diànshì) - TV",
+      "電腦 (diànnǎo) - computer"
+    ]
+  },
+  {"traditional": "數", "simplified": "数", "pinyin": "shù", "definition": "number; several, count; fate", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2999", "frequencyRank": 231,
+    "commonWords": [
+      "數學 (shùxué) - mathematics",
+      "數量 (shùliàng) - quantity",
+      "數位 (shùwèi) - digit, digital",
+      "多數 (duōshù) - majority"
+    ]
+  },
+  {"traditional": "安", "simplified": "安", "pinyin": "ān", "definition": "peaceful, tranquil, quiet", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0549", "frequencyRank": 232,
+    "commonWords": [
+      "安全 (ānquán) - safe",
+      "安靜 (ānjìng) - quiet",
+      "安心 (ānxīn) - at ease",
+      "安慰 (ānwèi) - comfort"
+    ]
+  },
+  {"traditional": "少", "simplified": "少", "pinyin": "shǎo", "definition": "few, less, inadequate", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0110", "frequencyRank": 233,
+    "commonWords": [
+      "很少 (hěn shǎo) - seldom",
+      "少數 (shǎoshù) - minority",
+      "減少 (jiǎnshǎo) - decrease",
+      "少年 (shàonián) - juvenile, youth"
+    ]
+  },
+  {"traditional": "報", "simplified": "报", "pinyin": "bào", "definition": "report, tell, announce", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0656", "frequencyRank": 234,
+    "commonWords": [
+      "報紙 (bàozhǐ) - newspaper",
+      "報告 (bàogào) - report",
+      "回報 (huíbào) - feedback",
+      "日報 (rìbào) - daily newspaper"
+    ]
+  },
+  {"traditional": "才", "simplified": "才", "pinyin": "cái", "definition": "talent, ability; just, only", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0029", "frequencyRank": 235,
+    "commonWords": [
+      "剛才 (gāngcái) - just now",
+      "才能 (cáinéng) - talent",
+      "天才 (tiāncái) - genius",
+      "這才 (zhècái) - only then"
+    ]
+  },
+  {"traditional": "結", "simplified": "结", "pinyin": "jié", "definition": "knot, tie; join, connect", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1754", "frequencyRank": 236,
+    "commonWords": [
+      "結果 (jiéguǒ) - result",
+      "結婚 (jiéhūn) - marry",
+      "結束 (jiéshù) - end",
+      "團結 (tuánjié) - unite"
+    ]
+  },
+  {"traditional": "反", "simplified": "反", "pinyin": "fǎn", "definition": "reverse, opposite, contrary, anti", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0139", "frequencyRank": 237,
+    "commonWords": [
+      "反對 (fǎnduì) - oppose",
+      "反而 (fǎn'ér) - instead",
+      "反映 (fǎnyìng) - reflect",
+      "反應 (fǎnyìng) - reaction"
+    ]
+  },
+  {"traditional": "受", "simplified": "受", "pinyin": "shòu", "definition": "receive, accept, get; bear, stand", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1174", "frequencyRank": 238,
+    "commonWords": [
+      "接受 (jiēshòu) - accept",
+      "受傷 (shòushāng) - injured",
+      "受到 (shòudào) - be subjected to",
+      "受不了 (shòu bù liǎo) - cannot stand"
+    ]
+  },
+  {"traditional": "目", "simplified": "目", "pinyin": "mù", "definition": "eye; look, see; division, topic", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0236", "frequencyRank": 239,
+    "commonWords": [
+      "目的 (mùdì) - purpose, goal",
+      "目標 (mùbiāo) - target",
+      "節目 (jiémù) - program",
+      "目錄 (mùlù) - catalog"
+    ]
+  },
+  {"traditional": "太", "simplified": "太", "pinyin": "tài", "definition": "very, too, much; big; extreme", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0093", "frequencyRank": 240,
+    "commonWords": [
+      "太太 (tàitai) - wife, Mrs.",
+      "太陽 (tàiyáng) - sun",
+      "太多 (tài duō) - too many",
+      "太大 (tài dà) - too big"
+    ]
+  },
+  {"traditional": "量", "simplified": "量", "pinyin": "liàng", "definition": "measure, quantity, capacity", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2616", "frequencyRank": 241,
+    "commonWords": [
+      "力量 (lìliàng) - strength",
+      "數量 (shùliàng) - quantity",
+      "能量 (néngliàng) - energy",
+      "分量 (fènliàng) - weight"
+    ]
+  },
+  {"traditional": "再", "simplified": "再", "pinyin": "zài", "definition": "again, twice, re-", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0382", "frequencyRank": 242,
+    "commonWords": [
+      "再見 (zàijiàn) - goodbye",
+      "再來 (zàilái) - come again",
+      "再說 (zàishuō) - say again",
+      "再一次 (zài yīcì) - once more"
+    ]
+  },
+  {"traditional": "感", "simplified": "感", "pinyin": "gǎn", "definition": "feel, perceive, emotion", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2875", "frequencyRank": 243,
+    "commonWords": [
+      "感覺 (gǎnjué) - feeling",
+      "感謝 (gǎnxiè) - grateful",
+      "感情 (gǎnqíng) - emotion",
+      "感動 (gǎndòng) - move, touch"
+    ]
+  },
+  {"traditional": "建", "simplified": "建", "pinyin": "jiàn", "definition": "build, establish, erect, found", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1302", "frequencyRank": 244,
+    "commonWords": [
+      "建立 (jiànlì) - establish",
+      "建議 (jiànyì) - suggest",
+      "建設 (jiànshè) - construct",
+      "建築 (jiànzhù) - building"
+    ]
+  },
+  {"traditional": "務", "simplified": "务", "pinyin": "wù", "definition": "affairs, business; must, should", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0297", "frequencyRank": 245,
+    "commonWords": [
+      "任務 (rènwù) - task",
+      "服務 (fúwù) - service",
+      "事務 (shìwù) - affairs",
+      "業務 (yèwù) - business"
+    ]
+  },
+  {"traditional": "做", "simplified": "做", "pinyin": "zuò", "definition": "work, make; act", "strokeCount": 11, "hskLevel": 1, "generalStandardNumber": "2324", "frequencyRank": 246,
+    "commonWords": [
+      "做飯 (zuòfàn) - cook",
+      "做作業 (zuò zuòyè) - do homework",
+      "做事情 (zuò shìqing) - do things",
+      "做夢 (zuòmèng) - dream"
+    ]
+  },
+  {"traditional": "接", "simplified": "接", "pinyin": "jiē", "definition": "receive; continue; catch; connect", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2185", "frequencyRank": 247,
+    "commonWords": [
+      "接到 (jiēdào) - receive",
+      "接著 (jiēzhe) - then, next",
+      "接近 (jiējìn) - approach, be near",
+      "接送 (jiēsòng) - pick up and drop off"
+    ]
+  },
+  {"traditional": "必", "simplified": "必", "pinyin": "bì", "definition": "surely, most certainly; must", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0321", "frequencyRank": 248,
+    "commonWords": [
+      "必要 (bìyào) - necessary",
+      "必須 (bìxū) - must, have to",
+      "未必 (wèibì) - not necessarily",
+      "必然 (bìrán) - inevitable"
+    ]
+  },
+  {"traditional": "場", "simplified": "场", "pinyin": "chǎng", "definition": "open space, field, market", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0367", "frequencyRank": 249,
+    "commonWords": [
+      "廣場 (guǎngchǎng) - square, plaza",
+      "農場 (nóngchǎng) - farm",
+      "球場 (qiúchǎng) - ball field",
+      "市場 (shìchǎng) - market"
+    ]
+  },
+  {"traditional": "件", "simplified": "件", "pinyin": "jiàn", "definition": "numerary adjunct for article; matter", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0466", "frequencyRank": 250,
+    "commonWords": [
+      "一件 (yījiàn) - one (piece/item)",
+      "事件 (shìjiàn) - event, incident",
+      "文件 (wénjiàn) - file, document",
+      "條件 (tiáojiàn) - condition"
+    ]
+  },
+  {"traditional": "計", "simplified": "计", "pinyin": "jì", "definition": "plan, plot; strategem; scheme", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0168", "frequencyRank": 251,
+    "commonWords": [
+      "計劃 (jìhuà) - plan",
+      "會計 (kuàijì) - accounting",
+      "統計 (tǒngjì) - statistics",
+      "計算 (jìsuàn) - calculate"
+    ]
+  },
+  {"traditional": "管", "simplified": "管", "pinyin": "guǎn", "definition": "pipe, tube, duct; woodwind music", "strokeCount": 14, "hskLevel": 4, "generalStandardNumber": "3123", "frequencyRank": 252,
+    "commonWords": [
+      "管理 (guǎnlǐ) - to manage, management",
+      "館 (guǎn) - a public building (e.g. 餐館 restaurant, 體育館 gym)",
+      "管子 (guǎnzi) - pipe, tube",
+      "不管 (bùguǎn) - regardless, no matter (what/how, etc.)"
+    ]
+  },
+  {"traditional": "期", "simplified": "期", "pinyin": "qī", "definition": "period of time; date; time limit", "strokeCount": 12, "hskLevel": 1, "generalStandardNumber": "2542", "frequencyRank": 253,
+    "commonWords": [
+      "星期 (xīngqī) - week",
+      "預期／预期 (yùqī) - to expect, expectation",
+      "長期／长期 (chángqī) - long-term",
+      "時期／时期 (shíqī) - period, phase"
+    ]
+  },
+  {"traditional": "市", "simplified": "市", "pinyin": "shì", "definition": "market, fair; city, town; trade", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0301", "frequencyRank": 254,
+    "commonWords": [
+      "城市 (chéngshì) - city",
+      "市長／市长 (shìzhǎng) - mayor",
+      "市場／市场 (shìchǎng) - market",
+      "市民 (shìmín) - citizen"
+    ]
+  },
+  {"traditional": "直", "simplified": "直", "pinyin": "zhí", "definition": "straight, erect, vertical", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1011", "frequencyRank": 255,
+    "commonWords": [
+      "一直 (yīzhí) - continuously, always",
+      "直接 (zhíjiē) - directly, direct",
+      "直線／直线 (zhíxiàn) - straight line",
+      "坦直 (tǎnzhí) - frank, straightforward"
+    ]
+  },
+  {"traditional": "德", "simplified": "德", "pinyin": "dé", "definition": "ethics, morality, virtue", "strokeCount": 15, "hskLevel": 5, "generalStandardNumber": "3272", "frequencyRank": 256,
+    "commonWords": [
+      "德國／德国 (Déguó) - Germany",
+      "品德 (pǐndé) - moral character",
+      "道德 (dàodé) - morals, ethics",
+      "醫德／医德 (yīdé) - medical ethics"
+    ]
+  },
+  {"traditional": "資", "simplified": "资", "pinyin": "zī", "definition": "property; wealth; capital", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2039", "frequencyRank": 257,
+    "commonWords": [
+      "資金／资金 (zījīn) - funds, capital",
+      "資源／资源 (zīyuán) - resources",
+      "工資／工资 (gōngzī) - wage, salary",
+      "投資／投资 (tóuzī) - investment, to invest"
+    ]
+  },
+  {"traditional": "命", "simplified": "命", "pinyin": "mìng", "definition": "life; destiny, fate, luck; an order, instruction", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1168", "frequencyRank": 258,
+    "commonWords": [
+      "生命 (shēngmìng) - life",
+      "命運／命运 (mìngyùn) - destiny, fate",
+      "命令 (mìnglìng) - order, command",
+      "革命 (gémìng) - revolution"
+    ]
+  },
+  {"traditional": "山", "simplified": "山", "pinyin": "shān", "definition": "mountain, hill, peak", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0039", "frequencyRank": 259,
+    "commonWords": [
+      "爬山 (páshān) - to climb a mountain",
+      "山頂／山顶 (shāndǐng) - mountain top",
+      "高山 (gāoshān) - high mountain",
+      "火山 (huǒshān) - volcano"
+    ]
+  },
+  {"traditional": "金", "simplified": "金", "pinyin": "jīn", "definition": "gold; metals in general; money", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1166", "frequencyRank": 260,
+    "commonWords": [
+      "黃金／黄金 (huángjīn) - gold",
+      "金錢／金钱 (jīnqián) - money",
+      "金屬／金属 (jīnshǔ) - metal",
+      "金牌 (jīnpái) - gold medal"
+    ]
+  },
+  {"traditional": "指", "simplified": "指", "pinyin": "zhǐ", "definition": "finger, toe; point, indicate", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1389", "frequencyRank": 261,
+    "commonWords": [
+      "手指 (shǒuzhǐ) - finger",
+      "指導／指导 (zhǐdǎo) - to guide, guidance",
+      "指示 (zhǐshì) - instruction, to instruct",
+      "指出 (zhǐchū) - to point out"
+    ]
+  },
+  {"traditional": "克", "simplified": "克", "pinyin": "kè", "definition": "gram; overcome; transliteration", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0675", "frequencyRank": 262,
+    "commonWords": [
+      "克服 (kèfú) - to overcome",
+      "千克 (qiānkè) - kilogram",
+      "公克 (gōngkè) - gram (TW usage)",
+      "可口可樂／可口可乐 (Kěkǒukělè) - Coca-Cola"
+    ]
+  },
+  {"traditional": "許", "simplified": "许", "pinyin": "xǔ", "definition": "allow, permit; promise; betroth", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0554", "frequencyRank": 263,
+    "commonWords": [
+      "許多／许多 (xǔduō) - many, much",
+      "允許／允许 (yǔnxǔ) - to allow, permit",
+      "許可／许可 (xǔkě) - permit, to permit",
+      "也許／也许 (yěxǔ) - perhaps, maybe"
+    ]
+  },
+  {"traditional": "統", "simplified": "统", "pinyin": "tǒng", "definition": "govern, command, control; unite", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1765", "frequencyRank": 264,
+    "commonWords": [
+      "統一／统一 (tǒngyī) - unify, unite",
+      "系統／系统 (xìtǒng) - system",
+      "統計／统计 (tǒngjì) - statistics, to count",
+      "總統／总统 (zǒngtǒng) - president"
+    ]
+  },
+  {"traditional": "區", "simplified": "区", "pinyin": "qū", "definition": "area, district, region, ward", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0094", "frequencyRank": 265,
+    "commonWords": [
+      "地區／地区 (dìqū) - area, region",
+      "區域／区域 (qūyù) - region, district",
+      "社區／社区 (shèqū) - community",
+      "商業區／商业区 (shāngyèqū) - business district"
+    ]
+  },
+  {"traditional": "保", "simplified": "保", "pinyin": "bǎo", "definition": "protect, safeguard, defend, care", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1562", "frequencyRank": 266,
+    "commonWords": [
+      "保護／保护 (bǎohù) - to protect",
+      "保證／保证 (bǎozhèng) - guarantee, to guarantee",
+      "保險／保险 (bǎoxiǎn) - insurance",
+      "保留 (bǎoliú) - to reserve, retain"
+    ]
+  },
+  {"traditional": "至", "simplified": "至", "pinyin": "zhì", "definition": "reach, arrive; extremely, very", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0410", "frequencyRank": 267,
+    "commonWords": [
+      "至今 (zhìjīn) - up to now",
+      "以至 (yǐzhì) - so that; even to",
+      "至於／至于 (zhìyú) - as for",
+      "至上 (zhìshàng) - supreme"
+    ]
+  },
+  {"traditional": "隊", "simplified": "队", "pinyin": "duì", "definition": "team, group; army unit", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0180", "frequencyRank": 268,
+    "commonWords": [
+      "部隊／部队 (bùduì) - troops, army",
+      "隊伍／队伍 (duìwǔ) - ranks, team",
+      "球隊／球队 (qiúduì) - ball team",
+      "隊長／队长 (duìzhǎng) - team captain"
+    ]
+  },
+  {"traditional": "形", "simplified": "形", "pinyin": "xíng", "definition": "form, shape, appearance", "strokeCount": 7, "hskLevel": 5, "generalStandardNumber": "0604", "frequencyRank": 269,
+    "commonWords": [
+      "形狀／形状 (xíngzhuàng) - shape, form",
+      "類型／类型 (lèixíng) - type, category",
+      "形成 (xíngchéng) - to form",
+      "外形 (wàixíng) - appearance"
+    ]
+  },
+  {"traditional": "社", "simplified": "社", "pinyin": "shè", "definition": "god of the soil and altars to him; group of families; company, society", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0890", "frequencyRank": 270,
+    "commonWords": [
+      "社會／社会 (shèhuì) - society",
+      "公司 (gōngsī) - company (sī contains 社’s concept)",
+      "社團／社团 (shètuán) - association, club",
+      "報社／报社 (bàoshè) - newspaper office"
+    ]
+  },
+  {"traditional": "便", "simplified": "便", "pinyin": "biàn", "definition": "convenience, ease; expedient", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1556", "frequencyRank": 271,
+    "commonWords": [
+      "方便 (fāngbiàn) - convenient",
+      "便利 (biànlì) - convenience, convenient",
+      "隨便／随便 (suíbiàn) - as one wishes, casual",
+      "便宜 (piányi) - cheap"
+    ]
+  },
+  {"traditional": "空", "simplified": "空", "pinyin": "kōng", "definition": "empty, hollow, bare, deserted", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1282", "frequencyRank": 272,
+    "commonWords": [
+      "天空 (tiānkōng) - sky",
+      "空氣／空气 (kōngqì) - air",
+      "空間／空间 (kōngjiān) - space",
+      "空調／空调 (kōngtiáo) - air conditioner"
+    ]
+  },
+  {"traditional": "決", "simplified": "决", "pinyin": "jué", "definition": "decide, determine, judge", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0523", "frequencyRank": 273,
+    "commonWords": [
+      "決定／决定 (juédìng) - to decide, decision",
+      "解決／解决 (jiějué) - to solve",
+      "決賽／决赛 (juésài) - final (competition)",
+      "堅決／坚决 (jiānjué) - firm, resolute"
+    ]
+  },
+  {"traditional": "治", "simplified": "治", "pinyin": "zhì", "definition": "govern, regulate, administer", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1264", "frequencyRank": 274,
+    "commonWords": [
+      "治理 (zhìlǐ) - to govern, governance",
+      "治療／治疗 (zhìliáo) - to treat (a disease)",
+      "治安 (zhì'ān) - public security",
+      "政治 (zhèngzhì) - politics"
+    ]
+  },
+  {"traditional": "展", "simplified": "展", "pinyin": "zhǎn", "definition": "open, unfold; stretch, extend", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2131", "frequencyRank": 275,
+    "commonWords": [
+      "展覽／展览 (zhǎnlǎn) - exhibition",
+      "發展／发展 (fāzhǎn) - development, to develop",
+      "展示 (zhǎnshì) - to display, show",
+      "進展／进展 (jìnzhǎn) - progress"
+    ]
+  },
+  {"traditional": "馬", "simplified": "马", "pinyin": "mǎ", "definition": "horse; surname; KangXi radical 187", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0072", "frequencyRank": 276,
+    "commonWords": [
+      "馬路／马路 (mǎlù) - road",
+      "馬上／马上 (mǎshàng) - immediately",
+      "馬虎／马虎 (mǎhu) - careless",
+      "小馬／小马 (xiǎomǎ) - pony"
+    ]
+  },
+  {"traditional": "科", "simplified": "科", "pinyin": "kē", "definition": "section, department, science", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1551", "frequencyRank": 277,
+    "commonWords": [
+      "科學／科学 (kēxué) - science",
+      "本科 (běnkē) - undergraduate",
+      "課程／课程 (kèchéng) - course, curriculum",
+      "科技 (kējì) - science and technology"
+    ]
+  },
+  {"traditional": "司", "simplified": "司", "pinyin": "sī", "definition": "take charge of, control, manage; officer", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0325", "frequencyRank": 278,
+    "commonWords": [
+      "公司 (gōngsī) - company",
+      "司機／司机 (sījī) - driver",
+      "司法 (sīfǎ) - justice, judicial",
+      "董事司 (dǒngshìsī) - board of directors"
+    ]
+  },
+  {"traditional": "五", "simplified": "五", "pinyin": "wǔ", "definition": "five; surname", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0088", "frequencyRank": 279,
+    "commonWords": [
+      "五月 (wǔyuè) - May",
+      "五十 (wǔshí) - fifty",
+      "五年 (wǔnián) - five years",
+      "五顏六色／五颜六色 (wǔyán liùsè) - multicolored"
+    ]
+  },
+  {"traditional": "基", "simplified": "基", "pinyin": "jī", "definition": "foundation, base", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2193", "frequencyRank": 280,
+    "commonWords": [
+      "基本 (jīběn) - basic, fundamental",
+      "基地 (jīdì) - base, foundation",
+      "基礎／基础 (jīchǔ) - foundation, basis",
+      "基因 (jīyīn) - gene"
+    ]
+  },
+  {"traditional": "眼", "simplified": "眼", "pinyin": "yǎn", "definition": "eye; eyelet, hole, opening", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2263", "frequencyRank": 281,
+    "commonWords": [
+      "眼睛 (yǎnjing) - eye",
+      "眼鏡／眼镜 (yǎnjìng) - glasses",
+      "眼神 (yǎnshén) - expression in one's eyes",
+      "開眼／开眼 (kāiyǎn) - to widen one's view"
+    ]
+  },
+  {"traditional": "書", "simplified": "书", "pinyin": "shū", "definition": "book, letter, document; writings", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0188", "frequencyRank": 282,
+    "commonWords": [
+      "書店／书店 (shūdiàn) - bookstore",
+      "書本／书本 (shūběn) - books",
+      "讀書／读书 (dúshū) - to read, study",
+      "書包／书包 (shūbāo) - schoolbag"
+    ]
+  },
+  {"traditional": "非", "simplified": "非", "pinyin": "fēi", "definition": "not, negative, non-; oppose", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1064", "frequencyRank": 283,
+    "commonWords": [
+      "非常 (fēicháng) - very, extremely",
+      "非法 (fēifǎ) - illegal",
+      "非洲 (Fēizhōu) - Africa",
+      "是非 (shìfēi) - right and wrong"
+    ]
+  },
+  {"traditional": "則", "simplified": "则", "pinyin": "zé", "definition": "rule, law, regulation; grades", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0440", "frequencyRank": 284,
+    "commonWords": [
+      "原則／原则 (yuánzé) - principle",
+      "規則／规则 (guīzé) - rules, regulations",
+      "法則／法则 (fǎzé) - law (science, nature)",
+      "否則／否则 (fǒuzé) - otherwise"
+    ]
+  },
+  {"traditional": "聽", "simplified": "听", "pinyin": "tīng", "definition": "hear; understand; obey, comply", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0739", "frequencyRank": 285,
+    "commonWords": [
+      "聽說／听说 (tīngshuō) - heard of, to hear",
+      "聽見／听见 (tīngjiàn) - to hear",
+      "聽力／听力 (tīnglì) - listening ability",
+      "收聽／收听 (shōutīng) - to listen (to broadcast, etc.)"
+    ]
+  },
+  {"traditional": "白", "simplified": "白", "pinyin": "bái", "definition": "white; pure, unblemished; bright", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0275", "frequencyRank": 286,
+    "commonWords": [
+      "白天 (báitiān) - daytime",
+      "明白 (míngbai) - understand, clear",
+      "白色 (báisè) - the color white",
+      "白飯／白饭 (báifàn) - plain rice"
+    ]
+  },
+  {"traditional": "卻", "simplified": "却", "pinyin": "què", "definition": "still, but; decline; retreat", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0658", "frequencyRank": 287,
+    "commonWords": [
+      "卻是／却是 (quèshì) - but (it is), yet",
+      "退卻／退却 (tuìquè) - to retreat",
+      "拒絕／拒绝 (jùjué) - to refuse, to reject",
+      "卻步／却步 (quèbù) - to shrink back"
+    ]
+  },
+  {"traditional": "界", "simplified": "界", "pinyin": "jiè", "definition": "boundary, limit; domain; society; the world", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1496", "frequencyRank": 288,
+    "commonWords": [
+      "世界 (shìjiè) - world",
+      "邊界／边界 (biānjiè) - border, boundary",
+      "界限 (jièxiàn) - limit, boundary",
+      "學界／学界 (xuéjiè) - academic circles"
+    ]
+  },
+  {"traditional": "達", "simplified": "达", "pinyin": "dá", "definition": "arrive at, reach; intelligent; smooth, slippery", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0398", "frequencyRank": 289,
+    "commonWords": [
+      "到達／到达 (dàodá) - to arrive",
+      "達到／达到 (dádào) - to achieve, reach",
+      "表達／表达 (biǎodá) - to express",
+      "傳達／传达 (chuándá) - to convey"
+    ]
+  },
+  {"traditional": "光", "simplified": "光", "pinyin": "guāng", "definition": "light, brilliant, shine; only", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0417", "frequencyRank": 290,
+    "commonWords": [
+      "陽光／阳光 (yángguāng) - sunlight",
+      "光明 (guāngmíng) - bright, light",
+      "光線／光线 (guāngxiàn) - ray of light",
+      "燈光／灯光 (dēngguāng) - lighting"
+    ]
+  },
+  {"traditional": "放", "simplified": "放", "pinyin": "fàng", "definition": "put, release, free, liberate", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1223", "frequencyRank": 291,
+    "commonWords": [
+      "放棄／放弃 (fàngqì) - to give up",
+      "放學／放学 (fàngxué) - to finish school (for day)",
+      "播放 (bōfàng) - to broadcast, to play (audio/video)",
+      "開放／开放 (kāifàng) - open (to public), to open up"
+    ]
+  },
+  {"traditional": "強", "simplified": "强", "pinyin": "qiáng", "definition": "strong, powerful, energetic", "strokeCount": 12, "hskLevel": 5, "generalStandardNumber": "2802", "frequencyRank": 292,
+    "commonWords": [
+      "強大／强大 (qiángdà) - powerful",
+      "增強／增强 (zēngqiáng) - to strengthen, enhance",
+      "強調／强调 (qiángdiào) - to emphasize",
+      "堅強／坚强 (jiānqiáng) - strong, tenacious"
+    ]
+  },
+  {"traditional": "即", "simplified": "即", "pinyin": "jí", "definition": "promptly, quickly, immediately", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0901", "frequencyRank": 293,
+    "commonWords": [
+      "立即 (lìjí) - immediately, at once",
+      "即使 (jíshǐ) - even if",
+      "即將／即将 (jíjiāng) - about to",
+      "即便 (jíbiàn) - even if"
+    ]
+  },
+  {"traditional": "像", "simplified": "像", "pinyin": "xiàng", "definition": "a picture, image, figure; to resemble", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2961", "frequencyRank": 294,
+    "commonWords": [
+      "好像 (hǎoxiàng) - as if, seems like",
+      "照像／照相 (zhàoxiàng) - to take a picture",
+      "圖像／图像 (túxiàng) - image",
+      "偶像 (ǒuxiàng) - idol"
+    ]
+  },
+  {"traditional": "難", "simplified": "难", "pinyin": "nán", "definition": "difficult, arduous, hard; unable", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2147", "frequencyRank": 295,
+    "commonWords": [
+      "困難／困难 (kùnnán) - difficulty",
+      "難過／难过 (nánguò) - sad, hard to bear",
+      "難題／难题 (nántí) - difficult problem",
+      "難受／难受 (nánshòu) - uncomfortable"
+    ]
+  },
+  {"traditional": "且", "simplified": "且", "pinyin": "qiě", "definition": "moreover, also (post-subject); about to, will soon (pre-verb)", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0237", "frequencyRank": 296,
+    "commonWords": [
+      "而且 (érqiě) - moreover, besides",
+      "並且／并且 (bìngqiě) - and, besides",
+      "且慢 (qiěmàn) - wait a moment, hold on",
+      "且不說／且不说 (qiěbùshuō) - let alone, to say nothing of"
+    ]
+  },
+  {"traditional": "權", "simplified": "权", "pinyin": "quán", "definition": "power, right, authority", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0378", "frequencyRank": 297,
+    "commonWords": [
+      "權利／权利 (quánlì) - right, privilege",
+      "權力／权力 (quánlì) - power, authority",
+      "人權／人权 (rénquán) - human rights",
+      "版權／版权 (bǎnquán) - copyright"
+    ]
+  },
+  {"traditional": "思", "simplified": "思", "pinyin": "sī", "definition": "think, consider, ponder; final particle", "strokeCount": 9, "hskLevel": 2, "generalStandardNumber": "1500", "frequencyRank": 298,
+    "commonWords": [
+      "思想 (sīxiǎng) - thought, thinking",
+      "思考 (sīkǎo) - to think, to ponder",
+      "思念 (sīniàn) - to miss (someone)",
+      "意思 (yìsi) - meaning, idea"
+    ]
+  },
+  {"traditional": "王", "simplified": "王", "pinyin": "wáng", "definition": "king, ruler; royal; surname", "strokeCount": 4, "hskLevel": 5, "generalStandardNumber": "0075", "frequencyRank": 299,
+    "commonWords": [
+      "國王／国王 (guówáng) - king",
+      "王子 (wángzǐ) - prince",
+      "女王 (nǚwáng) - queen",
+      "王國／王国 (wángguó) - kingdom"
+    ]
+  },
+  {"traditional": "象", "simplified": "象", "pinyin": "xiàng", "definition": "elephant; ivory; figure, image", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2361", "frequencyRank": 300,
+    "commonWords": [
+      "大象 (dàxiàng) - elephant",
+      "形象 (xíngxiàng) - image, figure",
+      "現象／现象 (xiànxiàng) - phenomenon",
+      "印象 (yìnxiàng) - impression"
+    ]
+  },
+  {"traditional": "完", "simplified": "完", "pinyin": "wán", "definition": "complete, finish, settle; whole", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0877", "frequencyRank": 301,
+    "commonWords": [
+      "完成 (wánchéng) - to complete",
+      "完美 (wánměi) - perfect",
+      "完了 (wánle) - finished, done",
+      "完全 (wánquán) - completely"
+    ]
+  },
+  {"traditional": "設", "simplified": "设", "pinyin": "shè", "definition": "build; establish; display", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0560", "frequencyRank": 302,
+    "commonWords": [
+      "設計／设计 (shèjì) - to design, design",
+      "設施／设施 (shèshī) - facilities",
+      "設置／设置 (shèzhì) - to set up, install",
+      "假設／假设 (jiǎshè) - suppose, hypothesis"
+    ]
+  },
+  {"traditional": "式", "simplified": "式", "pinyin": "shì", "definition": "style, system, formula, rule", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0349", "frequencyRank": 303,
+    "commonWords": [
+      "方式 (fāngshì) - way, method",
+      "公式 (gōngshì) - formula",
+      "儀式／仪式 (yíshì) - ceremony, ritual",
+      "款式 (kuǎnshì) - style, pattern"
+    ]
+  },
+  {"traditional": "色", "simplified": "色", "pinyin": "sè", "definition": "color, tint, hue, shade; form, body; beauty, desire for beauty", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0509", "frequencyRank": 304,
+    "commonWords": [
+      "顏色／颜色 (yánsè) - color",
+      "紅色／红色 (hóngsè) - red",
+      "特色 (tèsè) - characteristic, trait",
+      "色彩 (sècǎi) - color, hue"
+    ]
+  },
+  {"traditional": "路", "simplified": "路", "pinyin": "lù", "definition": "road, path, street; journey", "strokeCount": 13, "hskLevel": 2, "generalStandardNumber": "2918", "frequencyRank": 305,
+    "commonWords": [
+      "馬路／马路 (mǎlù) - road",
+      "一路 (yílù) - all the way",
+      "路線／路线 (lùxiàn) - route",
+      "公路 (gōnglù) - highway"
+    ]
+  },
+  {"traditional": "記", "simplified": "记", "pinyin": "jì", "definition": "record; keep in mind, remember", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0323", "frequencyRank": 306,
+    "commonWords": [
+      "記得／记得 (jìde) - to remember",
+      "記錄／记录 (jìlù) - record, to record",
+      "筆記／笔记 (bǐjì) - notes",
+      "忘記／忘记 (wàngjì) - to forget"
+    ]
+  },
+  {"traditional": "南", "simplified": "南", "pinyin": "nán", "definition": "south; southern part; southward", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1422", "frequencyRank": 307,
+    "commonWords": [
+      "南方 (nánfāng) - south, southern",
+      "河南 (Hénán) - Henan (province)",
+      "湖南 (Húnán) - Hunan (province)",
+      "海南 (Hǎinán) - Hainan (province)"
+    ]
+  },
+  {"traditional": "品", "simplified": "品", "pinyin": "pǐn", "definition": "article, product, commodity", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1503", "frequencyRank": 308,
+    "commonWords": [
+      "產品／产品 (chǎnpǐn) - product",
+      "食品 (shípǐn) - foodstuff",
+      "商品 (shāngpǐn) - commodity, goods",
+      "品質／品质 (pǐnzhì) - quality"
+    ]
+  },
+  {"traditional": "住", "simplified": "住", "pinyin": "zhù", "definition": "reside, live at, dwell, lodge; stop", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0783", "frequencyRank": 309,
+    "commonWords": [
+      "住院 (zhùyuàn) - be hospitalized",
+      "住房 (zhùfáng) - housing",
+      "居住 (jūzhù) - to reside",
+      "住宿 (zhùsù) - accommodation"
+    ]
+  },
+  {"traditional": "告", "simplified": "告", "pinyin": "gào", "definition": "tell, announce, inform; accuse", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0760", "frequencyRank": 310,
+    "commonWords": [
+      "報告／报告 (bàogào) - report",
+      "告訴／告诉 (gàosu) - to tell",
+      "警告 (jǐnggào) - to warn",
+      "公告 (gōnggào) - public announcement"
+    ]
+  },
+  {"traditional": "類", "simplified": "类", "pinyin": "lèi", "definition": "class, group, kind, category", "strokeCount": 9, "hskLevel": 5, "generalStandardNumber": "1646", "frequencyRank": 311,
+    "commonWords": [
+      "種類／种类 (zhǒnglèi) - kind, type",
+      "人類／人类 (rénlèi) - mankind, humanity",
+      "類似／类似 (lèisì) - similar",
+      "分類／分类 (fēnlèi) - classification"
+    ]
+  },
+  {"traditional": "求", "simplified": "求", "pinyin": "qiú", "definition": "seek; demand, request; beseech", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0690", "frequencyRank": 312,
+    "commonWords": [
+      "要求 (yāoqiú) - request, requirement",
+      "追求 (zhuīqiú) - to pursue",
+      "求助 (qiúzhù) - to seek help",
+      "請求／请求 (qǐngqiú) - to request, request"
+    ]
+  },
+  {"traditional": "據", "simplified": "据", "pinyin": "jù", "definition": "to occupy, take possession of; a base, position", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2189", "frequencyRank": 313,
+    "commonWords": [
+      "根據／根据 (gēnjù) - according to, basis",
+      "據說／据说 (jùshuō) - it is said",
+      "數據／数据 (shùjù) - data",
+      "憑據／凭据 (píngjù) - evidence, proof"
+    ]
+  },
+  {"traditional": "程", "simplified": "程", "pinyin": "chéng", "definition": "journey, trip; schedule, agenda", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2677", "frequencyRank": 314,
+    "commonWords": [
+      "課程／课程 (kèchéng) - course, curriculum",
+      "行程 (xíngchéng) - itinerary, schedule",
+      "程序 (chéngxù) - procedure, program",
+      "過程／过程 (guòchéng) - process"
+    ]
+  },
+  {"traditional": "北", "simplified": "北", "pinyin": "běi", "definition": "north; northern; northward", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0227", "frequencyRank": 315,
+    "commonWords": [
+      "北京 (Běijīng) - Beijing",
+      "北方 (běifāng) - north, northern",
+      "東北／东北 (dōngběi) - northeast",
+      "北極／北极 (běijí) - North Pole"
+    ]
+  },
+  {"traditional": "邊", "simplified": "边", "pinyin": "biān", "definition": "edge, margin, side, border", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0337", "frequencyRank": 316,
+    "commonWords": [
+      "旁邊／旁边 (pángbiān) - beside",
+      "這邊／这边 (zhèbiān) - this side, here",
+      "邊界／边界 (biānjiè) - border, boundary",
+      "一邊...一邊...／一边...一边... (yìbiān...yìbiān...) - at the same time"
+    ]
+  },
+  {"traditional": "死", "simplified": "死", "pinyin": "sǐ", "definition": "die; dead; death", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0400", "frequencyRank": 317,
+    "commonWords": [
+      "死亡 (sǐwáng) - death",
+      "死了 (sǐle) - dead",
+      "怕死 (pàsǐ) - afraid of dying",
+      "打死 (dǎsǐ) - to beat to death"
+    ]
+  },
+  {"traditional": "張", "simplified": "张", "pinyin": "zhāng", "definition": "stretch, extend, expand; sheet", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0909", "frequencyRank": 318,
+    "commonWords": [
+      "張開／张开 (zhāngkāi) - to open (mouth, arms, etc.)",
+      "緊張／紧张 (jǐnzhāng) - nervous",
+      "一張／一张 (yìzhāng) - (measure word) for flat objects",
+      "張嘴／张嘴 (zhāngzuǐ) - open mouth"
+    ]
+  },
+  {"traditional": "該", "simplified": "该", "pinyin": "gāi", "definition": "should, ought to, need to", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1300", "frequencyRank": 319,
+    "commonWords": [
+      "應該／应该 (yīnggāi) - should, ought to",
+      "該公司／该公司 (gāi gōngsī) - the (aforementioned) company",
+      "該校／该校 (gāi xiào) - that school",
+      "該學生／该学生 (gāi xuéshēng) - that student"
+    ]
+  },
+  {"traditional": "交", "simplified": "交", "pinyin": "jiāo", "definition": "mix; intersect; exchange, communicate; deliver", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0519", "frequencyRank": 320,
+    "commonWords": [
+      "交流 (jiāoliú) - to exchange, communicate",
+      "交朋友 (jiāo péngyou) - to make friends",
+      "交通 (jiāotōng) - traffic",
+      "交給／交给 (jiāogěi) - to hand over"
+    ]
+  },
+  {"traditional": "規", "simplified": "规", "pinyin": "guī", "definition": "rules, regulations, customs, law", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "0952", "frequencyRank": 321,
+    "commonWords": [
+      "規則／规则 (guīzé) - rule, regulation",
+      "規律／规律 (guīlǜ) - law (of science), regular pattern",
+      "規定／规定 (guīdìng) - regulation, stipulate",
+      "標準規範／标准规范 (biāozhǔn guīfàn) - standard norm"
+    ]
+  },
+  {"traditional": "萬", "simplified": "万", "pinyin": "wàn", "definition": "ten thousand; innumerable", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0035", "frequencyRank": 322,
+    "commonWords": [
+      "萬一／万一 (wànyī) - just in case",
+      "萬事如意／万事如意 (wànshì rúyì) - may all be well with you",
+      "萬能／万能 (wànnéng) - all-powerful",
+      "汽車萬里／汽车万里 (qìchē wànlǐ) - long journey by car"
+    ]
+  },
+  {"traditional": "取", "simplified": "取", "pinyin": "qǔ", "definition": "take, receive, obtain; select", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "0997", "frequencyRank": 323,
+    "commonWords": [
+      "取得 (qǔdé) - to obtain, to gain",
+      "領取／领取 (lǐngqǔ) - to collect, claim",
+      "取消 (qǔxiāo) - to cancel",
+      "取名 (qǔmíng) - to name"
+    ]
+  },
+  {"traditional": "拉", "simplified": "拉", "pinyin": "lā", "definition": "pull, drag; seize, hold; lengthen", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "0981", "frequencyRank": 324,
+    "commonWords": [
+      "拉開／拉开 (lākāi) - to pull open",
+      "拉手 (lāshǒu) - to hold hands, handle",
+      "拉車／拉车 (lāchē) - to pull a cart",
+      "拉倒 (lādǎo) - forget it, drop it"
+    ]
+  },
+  {"traditional": "格", "simplified": "格", "pinyin": "gé", "definition": "pattern, standard, form; style", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "1845", "frequencyRank": 325,
+    "commonWords": [
+      "價格／价格 (jiàgé) - price",
+      "人格 (réngé) - personality",
+      "規格／规格 (guīgé) - specification",
+      "及格 (jígé) - to pass (an exam)"
+    ]
+  },
+  {"traditional": "望", "simplified": "望", "pinyin": "wàng", "definition": "to look at, look forward; to hope, expect", "strokeCount": 11, "hskLevel": 2, "generalStandardNumber": "2394", "frequencyRank": 326,
+    "commonWords": [
+      "希望 (xīwàng) - hope, to hope",
+      "失望 (shīwàng) - disappointed",
+      "期望 (qīwàng) - expectation",
+      "盼望 (pànwàng) - to long for"
+    ]
+  },
+  {"traditional": "覺", "simplified": "觉", "pinyin": "jué", "definition": "to wake up from sleep; conscious", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1694", "frequencyRank": 327,
+    "commonWords": [
+      "覺得／觉得 (juéde) - to feel",
+      "睡覺／睡觉 (shuìjiào) - to sleep",
+      "覺醒／觉醒 (juéxǐng) - to awaken",
+      "感覺／感觉 (gǎnjué) - feeling, sense"
+    ]
+  },
+  {"traditional": "術", "simplified": "术", "pinyin": "shù", "definition": "art, skill, special feat; method, technique", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0211", "frequencyRank": 328,
+    "commonWords": [
+      "藝術／艺术 (yìshù) - art",
+      "技術／技术 (jìshù) - technology, technique",
+      "手術／手术 (shǒushù) - surgery",
+      "學術／学术 (xuéshù) - academic"
+    ]
+  },
+  {"traditional": "領", "simplified": "领", "pinyin": "lǐng", "definition": "neck; collar; lead, guide", "strokeCount": 11, "hskLevel": 5, "generalStandardNumber": "2354", "frequencyRank": 329,
+    "commonWords": [
+      "領導／领导 (lǐngdǎo) - leader, to lead",
+      "領取／领取 (lǐngqǔ) - to collect",
+      "領土／领土 (lǐngtǔ) - territory",
+      "衣領／衣领 (yīlǐng) - collar"
+    ]
+  },
+  {"traditional": "共", "simplified": "共", "pinyin": "gòng", "definition": "together with, all, total; to share", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0371", "frequencyRank": 330,
+    "commonWords": [
+      "共同 (gòngtóng) - together, common",
+      "總共／总共 (zǒnggòng) - altogether",
+      "共產／共产 (gòngchǎn) - to share, communist",
+      "公共 (gōnggòng) - public, communal"
+    ]
+  },
+  {"traditional": "確", "simplified": "确", "pinyin": "què", "definition": "sure, certain; real, true", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2591", "frequencyRank": 331,
+    "commonWords": [
+      "確定／确定 (quèdìng) - to determine, definite",
+      "準確／准确 (zhǔnquè) - accurate",
+      "明確／明确 (míngquè) - clear, explicit",
+      "的確／的确 (díquè) - indeed"
+    ]
+  },
+  {"traditional": "傳", "simplified": "传", "pinyin": "chuán", "definition": "summon; propagate, transmit", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0455", "frequencyRank": 332,
+    "commonWords": [
+      "傳統／传统 (chuántǒng) - tradition",
+      "傳說／传说 (chuánshuō) - legend, it is said",
+      "傳播／传播 (chuánbō) - to spread, disseminate",
+      "傳遞／传递 (chuándì) - to transmit"
+    ]
+  },
+  {"traditional": "師", "simplified": "师", "pinyin": "shī", "definition": "teacher, master, specialist", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0413", "frequencyRank": 333,
+    "commonWords": [
+      "老師／老师 (lǎoshī) - teacher",
+      "師傅／师傅 (shīfu) - master, skilled worker",
+      "律師／律师 (lǜshī) - lawyer",
+      "導師／导师 (dǎoshī) - tutor"
+    ]
+  },
+  {"traditional": "觀", "simplified": "观", "pinyin": "guān", "definition": "see, observe, view; appearance", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0586", "frequencyRank": 334,
+    "commonWords": [
+      "觀點／观点 (guāndiǎn) - viewpoint",
+      "觀察／观察 (guānchá) - to observe",
+      "觀眾／观众 (guānzhòng) - audience",
+      "旅遊觀光／旅游观光 (lǚyóu guānguāng) - sightseeing tourism"
+    ]
+  },
+  {"traditional": "清", "simplified": "清", "pinyin": "qīng", "definition": "clear, pure, clean; peaceful", "strokeCount": 11, "hskLevel": 3, "generalStandardNumber": "2410", "frequencyRank": 335,
+    "commonWords": [
+      "清楚 (qīngchu) - clear",
+      "清潔／清洁 (qīngjié) - clean, to clean",
+      "清理 (qīnglǐ) - to tidy up, clear out",
+      "清醒 (qīngxǐng) - sober, clear-headed"
+    ]
+  },
+  {"traditional": "今", "simplified": "今", "pinyin": "jīn", "definition": "now, today, modern era", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0144", "frequencyRank": 336,
+    "commonWords": [
+      "今天 (jīntiān) - today",
+      "今年 (jīnnián) - this year",
+      "如今 (rújīn) - nowadays",
+      "今晚 (jīnwǎn) - tonight"
+    ]
+  },
+  {"traditional": "切", "simplified": "切", "pinyin": "qiè", "definition": "cut, mince, slice, carve", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0107", "frequencyRank": 337,
+    "commonWords": [
+      "切割 (qiēgē) - to cut",
+      "一切 (yíqiè) - everything, all",
+      "親切／亲切 (qīnqiè) - cordial, kind",
+      "切實／切实 (qièshí) - feasible, practical"
+    ]
+  },
+  {"traditional": "院", "simplified": "院", "pinyin": "yuàn", "definition": "courtyard, yard, court; school", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1734", "frequencyRank": 338,
+    "commonWords": [
+      "醫院／医院 (yīyuàn) - hospital",
+      "法院 (fǎyuàn) - court (of law)",
+      "院子 (yuànzi) - courtyard",
+      "學院／学院 (xuéyuàn) - college, institute"
+    ]
+  },
+  {"traditional": "讓", "simplified": "让", "pinyin": "ràng", "definition": "allow, permit, yield, concede", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0317", "frequencyRank": 339,
+    "commonWords": [
+      "讓步／让步 (ràngbù) - to yield",
+      "讓座／让座 (ràngzuò) - offer seat",
+      "讓開／让开 (ràngkāi) - to step aside",
+      "請讓／请让 (qǐng ràng) - please let (me/others pass)"
+    ]
+  },
+  {"traditional": "識", "simplified": "识", "pinyin": "shí", "definition": "recognize, understand, know", "strokeCount": 7, "hskLevel": 1, "generalStandardNumber": "0892", "frequencyRank": 340,
+    "commonWords": [
+      "知識／知识 (zhīshi) - knowledge",
+      "認識／认识 (rènshi) - to know, recognize",
+      "常識／常识 (chángshí) - common sense",
+      "識字 (shízì) - to read (literacy)"
+    ]
+  },
+  {"traditional": "候", "simplified": "候", "pinyin": "hòu", "definition": "wait; expect; visit; greet", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1964", "frequencyRank": 341,
+    "commonWords": [
+      "等候 (děnghòu) - to wait",
+      "候車／候车 (hòuchē) - to wait for a bus/train",
+      "氣候／气候 (qìhòu) - climate",
+      "候選／候选 (hòuxuǎn) - candidate"
+    ]
+  },
+  {"traditional": "帶", "simplified": "带", "pinyin": "dài", "definition": "belt, girdle, band, strap, zone", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1407", "frequencyRank": 342,
+    "commonWords": [
+      "帶來／带来 (dàilái) - to bring",
+      "帶走／带走 (dàizǒu) - to take away",
+      "皮帶／皮带 (pídài) - belt",
+      "帶子 (dàizi) - belt, strap"
+    ]
+  },
+  {"traditional": "導", "simplified": "导", "pinyin": "dǎo", "definition": "direct, guide, lead, conduct", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0567", "frequencyRank": 343,
+    "commonWords": [
+      "指導／指导 (zhǐdǎo) - to guide, guidance",
+      "導演／导演 (dǎoyǎn) - director",
+      "領導／领导 (lǐngdǎo) - to lead, leader",
+      "導致 (dǎozhì) - to lead to, cause"
+    ]
+  },
+  {"traditional": "爭", "simplified": "争", "pinyin": "zhēng", "definition": "dispute, fight, contend, strive", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0508", "frequencyRank": 344,
+    "commonWords": [
+      "爭取／争取 (zhēngqǔ) - to strive for",
+      "爭吵／争吵 (zhēngchǎo) - to quarrel",
+      "競爭／竞争 (jìngzhēng) - competition",
+      "爭論／争论 (zhēnglùn) - to argue, debate"
+    ]
+  },
+  {"traditional": "運", "simplified": "运", "pinyin": "yùn", "definition": "run; simplified form of 運 luck, fortune; ship, transport", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0611", "frequencyRank": 345,
+    "commonWords": [
+      "運動／运动 (yùndòng) - exercise, sports",
+      "運氣／运气 (yùnqì) - luck",
+      "運輸／运输 (yùnshū) - to transport, transportation",
+      "幸運／幸运 (xìngyùn) - lucky"
+    ]
+  },
+  {"traditional": "笑", "simplified": "笑", "pinyin": "xiào", "definition": "smile, laugh, giggle; snicker", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "1952", "frequencyRank": 346,
+    "commonWords": [
+      "大笑 (dàxiào) - laugh out loud",
+      "笑話／笑话 (xiàohuà) - joke",
+      "微笑 (wēixiào) - smile",
+      "笑容 (xiàoróng) - smiling expression"
+    ]
+  },
+  {"traditional": "飛", "simplified": "飞", "pinyin": "fēi", "definition": "fly; go quickly; dart; high", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0069", "frequencyRank": 347,
+    "commonWords": [
+      "飛機／飞机 (fēijī) - airplane",
+      "起飛／起飞 (qǐfēi) - to take off (airplane)",
+      "飛行 (fēixíng) - to fly, flight",
+      "高飛／高飞 (gāofēi) - fly high"
+    ]
+  },
+  {"traditional": "風", "simplified": "风", "pinyin": "fēng", "definition": "wind; air; manners, atmosphere", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0154", "frequencyRank": 348,
+    "commonWords": [
+      "颱風／台风 (táifēng) - typhoon",
+      "風吹／风吹 (fēngchuī) - the wind blows",
+      "風格／风格 (fēnggé) - style",
+      "刮風／刮风 (guāfēng) - windy"
+    ]
+  },
+  {"traditional": "步", "simplified": "步", "pinyin": "bù", "definition": "step, pace; walk, stroll", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0710", "frequencyRank": 349,
+    "commonWords": [
+      "散步 (sànbù) - to take a walk",
+      "進步／进步 (jìnbù) - to progress, progress",
+      "步驟／步骤 (bùzhòu) - step, procedure",
+      "一步 (yībù) - one step"
+    ]
+  },
+  {"traditional": "改", "simplified": "改", "pinyin": "gǎi", "definition": "change, alter; improve, remodel", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0908", "frequencyRank": 350,
+    "commonWords": [
+      "改變／改变 (gǎibiàn) - to change",
+      "修改 (xiūgǎi) - to modify, to revise",
+      "改革 (gǎigé) - to reform",
+      "改進／改进 (gǎijìn) - to improve"
+    ]
+  },
+  {"traditional": "收", "simplified": "收", "pinyin": "shōu", "definition": "gather together, collect; harvest", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0573", "frequencyRank": 351,
+    "commonWords": [
+      "收拾 (shōushi) - to tidy up",
+      "收到 (shōudào) - to receive",
+      "收穫／收获 (shōuhuò) - harvest, gain",
+      "收費／收费 (shōufèi) - to charge a fee"
+    ]
+  },
+  {"traditional": "根", "simplified": "根", "pinyin": "gēn", "definition": "root, base(d on); foundation", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "1850", "frequencyRank": 352,
+    "commonWords": [
+      "根據／根据 (gēnjù) - according to, basis",
+      "根本 (gēnběn) - fundamental, foundation",
+      "樹根／树根 (shùgēn) - tree root",
+      "根源 (gēnyuán) - root, source"
+    ]
+  },
+  {"traditional": "幹", "simplified": "干", "pinyin": "gàn", "definition": "oppose, offend; invade; dried", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0023", "frequencyRank": 353,
+    "commonWords": [
+      "幹部／干部 (gànbù) - cadre, official",
+      "幹什麼／干什么 (gàn shénme) - do what?",
+      "幹活／干活 (gànhuó) - to work, do manual labor",
+      "主幹／主干 (zhǔgàn) - main trunk, backbone"
+    ]
+  },
+  {"traditional": "造", "simplified": "造", "pinyin": "zào", "definition": "construct, build, make, begin; prepare", "strokeCount": 10, "hskLevel": 5, "generalStandardNumber": "1940", "frequencyRank": 354,
+    "commonWords": [
+      "製造／制造 (zhìzào) - to manufacture",
+      "創造／创造 (chuàngzào) - to create",
+      "建造 (jiànzào) - to build, construct",
+      "造句 (zàojù) - to make a sentence"
+    ]
+  },
+  {"traditional": "言", "simplified": "言", "pinyin": "yán", "definition": "words, speech; speak, say", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0826", "frequencyRank": 355,
+    "commonWords": [
+      "語言／语言 (yǔyán) - language",
+      "言語／言语 (yányǔ) - speech, words",
+      "預言／预言 (yùyán) - prophecy",
+      "發言／发言 (fāyán) - to speak, statement"
+    ]
+  },
+  {"traditional": "聯", "simplified": "联", "pinyin": "lián", "definition": "connect, join; associate, ally", "strokeCount": 12, "hskLevel": 4, "generalStandardNumber": "2544", "frequencyRank": 356,
+    "commonWords": [
+      "聯合／联合 (liánhé) - unite, alliance",
+      "聯繫／联系 (liánxì) - contact, to contact",
+      "聯盟／联盟 (liánméng) - alliance, union",
+      "通聯／通联 (tōnglián) - communication"
+    ]
+  },
+  {"traditional": "持", "simplified": "持", "pinyin": "chí", "definition": "sustain, support; hold, grasp", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1367", "frequencyRank": 357,
+    "commonWords": [
+      "保持 (bǎochí) - to maintain, keep",
+      "堅持／坚持 (jiānchí) - to persist",
+      "持續／持续 (chíxù) - to continue, sustained",
+      "支持 (zhīchí) - to support"
+    ]
+  },
+  {"traditional": "組", "simplified": "组", "pinyin": "zǔ", "definition": "class; section, department", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1338", "frequencyRank": 358,
+    "commonWords": [
+      "組織／组织 (zǔzhī) - organization, to organize",
+      "小組／小组 (xiǎozǔ) - group",
+      "組成 (zǔchéng) - to form, compose",
+      "組員／组员 (zǔyuán) - group member"
+    ]
+  },
+  {"traditional": "每", "simplified": "每", "pinyin": "měi", "definition": "every, each", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0767", "frequencyRank": 359,
+    "commonWords": [
+      "每天 (měitiān) - every day",
+      "每次 (měicì) - every time",
+      "每個／每个 (měigè) - each one",
+      "每年 (měinián) - every year"
+    ]
+  },
+  {"traditional": "濟", "simplified": "济", "pinyin": "jì", "definition": "help, aid, relieve; ferry, cross", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1678", "frequencyRank": 360,
+    "commonWords": [
+      "經濟／经济 (jīngjì) - economy, economic",
+      "救濟／救济 (jiùjì) - to help the poor, relief",
+      "濟南 (Jǐnán) - Jinan (city)",
+      "接濟／接济 (jiējì) - to give material help"
+    ]
+  },
+  {"traditional": "車", "simplified": "车", "pinyin": "chē", "definition": "cart, vehicle; carry in cart", "strokeCount": 4, "hskLevel": 1, "generalStandardNumber": "0100", "frequencyRank": 361,
+    "commonWords": [
+      "汽車／汽车 (qìchē) - car",
+      "火車／火车 (huǒchē) - train",
+      "車站／车站 (chēzhàn) - station",
+      "自行車／自行车 (zìxíngchē) - bicycle"
+    ]
+  },
+  {"traditional": "親", "simplified": "亲", "pinyin": "qīn", "definition": "relatives, parents; intimate the hazel nut or filbert tree a thorny tree", "strokeCount": 9, "hskLevel": 4, "generalStandardNumber": "1631", "frequencyRank": 362,
+    "commonWords": [
+      "親愛／亲爱 (qīn'ài) - dear, beloved",
+      "親自 (qīnzì) - personally",
+      "親戚 (qīnqi) - relative",
+      "父母親／父母亲 (fùmǔqīn) - parents"
+    ]
+  },
+  {"traditional": "極", "simplified": "极", "pinyin": "jí", "definition": "extreme, utmost, furthest, final", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0687", "frequencyRank": 363,
+    "commonWords": [
+      "極其／极其 (jíqí) - extremely",
+      "北極／北极 (běijí) - North Pole",
+      "南極／南极 (nánjí) - South Pole",
+      "積極／积极 (jījí) - positive, active"
+    ]
+  },
+  {"traditional": "林", "simplified": "林", "pinyin": "lín", "definition": "forest, grove; surname", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1018", "frequencyRank": 364,
+    "commonWords": [
+      "森林 (sēnlín) - forest",
+      "林業／林业 (línyè) - forestry",
+      "林場／林场 (línchǎng) - forest farm",
+      "林先生 (Lín xiānsheng) - Mr. Lin"
+    ]
+  },
+  {"traditional": "服", "simplified": "服", "pinyin": "fú", "definition": "clothes; wear, dress", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1190", "frequencyRank": 365,
+    "commonWords": [
+      "衣服 (yīfu) - clothes",
+      "服務／服务 (fúwù) - service",
+      "客服 (kèfù) - customer service",
+      "服裝／服装 (fúzhuāng) - clothing, costume"
+    ]
+  },
+  {"traditional": "快", "simplified": "快", "pinyin": "kuài", "definition": "rapid, quick, speedy, fast; soon", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0876", "frequencyRank": 366,
+    "commonWords": [
+      "快樂／快乐 (kuàilè) - happy",
+      "很快 (hěnkuài) - soon",
+      "快速 (kuàisù) - rapid, fast",
+      "加快 (jiākuài) - to accelerate"
+    ]
+  },
+  {"traditional": "辦", "simplified": "办", "pinyin": "bàn", "definition": "manage, do, handle; deal with", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0181", "frequencyRank": 367,
+    "commonWords": [
+      "辦公室／办公室 (bàngōngshì) - office",
+      "辦法 (bànfǎ) - way, means, method",
+      "舉辦／举办 (jǔbàn) - to hold, conduct",
+      "辦理 (bànlǐ) - to handle, process"
+    ]
+  },
+  {"traditional": "議", "simplified": "议", "pinyin": "yì", "definition": "consult, talk over, discuss", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0320", "frequencyRank": 368,
+    "commonWords": [
+      "建議／建议 (jiànyì) - suggestion, to suggest",
+      "會議／会议 (huìyì) - meeting, conference",
+      "討論／讨论 (tǎolùn) - to discuss",
+      "提議／提议 (tíyì) - to propose, proposal"
+    ]
+  },
+  {"traditional": "往", "simplified": "往", "pinyin": "wǎng", "definition": "go, depart; past, formerly", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1160", "frequencyRank": 369,
+    "commonWords": [
+      "往返 (wǎngfǎn) - to go back and forth",
+      "往事 (wǎngshì) - past events",
+      "以往 (yǐwǎng) - in the past",
+      "往往 (wǎngwǎng) - often"
+    ]
+  },
+  {"traditional": "元", "simplified": "元", "pinyin": "yuán", "definition": "first; dollar; origin; head", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0080", "frequencyRank": 370,
+    "commonWords": [
+      "元旦 (Yuándàn) - New Year's Day",
+      "人民幣元／人民币元 (rénmínbì yuán) - RMB Yuan",
+      "美元 (měiyuán) - US dollar",
+      "元首 (yuánshǒu) - head of state"
+    ]
+  },
+  {"traditional": "英", "simplified": "英", "pinyin": "yīng", "definition": "petal, flower, leaf; brave, a hero; England, English", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1006", "frequencyRank": 371,
+    "commonWords": [
+      "英語／英语 (Yīngyǔ) - English language",
+      "英國／英国 (Yīngguó) - United Kingdom",
+      "英雄 (yīngxióng) - hero",
+      "英俊 (yīngjùn) - handsome"
+    ]
+  },
+  {"traditional": "士", "simplified": "士", "pinyin": "shì", "definition": "scholar, gentleman; soldier", "strokeCount": 3, "hskLevel": 4, "generalStandardNumber": "0028", "frequencyRank": 372,
+    "commonWords": [
+      "博士 (bóshì) - PhD, doctor",
+      "戰士／战士 (zhànshì) - soldier",
+      "護士／护士 (hùshì) - nurse",
+      "士兵 (shìbīng) - soldier"
+    ]
+  },
+  {"traditional": "證", "simplified": "证", "pinyin": "zhèng", "definition": "prove, confirm, verify; proof", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0885", "frequencyRank": 373,
+    "commonWords": [
+      "證明／证明 (zhèngmíng) - proof, to prove",
+      "證件／证件 (zhèngjiàn) - certificate",
+      "執照／执照 (zhízhào) - license (shows certificate usage)",
+      "證書／证书 (zhèngshū) - diploma, certificate"
+    ]
+  },
+  {"traditional": "近", "simplified": "近", "pinyin": "jìn", "definition": "near, close; approach; intimate", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0791", "frequencyRank": 374,
+    "commonWords": [
+      "最近 (zuìjìn) - recently",
+      "附近 (fùjìn) - nearby",
+      "靠近 (kàojìn) - to approach",
+      "接近 (jiējìn) - to get close to"
+    ]
+  },
+  {"traditional": "失", "simplified": "失", "pinyin": "shī", "definition": "lose; make mistake, neglect", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0265", "frequencyRank": 375,
+    "commonWords": [
+      "失敗／失败 (shībài) - fail, failure",
+      "失去 (shīqù) - to lose",
+      "失業／失业 (shīyè) - to lose one's job, unemployment",
+      "消失 (xiāoshī) - to disappear"
+    ]
+  },
+  {"traditional": "轉", "simplified": "转", "pinyin": "zhuǎn", "definition": "shift, move, turn", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1059", "frequencyRank": 376,
+    "commonWords": [
+      "轉動／转动 (zhuǎndòng) - to turn",
+      "轉學／转学 (zhuǎnxué) - to transfer schools",
+      "轉變／转变 (zhuǎnbiàn) - to change, transform",
+      "轉告 (zhuǎngào) - to pass on (information)"
+    ]
+  },
+  {"traditional": "夫", "simplified": "夫", "pinyin": "fū", "definition": "man, male adult, husband; those", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0079", "frequencyRank": 377,
+    "commonWords": [
+      "丈夫 (zhàngfu) - husband",
+      "夫人 (fūrén) - lady, madam",
+      "農夫／农夫 (nóngfū) - farmer",
+      "大夫 (dàifu) - doctor (casual)"
+    ]
+  },
+  {"traditional": "令", "simplified": "令", "pinyin": "lìng", "definition": "order, command, instruction; make a request", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0282", "frequencyRank": 378,
+    "commonWords": [
+      "命令 (mìnglìng) - command, to order",
+      "指令 (zhǐlìng) - instruction, directive",
+      "冷令 (lěnglìng) - unexpected order (rare)",
+      "下令 (xiàlìng) - to order, give an order"
+    ]
+  },
+  {"traditional": "準", "simplified": "准", "pinyin": "zhǔn", "definition": "approve, allow, permit; in accord", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "2024", "frequencyRank": 379,
+    "commonWords": [
+      "準備／准备 (zhǔnbèi) - to prepare",
+      "標準／标准 (biāozhǔn) - standard",
+      "精準／精准 (jīngzhǔn) - precise, accurate",
+      "准許／准许 (zhǔnxǔ) - to permit"
+    ]
+  },
+  {"traditional": "布", "simplified": "布", "pinyin": "bù", "definition": "cotton cloth, textiles, linen", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0218", "frequencyRank": 380,
+    "commonWords": [
+      "公布 (gōngbù) - to announce",
+      "布料 (bùliào) - fabric, material",
+      "揚布／扬布 (yángbù) - old term for spreading cloth",
+      "分布 (fēnbù) - to distribute"
+    ]
+  },
+  {"traditional": "始", "simplified": "始", "pinyin": "shǐ", "definition": "begin, start; then, only then", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1329", "frequencyRank": 381,
+    "commonWords": [
+      "開始／开始 (kāishǐ) - to start, begin",
+      "始終／始终 (shǐzhōng) - from beginning to end",
+      "原始 (yuánshǐ) - original, primitive",
+      "始發／始发 (shǐfā) - starting (point)"
+    ]
+  },
+  {"traditional": "怎", "simplified": "怎", "pinyin": "zěn", "definition": "what? why? how?", "strokeCount": 9, "hskLevel": 1, "generalStandardNumber": "1543", "frequencyRank": 382,
+    "commonWords": [
+      "怎麼／怎么 (zěnme) - how",
+      "怎樣／怎样 (zěnyàng) - how, what kind",
+      "你怎麼來的？／你怎么来的？(nǐ zěnme lái de?) - How did you get here?",
+      "怎麼辦／怎么办 (zěnme bàn) - what to do"
+    ]
+  },
+  {"traditional": "呢", "simplified": "呢", "pinyin": "ne", "definition": "interrogative or emphatic final; (Cant.) this", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1102", "frequencyRank": 383,
+    "commonWords": [
+      "你呢 (nǐ ne) - what about you?",
+      "在哪兒呢／在哪儿呢 (zài nǎr ne) - where is it?",
+      "怎麼呢／怎么呢 (zěnme ne) - how so?",
+      "啊呢 (ā ne) - interjection (variant, rare)"
+    ]
+  },
+  {"traditional": "存", "simplified": "存", "pinyin": "cún", "definition": "exist, live, be; survive; remain", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0391", "frequencyRank": 384,
+    "commonWords": [
+      "存在 (cúnzài) - to exist",
+      "存錢／存钱 (cúnqián) - to save money",
+      "保存 (bǎocún) - to preserve, save",
+      "存放 (cúnfàng) - to deposit, store"
+    ]
+  },
+  {"traditional": "未", "simplified": "未", "pinyin": "wèi", "definition": "not yet; 8th terrestrial branch", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0192", "frequencyRank": 385,
+    "commonWords": [
+      "未來／未来 (wèilái) - future",
+      "未婚 (wèihūn) - unmarried",
+      "未必 (wèibì) - not necessarily",
+      "尚未 (shàngwèi) - not yet"
+    ]
+  },
+  {"traditional": "遠", "simplified": "远", "pinyin": "yuǎn", "definition": "distant, remote, far; profound", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0608", "frequencyRank": 386,
+    "commonWords": [
+      "遠方／远方 (yuǎnfāng) - distant place",
+      "遠距離／远距离 (yuǎn jùlí) - long distance",
+      "遙遠／遥远 (yáoyuǎn) - distant, remote",
+      "遠足 (yuǎnzú) - hike, excursion"
+    ]
+  },
+  {"traditional": "叫", "simplified": "叫", "pinyin": "jiào", "definition": "cry, shout; hail, greet, call", "strokeCount": 5, "hskLevel": 1, "generalStandardNumber": "0253", "frequencyRank": 387,
+    "commonWords": [
+      "叫做 (jiàozuò) - to be called",
+      "呼叫 (hūjiào) - to call out, to shout",
+      "叫聲／叫声 (jiàoshēng) - a call, cry (of animals, people)",
+      "叫醒 (jiàoxǐng) - to wake up (by calling)"
+    ]
+  },
+  {"traditional": "臺", "simplified": "台", "pinyin": "tái", "definition": "platform; unit; term of address", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0342", "frequencyRank": 388,
+    "commonWords": [
+      "台灣／台湾 (Táiwān) - Taiwan",
+      "舞台 (wǔtái) - stage",
+      "電台／电台 (diàntái) - radio station",
+      "平台 (píngtái) - platform"
+    ]
+  },
+  {"traditional": "單", "simplified": "单", "pinyin": "dān", "definition": "single, individual, only; lone", "strokeCount": 8, "hskLevel": 3, "generalStandardNumber": "1232", "frequencyRank": 389,
+    "commonWords": [
+      "單位／单位 (dānwèi) - unit, work unit",
+      "簡單／简单 (jiǎndān) - simple",
+      "單身 (dānshēn) - single (not married)",
+      "單子 (dānzi) - form, list"
+    ]
+  },
+  {"traditional": "影", "simplified": "影", "pinyin": "yǐng", "definition": "shadow; image, reflection; photograph", "strokeCount": 15, "hskLevel": 1, "generalStandardNumber": "3240", "frequencyRank": 390,
+    "commonWords": [
+      "電影／电影 (diànyǐng) - movie",
+      "影子 (yǐngzi) - shadow",
+      "攝影／摄影 (shèyǐng) - photography",
+      "拍照 (pāi zhào) - to take a photo (影 in concept, not written)"
+    ]
+  },
+  {"traditional": "具", "simplified": "具", "pinyin": "jù", "definition": "tool, implement; draw up, write", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1077", "frequencyRank": 391,
+    "commonWords": [
+      "工具 (gōngjù) - tool",
+      "具有 (jùyǒu) - to possess, have",
+      "玩具 (wánjù) - toy",
+      "具體／具体 (jùtǐ) - concrete, specific"
+    ]
+  },
+  {"traditional": "羅", "simplified": "罗", "pinyin": "luō", "definition": "net for catching birds; gauze", "strokeCount": 8, "hskLevel": null, "generalStandardNumber": "1108", "frequencyRank": 392,
+    "commonWords": [
+      "羅馬／罗马 (Luómǎ) - Rome",
+      "羅列／罗列 (luóliè) - to spread out, list",
+      "羅氏／罗氏 (Luóshì) - surname Luo (or companies like Roche)",
+      "綱羅／纲罗 (gāngluó) - to cover comprehensively (rare)"
+    ]
+  },
+  {"traditional": "字", "simplified": "字", "pinyin": "zì", "definition": "letter, character, word", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0548", "frequencyRank": 393,
+    "commonWords": [
+      "漢字／汉字 (hànzì) - Chinese character",
+      "寫字／写字 (xiězì) - to write characters/words",
+      "名子 (míngzi) - name",
+      "字母 (zìmǔ) - letter (alphabet)"
+    ]
+  },
+  {"traditional": "愛", "simplified": "爱", "pinyin": "ài", "definition": "love, be fond of, like", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "1987", "frequencyRank": 394,
+    "commonWords": [
+      "愛心／爱心 (àixīn) - compassion",
+      "愛好 (àihào) - hobby",
+      "可愛／可爱 (kě'ài) - lovely, cute",
+      "戀愛／恋爱 (liàn’ài) - romantic love"
+    ]
+  },
+  {"traditional": "擊", "simplified": "击", "pinyin": "jī", "definition": "strike, hit, beat; attack, fight", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0195", "frequencyRank": 395,
+    "commonWords": [
+      "攻擊／攻击 (gōngjī) - attack",
+      "打擊／打击 (dǎjī) - to strike, blow",
+      "擊敗／击败 (jībài) - to defeat",
+      "擊中／击中 (jīzhòng) - hit (the target)"
+    ]
+  },
+  {"traditional": "流", "simplified": "流", "pinyin": "liú", "definition": "flow, circulate, drift; class", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2080", "frequencyRank": 396,
+    "commonWords": [
+      "流淚／流泪 (liúlèi) - to shed tears",
+      "流行 (liúxíng) - popular, fashionable",
+      "交流 (jiāoliú) - to exchange, communicate",
+      "河流 (héliú) - river"
+    ]
+  },
+  {"traditional": "備", "simplified": "备", "pinyin": "bèi", "definition": "prepare, ready, perfect", "strokeCount": 8, "hskLevel": 2, "generalStandardNumber": "1200", "frequencyRank": 397,
+    "commonWords": [
+      "準備／准备 (zhǔnbèi) - to prepare",
+      "裝備／装备 (zhuāngbèi) - equipment",
+      "備用 (bèiyòng) - reserve (for use)",
+      "具備／具备 (jùbèi) - to possess, have"
+    ]
+  },
+  {"traditional": "兵", "simplified": "兵", "pinyin": "bīng", "definition": "soldier, troops", "strokeCount": 7, "hskLevel": 5, "generalStandardNumber": "0768", "frequencyRank": 398,
+    "commonWords": [
+      "軍兵／军兵 (jūnbīng) - soldier",
+      "兵器 (bīngqì) - weapon",
+      "新兵 (xīnbīng) - recruit, new soldier",
+      "兵營／兵营 (bīngyíng) - barracks"
+    ]
+  },
+  {"traditional": "連", "simplified": "连", "pinyin": "lián", "definition": "join, connect; continuous; even", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0708", "frequencyRank": 399,
+    "commonWords": [
+      "連接／连接 (liánjiē) - to connect",
+      "連續／连续 (liánxù) - consecutive, continuous",
+      "連忙 (liánmáng) - at once, hurriedly",
+      "連同 (liántóng) - together with"
+    ]
+  },
+  {"traditional": "調", "simplified": "调", "pinyin": "diào", "definition": "transfer, move, change; tune", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2123", "frequencyRank": 400,
+    "commonWords": [
+      "調查／调查 (diàochá) - to investigate",
+      "調整／调整 (tiáozhěng) - to adjust, adjustment",
+      "音調／音调 (yīndiào) - tone (in speech/music)",
+      "調味 (tiáowèi) - seasoning"
+    ]
+  },
+  {"traditional": "深", "simplified": "深", "pinyin": "shēn", "definition": "deep; depth; far; very, extreme", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2432", "frequencyRank": 401,
+    "commonWords": [
+      "深刻 (shēnkè) - profound, deep",
+      "深夜 (shēnyè) - late at night",
+      "深入 (shēnrù) - to penetrate deeply, in depth",
+      "深情 (shēnqíng) - deep feeling"
+    ]
+  },
+  {"traditional": "商", "simplified": "商", "pinyin": "shāng", "definition": "commerce, business, trade", "strokeCount": 11, "hskLevel": 1, "generalStandardNumber": "2391", "frequencyRank": 402,
+    "commonWords": [
+      "商店 (shāngdiàn) - shop, store",
+      "商業／商业 (shāngyè) - commerce, business",
+      "商人 (shāngrén) - merchant",
+      "工商 (gōngshāng) - industry and commerce"
+    ]
+  },
+  {"traditional": "算", "simplified": "算", "pinyin": "suàn", "definition": "count, calculate, figure; plan", "strokeCount": 14, "hskLevel": 3, "generalStandardNumber": "3121", "frequencyRank": 403,
+    "commonWords": [
+      "打算 (dǎsuàn) - to plan",
+      "計算／计算 (jìsuàn) - to calculate",
+      "算了 (suànle) - forget it",
+      "算數／算数 (suànshù) - to count, to be reliable"
+    ]
+  },
+  {"traditional": "質", "simplified": "质", "pinyin": "zhì", "definition": "matter, material, substance", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1157", "frequencyRank": 404,
+    "commonWords": [
+      "質量／质量 (zhìliàng) - quality",
+      "素質／素质 (sùzhì) - quality (of a person)",
+      "本質／本质 (běnzhì) - essence",
+      "氣質／气质 (qìzhì) - temperament"
+    ]
+  },
+  {"traditional": "團", "simplified": "团", "pinyin": "tuán", "definition": "sphere, ball, circle; mass, lump", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0425", "frequencyRank": 405,
+    "commonWords": [
+      "集團／集团 (jítuán) - group, corporation",
+      "團結／团结 (tuánjié) - unite, unity",
+      "團體／团体 (tuántǐ) - group, organization",
+      "代表團／代表团 (dàibiǎotuán) - delegation"
+    ]
+  },
+  {"traditional": "集", "simplified": "集", "pinyin": "jí", "definition": "assemble, collect together", "strokeCount": 12, "hskLevel": 5, "generalStandardNumber": "2694", "frequencyRank": 406,
+    "commonWords": [
+      "集體／集体 (jítǐ) - collective",
+      "集中 (jízhōng) - to concentrate, focus",
+      "收集 (shōují) - to collect",
+      "集會／集会 (jíhuì) - meeting, rally"
+    ]
+  },
+  {"traditional": "百", "simplified": "百", "pinyin": "bǎi", "definition": "one hundred; numerous, many", "strokeCount": 6, "hskLevel": 2, "generalStandardNumber": "0389", "frequencyRank": 407,
+    "commonWords": [
+      "百貨公司／百货公司 (bǎihuò gōngsī) - department store",
+      "數百／数百 (shùbǎi) - several hundred",
+      "百姓 (bǎixìng) - common people",
+      "百分之 (bǎifēnzhī) - percent"
+    ]
+  },
+  {"traditional": "需", "simplified": "需", "pinyin": "xū", "definition": "need, require, must", "strokeCount": 14, "hskLevel": 3, "generalStandardNumber": "3095", "frequencyRank": 408,
+    "commonWords": [
+      "需要 (xūyào) - need, to require",
+      "必需 (bìxū) - essential, necessary",
+      "需求 (xūqiú) - demand, requirement",
+      "需時／需时 (xūshí) - to take time"
+    ]
+  },
+  {"traditional": "價", "simplified": "价", "pinyin": "jià", "definition": "price, value", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0469", "frequencyRank": 409,
+    "commonWords": [
+      "價格／价格 (jiàgé) - price",
+      "價值／价值 (jiàzhí) - value",
+      "議價／议价 (yìjià) - to bargain",
+      "減價／减价 (jiǎnjià) - to discount"
+    ]
+  },
+  {"traditional": "花", "simplified": "花", "pinyin": "huā", "definition": "flower; blossoms", "strokeCount": 7, "hskLevel": 3, "generalStandardNumber": "0665", "frequencyRank": 410,
+    "commonWords": [
+      "花園／花园 (huāyuán) - garden",
+      "花朵 (huāduǒ) - flower",
+      "花費／花费 (huāfèi) - to spend, cost",
+      "鮮花／鲜花 (xiānhuā) - fresh flowers"
+    ]
+  },
+  {"traditional": "黨", "simplified": "党", "pinyin": "dǎng", "definition": "political party, gang, faction", "strokeCount": 10, "hskLevel": 6, "generalStandardNumber": "1885", "frequencyRank": 411,
+    "commonWords": [
+      "政黨／政党 (zhèngdǎng) - political party",
+      "黨員／党员 (dǎngyuán) - party member",
+      "黨派／党派 (dǎngpài) - party, faction",
+      "共產黨／共产党 (gòngchǎndǎng) - Communist Party"
+    ]
+  },
+  {"traditional": "華", "simplified": "华", "pinyin": "huá", "definition": "flowery; illustrious; Chinese", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0472", "frequencyRank": 412,
+    "commonWords": [
+      "中華／中华 (Zhōnghuá) - China, Chinese",
+      "華人／华人 (huárén) - overseas Chinese",
+      "華語／華語 (Huáyǔ) - Chinese language",
+      "豪華／豪华 (háohuá) - luxurious"
+    ]
+  },
+  {"traditional": "城", "simplified": "城", "pinyin": "chéng", "definition": "castle; city, town; municipality", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1373", "frequencyRank": 413,
+    "commonWords": [
+      "城市 (chéngshì) - city",
+      "長城／长城 (Chángchéng) - Great Wall",
+      "城裡／城里 (chénglǐ) - in the city",
+      "城牆／城墙 (chéngqiáng) - city wall"
+    ]
+  },
+  {"traditional": "石", "simplified": "石", "pinyin": "shí", "definition": "stone, rock, mineral; rad. 112", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0216", "frequencyRank": 414,
+    "commonWords": [
+      "石頭／石头 (shítou) - stone",
+      "化石 (huàshí) - fossil",
+      "寶石／宝石 (bǎoshí) - gem, precious stone",
+      "岩石 (yánshí) - rock"
+    ]
+  },
+  {"traditional": "級", "simplified": "级", "pinyin": "jí", "definition": "level, rank, class; grade", "strokeCount": 6, "hskLevel": 3, "generalStandardNumber": "0594", "frequencyRank": 415,
+    "commonWords": [
+      "年級／年级 (niánjí) - grade (in school)",
+      "高級／高级 (gāojí) - advanced, high level",
+      "級別／级别 (jíbié) - rank",
+      "等級／等级 (děngjí) - grade, class"
+    ]
+  },
+  {"traditional": "整", "simplified": "整", "pinyin": "zhěng", "definition": "orderly, neat, tidy; whole", "strokeCount": 16, "hskLevel": 4, "generalStandardNumber": "3333", "frequencyRank": 416,
+    "commonWords": [
+      "整個／整个 (zhěnggè) - whole, entire",
+      "整理 (zhěnglǐ) - to tidy up, organize",
+      "整齊／整齐 (zhěngqí) - neat, tidy",
+      "調整／调整 (tiáozhěng) - to adjust"
+    ]
+  },
+  {"traditional": "府", "simplified": "府", "pinyin": "fǔ", "definition": "prefecture; prefect; government", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1211", "frequencyRank": 417,
+    "commonWords": [
+      "政府 (zhèngfǔ) - government",
+      "首府 (shǒufǔ) - capital city (region)",
+      "官府 (guānfǔ) - government office (old)",
+      "府上 (fǔshàng) - your house (polite)"
+    ]
+  },
+  {"traditional": "離", "simplified": "离", "pinyin": "lí", "definition": "rare beast; strange; elegant", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "2035", "frequencyRank": 418,
+    "commonWords": [
+      "離開／离开 (líkāi) - to leave",
+      "距離／距离 (jùlí) - distance",
+      "分離／分离 (fēnlí) - to separate",
+      "遠離／远离 (yuǎnlí) - to be far away from"
+    ]
+  },
+  {"traditional": "況", "simplified": "况", "pinyin": "kuàng", "definition": "condition, situation; furthermore", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0830", "frequencyRank": 419,
+    "commonWords": [
+      "情況／情况 (qíngkuàng) - situation",
+      "狀況／状况 (zhuàngkuàng) - condition, state",
+      "況且 (kuàngqiě) - moreover",
+      "況味 (kuàngwèi) - taste, flavor, circumstance (rare)"
+    ]
+  },
+  {"traditional": "亞", "simplified": "亚", "pinyin": "yà", "definition": "Asia; second", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0373", "frequencyRank": 420,
+    "commonWords": [
+      "亞洲／亚洲 (Yàzhōu) - Asia",
+      "亞軍／亚军 (yàjūn) - second place",
+      "亞熱帶／亚热带 (yàrèdài) - subtropical",
+      "亞健康／亚健康 (yàjiànkāng) - subhealthy"
+    ]
+  },
+  {"traditional": "請", "simplified": "请", "pinyin": "qǐng", "definition": "ask, request; invite; please", "strokeCount": 10, "hskLevel": 1, "generalStandardNumber": "2108", "frequencyRank": 421,
+    "commonWords": [
+      "請問／请问 (qǐngwèn) - may I ask",
+      "請假／请假 (qǐngjià) - to ask for leave",
+      "邀請／邀请 (yāoqǐng) - to invite",
+      "請客 (qǐngkè) - to treat (to food, entertainment, etc.)"
+    ]
+  },
+  {"traditional": "技", "simplified": "技", "pinyin": "jì", "definition": "skill, ability, talent, ingenuity", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0615", "frequencyRank": 422,
+    "commonWords": [
+      "技術／技术 (jìshù) - technology, skill",
+      "技巧 (jìqiǎo) - technique, skill",
+      "科技 (kējì) - science and technology",
+      "技工 (jìgōng) - skilled worker"
+    ]
+  },
+  {"traditional": "際", "simplified": "际", "pinyin": "jì", "definition": "border, boundary, juncture", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0911", "frequencyRank": 423,
+    "commonWords": [
+      "國際／国际 (guójì) - international",
+      "實際／实际 (shíjì) - actual, practical",
+      "交際／交际 (jiāojì) - to socialize, social intercourse",
+      "際遇 (jìyù) - opportunity, luck"
+    ]
+  },
+  {"traditional": "約", "simplified": "约", "pinyin": "yuē", "definition": "treaty, agreement, covenant", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0593", "frequencyRank": 424,
+    "commonWords": [
+      "約會／约会 (yuēhuì) - appointment, date",
+      "大約／大约 (dàyuē) - about, approximately",
+      "節約／节约 (jiéyuē) - to save, economize",
+      "預約／预约 (yùyuē) - to make an appointment"
+    ]
+  },
+  {"traditional": "示", "simplified": "示", "pinyin": "shì", "definition": "show, manifest; demonstrate", "strokeCount": 5, "hskLevel": 4, "generalStandardNumber": "0194", "frequencyRank": 425,
+    "commonWords": [
+      "表示 (biǎoshì) - to express, indicate",
+      "展示 (zhǎnshì) - to display",
+      "指示 (zhǐshì) - to indicate, instruction",
+      "顯示／显示 (xiǎnshì) - to show"
+    ]
+  },
+  {"traditional": "復", "simplified": "复", "pinyin": "fù", "definition": "return; repeat; repeatedly", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1553", "frequencyRank": 426,
+    "commonWords": [
+      "複雜／复杂 (fùzá) - complicated",
+      "恢復／恢复 (huīfù) - to recover, restore",
+      "複印／复印 (fùyìn) - to photocopy",
+      "覆蓋／覆盖 (fùgài) - to cover"
+    ]
+  },
+  {"traditional": "病", "simplified": "病", "pinyin": "bìng", "definition": "illness, sickness, disease", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "2027", "frequencyRank": 427,
+    "commonWords": [
+      "生病 (shēngbìng) - to get sick",
+      "病人 (bìngrén) - patient",
+      "疾病 (jíbìng) - disease",
+      "病房 (bìngfáng) - ward (in hospital)"
+    ]
+  },
+  {"traditional": "息", "simplified": "息", "pinyin": "xī", "definition": "rest, put stop to, end, cease", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "1973", "frequencyRank": 428,
+    "commonWords": [
+      "消息 (xiāoxi) - news, information",
+      "休息 (xiūxi) - to rest",
+      "利息 (lìxī) - interest (on money)",
+      "呼吸 (hūxī) - to breathe"
+    ]
+  },
+  {"traditional": "究", "simplified": "究", "pinyin": "jiū", "definition": "examine, investigate", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0881", "frequencyRank": 429,
+    "commonWords": [
+      "研究 (yánjiū) - to research, research",
+      "究竟 (jiūjìng) - after all, exactly",
+      "究查 (jiūchá) - to investigate",
+      "講究／讲究 (jiǎngjiū) - to pay attention to, be particular about"
+    ]
+  },
+  {"traditional": "線", "simplified": "线", "pinyin": "xiàn", "definition": "line, thread, wire; clue", "strokeCount": 8, "hskLevel": 4, "generalStandardNumber": "1336", "frequencyRank": 430,
+    "commonWords": [
+      "電話線／电话线 (diànhuàxiàn) - telephone line",
+      "地鐵線／地铁线 (dìtiě xiàn) - subway line",
+      "線路／线路 (xiànlù) - circuit, route",
+      "紅線／红线 (hóngxiàn) - red line"
+    ]
+  },
+  {"traditional": "似", "simplified": "似", "pinyin": "shì", "definition": "resemble, similar to; as if, seem", "strokeCount": 6, "hskLevel": 5, "generalStandardNumber": "0481", "frequencyRank": 431,
+    "commonWords": [
+      "相似 (xiāngsì) - similar",
+      "似乎 (sìhū) - as if, seems",
+      "類似／类似 (lèisì) - similar, analogous",
+      "似的 (shìde) - seems like, as if"
+    ]
+  },
+  {"traditional": "官", "simplified": "官", "pinyin": "guān", "definition": "official, public servant", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1281", "frequencyRank": 432,
+    "commonWords": [
+      "官員／官员 (guānyuán) - official",
+      "法官 (fǎguān) - judge",
+      "長官／长官 (zhǎngguān) - superior officer",
+      "高官 (gāoguān) - high official"
+    ]
+  },
+  {"traditional": "火", "simplified": "火", "pinyin": "huǒ", "definition": "fire, flame; burn; anger, rage", "strokeCount": 4, "hskLevel": 2, "generalStandardNumber": "0164", "frequencyRank": 433,
+    "commonWords": [
+      "火車／火车 (huǒchē) - train",
+      "著火／着火 (zháohuǒ) - to catch fire",
+      "火山 (huǒshān) - volcano",
+      "點火／点火 (diǎnhuǒ) - to ignite"
+    ]
+  },
+  {"traditional": "斷", "simplified": "断", "pinyin": "duàn", "definition": "sever, cut off; interrupt", "strokeCount": 11, "hskLevel": 4, "generalStandardNumber": "2405", "frequencyRank": 434,
+    "commonWords": [
+      "不斷／不断 (búduàn) - unceasingly, continually",
+      "判斷／判断 (pànduàn) - to judge, judgment",
+      "中斷／中断 (zhōngduàn) - to interrupt",
+      "斷絕／断绝 (duànjué) - to sever (relations, etc.)"
+    ]
+  },
+  {"traditional": "精", "simplified": "精", "pinyin": "jīng", "definition": "essence; semen; spirit", "strokeCount": 14, "hskLevel": 4, "generalStandardNumber": "3153", "frequencyRank": 435,
+    "commonWords": [
+      "精力 (jīnglì) - energy",
+      "精神 (jīngshén) - spirit, mind",
+      "精明 (jīngmíng) - astute",
+      "精通 (jīngtōng) - proficient in"
+    ]
+  },
+  {"traditional": "滿", "simplified": "满", "pinyin": "mǎn", "definition": "fill; full, satisfied", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "3005", "frequencyRank": 436,
+    "commonWords": [
+      "滿意／满意 (mǎnyì) - satisfied",
+      "裝滿／装满 (zhuāngmǎn) - to fill up",
+      "充分滿足／充分满足 (chōngfèn mǎnzú) - completely satisfy",
+      "充滿／充满 (chōngmǎn) - to be full of"
+    ]
+  },
+  {"traditional": "支", "simplified": "支", "pinyin": "zhī", "definition": "disperse, pay; support; branch", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0089", "frequencyRank": 437,
+    "commonWords": [
+      "支持 (zhīchí) - to support",
+      "分支 (fēnzhī) - branch (of business etc.)",
+      "支票 (zhīpiào) - cheque",
+      "支出 (zhīchū) - to spend, expenditure"
+    ]
+  },
+  {"traditional": "視", "simplified": "视", "pinyin": "shì", "definition": "look at, inspect, observe, see", "strokeCount": 8, "hskLevel": 1, "generalStandardNumber": "1294", "frequencyRank": 438,
+    "commonWords": [
+      "電視／电视 (diànshì) - television",
+      "視覺／视觉 (shìjué) - vision",
+      "視力 (shìlì) - eyesight",
+      "無視／无视 (wúshì) - to ignore"
+    ]
+  },
+  {"traditional": "消", "simplified": "消", "pinyin": "xiāo", "definition": "vanish, die out; melt away", "strokeCount": 10, "hskLevel": 4, "generalStandardNumber": "2071", "frequencyRank": 439,
+    "commonWords": [
+      "消失 (xiāoshī) - to disappear",
+      "消息 (xiāoxi) - news, information",
+      "消化 (xiāohuà) - to digest",
+      "消防 (xiāofáng) - firefighting"
+    ]
+  },
+  {"traditional": "越", "simplified": "越", "pinyin": "yuè", "definition": "exceed, go beyond; the more ...", "strokeCount": 12, "hskLevel": 3, "generalStandardNumber": "2514", "frequencyRank": 440,
+    "commonWords": [
+      "越來越／越来越 (yuèláiyuè) - more and more",
+      "超越 (chāoyuè) - to surpass, go beyond",
+      "越過／越过 (yuèguò) - to cross over",
+      "越南 (Yuènán) - Vietnam"
+    ]
+  },
+  {"traditional": "器", "simplified": "器", "pinyin": "qì", "definition": "receptacle, vessel; instrument", "strokeCount": 16, "hskLevel": 5, "generalStandardNumber": "3348", "frequencyRank": 441,
+    "commonWords": [
+      "樂器／乐器 (yuèqì) - musical instrument",
+      "機器／机器 (jīqì) - machine",
+      "容器 (róngqì) - container",
+      "儀器／仪器 (yíqì) - instrument, apparatus"
+    ]
+  },
+  {"traditional": "容", "simplified": "容", "pinyin": "róng", "definition": "looks, appearance; figure, form", "strokeCount": 10, "hskLevel": 3, "generalStandardNumber": "2105", "frequencyRank": 442,
+    "commonWords": [
+      "容易 (róngyì) - easy",
+      "內容／内容 (nèiróng) - content",
+      "容許／容许 (róngxǔ) - to permit, allow",
+      "美容 (měiróng) - beauty care, cosmetology"
+    ]
+  },
+  {"traditional": "照", "simplified": "照", "pinyin": "zhào", "definition": "shine, illumine, reflect", "strokeCount": 13, "hskLevel": 3, "generalStandardNumber": "2911", "frequencyRank": 443,
+    "commonWords": [
+      "照相 (zhàoxiàng) - to take a photo",
+      "照片 (zhàopiàn) - photo, picture",
+      "按照 (ànzhào) - according to",
+      "照顧／照顾 (zhàogù) - to take care of"
+    ]
+  },
   {"traditional": "須", "simplified": "须", "pinyin": "xū", "definition": "must, have to, necessary", "strokeCount": 9, "hskLevel": 3, "generalStandardNumber": "1585", "frequencyRank": 444},
   {"traditional": "九", "simplified": "九", "pinyin": "jiǔ", "definition": "nine", "strokeCount": 2, "hskLevel": 1, "generalStandardNumber": "0015", "frequencyRank": 445},
   {"traditional": "增", "simplified": "增", "pinyin": "zēng", "definition": "increase, add to, augment", "strokeCount": 15, "hskLevel": 4, "generalStandardNumber": "3204", "frequencyRank": 446},

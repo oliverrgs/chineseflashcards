@@ -1879,7 +1879,21 @@
         return `${radical.radical} ${radical.variants.length > 0 ? `(${radical.variants})` : ""}:
         ${radical.meaning}`;
       }
+/*
 
+            <div>
+              <div class="detailLabel">Radical</div>
+              <div>
+                ${radicalsFromMapping.map((oneradical)=>{ 
+                    const metadataForRadical = radicalMetadataForCard(oneradical); 
+                    if (metadataForRadical) return radicalToHtml(metadataForRadical); 
+                    const flashCardEntryForRadical = flashCardDataList.find((flashCardDataValue) => 
+                    flashCardDataValue.traditional === oneradical || flashCardDataValue.simplified === oneradical);
+                    return flashCardEntryForRadical ? `${flashCardEntryForRadical.traditional}: ${flashCardEntryForRadical.definition}` : oneradical; }
+                  ).join("<br/>")}
+                </div>
+            </div>
+            */
       cardContentElement.innerHTML = `
         <div class="cardContent">
             <div style="font-size: 1.6rem; font-weight: bold;">
@@ -1901,18 +1915,9 @@
             <div>
               <div class="detailPinyinTextValue">${currentCardData.pinyin}</div>
             </div>
-            <div>
-              <div class="detailLabel">Radical</div>
-              <div>
-                ${radicalsFromMapping.map((oneradical)=>{ 
-                    const metadataForRadical = radicalMetadataForCard(oneradical); 
-                    if (metadataForRadical) return radicalToHtml(metadataForRadical); 
-                    const flashCardEntryForRadical = flashCardDataList.find((flashCardDataValue) => 
-                    flashCardDataValue.traditional === oneradical || flashCardDataValue.simplified === oneradical);
-                    return flashCardEntryForRadical ? `${flashCardEntryForRadical.traditional}: ${flashCardEntryForRadical.definition}` : oneradical; }
-                  ).join("<br/>")}
-                </div>
-            </div>
+            ${currentCardData.commonWords && currentCardData.commonWords.length > 0 ? `<div class="detailRow">
+              <div class="">${currentCardData.commonWords.join("<br/>")}</div>
+            </div>` : ""}
             <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
               <div class="unimportantInfo">
               <div class="detailLabel">Stroke Count</div>
