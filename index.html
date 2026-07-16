@@ -23,6 +23,17 @@
       background: #0f172a;
       color: #e5e7eb;
     }
+    .commonWord0 {
+      display: inline-block;
+      padding-right:2px;
+      width: 160px;
+    }
+    .commonWord1 {
+      display: inline-block;
+      width: 220px;
+      text-align: left;
+      text-transform: capitalize;
+    }
     .appMainLayoutRow {
       display: flex;
       flex-direction: row;
@@ -1916,7 +1927,7 @@
               <div class="detailPinyinTextValue">${currentCardData.pinyin}</div>
             </div>
             ${currentCardData.commonWords && currentCardData.commonWords.length > 0 ? `<div class="detailRow">
-              <div class="">${currentCardData.commonWords.join("<br/>")}</div>
+              <div class="">${currentCardData.commonWords.map((commonWord) => commonWord.split("-").map((word, index) => `<div class="commonWord${index}">${word}${index === 0 ? ":" : ""}</div>`).join("")).join("<br/>")}</div>
             </div>` : ""}
             <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
               <div class="unimportantInfo">
