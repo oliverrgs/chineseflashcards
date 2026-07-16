@@ -372,7 +372,6 @@ const flashCardDataList = [
     "commonWords": [
       "和你 (hé nǐ) - with you",
       "和平 (hépíng) - peace",
-      "合作 (hézuò) - cooperate",
       "暖和 (nuǎnhuo) - warm"
     ]
   },
@@ -596,7 +595,6 @@ const flashCardDataList = [
     "commonWords": [
       "發現 (fāxiàn) - discover",
       "發生 (fāshēng) - happen",
-      "頭髮 (tóufa) - hair",
       "出發 (chūfā) - depart"
     ]
   },
@@ -620,8 +618,7 @@ const flashCardDataList = [
     "commonWords": [
       "這裡 (zhèlǐ) - here",
       "裡面 (lǐmiàn) - inside",
-      "家裡 (jiālǐ) - at home",
-      "合理 (hélǐ) - reasonable"
+      "家裡 (jiālǐ) - at home"
     ]
   },
   {"traditional": "用", "simplified": "用", "pinyin": "yòng", "definition": "use, employ, apply, operate; use", "strokeCount": 5, "hskLevel": 3, "generalStandardNumber": "0283", "frequencyRank": 51,
@@ -1052,8 +1049,7 @@ const flashCardDataList = [
     "commonWords": [
       "意思 (yìsi) - meaning",
       "注意 (zhùyì) - pay attention",
-      "主意 (zhǔyi) - idea",
-      "異議 (yìyì) - objection"
+      "主意 (zhǔyi) - idea"
     ]
   },
   {"traditional": "無", "simplified": "无", "pinyin": "wú", "definition": "negative, no, not; KangXi radical 71", "strokeCount": 4, "hskLevel": 4, "generalStandardNumber": "0081", "frequencyRank": 105,
@@ -1074,7 +1070,6 @@ const flashCardDataList = [
   },
   {"traditional": "它", "simplified": "它", "pinyin": "tā", "definition": "it; other", "strokeCount": 5, "hskLevel": 2, "generalStandardNumber": "0314", "frequencyRank": 107,
     "commonWords": [
-      "其他 (qítā) - other",
       "它們 (tāmen) - they (for animals/things)",
       "看它 (kàn tā) - look at it",
       "它的 (tā de) - its"
@@ -1156,8 +1151,6 @@ const flashCardDataList = [
     "commonWords": [
       "已經 (yǐjīng) - already",
       "不已 (bùyǐ) - endlessly",
-      "難以 (nányǐ) - hard to",
-      "得以 (déyǐ) - able to"
     ]
   },
   {"traditional": "工", "simplified": "工", "pinyin": "gōng", "definition": "labor, work; worker, laborer", "strokeCount": 3, "hskLevel": 1, "generalStandardNumber": "0026", "frequencyRank": 118,
@@ -1348,7 +1341,6 @@ const flashCardDataList = [
     "commonWords": [
       "並且 (bìngqiě) - and, moreover",
       "並不 (bìng bù) - not at all",
-      "合併 (hébìng) - merge",
       "並列 (bìngliè) - alongside"
     ]
   },
@@ -1522,7 +1514,6 @@ const flashCardDataList = [
   },
   {"traditional": "制", "simplified": "制", "pinyin": "zhì", "definition": "system; establish; overpower", "strokeCount": 8, "hskLevel": 5, "generalStandardNumber": "1121", "frequencyRank": 163,
     "commonWords": [
-      "製造 (zhìzào) - manufacture",
       "制度 (zhìdù) - system",
       "控制 (kòngzhì) - control",
       "制定 (zhìdìng) - formulate"
@@ -1636,8 +1627,7 @@ const flashCardDataList = [
     "commonWords": [
       "表現 (biǎoxiàn) - performance",
       "表達 (biǎodá) - express",
-      "手表 (shǒubiǎo) - watch",
-      "錶格 (biǎogé) - form"
+      "手表 (shǒubiǎo) - watch"
     ]
   },
   {"traditional": "化", "simplified": "化", "pinyin": "huà", "definition": "change, convert, reform; -ize", "strokeCount": 4, "hskLevel": 3, "generalStandardNumber": "0132", "frequencyRank": 178,
@@ -1909,7 +1899,6 @@ const flashCardDataList = [
       "幾個 (jǐ ge) - how many",
       "好幾 (hǎojǐ) - several",
       "幾點 (jǐ diǎn) - what time",
-      "多少 (duō shǎo) - how many"
     ]
   },
   {"traditional": "口", "simplified": "口", "pinyin": "kǒu", "definition": "mouth; open end; entrance, gate", "strokeCount": 3, "hskLevel": 3, "generalStandardNumber": "0038", "frequencyRank": 212,
@@ -2235,7 +2224,6 @@ const flashCardDataList = [
   {"traditional": "管", "simplified": "管", "pinyin": "guǎn", "definition": "pipe, tube, duct; woodwind music", "strokeCount": 14, "hskLevel": 4, "generalStandardNumber": "3123", "frequencyRank": 252,
     "commonWords": [
       "管理 (guǎnlǐ) - to manage, management",
-      "館 (guǎn) - a public building (e.g. 餐館 restaurant, 體育館 gym)",
       "管子 (guǎnzi) - pipe, tube",
       "不管 (bùguǎn) - regardless, no matter (what/how, etc.)"
     ]
@@ -2316,8 +2304,7 @@ const flashCardDataList = [
     "commonWords": [
       "克服 (kèfú) - to overcome",
       "千克 (qiānkè) - kilogram",
-      "公克 (gōngkè) - gram (TW usage)",
-      "可口可樂／可口可乐 (Kěkǒukělè) - Coca-Cola"
+      "公克 (gōngkè) - gram (TW usage)"
     ]
   },
   {"traditional": "許", "simplified": "许", "pinyin": "xǔ", "definition": "allow, permit; promise; betroth", "strokeCount": 6, "hskLevel": 4, "generalStandardNumber": "0554", "frequencyRank": 263,
@@ -2371,7 +2358,6 @@ const flashCardDataList = [
   {"traditional": "形", "simplified": "形", "pinyin": "xíng", "definition": "form, shape, appearance", "strokeCount": 7, "hskLevel": 5, "generalStandardNumber": "0604", "frequencyRank": 269,
     "commonWords": [
       "形狀／形状 (xíngzhuàng) - shape, form",
-      "類型／类型 (lèixíng) - type, category",
       "形成 (xíngchéng) - to form",
       "外形 (wàixíng) - appearance"
     ]
@@ -2436,7 +2422,6 @@ const flashCardDataList = [
     "commonWords": [
       "科學／科学 (kēxué) - science",
       "本科 (běnkē) - undergraduate",
-      "課程／课程 (kèchéng) - course, curriculum",
       "科技 (kējì) - science and technology"
     ]
   },
@@ -2516,7 +2501,6 @@ const flashCardDataList = [
     "commonWords": [
       "卻是／却是 (quèshì) - but (it is), yet",
       "退卻／退却 (tuìquè) - to retreat",
-      "拒絕／拒绝 (jùjué) - to refuse, to reject",
       "卻步／却步 (quèbù) - to shrink back"
     ]
   },
@@ -3164,7 +3148,6 @@ const flashCardDataList = [
     "commonWords": [
       "建議／建议 (jiànyì) - suggestion, to suggest",
       "會議／会议 (huìyì) - meeting, conference",
-      "討論／讨论 (tǎolùn) - to discuss",
       "提議／提议 (tíyì) - to propose, proposal"
     ]
   },
@@ -3204,7 +3187,6 @@ const flashCardDataList = [
     "commonWords": [
       "證明／证明 (zhèngmíng) - proof, to prove",
       "證件／证件 (zhèngjiàn) - certificate",
-      "執照／执照 (zhízhào) - license (shows certificate usage)",
       "證書／证书 (zhèngshū) - diploma, certificate"
     ]
   },
@@ -3364,7 +3346,6 @@ const flashCardDataList = [
     "commonWords": [
       "漢字／汉字 (hànzì) - Chinese character",
       "寫字／写字 (xiězì) - to write characters/words",
-      "名子 (míngzi) - name",
       "字母 (zìmǔ) - letter (alphabet)"
     ]
   },
@@ -3629,7 +3610,6 @@ const flashCardDataList = [
       "複雜／复杂 (fùzá) - complicated",
       "恢復／恢复 (huīfù) - to recover, restore",
       "複印／复印 (fùyìn) - to photocopy",
-      "覆蓋／覆盖 (fùgài) - to cover"
     ]
   },
   {"traditional": "病", "simplified": "病", "pinyin": "bìng", "definition": "illness, sickness, disease", "strokeCount": 10, "hskLevel": 2, "generalStandardNumber": "2027", "frequencyRank": 427,
@@ -3645,7 +3625,6 @@ const flashCardDataList = [
       "消息 (xiāoxi) - news, information",
       "休息 (xiūxi) - to rest",
       "利息 (lìxī) - interest (on money)",
-      "呼吸 (hūxī) - to breathe"
     ]
   },
   {"traditional": "究", "simplified": "究", "pinyin": "jiū", "definition": "examine, investigate", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0881", "frequencyRank": 429,
@@ -4190,9 +4169,7 @@ const flashCardDataList = [
   },
   {"traditional": "希", "simplified": "希", "pinyin": "xī", "definition": "rare; hope, expect, strive for", "strokeCount": 7, "hskLevel": 2, "generalStandardNumber": "0796", "frequencyRank": 508,
     "commonWords": [
-      "希望 (xīwàng) - hope",
-      "期望 (qīwàng) - expect",
-      "追求 (zhuīqiú) - strive for"
+      "希望 (xīwàng) - hope"
     ]
   },
   {"traditional": "古", "simplified": "古", "pinyin": "gǔ", "definition": "old, classic, ancient", "strokeCount": 5, "hskLevel": 5, "generalStandardNumber": "0208", "frequencyRank": 509,
