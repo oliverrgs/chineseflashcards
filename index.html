@@ -798,12 +798,24 @@
         if (pointerEventValue.button !== 0) {
           return;
         }
+        logChineseFlashCardsDiagnosticMessage(
+          "pointer: mousedown received",
+          navButtonHoldDiagnosticLabelValue,
+          "at",
+          Date.now()
+        );
         pointerEventValue.preventDefault();
         startNavButtonHoldInteraction(false);
       });
       buttonElementValue.addEventListener("mouseup", cancelNavButtonHoldInteraction);
       buttonElementValue.addEventListener("mouseleave", cancelNavButtonHoldInteraction);
       buttonElementValue.addEventListener("touchstart", (touchEventValue) => {
+        logChineseFlashCardsDiagnosticMessage(
+          "pointer: touchstart received",
+          navButtonHoldDiagnosticLabelValue,
+          "at",
+          Date.now()
+        );
         touchEventValue.preventDefault();
         startNavButtonHoldInteraction(false);
       }, { passive: false });
