@@ -1634,8 +1634,7 @@ const flashCardDataList = [
     "commonWords": [
       "文化 (wénhuà) - culture",
       "變化 (biànhuà) - change",
-      "美化 (měihuà) - beautify",
-      "計劃 (jìhuà) - plan"
+      "美化 (měihuà) - beautify"
     ]
   },
   {"traditional": "老", "simplified": "老", "pinyin": "lǎo", "definition": "old, aged; experienced", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0360", "frequencyRank": 179,

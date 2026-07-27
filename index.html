@@ -26,7 +26,7 @@
     .commonWord0 {
       display: inline-block;
       padding-right:2px;
-      width: 160px;
+      width: 240px;
     }
     .commonWord1 {
       display: inline-block;
@@ -77,6 +77,25 @@
       justify-content: flex-end;
       gap: 8px;
       flex-wrap: wrap;
+    }
+    @media (max-width: 767px) {
+      .auxControlsRow {
+        position: fixed;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        flex-direction: column;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+        z-index: 10;
+      }
+      .learnModeLabel {
+        display: none;
+      }
+      #ttsPlaybackModeSelectElement {
+        display: none;
+      }
     }
     body.studySessionChromeControlsHidden .studySessionChromeControlElement {
       display: none !important;
@@ -192,7 +211,7 @@
       letter-spacing: 4px;
     }
     .characterValue {
-      font-size: clamp(120px, 12vw, 400px);
+      font-size: clamp(120px, 12vh, 400px);
       font-weight: 600;
       letter-spacing: 4px;
     }
@@ -221,9 +240,9 @@
       color: #9ca3af;
     }
     .detailPinyinTextValue {
-      font-size: clamp(36px, 11vw, 160px);
+      font-size: clamp(36px, 9vw, 160px);
       font-weight: 500;
-      line-height: 1.35;
+      line-height: 1.15;
       letter-spacing: 0.04em;
     }
     .navigationRow {
@@ -598,6 +617,7 @@
   </div>
 
   <script src="radicalmapping.js"></script>
+  <script src="basicRadicals.js"></script>
   <script src="flashcardDataList.js"></script>
   <script>
     const pageLoadTime = Date.now();
@@ -1898,29 +1918,17 @@
       }
 
       const characterForRadicalLookup = currentCardData.traditional;
-      const radicalsFromMapping = (typeof radicalMapping !== "undefined" && radicalMapping[characterForRadicalLookup]) ? radicalMapping[characterForRadicalLookup] : [];
-      const mainRadicalForCard = radicalsFromMapping[0] || "";
+	    const radicalsFromMapping = (typeof radicalMapping !== "undefined" && radicalMapping[characterForRadicalLookup]) ? radicalMapping[characterForRadicalLookup] : [];
+      
+	  const mainRadicalForCard = radicalsFromMapping[0] || "";
       const radicalMetadataForCard = (mainRadicalForCard)=>{
-        return radicalList.find((radical) => radical.radical === mainRadicalForCard || radical.variants.includes(mainRadicalForCard));
+        return flashCardDataList.find((radical) => radical.traditional === mainRadicalForCard || radical.simplified === mainRadicalForCard);
       }
       const radicalToHtml = (radical) => {
-        return `${radical.radical} ${radical.variants.length > 0 ? `(${radical.variants})` : ""}:
-        ${radical.meaning}`;
+        return `${radical.traditional}: ${radical.meaning}`;
       }
 /*
 
-            <div>
-              <div class="detailLabel">Radical</div>
-              <div>
-                ${radicalsFromMapping.map((oneradical)=>{ 
-                    const metadataForRadical = radicalMetadataForCard(oneradical); 
-                    if (metadataForRadical) return radicalToHtml(metadataForRadical); 
-                    const flashCardEntryForRadical = flashCardDataList.find((flashCardDataValue) => 
-                    flashCardDataValue.traditional === oneradical || flashCardDataValue.simplified === oneradical);
-                    return flashCardEntryForRadical ? `${flashCardEntryForRadical.traditional}: ${flashCardEntryForRadical.definition}` : oneradical; }
-                  ).join("<br/>")}
-                </div>
-            </div>
             */
       cardContentElement.innerHTML = `
         <div class="cardContent">
@@ -1946,6 +1954,45 @@
             ${currentCardData.commonWords && currentCardData.commonWords.length > 0 ? `<div class="detailRow">
               <div class="">${currentCardData.commonWords.map((commonWord) => commonWord.split("-").map((word, index) => `<div class="commonWord${index}">${word}${index === 0 ? ":" : ""}</div>`).join("")).join("<br/>")}</div>
             </div>` : ""}
+              ${(radicalsFromMapping?.length > 0 && radicalsFromMapping[0]!=currentCardData.traditional) ? 
+              `<div class="detailLabel">Radical</div>
+              <div>
+                ${radicalsFromMapping.map((oneradical)=>{ 
+                    const flashCardEntryForRadical = flashCardDataList.find((flashCardDataValue) => 
+                    flashCardDataValue.traditional === oneradical || flashCardDataValue.simplified === oneradical);
+                    // Limit the length of the definition: split by commas, sort by length, accumulate until <= 40 chars or out of items
+                    const basicRadical = basicRadicals.find((radical) => radical.radicalGlyph.includes(oneradical));  
+                    if(basicRadical){
+                      return `${oneradical}: №${basicRadical.radicalNumber} ${basicRadical.radicalMeaning}`;
+                    } else if (flashCardEntryForRadical) {
+                      const definitions = flashCardEntryForRadical.definition.split(',').map(d => d.trim());
+                      // sort by length, shortest first
+                      definitions.sort((a, b) => a.length - b.length);
+                      let result = [];
+                      let charCount = 0;
+                      for (const def of definitions) {
+                        if (result.length === 0) {
+                          // always add first
+                          result.push(def);
+                          charCount += def.length;
+                        } else if (charCount + 2 + def.length <= 55) { // +2 for comma and space
+                          result.push(def);
+                          charCount += 2 + def.length;
+                        } else {
+                          break;
+                        }
+                      }
+                      const limitedDefinition = result.join(', ');
+                      return `${flashCardEntryForRadical.traditional}: ${limitedDefinition}${result.length < definitions.length ? '…' : ''}`;
+                    } else  {
+                      return oneradical;
+                    }
+               
+                  }
+                  ).join("<br/>")}
+                </div>
+              ` : ""}
+            </div>
             <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
               <div class="unimportantInfo">
               <div class="detailLabel">Stroke Count</div>
@@ -1959,6 +2006,7 @@
               <div class="detailLabel">Frequency Rank</div>
               <div>${currentCardData.frequencyRank}</div>
               </div>
+            <div>
               <div class="unimportantInfo">
                 <div class="detailLabel">Seen Count</div>
                 <div>${currentCardSeenCountValue}</div>
