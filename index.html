@@ -629,6 +629,24 @@
       }
       console.log("[ChineseFlashCards]", ...diagnosticLogArgs);
     };
+    const eventLoopHeartbeatIntervalMillisecondsValue = 250;
+    const eventLoopHeartbeatStallReportThresholdMillisecondsValue = 500;
+    let lastEventLoopHeartbeatPerformanceNowValue = performance.now();
+    setInterval(() => {
+      const currentEventLoopHeartbeatPerformanceNowValue = performance.now();
+      const eventLoopHeartbeatGapMillisecondsValue =
+        currentEventLoopHeartbeatPerformanceNowValue - lastEventLoopHeartbeatPerformanceNowValue;
+      lastEventLoopHeartbeatPerformanceNowValue = currentEventLoopHeartbeatPerformanceNowValue;
+      if (eventLoopHeartbeatGapMillisecondsValue > eventLoopHeartbeatStallReportThresholdMillisecondsValue) {
+        logChineseFlashCardsDiagnosticMessage(
+          "heartbeat: event loop stall detected",
+          "gapMs",
+          Math.round(eventLoopHeartbeatGapMillisecondsValue),
+          "at",
+          Date.now()
+        );
+      }
+    }, eventLoopHeartbeatIntervalMillisecondsValue);
     const uiClickDebounceDelayMillisecondsValue = 150;
     const uiClickDebounceMaximumAcceptableFireDelayMillisecondsValue = 2500;
     const navButtonHoldToActivateDurationMillisecondsValue = 300;
@@ -746,6 +764,16 @@
           runActionCallbackValue();
           return;
         }
+        logChineseFlashCardsDiagnosticMessage(
+          "navHold: cancel took no-action else branch",
+          navButtonHoldDiagnosticLabelValue,
+          "keyboardTimedHoldActive",
+          navButtonHoldKeyboardTimedHoldIsActiveValue,
+          "actionAlreadyCompleted",
+          navButtonHoldActionAlreadyCompletedForCurrentPressValue,
+          "elapsedPerformanceMs",
+          Math.round(elapsedSinceKeyboardHoldStartPerformanceMsValue)
+        );
         navButtonHoldKeyboardTimedHoldIsActiveValue = false;
         resetNavButtonHoldProgressVisual();
       };
