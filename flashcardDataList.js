@@ -598,7 +598,7 @@ const flashCardDataList = [
       "出發 (chūfā) - depart"
     ]
   },
-  {"traditional": "後", "simplified": "后", "pinyin": "hòu", "definition": "queen, empress, sovereign; (simp. for 後) behind, rear, after", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0482", "frequencyRank": 48,
+  {"traditional": "後", "simplified": "后", "pinyin": "hòu", "definition": "behind, rear, after; queen, empress, sovereign", "strokeCount": 6, "hskLevel": 1, "generalStandardNumber": "0482", "frequencyRank": 48,
     "commonWords": [
       "然後 (ránhòu) - then, afterwards",
       "最後 (zuìhòu) - last, final",

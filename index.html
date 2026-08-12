@@ -1991,6 +1991,9 @@
                     // Limit the length of the definition: split by commas, sort by length, accumulate until <= 40 chars or out of items
                     const basicRadical = basicRadicals.find((radical) => radical.radicalGlyph.includes(oneradical));  
                     if(basicRadical){
+                      if(basicRadical.radicalNumber <= 0){
+                        return `${oneradical}: ${basicRadical.radicalMeaning}`;
+                      }
                       return `${oneradical}: №${basicRadical.radicalNumber} ${basicRadical.radicalMeaning}`;
                     } else if (flashCardEntryForRadical) {
                       const definitions = flashCardEntryForRadical.definition.split(',').map(d => d.trim());

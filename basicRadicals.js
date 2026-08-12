@@ -1283,4 +1283,10 @@ const basicRadicals = [
         radicalPinyin: "yuè",
         radicalMeaning: "Flute"
     },
+    {
+        radicalNumber: -1,
+        radicalGlyph: "昜",
+        radicalPinyin: "yáng",
+        radicalMeaning: "Sun"
+    },
 ]
