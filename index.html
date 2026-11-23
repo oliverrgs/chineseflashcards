@@ -894,7 +894,9 @@
       full: "full"
     };
 
-    const learnModeStateStorageSchemaVersionValue = 2;
+    const learnModeStateStorageSchemaVersionValue = 3;
+    const learnModePresentationKindCharacterValue = "character";
+    const learnModePresentationKindWordValue = "word";
 
     const characterResponseHistoryMaxEntryCountValue = 25;
     const characterResponseHistoryLongGapThresholdMillisecondsValue = 10 * 60 * 1000;
@@ -921,6 +923,100 @@
     };
 
     const getSeenCountKeyFromCardData = (cardDataValue) => cardDataValue.simplified;
+
+    const buildWordFlashCardCatalogFromFlashCardDataList = () => {
+      const traditionalToSimplifiedCharacterMapValue = new Map();
+      const simplifiedCharacterToCardDataMapValue = new Map();
+      for (const flashCardDataValue of flashCardDataList) {
+        traditionalToSimplifiedCharacterMapValue.set(flashCardDataValue.traditional, flashCardDataValue.simplified);
+        traditionalToSimplifiedCharacterMapValue.set(flashCardDataValue.simplified, flashCardDataValue.simplified);
+        simplifiedCharacterToCardDataMapValue.set(flashCardDataValue.simplified, flashCardDataValue);
+      }
+
+      const convertHanStringToSimplifiedValue = (hanStringValue) => {
+        let simplifiedStringBuilderValue = "";
+        for (const hanCharacterValue of hanStringValue) {
+          simplifiedStringBuilderValue += traditionalToSimplifiedCharacterMapValue.get(hanCharacterValue) || hanCharacterValue;
+        }
+        return simplifiedStringBuilderValue;
+      };
+
+      const parseCommonWordStringValue = (commonWordStringValue) => {
+        const commonWordMatchValue = String(commonWordStringValue).match(/^(.+?)\s*\(([^)]+)\)\s*-\s*(.+)$/);
+        if (!commonWordMatchValue) {
+          return null;
+        }
+        const chinesePartRawValue = commonWordMatchValue[1].trim();
+        const pinyinValue = commonWordMatchValue[2].trim();
+        const definitionValue = commonWordMatchValue[3].trim();
+        let traditionalWordValue = chinesePartRawValue;
+        let simplifiedWordValue = chinesePartRawValue;
+        if (chinesePartRawValue.includes("／")) {
+          const chinesePartSplitListValue = chinesePartRawValue.split("／");
+          traditionalWordValue = chinesePartSplitListValue[0].trim();
+          simplifiedWordValue = chinesePartSplitListValue[1].trim();
+        } else if (chinesePartRawValue.includes("/")) {
+          const chinesePartSplitListValue = chinesePartRawValue.split("/");
+          traditionalWordValue = chinesePartSplitListValue[0].trim();
+          simplifiedWordValue = chinesePartSplitListValue[1].trim();
+        } else {
+          simplifiedWordValue = convertHanStringToSimplifiedValue(chinesePartRawValue);
+        }
+        return {
+          traditional: traditionalWordValue,
+          simplified: simplifiedWordValue,
+          pinyin: pinyinValue,
+          definition: definitionValue
+        };
+      };
+
+      const wordCardDataBySimplifiedKeyMapValue = new Map();
+      const wordSimplifiedKeyListByConstituentCharacterMapValue = new Map();
+
+      for (const flashCardDataValue of flashCardDataList) {
+        const commonWordListValue = flashCardDataValue.commonWords || [];
+        for (const commonWordStringValue of commonWordListValue) {
+          const parsedWordValue = parseCommonWordStringValue(commonWordStringValue);
+          if (!parsedWordValue) {
+            continue;
+          }
+          const simplifiedWordKeyValue = parsedWordValue.simplified;
+          const constituentSimplifiedCharacterListValue = [...simplifiedWordKeyValue];
+          if (constituentSimplifiedCharacterListValue.length < 2) {
+            continue;
+          }
+          if (wordCardDataBySimplifiedKeyMapValue.has(simplifiedWordKeyValue)) {
+            continue;
+          }
+          wordCardDataBySimplifiedKeyMapValue.set(simplifiedWordKeyValue, {
+            simplified: simplifiedWordKeyValue,
+            traditional: parsedWordValue.traditional,
+            pinyin: parsedWordValue.pinyin,
+            definition: parsedWordValue.definition,
+            constituentSimplifiedCharacterList: constituentSimplifiedCharacterListValue,
+            isWordCard: true
+          });
+          for (const constituentCharacterValue of constituentSimplifiedCharacterListValue) {
+            if (!wordSimplifiedKeyListByConstituentCharacterMapValue.has(constituentCharacterValue)) {
+              wordSimplifiedKeyListByConstituentCharacterMapValue.set(constituentCharacterValue, []);
+            }
+            wordSimplifiedKeyListByConstituentCharacterMapValue.get(constituentCharacterValue).push(simplifiedWordKeyValue);
+          }
+        }
+      }
+
+      return {
+        wordCardDataBySimplifiedKeyMapValue,
+        wordSimplifiedKeyListByConstituentCharacterMapValue,
+        simplifiedCharacterToCardDataMapValue
+      };
+    };
+
+    const {
+      wordCardDataBySimplifiedKeyMapValue,
+      wordSimplifiedKeyListByConstituentCharacterMapValue,
+      simplifiedCharacterToCardDataMapValue
+    } = buildWordFlashCardCatalogFromFlashCardDataList();
 
     const loadResponseHistoryByCharacterMapFromLocalStorage = () => {
       const responseHistoryByCharacterStorageValue = localStorage.getItem(localStorageKeyNameMap.responseHistoryByCharacter);
@@ -990,8 +1086,7 @@
       return Date.now() - lastResponseHistoryEntryValue.responseTimestampMilliseconds;
     };
 
-    const getLearnModeCorrectAnswerWeightMultiplierForCharacter = (simplifiedCharacterKeyValue) => {
-      const millisecondsSinceLastResponseValue = getMillisecondsSinceLastResponseForCharacter(simplifiedCharacterKeyValue);
+    const getLearnModeCorrectAnswerWeightMultiplierFromMillisecondsSinceLastResponse = (millisecondsSinceLastResponseValue) => {
       if (millisecondsSinceLastResponseValue === null) {
         return learnModeRightWeightMultiplierValue;
       }
@@ -1011,9 +1106,15 @@
       );
     };
 
-    const appendCharacterResponseHistoryEntry = (simplifiedCharacterKeyValue, wasCorrectValue) => {
+    const getLearnModeCorrectAnswerWeightMultiplierForCharacter = (simplifiedCharacterKeyValue) => {
+      return getLearnModeCorrectAnswerWeightMultiplierFromMillisecondsSinceLastResponse(
+        getMillisecondsSinceLastResponseForCharacter(simplifiedCharacterKeyValue)
+      );
+    };
+
+    const appendResponseHistoryEntryToMapValue = (responseHistoryByKeyMapValue, responseHistoryKeyValue, wasCorrectValue) => {
       const responseTimestampMillisecondsValue = Date.now();
-      const existingResponseHistoryEntryListValue = responseHistoryByCharacterMapValue[simplifiedCharacterKeyValue] || [];
+      const existingResponseHistoryEntryListValue = responseHistoryByKeyMapValue[responseHistoryKeyValue] || [];
       const lastResponseHistoryEntryValue = existingResponseHistoryEntryListValue.length > 0
         ? existingResponseHistoryEntryListValue[existingResponseHistoryEntryListValue.length - 1]
         : null;
@@ -1028,10 +1129,33 @@
           intervalSincePreviousResponseMilliseconds: intervalSincePreviousResponseMillisecondsValue
         }
       ];
-      responseHistoryByCharacterMapValue[simplifiedCharacterKeyValue] = nextResponseHistoryEntryListValue.length > characterResponseHistoryMaxEntryCountValue
+      responseHistoryByKeyMapValue[responseHistoryKeyValue] = nextResponseHistoryEntryListValue.length > characterResponseHistoryMaxEntryCountValue
         ? nextResponseHistoryEntryListValue.slice(nextResponseHistoryEntryListValue.length - characterResponseHistoryMaxEntryCountValue)
         : nextResponseHistoryEntryListValue;
+    };
+
+    const appendCharacterResponseHistoryEntry = (simplifiedCharacterKeyValue, wasCorrectValue) => {
+      appendResponseHistoryEntryToMapValue(responseHistoryByCharacterMapValue, simplifiedCharacterKeyValue, wasCorrectValue);
       saveResponseHistoryByCharacterMapToLocalStorage(responseHistoryByCharacterMapValue);
+    };
+
+    const getMillisecondsSinceLastResponseForWord = (simplifiedWordKeyValue) => {
+      const responseHistoryEntryListValue = responseHistoryByWordMapValue[simplifiedWordKeyValue] || [];
+      if (responseHistoryEntryListValue.length === 0) {
+        return null;
+      }
+      const lastResponseHistoryEntryValue = responseHistoryEntryListValue[responseHistoryEntryListValue.length - 1];
+      return Date.now() - lastResponseHistoryEntryValue.responseTimestampMilliseconds;
+    };
+
+    const getLearnModeCorrectAnswerWeightMultiplierForWord = (simplifiedWordKeyValue) => {
+      return getLearnModeCorrectAnswerWeightMultiplierFromMillisecondsSinceLastResponse(
+        getMillisecondsSinceLastResponseForWord(simplifiedWordKeyValue)
+      );
+    };
+
+    const appendWordResponseHistoryEntry = (simplifiedWordKeyValue, wasCorrectValue) => {
+      appendResponseHistoryEntryToMapValue(responseHistoryByWordMapValue, simplifiedWordKeyValue, wasCorrectValue);
     };
 
     const loadNightModeEnabledValueFromLocalStorage = () => {
@@ -1099,6 +1223,14 @@
       );
     };
 
+    const findCardDataBySimplifiedKeyInFullFlashCardDataList = (simplifiedCharacterKeyValue) => {
+      return simplifiedCharacterToCardDataMapValue.get(simplifiedCharacterKeyValue) || null;
+    };
+
+    const findWordCardDataBySimplifiedKeyValue = (simplifiedWordKeyValue) => {
+      return wordCardDataBySimplifiedKeyMapValue.get(simplifiedWordKeyValue) || null;
+    };
+
     const buildLearnModePoolStatePlainObjectForStorage = () => {
       return {
         schemaVersion: learnModeStateStorageSchemaVersionValue,
@@ -1107,7 +1239,14 @@
           simplifiedCharacterKey: getSeenCountKeyFromCardData(poolEntryValue.cardData),
           weight: poolEntryValue.weight
         })),
-        currentLearnModePoolIndexValue
+        wordPoolEntryList: learnModeWordPoolList.map((wordPoolEntryValue) => ({
+          simplifiedWordKey: getSeenCountKeyFromCardData(wordPoolEntryValue.cardData),
+          weight: wordPoolEntryValue.weight
+        })),
+        currentLearnModePoolIndexValue,
+        currentLearnModeWordPoolIndexValue,
+        currentLearnModePresentationKindValue,
+        responseHistoryByWord: responseHistoryByWordMapValue
       };
     };
 
@@ -1142,6 +1281,7 @@
         !learnModeStatePlainObjectValue
         || (
           learnModeStatePlainObjectValue.schemaVersion !== 1
+          && learnModeStatePlainObjectValue.schemaVersion !== 2
           && learnModeStatePlainObjectValue.schemaVersion !== learnModeStateStorageSchemaVersionValue
         )
       ) {
@@ -1160,6 +1300,22 @@
           return false;
         }
       }
+      if (Array.isArray(learnModeStatePlainObjectValue.wordPoolEntryList)) {
+        for (
+          let wordPoolEntryIndexValue = 0;
+          wordPoolEntryIndexValue < learnModeStatePlainObjectValue.wordPoolEntryList.length;
+          wordPoolEntryIndexValue += 1
+        ) {
+          const wordPoolEntryFromStorageValue = learnModeStatePlainObjectValue.wordPoolEntryList[wordPoolEntryIndexValue];
+          if (
+            !wordPoolEntryFromStorageValue
+            || typeof wordPoolEntryFromStorageValue.simplifiedWordKey !== "string"
+            || typeof wordPoolEntryFromStorageValue.weight !== "number"
+          ) {
+            return false;
+          }
+        }
+      }
       return true;
     };
 
@@ -1174,7 +1330,8 @@
         poolEntryIndexValue += 1
       ) {
         const poolEntryFromStorageValue = learnModeStatePlainObjectValue.poolEntryList[poolEntryIndexValue];
-        const matchedCardDataValue = findCardDataBySimplifiedKeyInRandomizedDeck(poolEntryFromStorageValue.simplifiedCharacterKey);
+        const matchedCardDataValue = findCardDataBySimplifiedKeyInRandomizedDeck(poolEntryFromStorageValue.simplifiedCharacterKey)
+          || findCardDataBySimplifiedKeyInFullFlashCardDataList(poolEntryFromStorageValue.simplifiedCharacterKey);
         if (matchedCardDataValue) {
           restoredLearnModePoolList.push({
             cardData: matchedCardDataValue,
@@ -1182,19 +1339,60 @@
           });
         }
       }
+      const restoredLearnModeWordPoolList = [];
+      const wordPoolEntryListFromStorageValue = Array.isArray(learnModeStatePlainObjectValue.wordPoolEntryList)
+        ? learnModeStatePlainObjectValue.wordPoolEntryList
+        : [];
+      for (
+        let wordPoolEntryIndexValue = 0;
+        wordPoolEntryIndexValue < wordPoolEntryListFromStorageValue.length;
+        wordPoolEntryIndexValue += 1
+      ) {
+        const wordPoolEntryFromStorageValue = wordPoolEntryListFromStorageValue[wordPoolEntryIndexValue];
+        const matchedWordCardDataValue = findWordCardDataBySimplifiedKeyValue(wordPoolEntryFromStorageValue.simplifiedWordKey);
+        if (matchedWordCardDataValue) {
+          restoredLearnModeWordPoolList.push({
+            cardData: matchedWordCardDataValue,
+            weight: wordPoolEntryFromStorageValue.weight
+          });
+        }
+      }
       isLearnModeEnabledValue = Boolean(learnModeStatePlainObjectValue.learnModeEnabled);
       learnModePoolList = restoredLearnModePoolList;
+      learnModeWordPoolList = restoredLearnModeWordPoolList;
       if (learnModeStatePlainObjectValue.responseHistoryByCharacter) {
         responseHistoryByCharacterMapValue = sanitizeResponseHistoryByCharacterMapValue(
           learnModeStatePlainObjectValue.responseHistoryByCharacter
         );
         saveResponseHistoryByCharacterMapToLocalStorage(responseHistoryByCharacterMapValue);
       }
+      responseHistoryByWordMapValue = learnModeStatePlainObjectValue.responseHistoryByWord
+        ? sanitizeResponseHistoryByCharacterMapValue(learnModeStatePlainObjectValue.responseHistoryByWord)
+        : {};
       const clampedPoolIndexValue = Math.min(
         Math.max(0, Number(learnModeStatePlainObjectValue.currentLearnModePoolIndexValue) || 0),
         Math.max(0, learnModePoolList.length - 1)
       );
       currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? clampedPoolIndexValue : 0;
+      const clampedWordPoolIndexValue = Math.min(
+        Math.max(0, Number(learnModeStatePlainObjectValue.currentLearnModeWordPoolIndexValue) || 0),
+        Math.max(0, learnModeWordPoolList.length - 1)
+      );
+      currentLearnModeWordPoolIndexValue = learnModeWordPoolList.length > 0 ? clampedWordPoolIndexValue : 0;
+      const restoredPresentationKindValue = learnModeStatePlainObjectValue.currentLearnModePresentationKindValue;
+      if (
+        restoredPresentationKindValue === learnModePresentationKindWordValue
+        && learnModeWordPoolList.length > 0
+      ) {
+        currentLearnModePresentationKindValue = learnModePresentationKindWordValue;
+      } else if (learnModePoolList.length > 0) {
+        currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
+      } else if (learnModeWordPoolList.length > 0) {
+        currentLearnModePresentationKindValue = learnModePresentationKindWordValue;
+      } else {
+        currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
+      }
+      addEligibleWordsToWordPoolForAllSkilledCharactersInCharacterPool();
       learnModeLabelElement.textContent = isLearnModeEnabledValue ? "Learn Mode" : "Ordered Mode";
       persistLearnModeStateBundleToLocalStorage();
       syncLearnModeStateAsideColumnVisibilityFromLearnModeEnabled();
@@ -1238,7 +1436,11 @@
       }
       isLearnModeEnabledValue = false;
       learnModePoolList = [];
+      learnModeWordPoolList = [];
       currentLearnModePoolIndexValue = 0;
+      currentLearnModeWordPoolIndexValue = 0;
+      currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
+      responseHistoryByWordMapValue = {};
       learnModeLabelElement.textContent = "Ordered Mode";
       localStorage.removeItem(localStorageKeyNameMap.learnModeState);
       saveLearnModeEnabledValueToLocalStorage(false);
@@ -1377,7 +1579,11 @@
     responseHistoryByCharacterMapValue = sanitizeResponseHistoryByCharacterMapValue(responseHistoryByCharacterMapValue);
     let isLearnModeEnabledValue = false;
     let learnModePoolList = [];
+    let learnModeWordPoolList = [];
     let currentLearnModePoolIndexValue = 0;
+    let currentLearnModeWordPoolIndexValue = 0;
+    let currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
+    let responseHistoryByWordMapValue = {};
     let hasSeenCountIncrementedValue = false;
     let isSpeechVoiceLoadPendingValue = false;
     let previousIsDetailViewVisibleForGuessSideRandomizationValue = false;
@@ -1409,10 +1615,38 @@
       console.log("radicalMapping values without definition in flashCardDataList", radicalMappingValuesWithoutDefinitionInFlashCardListValue.sort());
     })();
 
+    const doesLearnModeHaveAnyPresentableCardValue = () => {
+      return learnModePoolList.length > 0 || learnModeWordPoolList.length > 0;
+    };
+
+    const getCurrentLearnModeCardDataValue = () => {
+      if (currentLearnModePresentationKindValue === learnModePresentationKindWordValue) {
+        if (
+          currentLearnModeWordPoolIndexValue < 0
+          || currentLearnModeWordPoolIndexValue >= learnModeWordPoolList.length
+        ) {
+          return null;
+        }
+        return learnModeWordPoolList[currentLearnModeWordPoolIndexValue].cardData;
+      }
+      if (
+        currentLearnModePoolIndexValue < 0
+        || currentLearnModePoolIndexValue >= learnModePoolList.length
+      ) {
+        return null;
+      }
+      return learnModePoolList[currentLearnModePoolIndexValue].cardData;
+    };
+
+    const getCurrentEffectiveCardDataValue = () => {
+      if (isLearnModeEnabledValue && doesLearnModeHaveAnyPresentableCardValue()) {
+        return getCurrentLearnModeCardDataValue();
+      }
+      return randomizedFlashCardDataList[currentCardIndexValue] || null;
+    };
+
     const updateSeenCountForCurrentCard = () => {
-      const effectiveCardDataValue = isLearnModeEnabledValue && learnModePoolList.length > 0
-        ? learnModePoolList[currentLearnModePoolIndexValue].cardData
-        : randomizedFlashCardDataList[currentCardIndexValue];
+      const effectiveCardDataValue = getCurrentEffectiveCardDataValue();
       if (!effectiveCardDataValue) {
         currentCardSeenCountValue = 0;
         return;
@@ -1467,6 +1701,68 @@
     };
 
     const getLearnModePoolKeysSet = () => new Set(learnModePoolList.map((entryValue) => getSeenCountKeyFromCardData(entryValue.cardData)));
+
+    const getLearnModeWordPoolKeysSet = () => new Set(
+      learnModeWordPoolList.map((wordPoolEntryValue) => getSeenCountKeyFromCardData(wordPoolEntryValue.cardData))
+    );
+
+    const pushWordCardIntoLearnModeWordPoolIfMissing = (wordCardDataValue) => {
+      if (!wordCardDataValue) {
+        return false;
+      }
+      const simplifiedWordKeyValue = getSeenCountKeyFromCardData(wordCardDataValue);
+      if (getLearnModeWordPoolKeysSet().has(simplifiedWordKeyValue)) {
+        return false;
+      }
+      learnModeWordPoolList.push({
+        cardData: wordCardDataValue,
+        weight: 1
+      });
+      return true;
+    };
+
+    const addEligibleWordsToWordPoolForSkilledSimplifiedCharacterKey = (simplifiedCharacterKeyValue) => {
+      const wordSimplifiedKeyListForCharacterValue = wordSimplifiedKeyListByConstituentCharacterMapValue.get(
+        simplifiedCharacterKeyValue
+      ) || [];
+      for (const wordSimplifiedKeyValue of wordSimplifiedKeyListForCharacterValue) {
+        pushWordCardIntoLearnModeWordPoolIfMissing(findWordCardDataBySimplifiedKeyValue(wordSimplifiedKeyValue));
+      }
+    };
+
+    const addEligibleWordsToWordPoolForAllSkilledCharactersInCharacterPool = () => {
+      for (const poolEntryValue of learnModePoolList) {
+        if (poolEntryValue.weight > characterHasBeenLearnedThresholdValue) {
+          continue;
+        }
+        addEligibleWordsToWordPoolForSkilledSimplifiedCharacterKey(
+          getSeenCountKeyFromCardData(poolEntryValue.cardData)
+        );
+      }
+    };
+
+    const addMissingConstituentCharactersFromLearnedWordToCharacterPool = (wordCardDataValue) => {
+      if (!wordCardDataValue || !Array.isArray(wordCardDataValue.constituentSimplifiedCharacterList)) {
+        return;
+      }
+      const poolCharacterKeysSetValue = getLearnModePoolKeysSet();
+      for (const constituentSimplifiedCharacterKeyValue of wordCardDataValue.constituentSimplifiedCharacterList) {
+        if (poolCharacterKeysSetValue.has(constituentSimplifiedCharacterKeyValue)) {
+          continue;
+        }
+        const matchedCharacterCardDataValue = findCardDataBySimplifiedKeyInFullFlashCardDataList(
+          constituentSimplifiedCharacterKeyValue
+        );
+        if (!matchedCharacterCardDataValue) {
+          continue;
+        }
+        learnModePoolList.push({
+          cardData: matchedCharacterCardDataValue,
+          weight: 1
+        });
+        poolCharacterKeysSetValue.add(constituentSimplifiedCharacterKeyValue);
+      }
+    };
 
     const formatLearnModeBannerNumericValueForDisplay = (numericValue) => {
       const roundedToSixDecimalPlacesValue = Math.round(numericValue * 1e6) / 1e6;
@@ -1595,18 +1891,137 @@
       return indicesToConsiderValue[indicesToConsiderValue.length - 1];
     };
 
+    const applyLearnModePresentationSelectionValue = (presentationSelectionValue) => {
+      if (!presentationSelectionValue) {
+        currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
+        currentLearnModePoolIndexValue = 0;
+        currentLearnModeWordPoolIndexValue = 0;
+        return;
+      }
+      currentLearnModePresentationKindValue = presentationSelectionValue.kind;
+      if (presentationSelectionValue.kind === learnModePresentationKindWordValue) {
+        currentLearnModeWordPoolIndexValue = presentationSelectionValue.poolIndex;
+      } else {
+        currentLearnModePoolIndexValue = presentationSelectionValue.poolIndex;
+      }
+    };
+
+    const pickNextLearnModePresentationByWeight = (kindToExcludeValue, indexToExcludeValue) => {
+      const candidatePresentationListValue = [];
+      for (let characterPoolIndexValue = 0; characterPoolIndexValue < learnModePoolList.length; characterPoolIndexValue += 1) {
+        if (
+          kindToExcludeValue === learnModePresentationKindCharacterValue
+          && indexToExcludeValue === characterPoolIndexValue
+        ) {
+          continue;
+        }
+        candidatePresentationListValue.push({
+          kind: learnModePresentationKindCharacterValue,
+          poolIndex: characterPoolIndexValue,
+          weight: learnModePoolList[characterPoolIndexValue].weight
+        });
+      }
+      for (let wordPoolIndexValue = 0; wordPoolIndexValue < learnModeWordPoolList.length; wordPoolIndexValue += 1) {
+        if (
+          kindToExcludeValue === learnModePresentationKindWordValue
+          && indexToExcludeValue === wordPoolIndexValue
+        ) {
+          continue;
+        }
+        candidatePresentationListValue.push({
+          kind: learnModePresentationKindWordValue,
+          poolIndex: wordPoolIndexValue,
+          weight: learnModeWordPoolList[wordPoolIndexValue].weight
+        });
+      }
+      if (candidatePresentationListValue.length === 0) {
+        if (learnModePoolList.length > 0) {
+          return { kind: learnModePresentationKindCharacterValue, poolIndex: 0 };
+        }
+        if (learnModeWordPoolList.length > 0) {
+          return { kind: learnModePresentationKindWordValue, poolIndex: 0 };
+        }
+        return null;
+      }
+      const totalWeightValue = candidatePresentationListValue.reduce(
+        (sumValue, candidatePresentationValue) => sumValue + candidatePresentationValue.weight,
+        0
+      );
+      if (totalWeightValue <= 0) {
+        return candidatePresentationListValue[0];
+      }
+      let randomValue = Math.random() * totalWeightValue;
+      for (let candidateIndexValue = 0; candidateIndexValue < candidatePresentationListValue.length; candidateIndexValue += 1) {
+        randomValue -= candidatePresentationListValue[candidateIndexValue].weight;
+        if (randomValue <= 0) {
+          return {
+            kind: candidatePresentationListValue[candidateIndexValue].kind,
+            poolIndex: candidatePresentationListValue[candidateIndexValue].poolIndex
+          };
+        }
+      }
+      const lastCandidatePresentationValue = candidatePresentationListValue[candidatePresentationListValue.length - 1];
+      return {
+        kind: lastCandidatePresentationValue.kind,
+        poolIndex: lastCandidatePresentationValue.poolIndex
+      };
+    };
+
+    const clampLearnModePresentationPointerToAvailablePools = () => {
+      if (
+        currentLearnModePresentationKindValue === learnModePresentationKindWordValue
+        && learnModeWordPoolList.length === 0
+        && learnModePoolList.length > 0
+      ) {
+        currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
+      }
+      if (
+        currentLearnModePresentationKindValue === learnModePresentationKindCharacterValue
+        && learnModePoolList.length === 0
+        && learnModeWordPoolList.length > 0
+      ) {
+        currentLearnModePresentationKindValue = learnModePresentationKindWordValue;
+      }
+      if (learnModePoolList.length > 0) {
+        currentLearnModePoolIndexValue = Math.min(
+          Math.max(0, currentLearnModePoolIndexValue),
+          learnModePoolList.length - 1
+        );
+      } else {
+        currentLearnModePoolIndexValue = 0;
+      }
+      if (learnModeWordPoolList.length > 0) {
+        currentLearnModeWordPoolIndexValue = Math.min(
+          Math.max(0, currentLearnModeWordPoolIndexValue),
+          learnModeWordPoolList.length - 1
+        );
+      } else {
+        currentLearnModeWordPoolIndexValue = 0;
+      }
+    };
+
     const reconcileLearnModePoolWithNewShuffledDeckPreservingCurrentSelection = () => {
+      const previousPresentationKindValue = currentLearnModePresentationKindValue;
       const previousSimplifiedKeyForCurrentCardValue =
-        learnModePoolList.length > 0 &&
-        currentLearnModePoolIndexValue >= 0 &&
-        currentLearnModePoolIndexValue < learnModePoolList.length
+        previousPresentationKindValue === learnModePresentationKindCharacterValue
+        && learnModePoolList.length > 0
+        && currentLearnModePoolIndexValue >= 0
+        && currentLearnModePoolIndexValue < learnModePoolList.length
           ? getSeenCountKeyFromCardData(learnModePoolList[currentLearnModePoolIndexValue].cardData)
+          : null;
+      const previousSimplifiedWordKeyForCurrentCardValue =
+        previousPresentationKindValue === learnModePresentationKindWordValue
+        && learnModeWordPoolList.length > 0
+        && currentLearnModeWordPoolIndexValue >= 0
+        && currentLearnModeWordPoolIndexValue < learnModeWordPoolList.length
+          ? getSeenCountKeyFromCardData(learnModeWordPoolList[currentLearnModeWordPoolIndexValue].cardData)
           : null;
       const restoredLearnModePoolList = [];
       for (let poolEntryIndexValue = 0; poolEntryIndexValue < learnModePoolList.length; poolEntryIndexValue += 1) {
         const poolEntryValue = learnModePoolList[poolEntryIndexValue];
         const simplifiedKeyValue = getSeenCountKeyFromCardData(poolEntryValue.cardData);
-        const matchedCardDataValue = findCardDataBySimplifiedKeyInRandomizedDeck(simplifiedKeyValue);
+        const matchedCardDataValue = findCardDataBySimplifiedKeyInRandomizedDeck(simplifiedKeyValue)
+          || findCardDataBySimplifiedKeyInFullFlashCardDataList(simplifiedKeyValue);
         if (matchedCardDataValue) {
           restoredLearnModePoolList.push({
             cardData: matchedCardDataValue,
@@ -1615,11 +2030,13 @@
         }
       }
       learnModePoolList = restoredLearnModePoolList;
-      if (learnModePoolList.length === 0) {
+      if (learnModePoolList.length === 0 && learnModeWordPoolList.length === 0) {
         currentLearnModePoolIndexValue = 0;
+        currentLearnModeWordPoolIndexValue = 0;
+        currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
         if (isLearnModeEnabledValue && randomizedFlashCardDataList.length > 0) {
           seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
-          currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
+          applyLearnModePresentationSelectionValue(pickNextLearnModePresentationByWeight(null, -1));
         }
         return;
       }
@@ -1629,18 +2046,19 @@
         );
         if (newIndexForPreviousKeyValue >= 0) {
           currentLearnModePoolIndexValue = newIndexForPreviousKeyValue;
-        } else {
-          currentLearnModePoolIndexValue = Math.min(
-            Math.max(0, currentLearnModePoolIndexValue),
-            learnModePoolList.length - 1
-          );
+          currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
         }
-      } else {
-        currentLearnModePoolIndexValue = Math.min(
-          Math.max(0, currentLearnModePoolIndexValue),
-          learnModePoolList.length - 1
+      } else if (previousSimplifiedWordKeyForCurrentCardValue) {
+        const newWordIndexForPreviousKeyValue = learnModeWordPoolList.findIndex(
+          (wordPoolEntryValue) => getSeenCountKeyFromCardData(wordPoolEntryValue.cardData) === previousSimplifiedWordKeyForCurrentCardValue
         );
+        if (newWordIndexForPreviousKeyValue >= 0) {
+          currentLearnModeWordPoolIndexValue = newWordIndexForPreviousKeyValue;
+          currentLearnModePresentationKindValue = learnModePresentationKindWordValue;
+        }
       }
+      clampLearnModePresentationPointerToAvailablePools();
+      addEligibleWordsToWordPoolForAllSkilledCharactersInCharacterPool();
     };
 
     const updateRandomizedFlashCardDataListForSelection = (shouldPreserveLearnModePoolAcrossDeckRebuildValue = false) => {
@@ -1658,10 +2076,13 @@
         reconcileLearnModePoolWithNewShuffledDeckPreservingCurrentSelection();
       } else {
         learnModePoolList = [];
+        learnModeWordPoolList = [];
         currentLearnModePoolIndexValue = 0;
+        currentLearnModeWordPoolIndexValue = 0;
+        currentLearnModePresentationKindValue = learnModePresentationKindCharacterValue;
         if (isLearnModeEnabledValue && randomizedFlashCardDataList.length > 0) {
           seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
-          currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
+          applyLearnModePresentationSelectionValue(pickNextLearnModePresentationByWeight(null, -1));
         }
       }
       updateSeenCountForCurrentCard();
@@ -1672,7 +2093,10 @@
       isLearnModeEnabledValue = learnModeEnabledValue;
       if (learnModeEnabledValue && randomizedFlashCardDataList.length > 0 && learnModePoolList.length === 0) {
         seedLearnModePoolWithRandomCharactersFromShuffledDeckUpToInitialSize();
-        currentLearnModePoolIndexValue = learnModePoolList.length > 0 ? pickNextLearnModeCardIndexByWeight() : 0;
+        applyLearnModePresentationSelectionValue(pickNextLearnModePresentationByWeight(null, -1));
+      }
+      if (learnModeEnabledValue) {
+        addEligibleWordsToWordPoolForAllSkilledCharactersInCharacterPool();
       }
       learnModeLabelElement.textContent = learnModeEnabledValue ? "Learn Mode" : "Ordered Mode";
       persistLearnModeStateBundleToLocalStorage();
@@ -1800,9 +2224,7 @@
         }
         return;
       }
-      const currentCardDataForSpeechValue = isLearnModeEnabledValue && learnModePoolList.length > 0
-        ? learnModePoolList[currentLearnModePoolIndexValue].cardData
-        : randomizedFlashCardDataList[currentCardIndexValue];
+      const currentCardDataForSpeechValue = getCurrentEffectiveCardDataValue();
       if (!currentCardDataForSpeechValue) {
         alert("No cards to speak.");
         return;
@@ -1857,7 +2279,7 @@
 
     const renderCardContent = () => {
       try {
-      if (randomizedFlashCardDataList.length === 0 && !(isLearnModeEnabledValue && learnModePoolList.length > 0)) {
+      if (randomizedFlashCardDataList.length === 0 && !(isLearnModeEnabledValue && doesLearnModeHaveAnyPresentableCardValue())) {
         positionTextElement.textContent = "0 / 0";
         previousButtonLabelSpanElement.textContent = isLearnModeEnabledValue ? "Wrong" : "Previous";
         nextButtonLabelSpanElement.textContent = isLearnModeEnabledValue ? "Right" : "Next";
@@ -1877,14 +2299,35 @@
         return;
       }
       const flippedFromAnswerSideToGuessSideValue = previousIsDetailViewVisibleForGuessSideRandomizationValue === true && isDetailViewVisibleValue === false;
-      const currentCardData = isLearnModeEnabledValue && learnModePoolList.length > 0
-        ? learnModePoolList[currentLearnModePoolIndexValue].cardData
-        : (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length ? (currentCardIndexValue = 0, randomizedFlashCardDataList[currentCardIndexValue]) : randomizedFlashCardDataList[currentCardIndexValue]);
-      if (!isLearnModeEnabledValue && (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length)) {
-        currentCardIndexValue = 0;
+      let currentCardData = getCurrentEffectiveCardDataValue();
+      if (!isLearnModeEnabledValue) {
+        if (currentCardIndexValue < 0 || currentCardIndexValue >= randomizedFlashCardDataList.length) {
+          currentCardIndexValue = 0;
+        }
+        currentCardData = randomizedFlashCardDataList[currentCardIndexValue];
       }
+      if (!currentCardData) {
+        positionTextElement.textContent = isLearnModeEnabledValue ? `Pool: ${learnModePoolList.length}` : "0 / 0";
+        previousButtonLabelSpanElement.textContent = isLearnModeEnabledValue ? "Wrong" : "Previous";
+        nextButtonLabelSpanElement.textContent = isLearnModeEnabledValue ? "Right" : "Next";
+        previousButtonElement.disabled = true;
+        nextButtonElement.disabled = true;
+        cardContentElement.innerHTML = `
+          <div class="cardContent">
+            <div class="detailRow">
+              <div>
+                <div class="detailLabel">No cards</div>
+                <div>Adjust HSK level</div>
+              </div>
+            </div>
+          </div>
+        `;
+        previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
+        return;
+      }
+      const isWordCardValue = Boolean(currentCardData.isWordCard);
       const currentGuessSideRandomizationKeyValue = getSeenCountKeyFromCardData(currentCardData);
-      const traditionalAndSimplifiedFormsDifferValue = currentCardData.traditional !== currentCardData.simplified;
+      const traditionalAndSimplifiedFormsDifferValue = !isWordCardValue && currentCardData.traditional !== currentCardData.simplified;
       if (traditionalAndSimplifiedFormsDifferValue) {
         if (
           guessSideRandomizationCardKeyValue !== currentGuessSideRandomizationKeyValue
@@ -1896,14 +2339,14 @@
       } else {
         guessSideRandomizationCardKeyValue = currentGuessSideRandomizationKeyValue;
       }
-      positionTextElement.textContent = isLearnModeEnabledValue && learnModePoolList.length > 0
+      positionTextElement.textContent = isLearnModeEnabledValue && doesLearnModeHaveAnyPresentableCardValue()
         ? `Pool: ${learnModePoolList.length}`
         : `${currentCardIndexValue + 1} / ${randomizedFlashCardDataList.length}`;
       if (isLearnModeEnabledValue) {
         previousButtonLabelSpanElement.textContent = "Wrong";
         nextButtonLabelSpanElement.textContent = "Right";
-        previousButtonElement.disabled = learnModePoolList.length === 0;
-        nextButtonElement.disabled = learnModePoolList.length === 0;
+        previousButtonElement.disabled = !doesLearnModeHaveAnyPresentableCardValue();
+        nextButtonElement.disabled = !doesLearnModeHaveAnyPresentableCardValue();
       } else {
         previousButtonLabelSpanElement.textContent = "Previous";
         nextButtonLabelSpanElement.textContent = "Next";
@@ -1915,7 +2358,13 @@
         cardContentElement.innerHTML = `
           <div class="cardContent">
             <div class="characterRow">
-              ${traditionalAndSimplifiedFormsDifferValue ? (
+              ${isWordCardValue ? (
+              `
+              <div>
+                <div class="characterValue">${currentCardData.simplified}</div>
+              </div>
+              `
+              ) : traditionalAndSimplifiedFormsDifferValue ? (
               guessSideDisplaysTraditionalCharacterValue ? (
               `
               <div>
@@ -1938,6 +2387,42 @@
                 </div>
                 `
               )}
+            </div>
+          </div>
+        `;
+        previousIsDetailViewVisibleForGuessSideRandomizationValue = isDetailViewVisibleValue;
+        return;
+      }
+
+      if (isWordCardValue) {
+        cardContentElement.innerHTML = `
+          <div class="cardContent">
+            <div style="font-size: 1.6rem; font-weight: bold;">
+              ${currentCardData.definition}
+            </div>
+            <div class="characterRow">
+              ${currentCardData.traditional != currentCardData.simplified ? (
+                `
+                <div>${currentCardData.traditional} / ${currentCardData.simplified}</div>
+                `
+              ) : (
+                `
+                <div>${currentCardData.simplified}</div>
+                `
+              )}
+            </div>
+            <div class="detailRow">
+              <div>
+                <div class="detailPinyinTextValue">${currentCardData.pinyin}</div>
+              </div>
+            </div>
+            <div class="detailRow" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+              <div>
+                <div class="unimportantInfo">
+                  <div class="detailLabel">Seen Count</div>
+                  <div>${currentCardSeenCountValue}</div>
+                </div>
+              </div>
             </div>
           </div>
         `;
@@ -2057,11 +2542,47 @@
       renderCardContent();
     });
 
+    const clampPoolEntryWeightAgainstCombinedLearnModeMaxProbability = (poolEntryValue, poolListForProbabilityValue) => {
+      const totalWeightValue = poolListForProbabilityValue.reduce(
+        (sumValue, entryValue) => sumValue + entryValue.weight,
+        0
+      );
+      if (totalWeightValue > 0 && poolEntryValue.weight / totalWeightValue > learnModeMaxProbabilityValue) {
+        poolEntryValue.weight = learnModeMaxProbabilityValue * totalWeightValue;
+      }
+    };
+
+    const advanceLearnModePresentationAfterAnswer = (answeredPresentationKindValue, answeredPoolIndexValue) => {
+      applyLearnModePresentationSelectionValue(
+        pickNextLearnModePresentationByWeight(answeredPresentationKindValue, answeredPoolIndexValue)
+      );
+      isDetailViewVisibleValue = false;
+      hasSeenCountIncrementedValue = false;
+      updateSeenCountForCurrentCard();
+      persistLearnModeStateBundleToLocalStorage();
+      renderCardContent();
+    };
+
     const runPreviousNavigationButtonAction = () => {
-      if (isLearnModeEnabledValue && learnModePoolList.length > 0) {
+      if (isLearnModeEnabledValue && doesLearnModeHaveAnyPresentableCardValue()) {
         if (!isDetailViewVisibleValue) {
           isDetailViewVisibleValue = true;
           renderCardContent();
+          return;
+        }
+        if (currentLearnModePresentationKindValue === learnModePresentationKindWordValue) {
+          const wordPoolEntryValue = learnModeWordPoolList[currentLearnModeWordPoolIndexValue];
+          const simplifiedWordKeyForWrongResponseValue = getSeenCountKeyFromCardData(wordPoolEntryValue.cardData);
+          wordPoolEntryValue.weight = Math.max(
+            learnModeWrongMinimumWeightFloorValue,
+            wordPoolEntryValue.weight * learnModeWrongWeightMultiplierValue
+          );
+          appendWordResponseHistoryEntry(simplifiedWordKeyForWrongResponseValue, false);
+          clampPoolEntryWeightAgainstCombinedLearnModeMaxProbability(wordPoolEntryValue, learnModeWordPoolList);
+          advanceLearnModePresentationAfterAnswer(
+            learnModePresentationKindWordValue,
+            currentLearnModeWordPoolIndexValue
+          );
           return;
         }
         const entryValue = learnModePoolList[currentLearnModePoolIndexValue];
@@ -2071,17 +2592,15 @@
           entryValue.weight * learnModeWrongWeightMultiplierValue
         );
         appendCharacterResponseHistoryEntry(simplifiedCharacterKeyForWrongResponseValue, false);
-        const totalWeightValue = learnModePoolList.reduce((sumValue, e) => sumValue + e.weight, 0);
-        if (totalWeightValue > 0 && entryValue.weight / totalWeightValue > learnModeMaxProbabilityValue) {
-          entryValue.weight = learnModeMaxProbabilityValue * totalWeightValue;
-        }
+        clampPoolEntryWeightAgainstCombinedLearnModeMaxProbability(entryValue, learnModePoolList);
         tryAddNewCharacterToLearnModePool();
-        currentLearnModePoolIndexValue = pickNextLearnModeCardIndexByWeight(currentLearnModePoolIndexValue);
-        isDetailViewVisibleValue = false;
-        hasSeenCountIncrementedValue = false;
-        updateSeenCountForCurrentCard();
-        persistLearnModeStateBundleToLocalStorage();
-        renderCardContent();
+        if (entryValue.weight <= characterHasBeenLearnedThresholdValue) {
+          addEligibleWordsToWordPoolForSkilledSimplifiedCharacterKey(simplifiedCharacterKeyForWrongResponseValue);
+        }
+        advanceLearnModePresentationAfterAnswer(
+          learnModePresentationKindCharacterValue,
+          currentLearnModePoolIndexValue
+        );
         return;
       }
       if (currentCardIndexValue === 0) return;
@@ -2093,10 +2612,31 @@
     };
 
     const runNextNavigationButtonAction = () => {
-      if (isLearnModeEnabledValue && learnModePoolList.length > 0) {
+      if (isLearnModeEnabledValue && doesLearnModeHaveAnyPresentableCardValue()) {
         if (!isDetailViewVisibleValue) {
           isDetailViewVisibleValue = true;
           renderCardContent();
+          return;
+        }
+        if (currentLearnModePresentationKindValue === learnModePresentationKindWordValue) {
+          const correctAnswerWordPoolEntryValue = learnModeWordPoolList[currentLearnModeWordPoolIndexValue];
+          const simplifiedWordKeyForCorrectResponseValue = getSeenCountKeyFromCardData(
+            correctAnswerWordPoolEntryValue.cardData
+          );
+          const correctAnswerWeightMultiplierForWordValue = getLearnModeCorrectAnswerWeightMultiplierForWord(
+            simplifiedWordKeyForCorrectResponseValue
+          );
+          correctAnswerWordPoolEntryValue.weight *= correctAnswerWeightMultiplierForWordValue;
+          appendWordResponseHistoryEntry(simplifiedWordKeyForCorrectResponseValue, true);
+          if (correctAnswerWordPoolEntryValue.weight <= characterHasBeenLearnedThresholdValue) {
+            addMissingConstituentCharactersFromLearnedWordToCharacterPool(
+              correctAnswerWordPoolEntryValue.cardData
+            );
+          }
+          advanceLearnModePresentationAfterAnswer(
+            learnModePresentationKindWordValue,
+            currentLearnModeWordPoolIndexValue
+          );
           return;
         }
         const correctAnswerPoolEntryValue = learnModePoolList[currentLearnModePoolIndexValue];
@@ -2107,12 +2647,13 @@
         correctAnswerPoolEntryValue.weight *= correctAnswerWeightMultiplierForCharacterValue;
         appendCharacterResponseHistoryEntry(simplifiedCharacterKeyForCorrectResponseValue, true);
         tryAddNewCharacterToLearnModePool();
-        currentLearnModePoolIndexValue = pickNextLearnModeCardIndexByWeight(currentLearnModePoolIndexValue);
-        isDetailViewVisibleValue = false;
-        hasSeenCountIncrementedValue = false;
-        updateSeenCountForCurrentCard();
-        persistLearnModeStateBundleToLocalStorage();
-        renderCardContent();
+        if (correctAnswerPoolEntryValue.weight <= characterHasBeenLearnedThresholdValue) {
+          addEligibleWordsToWordPoolForSkilledSimplifiedCharacterKey(simplifiedCharacterKeyForCorrectResponseValue);
+        }
+        advanceLearnModePresentationAfterAnswer(
+          learnModePresentationKindCharacterValue,
+          currentLearnModePoolIndexValue
+        );
         return;
       }
       if (currentCardIndexValue === randomizedFlashCardDataList.length - 1) return;

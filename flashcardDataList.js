@@ -2361,7 +2361,7 @@ const flashCardDataList = [
       "外形 (wàixíng) - appearance"
     ]
   },
-  {"traditional": "社", "simplified": "社", "pinyin": "shè", "definition": "god of the soil and altars to him; group of families; company, society", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0890", "frequencyRank": 270,
+  {"traditional": "社", "simplified": "社", "pinyin": "shè", "definition": "company, society", "strokeCount": 7, "hskLevel": 4, "generalStandardNumber": "0890", "frequencyRank": 270,
     "commonWords": [
       "社會／社会 (shèhuì) - society",
       "公司 (gōngsī) - company (sī contains 社’s concept)",
